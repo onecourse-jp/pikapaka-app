@@ -1,0 +1,16 @@
+{
+  "hosting": {
+    "public": "build",
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  },
+  "react-native": {
+    "crashlytics_debug_enabled": false,
+    "crashlytics_auto_collection_enabled": true
+  }
+}

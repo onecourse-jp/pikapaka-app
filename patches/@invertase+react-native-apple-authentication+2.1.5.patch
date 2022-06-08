@@ -1,0 +1,9 @@
+diff --git a/node_modules/@invertase/react-native-apple-authentication/lib/AppleButton.web.js b/node_modules/@invertase/react-native-apple-authentication/lib/AppleButton.web.js
+new file mode 100644
+index 0000000..744158c
+--- /dev/null
++++ b/node_modules/@invertase/react-native-apple-authentication/lib/AppleButton.web.js
+@@ -0,0 +1,2 @@
++const AppleButton = undefined
++export default AppleButton
+\ No newline at end of file

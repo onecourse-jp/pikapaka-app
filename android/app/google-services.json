@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "417005058487",
+    "project_id": "test-api-sheet-excel",
+    "storage_bucket": "test-api-sheet-excel.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:417005058487:android:8d1c24cf547e7387e3d032",
+        "android_client_info": {
+          "package_name": "com.meta.tcare"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "417005058487-oc319p9esmg8raee6ha7kv0drh6boa66.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.meta.tcare",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "417005058487-gjhtbopnpce48n0gogcc6r63crje7vvr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAkTiTVitONFW0fr4Fkl2XN71JzWC5oeWU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "417005058487-gjhtbopnpce48n0gogcc6r63crje7vvr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
+

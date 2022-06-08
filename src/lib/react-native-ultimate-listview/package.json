@@ -1,0 +1,88 @@
+{
+  "_args": [
+    [
+      "react-native-ultimate-listview@3.3.0",
+      "/Users/Jurs/Desktop/PRO/_Project/RN_TEMPLATE"
+    ]
+  ],
+  "_from": "react-native-ultimate-listview@3.3.0",
+  "_id": "react-native-ultimate-listview@3.3.0",
+  "_inBundle": false,
+  "_integrity": "sha512-xAVtG6ztziADYCYwpA2LY5mflM+Sq0f23EwDHHks1SoUhSekBs9IHbMeBNiaZGKcuicxrwjRBtvPi7hx0aWJhw==",
+  "_location": "/react-native-ultimate-listview",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "version",
+    "registry": true,
+    "raw": "react-native-ultimate-listview@3.3.0",
+    "name": "react-native-ultimate-listview",
+    "escapedName": "react-native-ultimate-listview",
+    "rawSpec": "3.3.0",
+    "saveSpec": null,
+    "fetchSpec": "3.3.0"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/react-native-ultimate-listview/-/react-native-ultimate-listview-3.3.0.tgz",
+  "_spec": "3.3.0",
+  "_where": "/Users/Jurs/Desktop/PRO/_Project/RN_TEMPLATE",
+  "author": {
+    "name": "Chen Jiajie",
+    "email": "gameboyvito@gmail.com"
+  },
+  "bugs": {
+    "url": "https://github.com/gameboyVito/react-native-ultimate-listview/issues"
+  },
+  "description": "A high performance FlatList providing customised pull-to-refresh | auto-pagination & infinite-scrolling | gridview layout | swipeable-row. The truly ultimate version that I have done the most tricky part for you, just simply follow the instructions shown below to put it in your app.",
+  "devDependencies": {
+    "babel-eslint": "^8.0.1",
+    "babel-jest": "21.2.0",
+    "babel-preset-react-native": "4.0.0",
+    "eslint": "^4.9.0",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-jsx-a11y": "^6.0.2",
+    "eslint-plugin-react": "^7.4.0",
+    "eslint-plugin-react-native": "^3.1.0",
+    "jest": "21.2.1",
+    "prop-types": "^15.6.0",
+    "react": "16.0.0-beta.5",
+    "react-native": "0.49.5",
+    "react-test-renderer": "16.0.0-beta.5"
+  },
+  "homepage": "https://github.com/gameboyVito/react-native-ultimate-listview#readme",
+  "keywords": [
+    "flatlist",
+    "scrollview",
+    "refreshable-scrollview",
+    "sectionlist",
+    "virtualizedlist",
+    "pull-to-refresh",
+    "refreshable",
+    "auto-pagination",
+    "infinite-scrolling",
+    "swipeable-row",
+    "gridview",
+    "listview",
+    "native-base",
+    "react-native",
+    "react-component",
+    "react-native-component",
+    "android",
+    "ios"
+  ],
+  "license": "MIT",
+  "main": "index.js",
+  "name": "react-native-ultimate-listview",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gameboyVito/react-native-ultimate-listview.git"
+  },
+  "scripts": {
+    "eslint": "eslint src Example/src",
+    "eslint-fix": "eslint --fix src Example/src",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "3.3.0"
+}

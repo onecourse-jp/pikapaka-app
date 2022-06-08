@@ -1,0 +1,93 @@
+import { StyleSheet, Dimensions } from 'react-native';
+import Colors from '@config/styles';
+let { width } = Dimensions.get('window');
+width = width > 600 ? 600 : width;
+export const styles = StyleSheet.create({
+  container: {
+    // height: 250,
+    // width: '90%',
+    marginHorizontal: 32,
+    padding: 16,
+    backgroundColor: Colors.color.COLOR_WHITE,
+    borderRadius: 10,
+    // justifyContent: 'space-between',
+    alignItems: 'stretch',
+    alignSelf: 'center',
+    margin: 'auto',
+    width: '94%',
+    minWidth: 340,
+  },
+  mainModal: {
+    maxWidth: 400,
+    alignSelf: 'center',
+  },
+  imageWarn: {
+    margin: 32,
+    alignSelf: 'center',
+    width: 56,
+    height: 56,
+  },
+  topTitle: {
+    textAlign: 'center',
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: Colors.color.COLOR_BLACK,
+    marginTop: 30,
+  },
+  title: {
+    textAlign: 'center',
+    fontSize: 16,
+    color: Colors.color.COLOR_BLACK,
+    marginTop: 20,
+    marginBottom: 20,
+  },
+  text: {
+    fontSize: 14,
+    color: Colors.color.COLOR_WHITE,
+  },
+  touchable: {
+    height: 48,
+    // flex: 1,
+    borderRadius: 100,
+    backgroundColor: Colors.color.COLOR_PRIMARY,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginHorizontal: 8,
+    marginVertical: 8,
+  },
+  invertTouchable: {
+    borderWidth: 1,
+    borderColor: Colors.color.COLOR_NEW_YORK_PINK,
+    backgroundColor: Colors.color.COLOR_WHITE,
+  },
+  btnBox: {
+    // flexDirection: 'row',
+    // flex:1,
+    marginTop: 20,
+    marginBottom: 16,
+  },
+  flex1: {},
+  web: {
+    height: 48,
+    width: width / 2 - 60,
+    borderRadius: 100,
+    backgroundColor: Colors.color.COLOR_PRIMARY,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginHorizontal: 8,
+    marginVertical: 8,
+  },
+  webCancel: {
+    height: 48,
+    width: width / 2 - 60,
+    borderRadius: 100,
+    borderWidth: 1,
+    backgroundColor: '#fff',
+    borderColor: Colors.color.COLOR_PRIMARY,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginHorizontal: 8,
+    marginVertical: 8,
+  },
+  webnone: {},
+});

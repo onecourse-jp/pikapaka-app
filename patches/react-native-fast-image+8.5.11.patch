@@ -1,0 +1,233 @@
+diff --git a/node_modules/react-native-fast-image/dist/index.js b/node_modules/react-native-fast-image/dist/index.js
+index 1fc0e9d..f1758a3 100644
+--- a/node_modules/react-native-fast-image/dist/index.js
++++ b/node_modules/react-native-fast-image/dist/index.js
+@@ -1,111 +1,129 @@
+-import _extends from '@babel/runtime/helpers/extends';
+-import React, { forwardRef, memo } from 'react';
+-import { NativeModules, StyleSheet, requireNativeComponent, Image, View } from 'react-native';
++import React, { forwardRef, memo } from 'react'
++import {
++    View,
++    Image,
++    NativeModules,
++    StyleSheet,
++    Platform,
++} from 'react-native'
+ 
+-const FastImageViewNativeModule = NativeModules.FastImageView;
+-const resizeMode = {
+-  contain: 'contain',
+-  cover: 'cover',
+-  stretch: 'stretch',
+-  center: 'center'
+-};
+-const priority = {
+-  low: 'low',
+-  normal: 'normal',
+-  high: 'high'
+-};
+-const cacheControl = {
+-  // Ignore headers, use uri as cache key, fetch only if not in cache.
+-  immutable: 'immutable',
+-  // Respect http headers, no aggressive caching.
+-  web: 'web',
+-  // Only load from cache.
+-  cacheOnly: 'cacheOnly'
+-};
++const FastImageViewNativeModule = NativeModules.FastImageView
+ 
+ function FastImageBase({
+-  source,
+-  tintColor,
+-  onLoadStart,
+-  onProgress,
+-  onLoad,
+-  onError,
+-  onLoadEnd,
+-  style,
+-  fallback,
+-  children,
+-  // eslint-disable-next-line no-shadow
+-  resizeMode = 'cover',
+-  forwardedRef,
+-  ...props
++    source,
++    tintColor,
++    onLoadStart,
++    onProgress,
++    onLoad,
++    onError,
++    onLoadEnd,
++    style,
++    children,
++    fallback,
++    forwardedRef,
++    ...props
+ }) {
+-  if (fallback) {
+-    const cleanedSource = { ...source
+-    };
+-    delete cleanedSource.cache;
+-    const resolvedSource = Image.resolveAssetSource(cleanedSource);
+-    return /*#__PURE__*/React.createElement(View, {
+-      style: [styles.imageContainer, style],
+-      ref: forwardedRef
+-    }, /*#__PURE__*/React.createElement(Image, _extends({}, props, {
+-      style: StyleSheet.absoluteFill,
+-      source: resolvedSource,
+-      onLoadStart: onLoadStart,
+-      onProgress: onProgress,
+-      onLoad: onLoad,
+-      onError: onError,
+-      onLoadEnd: onLoadEnd,
+-      resizeMode: resizeMode
+-    })), children);
+-  }
++    if (fallback || Platform.OS === 'web') {
++        return (
++            <View style={[styles.imageContainer, style]} ref={forwardedRef}>
++                <Image
++                    {...props}
++                    tintColor={tintColor}
++                    style={StyleSheet.absoluteFill}
++                    source={source}
++                    onLoadStart={onLoadStart}
++                    onProgress={onProgress}
++                    onLoad={onLoad}
++                    onError={onError}
++                    onLoadEnd={onLoadEnd}
++                />
++                {children}
++            </View>
++        )
++    }
+ 
+-  const resolvedSource = Image.resolveAssetSource(source);
+-  return /*#__PURE__*/React.createElement(View, {
+-    style: [styles.imageContainer, style],
+-    ref: forwardedRef
+-  }, /*#__PURE__*/React.createElement(FastImageView, _extends({}, props, {
+-    tintColor: tintColor,
+-    style: StyleSheet.absoluteFill,
+-    source: resolvedSource,
+-    onFastImageLoadStart: onLoadStart,
+-    onFastImageProgress: onProgress,
+-    onFastImageLoad: onLoad,
+-    onFastImageError: onError,
+-    onFastImageLoadEnd: onLoadEnd,
+-    resizeMode: resizeMode
+-  })), children);
++    return (
++        <View style={[styles.imageContainer, style]} ref={forwardedRef}>
++            <FastImageView
++                {...props}
++                tintColor={tintColor}
++                style={StyleSheet.absoluteFill}
++                source={Image.resolveAssetSource(source)}
++                onFastImageLoadStart={onLoadStart}
++                onFastImageProgress={onProgress}
++                onFastImageLoad={onLoad}
++                onFastImageError={onError}
++                onFastImageLoadEnd={onLoadEnd}
++            />
++            {children}
++        </View>
++    )
+ }
+ 
+-const FastImageMemo = /*#__PURE__*/memo(FastImageBase);
+-const FastImageComponent = /*#__PURE__*/forwardRef((props, ref) => /*#__PURE__*/React.createElement(FastImageMemo, _extends({
+-  forwardedRef: ref
+-}, props)));
+-FastImageComponent.displayName = 'FastImage';
+-const FastImage = FastImageComponent;
+-FastImage.resizeMode = resizeMode;
+-FastImage.cacheControl = cacheControl;
+-FastImage.priority = priority;
++const FastImageMemo = memo(FastImageBase)
+ 
+-FastImage.preload = sources => FastImageViewNativeModule.preload(sources);
++const FastImage = forwardRef((props, ref) => (
++    <FastImageMemo forwardedRef={ref} {...props} />
++))
+ 
+-FastImage.clearMemoryCache = () => FastImageViewNativeModule.clearMemoryCache();
+-
+-FastImage.clearDiskCache = () => FastImageViewNativeModule.clearDiskCache();
++FastImage.displayName = 'FastImage'
+ 
+ const styles = StyleSheet.create({
+-  imageContainer: {
+-    overflow: 'hidden'
+-  }
+-}); // Types of requireNativeComponent are not correct.
++    imageContainer: {
++        overflow: 'hidden',
++    },
++})
++
++FastImage.resizeMode = {
++    contain: 'contain',
++    cover: 'cover',
++    stretch: 'stretch',
++    center: 'center',
++}
++
++FastImage.priority = {
++    // lower than usual.
++    low: 'low',
++    // normal, the default.
++    normal: 'normal',
++    // higher than usual.
++    high: 'high',
++}
++
++FastImage.cacheControl = {
++    // Ignore headers, use uri as cache key, fetch only if not in cache.
++    immutable: 'immutable',
++    // Respect http headers, no aggressive caching.
++    web: 'web',
++    // Only load from cache.
++    cacheOnly: 'cacheOnly',
++}
+ 
+-const FastImageView = requireNativeComponent('FastImageView', FastImage, {
+-  nativeOnly: {
+-    onFastImageLoadStart: true,
+-    onFastImageProgress: true,
+-    onFastImageLoad: true,
+-    onFastImageError: true,
+-    onFastImageLoadEnd: true
+-  }
+-});
++FastImage.preload = sources => {
++    if (Platform.OS !== 'web') {
++        FastImageViewNativeModule.preload(sources)
++    }
++}
++
++FastImage.defaultProps = {
++    resizeMode: FastImage.resizeMode.cover,
++}
++
++let FastImageView
++
++if (Platform.OS === 'web') {
++    FastImageView = Image
++} else {
++    const { requireNativeComponent } = require('react-native')
++    FastImageView = requireNativeComponent('FastImageView', FastImage, {
++        nativeOnly: {
++            onFastImageLoadStart: true,
++            onFastImageProgress: true,
++            onFastImageLoad: true,
++            onFastImageError: true,
++            onFastImageLoadEnd: true,
++        },
++    })
++}
+ 
+-export default FastImage;
++export default FastImage
+\ No newline at end of file

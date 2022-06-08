@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="UBl-ry-LDe">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="9sg-Ni-qfr">
+            <objects>
+                <viewController id="UBl-ry-LDe" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Mwf-vA-Cp3">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="b06-25-n9c">
+                                <rect key="frame" x="0.0" y="876" width="414" height="0.0"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash_background" translatesAutoresizingMaskIntoConstraints="NO" id="6CG-KJ-DCd">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                            </imageView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="QbH-IV-27z"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="6CG-KJ-DCd" firstAttribute="leading" secondItem="QbH-IV-27z" secondAttribute="leading" id="1d5-9l-wyc"/>
+                            <constraint firstItem="QbH-IV-27z" firstAttribute="centerX" secondItem="b06-25-n9c" secondAttribute="centerX" id="DaE-lB-j2O"/>
+                            <constraint firstItem="b06-25-n9c" firstAttribute="leading" secondItem="QbH-IV-27z" secondAttribute="leading" symbolic="YES" id="KVM-fP-k7T"/>
+                            <constraint firstItem="6CG-KJ-DCd" firstAttribute="bottom" secondItem="Mwf-vA-Cp3" secondAttribute="bottom" id="LIE-cP-2vQ"/>
+                            <constraint firstItem="6CG-KJ-DCd" firstAttribute="top" secondItem="Mwf-vA-Cp3" secondAttribute="top" id="VTg-dM-Fci"/>
+                            <constraint firstItem="6CG-KJ-DCd" firstAttribute="trailing" secondItem="QbH-IV-27z" secondAttribute="trailing" id="cFc-yj-jvi"/>
+                            <constraint firstAttribute="bottom" secondItem="b06-25-n9c" secondAttribute="bottom" constant="20" id="mrw-RO-9J2"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="un3-dx-jFR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="52" y="374.66266866566718"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="splash_background" width="428" height="926"/>
+    </resources>
+</document>

@@ -1,0 +1,38 @@
+{
+  "name": "react-native-image-video-picker-editor",
+  "version": "1.0.15",
+  "description": "Picker and editor for image and video muliti select image and videotrimmer and image cropper",
+  "main": "./MImagePicker.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/blazerroad/react-native-image-video-picker-editor.git"
+  },
+  "dependencies": {},
+  "keywords": [
+    "react native",
+    "image picker",
+    "video picker",
+    "image cropper",
+    "video trimmer",
+    "multi select",
+    "react-native",
+    "cameraroll",
+    "camera",
+    "photo gallery",
+    "Video trimmer",
+    "Video comprosser",
+    "photo zoom",
+    "photo edit",
+    "camera",
+    "video record"
+  ],
+  "author": "BlazerRoad",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/blazerroad/react-native-image-video-picker-editor/issues"
+  },
+  "homepage": "https://github.com/blazerroad/react-native-image-video-picker-editor#readme"
+}

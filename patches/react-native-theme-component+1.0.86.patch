@@ -1,0 +1,436 @@
+diff --git a/node_modules/react-native-theme-component/index.ts b/node_modules/react-native-theme-component/index.ts
+index 58dcac4..1dec388 100644
+--- a/node_modules/react-native-theme-component/index.ts
++++ b/node_modules/react-native-theme-component/index.ts
+@@ -15,7 +15,6 @@ export {
+ export { getDeviceCountryCode } from './src/country-picker/country-code';
+ export { default as CountryPicker } from './src/country-picker';
+ export { default as DatePicker } from './src/date-picker';
+-export { default as ImagePicker } from './src/image-picker';
+ export { default as DateRangePicker } from './src/date-range-picker';
+ export { default as CheckBox } from './src/checkbox';
+ export { default as LoadingModal } from './src/loading-modal';
+diff --git a/node_modules/react-native-theme-component/src/image-picker/index.tsx b/node_modules/react-native-theme-component/src/image-picker/index.tsx
+deleted file mode 100644
+index c6318d9..0000000
+--- a/node_modules/react-native-theme-component/src/image-picker/index.tsx
++++ /dev/null
+@@ -1,225 +0,0 @@
+-import React, { useContext } from 'react';
+-import { Alert, StyleProp, Text, TextStyle, TouchableOpacity, ViewStyle } from 'react-native';
+-import Picker from 'react-native-image-crop-picker';
+-// @ts-ignore
+-import * as mime from 'react-native-mime-types';
+-import { openSettings } from 'react-native-permissions';
+-import BottomSheetModal from '../bottom-sheet';
+-import { ThemeContext } from '../theme-context';
+-import { GalleryIcon, CameraIcon } from '../assets';
+-import { defaultsDeep } from 'lodash';
+-import { showMessage } from 'react-native-flash-message';
+-
+-export type ImagePickerStyles = {
+-  buttonContainerStyle?: StyleProp<ViewStyle>;
+-  buttonTextStyle?: StyleProp<TextStyle>;
+-  cancelTextStyle?: StyleProp<TextStyle>;
+-  cancelButtonContainerStyle?: StyleProp<ViewStyle>;
+-};
+-
+-export type ImagePickerProps = {
+-  isVisible?: boolean;
+-  maxImageSize?: number;
+-  allowTypes?: string[];
+-  cropping?: boolean;
+-  cropperCircleOverlay?: boolean;
+-  useFrontCamera?: boolean;
+-  onClose: () => void;
+-  onUpload: (image: any) => void;
+-  style?: ImagePickerStyles;
+-};
+-
+-const ImagePicker = (props: ImagePickerProps) => {
+-  const { i18n, imagePicker } = useContext(ThemeContext);
+-  const {
+-    maxImageSize,
+-    allowTypes,
+-    cropping,
+-    cropperCircleOverlay,
+-    useFrontCamera,
+-    onClose,
+-    onUpload,
+-    isVisible,
+-    style,
+-  } = props;
+-
+-  const styles: ImagePickerStyles = defaultsDeep(style, imagePicker);
+-
+-  const launchCamera = () => {
+-    Picker.openCamera({
+-      mediaType: 'photo',
+-      includeBase64: true,
+-      compressImageMaxWidth: 1440,
+-      compressImageMaxHeight: 890,
+-      compressImageQuality: 0.8,
+-      cropping: cropping,
+-      cropperCircleOverlay: cropperCircleOverlay,
+-      useFrontCamera: useFrontCamera,
+-      loadingLabelText: i18n?.t('image_picker.msg_loading_picker') ?? 'Please waiting...',
+-    })
+-      .then((image) => {
+-        if (image.size < maxImageSize!) {
+-          const imageType = imageHandler(image.sourceURL ? image.sourceURL : image.path);
+-          const validatedImageType = allowTypes?.filter((element: String) =>
+-            imageType.toLowerCase().includes(element)
+-          );
+-          if (validatedImageType) {
+-            onUpload(image);
+-          } else {
+-            showMessage({
+-              message:
+-                i18n?.t('image_picker.msg_allow_file_type') ??
+-                `Allowed file types are ${allowTypes?.map((al) => al.toUpperCase()).join(', ')}.`,
+-              backgroundColor: '#ff0000',
+-            });
+-          }
+-        } else {
+-          showMessage({
+-            message: i18n?.t('image_picker.msg_max_file_size') ?? 'Maximum file size should be 2MB',
+-            backgroundColor: '#ff0000',
+-          });
+-        }
+-      })
+-      .catch((e) => {
+-        if (e.toString() !== 'Error: User cancelled image selection') {
+-          Alert.alert(
+-            i18n?.t('image_picker.msg_allow_access_camera') ??
+-              'Allow Application To Access Your Camera',
+-            i18n?.t('image_picker.msg_turn_camera_setting') ??
+-              'Tap Open Settings and turn on Camera to allow access.',
+-            [
+-              { text: i18n?.t('image_picker.btn_cancel') ?? 'Cancel' },
+-              {
+-                text: i18n?.t('image_picker.btn_open_setting') ?? 'Open Settings',
+-                onPress: () => openSettings(),
+-              },
+-            ]
+-          );
+-        }
+-      });
+-  };
+-
+-  const launchImageLibrary = () => {
+-    Picker.openPicker({
+-      mediaType: 'photo',
+-      includeBase64: true,
+-      compressImageMaxWidth: 1440,
+-      compressImageMaxHeight: 890,
+-      compressImageQuality: 0.8,
+-      cropping: cropping,
+-      cropperCircleOverlay: cropperCircleOverlay,
+-      loadingLabelText: i18n?.t('image_picker.msg_loading_picker') ?? 'Please waiting...',
+-    })
+-      .then((image) => {
+-        if (image.size < maxImageSize!) {
+-          const imageType = imageHandler(image.sourceURL ? image.sourceURL : image.path);
+-          const validatedImageType = allowTypes?.filter((element: String) =>
+-            imageType.toLowerCase().includes(element)
+-          );
+-
+-          if (validatedImageType) {
+-            onUpload(image);
+-          } else {
+-            showMessage({
+-              message:
+-                i18n?.t('image_picker.msg_allow_file_type') ??
+-                `Allowed file types are ${allowTypes?.map((al) => al.toUpperCase()).join(', ')}.`,
+-              backgroundColor: '#ff0000',
+-            });
+-          }
+-        } else {
+-          showMessage({
+-            message: i18n?.t('image_picker.msg_max_file_size') ?? 'Maximum file size should be 2MB',
+-            backgroundColor: '#ff0000',
+-          });
+-        }
+-      })
+-      .catch((e) => {
+-        if (e.toString() !== 'Error: User cancelled image selection') {
+-          Alert.alert(
+-            i18n?.t('image_picker.msg_allow_access_photo') ??
+-              'Allow Application To Access Your Photos',
+-            i18n?.t('image_picker.msg_turn_photo_setting') ??
+-              'Tap Open Settings and turn on Photos to allow access',
+-            [
+-              { text: i18n?.t('image_picker.btn_cancel') ?? 'Cancel' },
+-              {
+-                text: i18n?.t('image_picker.btn_open_setting') ?? 'Open Settings',
+-                onPress: () => openSettings(),
+-              },
+-            ]
+-          );
+-        }
+-      });
+-  };
+-
+-  const imageHandler = (uri?: String) => {
+-    if (uri) {
+-      const getFilename = uri.split('/');
+-      const imgName = getFilename[getFilename.length - 1];
+-      return mime.lookup(imgName);
+-    } else {
+-      return null;
+-    }
+-  };
+-
+-  return (
+-    <BottomSheetModal
+-      onBackButtonPress={onClose}
+-      isVisible={isVisible}
+-      backdropOpacity={0.25}
+-      onBackdropPress={onClose}
+-    >
+-      <TouchableOpacity
+-        onPress={() => {
+-          onClose();
+-          setTimeout(() => {
+-            launchCamera();
+-          }, 1000);
+-        }}
+-        style={styles.buttonContainerStyle}
+-        activeOpacity={0.8}
+-      >
+-        <CameraIcon width={18} height={18} />
+-        <Text style={styles.buttonTextStyle}>
+-          {i18n?.t('image_picker.btn_take_photo') ?? 'Take photo'}
+-        </Text>
+-      </TouchableOpacity>
+-      <TouchableOpacity
+-        onPress={() => {
+-          onClose();
+-          setTimeout(() => {
+-            launchImageLibrary();
+-          }, 1000);
+-        }}
+-        style={styles.buttonContainerStyle}
+-        activeOpacity={0.8}
+-      >
+-        <GalleryIcon width={18} height={18} />
+-        <Text style={styles.buttonTextStyle}>
+-          {i18n?.t('image_picker.btn_choose_photo') ?? 'Choose photo'}
+-        </Text>
+-      </TouchableOpacity>
+-      <TouchableOpacity
+-        onPress={onClose}
+-        style={styles.cancelButtonContainerStyle}
+-        activeOpacity={0.8}
+-      >
+-        <Text style={styles.cancelTextStyle}>
+-          {i18n?.t('image_picker.btn_cancel').toUpperCase() ?? 'CANCEL'}
+-        </Text>
+-      </TouchableOpacity>
+-    </BottomSheetModal>
+-  );
+-};
+-
+-ImagePicker.defaultProps = {
+-  isVisible: false,
+-  maxImageSize: 2097151,
+-  allowTypes: ['jpeg', 'jpg', 'png', 'heic'],
+-  cropping: true,
+-  cropperCircleOverlay: true,
+-  useFrontCamera: false,
+-};
+-
+-export default ImagePicker;
+diff --git a/node_modules/react-native-theme-component/src/image-picker/theme.tsx b/node_modules/react-native-theme-component/src/image-picker/theme.tsx
+deleted file mode 100644
+index 8d04efe..0000000
+--- a/node_modules/react-native-theme-component/src/image-picker/theme.tsx
++++ /dev/null
+@@ -1,37 +0,0 @@
+-import { StyleSheet } from 'react-native';
+-import { ImagePickerStyles } from '.';
+-import { ThemeFontProps } from '../fonts';
+-
+-const defaultImagePickerTheme = (fonts: ThemeFontProps): ImagePickerStyles => {
+-  return StyleSheet.create({
+-    buttonContainerStyle: {
+-      width: '100%',
+-      flexDirection: 'row',
+-      paddingVertical: 10,
+-      alignItems: 'center',
+-    },
+-    buttonTextStyle: {
+-      fontFamily: fonts.regular,
+-      fontSize: 14,
+-      textAlign: 'left',
+-      color: 'black',
+-      lineHeight: 17,
+-      marginLeft: 15,
+-    },
+-    cancelButtonContainerStyle: {
+-      width: '100%',
+-      alignItems: 'center',
+-      justifyContent: 'center',
+-      paddingVertical: 10,
+-    },
+-    cancelTextStyle: {
+-      fontFamily: fonts.medium,
+-      fontSize: 14,
+-      textAlign: 'center',
+-      color: 'red',
+-      lineHeight: 17,
+-    },
+-  });
+-};
+-
+-export default defaultImagePickerTheme;
+diff --git a/node_modules/react-native-theme-component/src/theme-context/context.tsx b/node_modules/react-native-theme-component/src/theme-context/context.tsx
+index f3df81f..933cda6 100644
+--- a/node_modules/react-native-theme-component/src/theme-context/context.tsx
++++ b/node_modules/react-native-theme-component/src/theme-context/context.tsx
+@@ -22,8 +22,6 @@ import { CountryPickerStyles } from '../country-picker';
+ import defaultCountryPickerTheme from '../country-picker/theme';
+ import { DatePickerStyles } from '../date-picker';
+ import defaultDatePickerTheme from '../date-picker/theme';
+-import { ImagePickerStyles } from '../image-picker';
+-import defaultImagePickerTheme from '../image-picker/theme';
+ import { DateRangePickerStyles } from '../date-range-picker';
+ import defaultDateRangePickerTheme from '../date-range-picker/theme';
+ import { CheckBoxStyles } from '../checkbox';
+@@ -43,7 +41,6 @@ export const defaultTheme = (fonts: ThemeFontProps, colors: ThemeColorProps): Th
+     errorModal: defaultErrorModalTheme(fonts),
+     countryPicker: defaultCountryPickerTheme(fonts),
+     datePicker: defaultDatePickerTheme(fonts, colors),
+-    imagePicker: defaultImagePickerTheme(fonts),
+     dateRangePicker: defaultDateRangePickerTheme(fonts, colors),
+     checkBox: defaultCheckBoxTheme(fonts, colors),
+     loadingModal: defaultLoadingModalStyles(),
+@@ -61,7 +58,6 @@ export type ThemeProps = {
+   errorModal: ErrorModalStyles;
+   countryPicker: CountryPickerStyles;
+   datePicker: DatePickerStyles;
+-  imagePicker: ImagePickerStyles;
+   dateRangePicker: DateRangePickerStyles;
+   checkBox: CheckBoxStyles;
+   loadingModal: LoadingModalStyles;
+@@ -78,7 +74,6 @@ export interface ThemeContextData {
+   errorModal: ErrorModalStyles;
+   countryPicker: CountryPickerStyles;
+   datePicker: DatePickerStyles;
+-  imagePicker: ImagePickerStyles;
+   dateRangePicker: DateRangePickerStyles;
+   checkBox: CheckBoxStyles;
+   loadingModal: LoadingModalStyles;
+@@ -100,7 +95,6 @@ export const themeDefaultValue: ThemeContextData = {
+   inputPhoneNumber: {},
+   countryPicker: {},
+   datePicker: {},
+-  imagePicker: {},
+   dateRangePicker: {},
+   checkBox: {},
+   countries: [],
+@@ -127,88 +121,11 @@ export const useThemeContextValue = (initial: ThemeProps, initI18n?: any): Theme
+   const [deviceCountryCode, setDeviceCountryCode] = useState<string>('65');
+   const [isLoadingCountry, setLoadingCountry] = useState(false);
+   const [datePicker] = useState<DatePickerStyles>(initial.datePicker ?? {});
+-  const [imagePicker] = useState<ImagePickerStyles>(initial.imagePicker ?? {});
+   const [dateRangePicker] = useState<DateRangePickerStyles>(initial.dateRangePicker ?? {});
+   const [currencies, setCurrencies] = useState<any[]>([]);
+   const [checkBox] = useState<CheckBoxStyles>(initial.checkBox ?? {});
+   const [loadingModal] = useState<LoadingModalStyles>(initial.loadingModal ?? {});
+ 
+-  useEffect(() => {
+-    getCurrentCountries();
+-    getCurrencies();
+-  }, []);
+-
+-  useEffect(() => {
+-    getCountryCode();
+-  }, [countries]);
+-
+-  const getCurrencies = async () => {
+-    try {
+-      const _localCurrencies = await localCountry.getCurrencies();
+-      if (_localCurrencies.length === 0) {
+-        const _currencies = await countryServices.getCurrencies();
+-        await localCountry.storeCurrencies(_currencies);
+-        setCurrencies(_currencies);
+-      } else {
+-        setCurrencies(_localCurrencies);
+-      }
+-    } catch (error) {
+-      setCurrencies([]);
+-    }
+-  };
+-
+-  const getCurrentCountries = async () => {
+-    try {
+-      setLoadingCountry(true);
+-      const _localCountries = await localCountry.getCountries();
+-      if (_localCountries.length === 0) {
+-        const _countries = await countryServices.getCountries();
+-        const filteredCountried = filter(
+-          _countries,
+-          (country) => !isEmpty(country.attributes.idd) && country.attributes.idd !== 'NONE'
+-        );
+-        let lastestCountries: CountryInformation[] = [];
+-        filteredCountried.forEach((country: CountryInformation) => {
+-          const separateIdds = country.attributes.idd.split(',');
+-          if (separateIdds.length > 0) {
+-            separateIdds.forEach((idd) =>
+-              lastestCountries.push({
+-                ...country,
+-                attributes: {
+-                  ...country.attributes,
+-                  idd: idd.trim().replace('+', ''),
+-                },
+-              })
+-            );
+-          } else {
+-            lastestCountries.push({
+-              ...country,
+-              attributes: { ...country.attributes, idd: country.attributes.idd.replace('+', '') },
+-            });
+-          }
+-        });
+-        await localCountry.storeCountries(lastestCountries);
+-        setCountries(lastestCountries);
+-      } else {
+-        setCountries(_localCountries);
+-      }
+-      setLoadingCountry(false);
+-    } catch (error) {
+-      setCountries([]);
+-      setLoadingCountry(false);
+-    }
+-  };
+-
+-  const getCountryCode = async () => {
+-    const _countryCode = await getDeviceCountryCode();
+-    if (!isEmpty(countries) && _countryCode) {
+-      const data = find(countries, (c) => c.attributes.code2 === _countryCode);
+-      if (data) {
+-        setDeviceCountryCode(data.attributes.idd);
+-      }
+-    }
+-  };
+-
+   return useMemo(
+     () => ({
+       colors,
+@@ -225,7 +142,6 @@ export const useThemeContextValue = (initial: ThemeProps, initI18n?: any): Theme
+       countryPicker,
+       isLoadingCountry,
+       datePicker,
+-      imagePicker,
+       dateRangePicker,
+       currencies,
+       checkBox,
+@@ -246,7 +162,6 @@ export const useThemeContextValue = (initial: ThemeProps, initI18n?: any): Theme
+       countryPicker,
+       isLoadingCountry,
+       datePicker,
+-      imagePicker,
+       dateRangePicker,
+       currencies,
+       checkBox,

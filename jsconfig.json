@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "src/*": ["./src/*"],
+      "@actions/*": ["./src/actions/*"],
+      "@api/*": ["./src/api/*"],
+      "@assets/*": ["./src/assets/*"],
+      "@components/*": ["./src/components/*"],
+      "@config/*": ["./src/config/*"],
+      "@data/*": ["./src/data/*"],
+      "@lib/*": ["./src/lib/*"],
+      "@navigation/*": ["./src/navigation/*"],
+      "@reducers/*": ["./src/reducers/*"],
+      "@sagas/*": ["./src/sagas/*"],
+      "@screens/*": ["./src/screens/*"],
+      "@store/*": ["./src/store/*"],
+      "@services/*": ["./src/services/*"],
+      "@utils/*": ["./src/utils/*"],
+      "@I18n/*": ["./src/i18n/*"],
+      "@context/*": ["./src/context/*"]
+    },
+    "allowJs": true
+  },
+  "include": [],
+  "exclude": ["node_modules", "babel.config.js", "metro.config.js"]
+}

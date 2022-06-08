@@ -1,0 +1,4 @@
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+    <color name="custom_notification_color">#F15D69</color>
+    <color name="primary_dark">#000000</color>
+</resources>

@@ -1,0 +1,11 @@
+{
+    "applinks": {
+        "apps": [],
+        "details": [
+            {
+                "appID": "5634LD444J.com.meta.ja.tcare-app",
+                "paths": [ "/line-auth/*" ]
+            }
+        ]
+    }
+}

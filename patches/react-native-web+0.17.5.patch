@@ -1,0 +1,13 @@
+diff --git a/node_modules/react-native-web/dist/exports/Image/index.js b/node_modules/react-native-web/dist/exports/Image/index.js
+index 5c25ebf..5c9c718 100644
+--- a/node_modules/react-native-web/dist/exports/Image/index.js
++++ b/node_modules/react-native-web/dist/exports/Image/index.js
+@@ -173,7 +173,7 @@ var Image = /*#__PURE__*/React.forwardRef(function (props, ref) {
+       onLoadEnd = props.onLoadEnd,
+       onLoadStart = props.onLoadStart,
+       pointerEvents = props.pointerEvents,
+-      source = props.source,
++      source = props.source.default??props.source,
+       style = props.style,
+       rest = _objectWithoutPropertiesLoose(props, ["accessibilityLabel", "blurRadius", "defaultSource", "draggable", "onError", "onLayout", "onLoad", "onLoadEnd", "onLoadStart", "pointerEvents", "source", "style"]);
+ 
