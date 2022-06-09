@@ -192,8 +192,25 @@ export default function ItemQuestionForm({item, valueData = null, changeData = (
           paddingHorizontal: 16,
         }}
       >
-        <Text style={{color: colors.textBlack, width: "40%", fontSize: 15, marginRight: 11, lineHeight: 21}}>{item.title}</Text>
-        <View style={{flexDirection: "row", width: "60%", justifyContent: "flex-start", alignItems: "center"}}>
+        <Text
+          style={{
+            color: colors.textBlack,
+            width: type === "questionAdmin" && (item.label === 4 || item.label === 3) ? "80%" : "40%",
+            fontSize: 15,
+            marginRight: 11,
+            lineHeight: 21,
+          }}
+        >
+          {item.title}
+        </Text>
+        <View
+          style={{
+            flexDirection: "row",
+            width: type === "questionAdmin" && (item.label === 4 || item.label === 3) ? "20%" : "60%",
+            justifyContent: "flex-start",
+            alignItems: "center",
+          }}
+        >
           {item.label === 4 || item.label === 3 ? (
             <>
               <View style={{marginRight: 6, minWidth: 120, flexDirection: "column"}}>

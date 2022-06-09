@@ -126,7 +126,7 @@ export const yourThemeData = createThemeData({
     colorHome02: "rgba(0, 176, 80, 0.2)",
     colorHome04: "rgba(0, 176, 80, 0.4)",
 
-    colorRedEditCalendar: "#DE0404",
+    colorRedEditCalendar: "#F15F5F",
 
     colorGreenEditCalendar3: "#B7EB8F",
     colorGreenEditCalendar1: "#F6FFED",

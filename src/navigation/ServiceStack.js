@@ -142,7 +142,7 @@ function ServiceStackScreen() {
         name={SCREEN_QUESIONAIRE_STEP2}
         component={QuestionaireStep2}
         options={{
-          title: "問診票入力",
+          title: "オンライン診療予約",
           headerLeft: (props) => {
             return null;
           },
@@ -152,14 +152,14 @@ function ServiceStackScreen() {
         name={SCREEN_QUESIONAIRE_STEP3}
         component={QuestionaireStep3}
         options={{
-          title: "内容確認",
+          title: "オンライン診療予約",
         }}
       />
       <ServiceStack.Screen
         name={SCREEN_QUESIONAIRE_STEP4}
         component={QuestionaireStep4}
         options={{
-          title: "問診票入力完了",
+          title: "問診票登録完了",
         }}
       />
       <ServiceStack.Screen name={SCREEN_PAYMENT} component={PaymentScreen} options={{title: "お会計"}} />

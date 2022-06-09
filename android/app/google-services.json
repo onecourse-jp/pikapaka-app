@@ -14,11 +14,19 @@
       },
       "oauth_client": [
         {
-          "client_id": "417005058487-oc319p9esmg8raee6ha7kv0drh6boa66.apps.googleusercontent.com",
+          "client_id": "417005058487-kfcdfinfuuqs6lc4eve06adgqebu9rqd.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.meta.tcare",
             "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "417005058487-oc319p9esmg8raee6ha7kv0drh6boa66.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.meta.tcare",
+            "certificate_hash": "f54fb0f475732c7c433d30162de61b9e8030345b"
           }
         },
         {
@@ -37,6 +45,14 @@
             {
               "client_id": "417005058487-gjhtbopnpce48n0gogcc6r63crje7vvr.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "417005058487-6g9817uareh4ed0jqshaq6collvgajue.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.meta.tcare-app",
+                "app_store_id": "1619858575"
+              }
             }
           ]
         }
@@ -45,4 +61,3 @@
   ],
   "configuration_version": "1"
 }
-

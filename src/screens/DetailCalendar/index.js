@@ -15,7 +15,6 @@ export default function DetailCalender({route}) {
   const idCalendar = route?.params?.id;
   const fromScreen = route?.params?.fromScreen;
   const [refreshing, setRefreshing] = React.useState(false);
-  console.log("idCalendar--", idCalendar);
   const screenStep = 2;
   const navigation = useNavigation();
   const [dataCalendar, setDataCalendar] = useState(null);
@@ -62,7 +61,7 @@ export default function DetailCalender({route}) {
       <View style={[styles.container]}>
         <ScrollView refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />} contentContainerStyle={{}}>
           <GuideComponent
-            text={
+            title={
               dataCalendar?.status == 1
                 ? "診療時間までお待ちください。"
                 : "現在下記ご予約を承っております。診察前に必ず事前問診にお答えください。"
@@ -126,12 +125,13 @@ export default function DetailCalender({route}) {
             <Button label={dataCalendar?.status === 1 ? "入室して接続準備を行う" : "問診票を記入する"} onPress={handleSubmit} />
             <TouchableOpacity
               onPress={handleEditCalendar}
+              disabled={dataCalendar?.status > 2 ? true : false}
               style={{
                 flexDirection: "row",
                 alignItems: "center",
                 justifyContent: "center",
                 borderColor: colors.colorTextBlack,
-                backgroundColor: colors.white,
+                backgroundColor: dataCalendar?.status > 2 ? colors.gray7 : colors.white,
                 borderWidth: 1,
                 borderRadius: 4,
                 marginTop: 11,
@@ -143,7 +143,7 @@ export default function DetailCalender({route}) {
                   fontFamily: fonts.Hiragino,
                   fontSize: 14,
                   color: colors.colorTextBlack,
-                  fontWeight: "500",
+                  fontWeight: "600",
                   textAlign: "center",
                   lineHeight: 14,
                 }}
@@ -152,24 +152,6 @@ export default function DetailCalender({route}) {
               </Text>
             </TouchableOpacity>
           </View>
-
-          {/* <View style={{flexDirection: "row", alignItems: "center", justifyContent: "center", marginTop: 20}}>
-            <TouchableOpacity
-              onPress={() => navigation.navigate(SCREEN_PAYMENT, {id: dataCalendar.id})}
-              style={{
-                flexDirection: "row",
-                justifyContent: "center",
-                alignItems: "center",
-                width: 300,
-                height: 32,
-                borderWidth: 1,
-                borderColor: colors.textBlue,
-                margin: 0,
-              }}
-            >
-              <Text style={{color: colors.textBlue, textAlign: "center", lineHeight: 22}}>お会計</Text>
-            </TouchableOpacity>
-          </View> */}
         </ScrollView>
       </View>
     </SafeAreaView>

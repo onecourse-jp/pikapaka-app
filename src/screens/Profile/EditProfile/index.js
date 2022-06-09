@@ -222,7 +222,7 @@ export default function EditProfile() {
             </View>
             <View style={{marginTop: 27}}>
               <Text style={{fontFamily: fonts.NSbold, color: colors.colorTextBlack, paddingHorizontal: 16, fontSize: 16, marginBottom: 8}}>
-                タイトルが入ります
+                基本情報
               </Text>
               {DATALISTPERSON.map((item, index) => {
                 return (

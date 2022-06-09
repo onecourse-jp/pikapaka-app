@@ -87,55 +87,28 @@ export default function QuestionaireStep2({route}) {
     <SafeAreaView style={{flex: 1, backgroundColor: colors.backgroundTheme}}>
       <View style={[styles.container]}>
         <ScrollView contentContainerStyle={{}} listMode="MODAL">
-          <GuideComponent text={"下記の問診にお答えください。（回答していただかないと受診ができません）\n連絡先のご記入をお願いします。"} />
+          <GuideComponent
+            title={"下記の問診にお答えください。連絡先のご記入をお願いします。"}
+            note="※回答していただかないと受診ができません"
+          />
           <StepsComponent currentStep={screenStep} isStepSchedule={true} />
-          {calendarData && (
-            <View style={{backgroundColor: colors.white, padding: 16}}>
-              <View style={{flexDirection: "row", alignItems: "center"}}>
-                <View
-                  style={{
-                    borderWidth: 1,
-                    marginRight: 7,
-                    borderColor: global.renderColorStatus({type: "text", status: 1}),
-                    backgroundColor: global.renderColorStatus({type: "background", status: 1}),
-                    paddingHorizontal: 8,
-                    alignSelf: "flex-start",
-                  }}
-                >
-                  <Text
-                    style={{
-                      fontFamily: fonts.Hiragino,
-                      fontSize: 12,
-                      color: global.renderColorStatus({type: "text", status: 1}),
-                      lineHeight: 20,
-                      textAlign: "left",
-                    }}
-                  >
-                    {global.t(`status_calendar.${1}`)}
-                  </Text>
-                </View>
-                <Text
-                  style={{
-                    fontFamily: fonts.Hiragino,
-                    fontSize: 13,
-                    color: colors.textBlack,
-                    fontWeight: "600",
-                    lineHeight: 16,
-                    textAlign: "center",
-                  }}
-                >
-                  {global.t(`categoryTitle.${calendarData?.detail_category_medical_of_customer}`)}
-                </Text>
-              </View>
-              <View>
-                <Text style={{fontFamily: fonts.Hiragino, fontSize: 14, color: colors.gray1, lineHeight: 17, marginTop: 7}}>
-                  {`${moment(calendarData?.date).format("YYYY年MM月DD日")}（${moment(calendarData?.date).format("dddd")}）${
-                    calendarData?.time_start
-                  }~${calendarData?.time_end}`}
-                </Text>
-              </View>
-            </View>
-          )}
+          <View style={{flexDirection: "row", alignItems: "center", paddingHorizontal: 16}}>
+            <Text style={{fontFamily: fonts.Hiragino, fontSize: 13, color: colors.gray1, width: "40%", lineHeight: 23, marginBottom: 16}}>
+              診療科目：
+            </Text>
+            <Text
+              style={{
+                fontFamily: fonts.Hiragino,
+                fontSize: 13,
+                color: colors.gray7,
+                width: "60%",
+                lineHeight: 23,
+                marginBottom: 16,
+              }}
+            >
+              {global.t(`categoryTitle.${calendarData?.detail_category_medical_of_customer}`)}
+            </Text>
+          </View>
           <View>
             <Text style={{fontFamily: fonts.NSbold, paddingHorizontal: 16, fontSize: 16, marginTop: 16}}>問診</Text>
             {dataQuestion.map((item, index) => {

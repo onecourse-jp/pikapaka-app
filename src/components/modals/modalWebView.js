@@ -7,7 +7,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {messages} from "../../screens/CallLogic/lib/emitter";
 import {SCREEN_DETAIL_CALENDAR} from "../../screens/screens.constants";
 let {width, height} = Dimensions.get("window");
-const dataPopup = [{}, {}, {}];
+const dataPopup = [];
 
 export default function ModalWebView({route}) {
   const [isPopup, setIsPopup] = useState(false);

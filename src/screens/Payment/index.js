@@ -177,6 +177,7 @@ export default function Payment({route}) {
                               {item?.item?.map((el, ind) => {
                                 return (
                                   <Text
+                                    key={`item?.item-${ind}`}
                                     style={{fontFamily: fonts.RobotoRegular, fontSize: 13, color: colors.colorTextBlack, lineHeight: 22}}
                                   >
                                     {el}

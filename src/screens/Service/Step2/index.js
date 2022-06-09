@@ -171,7 +171,7 @@ export default function ServiceStep2() {
                     paddingHorizontal: 16,
                   }}
                 >
-                  <View style={{flexDirection: "row"}}>
+                  <View style={{flexDirection: "row", alignItems: "center"}}>
                     <Text style={{fontFamily: fonts.NSregular, fontWeight: "bold", color: colors.colorTextBlack, fontSize: 12}}>
                       {calendar.data[item].label}：
                     </Text>
