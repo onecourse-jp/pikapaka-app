@@ -136,8 +136,8 @@ export default function ServiceStep4() {
                     paddingHorizontal: 16,
                   }}
                 >
-                  <Text style={{color: colors.colorTextBlack, fontWeight: "bold", fontSize: 15}}>{item.label}</Text>
-                  <Text style={{color: colors.textBlack, fontSize: 15}}>{item.value}</Text>
+                  <Text style={{color: colors.colorTextBlack, width: "40%", fontWeight: "bold", fontSize: 15}}>{item.label}</Text>
+                  <Text style={{color: colors.textBlack, width: "60%", textAlign: "left", fontSize: 15}}>{item.value}</Text>
                 </View>
               );
             })}
@@ -153,7 +153,7 @@ export default function ServiceStep4() {
                 lineHeight: 15,
               }}
             >
-              タイトルが入ります
+              基本情報
             </Text>
             {DATALISTPERSON2.map((item, index) => {
               console.log("item.option", item.option, item.value);
@@ -173,26 +173,24 @@ export default function ServiceStep4() {
                   }}
                 >
                   <Text style={{color: colors.colorTextBlack, fontWeight: "bold", fontSize: 14}}>{item.label}</Text>
-                  {item.option &&
-                    item.data &&
-                    Array.isArray(item.value) &&
-                    item.value.map((el, ind) => {
-                      return (
-                        <Text
-                          key={`med-item-${ind}`}
-                          style={{color: colors.textBlack, fontSize: 14, textAlign: "left", width: "60%", lineHeight: 18, marginBottom: 8}}
-                        >
-                          {dataMedicalHistory[el]?.label}
-                        </Text>
-                      );
-                    })}
+                  {item.option && item.data && Array.isArray(item.value) && (
+                    <View style={{width: "60%"}}>
+                      {item.value.map((el, ind) => {
+                        return (
+                          <Text key={`med-item-${ind}`} style={{color: colors.textBlack, fontSize: 14, textAlign: "left", lineHeight: 18}}>
+                            {dataMedicalHistory[el]?.label}
+                          </Text>
+                        );
+                      })}
+                    </View>
+                  )}
                   {item.option && !item.data && (
-                    <Text style={{color: colors.textBlack, fontSize: 14, textAlign: "left", width: "60%", lineHeight: 18, marginBottom: 8}}>
+                    <Text style={{color: colors.textBlack, fontSize: 14, textAlign: "left", width: "60%", lineHeight: 18}}>
                       {item.value === 1 ? "有" : "無"}
                     </Text>
                   )}
                   {!item.option && (
-                    <Text style={{color: colors.textBlack, fontSize: 14, textAlign: "left", width: "60%", lineHeight: 18, marginBottom: 8}}>
+                    <Text style={{color: colors.textBlack, fontSize: 14, textAlign: "left", width: "60%", lineHeight: 18}}>
                       {item.value}
                     </Text>
                   )}
@@ -255,7 +253,7 @@ export default function ServiceStep4() {
             }}
           >
             <Text style={{fontFamily: fonts.NSregular, fontSize: 14, lineHeight: 15, color: colors.gray1}}>
-              {dataConfirm?.old_reservation_id ? "はい" : "いいえ"}
+              {dataConfirm?.old_reservation_id ? "いいえ" : "はい"}
             </Text>
           </View>
 
@@ -263,7 +261,7 @@ export default function ServiceStep4() {
             <Button label="内容確認へ進む" onPress={handleSubmit} />
           </View>
           <View style={{marginTop: 11, paddingHorizontal: 16}}>
-            <Button variant="secondary" label="日付選択選択へ戻る" onPress={() => navigation.goBack()} />
+            <Button variant="secondary" label="予約内容を確定" onPress={() => navigation.goBack()} />
           </View>
         </ScrollView>
       </View>

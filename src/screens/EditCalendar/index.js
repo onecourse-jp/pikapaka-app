@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {StyleSheet, Text, View, ScrollView, SafeAreaView, TouchableOpacity, Alert} from "react-native";
+import {StyleSheet, Text, View, ScrollView, SafeAreaView, TouchableOpacity, Alert, Image} from "react-native";
 import {useThemeColors, useThemeFonts, Button} from "react-native-theme-component";
 import {useNavigation} from "@react-navigation/native";
 import {useDispatch, useSelector} from "react-redux";
@@ -12,7 +12,7 @@ import {
 } from "@screens/screens.constants";
 import {deleteCalendar} from "@services/editCalendar";
 import moment from "moment";
-import {changeStatusCalendar} from "@services/editCalendar";
+import {changeStatusCalendar} from "@actions/calendarAction";
 
 export default function EditCalendar({route}) {
   const colors = useThemeColors();
@@ -32,23 +32,6 @@ export default function EditCalendar({route}) {
       }, 2000);
     }
   }, [route?.params?.data]);
-  // const handleSubmit = () => {
-  //   navigation.navigate(SCREEN_QUESIONAIRE_STEP2, {data: dataCalendar});
-  // };
-
-  // useEffect(async () => {
-  //   if (idCalendar) {
-  //     global.showLoadingView();
-  //     const {response, data} = await getReservationById(idCalendar);
-  //     if (response?.status === 200) {
-  //       setDataCalendar(data?.data);
-  //       console.log("datadatadata getReservation", data?.data);
-  //     } else {
-  //       console.log("response getReservationById", response?.status);
-  //     }
-  //     global.hideLoadingView();
-  //   }
-  // }, []);
   const handleDateTime = () => {
     navigation.navigate(SCREEN_EDIT_CALENDAR_DATETIME, {data: dataCalendar});
   };
@@ -67,7 +50,8 @@ export default function EditCalendar({route}) {
     const {data, response} = await deleteCalendar(dataCalendar.id);
     console.log("data after delete", data);
     if (data.status === 200) {
-      dispatch(changeStatusCalendar({}));
+      global.hideLoadingView();
+      dispatch(changeStatusCalendar());
       navigation.navigate(SCREEN_HISTORY);
       Alert.alert("", "解除が完了しました。", [
         {
@@ -83,13 +67,11 @@ export default function EditCalendar({route}) {
         },
       ]);
     }
-
-    global.hideLoadingView();
   };
   const handleDelete = () => {
     Alert.alert(
       "",
-      "解除してよろしいでしょうか。",
+      "予約をキャンセルしますか？",
       [
         {
           text: "Cancel",
@@ -105,22 +87,12 @@ export default function EditCalendar({route}) {
     <View style={{paddingVertical: 25}}>
       <View style={{flexDirection: "row", justifyContent: "space-between"}}>
         <Text style={{fontFamily: fonts.NSbold, fontSize: 20, color: colors.textBlack, lineHeight: 29}}>{title}</Text>
-        <View style={{borderWidth: 1, borderColor: colors.textBlue}}>
-          <TouchableOpacity onPress={onClick}>
-            <Text
-              style={{
-                fontSize: 14,
-                lineHeight: 22,
-                fontFamily: fonts.RobotoMedium,
-                color: colors.textBlue,
-                paddingHorizontal: 16,
-                paddingVertical: 5,
-              }}
-            >
-              変更
-            </Text>
-          </TouchableOpacity>
-        </View>
+        <TouchableOpacity onPress={onClick} style={{flexDirection: "row", alignItems: "center"}}>
+          <Text style={{fontFamily: fonts.NSregular, color: colors.headerComponent, fontSize: 12}}>変更</Text>
+          <View style={{marginLeft: 7}}>
+            <Image height={13} width={8} source={require("@assets/images/icons/ic_arrowRight_back_step.png")} />
+          </View>
+        </TouchableOpacity>
       </View>
       <Text style={{fontSize: 15, lineHeight: 26, fontFamily: fonts.SFregular, color: colors.gray1}}>{content}</Text>
     </View>
@@ -129,22 +101,12 @@ export default function EditCalendar({route}) {
     <View style={{paddingVertical: 25}}>
       <View style={{flexDirection: "row", justifyContent: "space-between"}}>
         <Text style={{fontFamily: fonts.NSbold, fontSize: 20, color: colors.textBlack, lineHeight: 29}}>{title}</Text>
-        <View style={{borderWidth: 1, borderColor: colors.textBlue}}>
-          <TouchableOpacity onPress={onClick}>
-            <Text
-              style={{
-                fontSize: 14,
-                lineHeight: 22,
-                fontFamily: fonts.RobotoMedium,
-                color: colors.textBlue,
-                paddingHorizontal: 16,
-                paddingVertical: 5,
-              }}
-            >
-              変更
-            </Text>
-          </TouchableOpacity>
-        </View>
+        <TouchableOpacity onPress={onClick} style={{flexDirection: "row", alignItems: "center"}}>
+          <Text style={{fontFamily: fonts.NSregular, color: colors.headerComponent, fontSize: 12}}>変更</Text>
+          <View style={{marginLeft: 7}}>
+            <Image height={13} width={8} source={require("@assets/images/icons/ic_arrowRight_back_step.png")} />
+          </View>
+        </TouchableOpacity>
       </View>
       <Text style={{fontSize: 16, lineHeight: 23, fontWeight: "700", fontFamily: fonts.SFbold, marginTop: 24, marginBottom: 7}}>
         ご相談内容
@@ -183,28 +145,20 @@ export default function EditCalendar({route}) {
   );
   const CalendarAddress = ({title = null, content = null, onClick = () => {}}) => (
     <View style={{paddingVertical: 25}}>
-      <View style={{flexDirection: "row", justifyContent: "space-between"}}>
-        <Text style={{fontFamily: fonts.NSbold, fontSize: 20, color: colors.textBlack, lineHeight: 29}}>{title}</Text>
-        <View style={{borderWidth: 1, borderColor: colors.textBlue}}>
-          <TouchableOpacity onPress={onClick}>
-            <Text
-              style={{
-                fontSize: 14,
-                lineHeight: 22,
-                fontFamily: fonts.RobotoMedium,
-                color: colors.textBlue,
-                paddingHorizontal: 16,
-                paddingVertical: 5,
-              }}
-            >
-              登録住所以外を指定する
-            </Text>
-          </TouchableOpacity>
-        </View>
+      <Text style={{fontFamily: fonts.NSbold, fontSize: 20, color: colors.textBlack, lineHeight: 29}}>{title}</Text>
+
+      <View style={{flexDirection: "row", justifyContent: "space-between", alignItems: "center"}}>
+        <Text style={{fontSize: 16, lineHeight: 23, fontWeight: "400", fontFamily: fonts.SFbold, marginTop: 24, marginBottom: 10}}>
+          {dataCalendar?.shipping_postal_code} {dataCalendar?.shipping_address}
+        </Text>
+        <TouchableOpacity onPress={onClick} style={{flexDirection: "row", alignItems: "center"}}>
+          <Text style={{fontFamily: fonts.NSregular, color: colors.headerComponent, fontSize: 12}}>今回のお届け先を追加</Text>
+          <View style={{marginLeft: 7}}>
+            <Image height={13} width={8} source={require("@assets/images/icons/ic_arrowRight_back_step.png")} />
+          </View>
+        </TouchableOpacity>
       </View>
-      <Text style={{fontSize: 16, lineHeight: 23, fontWeight: "400", fontFamily: fonts.SFbold, marginTop: 24, marginBottom: 10}}>
-        {dataCalendar?.shipping_postal_code} {dataCalendar?.shipping_address}
-      </Text>
+
       <Text style={{fontSize: 15, lineHeight: 26, fontFamily: fonts.SFregular, color: colors.gray7}}>
         今回のみ配送先を登録住所以外で指定したい方は『登録住所以外を指定する』ボタンから住所を指定して下さい。引っ越しなどで住所が変わられた方はマイページから変更を行って下さい。{" "}
       </Text>
@@ -215,11 +169,6 @@ export default function EditCalendar({route}) {
     <SafeAreaView style={{flex: 1, backgroundColor: colors.backgroundTheme}}>
       <View style={[styles.container]}>
         <ScrollView contentContainerStyle={{paddingHorizontal: 16}}>
-          <View>
-            <Text style={{fontFamily: fonts.NSbold, fontSize: 20, color: colors.textBlack, lineHeight: 29, textAlign: "center"}}>
-              佐藤 太郎
-            </Text>
-          </View>
           <CalendarComponent
             title="予約日時"
             content={`${moment(dataCalendar?.date).format("YYYY年MM月DD日")} (${moment(dataCalendar?.date).format("dddd")}) ${
@@ -245,7 +194,7 @@ export default function EditCalendar({route}) {
                   borderColor: colors.colorRedEditCalendar,
                 }}
               >
-                予約をキャンセル
+                X この予約をキャンセルする
               </Text>
             </View>
           </TouchableOpacity>
@@ -272,7 +221,6 @@ export default function EditCalendar({route}) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingVertical: 16,
     flexDirection: "column",
   },
 });

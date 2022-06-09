@@ -148,7 +148,7 @@ export default function Register() {
               <Text style={{fontSize: 16, marginBottom: 14, textAlign: "center"}}>メールアドレスで新規登録</Text> */}
               {errors.password && (
                 <Text style={styles.textError}>
-                  {errors.password.type === "required" ? "Password is required" : `Length of password more than 8`}.
+                  {errors.password.type === "required" ? "パスワードが必要です" : `7文字以上の半角英数字`}.
                 </Text>
               )}
               {errorApi.length > 0 && <Text style={styles.textError}>{errorApi}</Text>}

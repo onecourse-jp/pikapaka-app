@@ -279,15 +279,15 @@ export default function BottomTabbarNavigator({route}) {
             focused ? (
               <View style={[styles.tabbarItem]}>
                 <View style={[styles.widgetText, styles.widgetTextActive]}>
-                  <Image source={require("@assets/images/icons/ic_home_tabbar_active.png")} />
-                  <Text style={[styles.tabbarText]}>トップ</Text>
+                  <Image source={require("@assets/images/icons/ic_home_tabbar_active_v2.png")} />
+                  <Text style={[styles.tabbarText]}>ホーム</Text>
                 </View>
               </View>
             ) : (
               <View style={[styles.tabbarItem]}>
                 <View style={[styles.widgetText]}>
                   <Image source={require("@assets/images/icons/ic_home_tabbar_v2.png")} />
-                  <Text style={[styles.tabbarText, styles.tabbarTextDefault]}>トップ</Text>
+                  <Text style={[styles.tabbarText, styles.tabbarTextDefault]}>ホーム</Text>
                 </View>
               </View>
             ),
@@ -316,7 +316,7 @@ export default function BottomTabbarNavigator({route}) {
 
                   <Text style={[styles.tabbarText]}>
                     {/* {AppText.bottomTab.chat} */}
-                    診療窓口
+                    オンライン診療
                   </Text>
                 </View>
               </View>
@@ -328,7 +328,7 @@ export default function BottomTabbarNavigator({route}) {
                   </View>
                   <Text style={[styles.tabbarText, styles.tabbarTextDefault]}>
                     {/* {AppText.bottomTab.chat} */}
-                    診療窓口
+                    オンライン診療
                   </Text>
                 </View>
               </View>

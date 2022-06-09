@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {StyleSheet, Text, View, Alert, TextInput, SafeAreaView} from "react-native";
+import {StyleSheet, Text, View, Alert, TextInput, SafeAreaView, TouchableOpacity} from "react-native";
 import {useForm, Controller} from "react-hook-form";
 import {navigationRef} from "src/navigation/NavigationService";
 import {useNavigation, useRoute} from "@react-navigation/native";
@@ -11,6 +11,8 @@ import ButtonOrange from "../../components/Button/ButtonOrange";
 export default function ResetPassword() {
   const colors = useThemeColors();
   const route = useRoute();
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const routeParams = route?.params;
   const {
     control,
@@ -74,6 +76,8 @@ export default function ResetPassword() {
                       alignItems: "center",
                       borderTopWidth: 1,
                       borderTopColor: "#EEEEEE",
+                      paddingHorizontal: 16,
+                      backgroundColor: colors.white,
                     }}
                   >
                     <Text style={{width: 120}}>メールアドレス</Text>
@@ -119,6 +123,8 @@ export default function ResetPassword() {
                     alignItems: "center",
                     borderTopWidth: 1,
                     borderTopColor: "#EEEEEE",
+                    paddingHorizontal: 16,
+                    backgroundColor: colors.white,
                   }}
                 >
                   <Text style={{width: 120}}>新しいパスワード</Text>
@@ -131,7 +137,7 @@ export default function ResetPassword() {
                     type={"password"}
                     placeholder={"7文字以上の半角英数字"}
                     placeholderTextColor={colors.textPlaceholder}
-                    secureTextEntry={true}
+                    secureTextEntry={showPassword ? false : true}
                     onChangeText={(text) => {
                       onChange(text);
                       setPasswordForm(text);
@@ -141,13 +147,16 @@ export default function ResetPassword() {
                     value={value}
                     maxLength={30}
                   />
+                  <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
+                    <Image source={require("@assets/images/show_hide_password.png")} />
+                  </TouchableOpacity>
                 </View>
               )}
               name="password"
             />
             {errors.password && (
               <Text style={styles.textError}>
-                {errors.password.type === "required" ? "Password is required" : `Length of password more than 8`}.
+                {errors.password.type === "required" ? "パスワードが必要です" : `7文字以上の半角英数字`}.
               </Text>
             )}
             <Controller
@@ -164,6 +173,8 @@ export default function ResetPassword() {
                     alignItems: "center",
                     borderTopWidth: 1,
                     borderTopColor: "#EEEEEE",
+                    paddingHorizontal: 16,
+                    backgroundColor: colors.white,
                   }}
                 >
                   <Text style={{width: 120}}>確認用パスワード</Text>
@@ -176,7 +187,7 @@ export default function ResetPassword() {
                     type={"password"}
                     placeholder={"パスワードをもう一度入力"}
                     placeholderTextColor={colors.textPlaceholder}
-                    secureTextEntry={true}
+                    secureTextEntry={showConfirmPassword ? false : true}
                     onChangeText={(text) => {
                       onChange(text);
                       setErrorApi("");
@@ -185,20 +196,25 @@ export default function ResetPassword() {
                     value={value}
                     maxLength={30}
                   />
+                  <TouchableOpacity onPress={() => setShowConfirmPassword(!showConfirmPassword)}>
+                    <Image source={require("@assets/images/show_hide_password.png")} />
+                  </TouchableOpacity>
                 </View>
               )}
               name="corfirmpassword"
             />
-            {errors.corfirmpassword && <Text style={styles.textError}>The entered passwords do not match.</Text>}
+            {errors.corfirmpassword && <Text style={styles.textError}>入力されたパスワードが一致しません。</Text>}
             {errorApi.length > 0 && <Text style={styles.textError}>{errorApi}</Text>}
           </View>
-          <ButtonOrange  disabled={disableSubmit} title="パスワード再設定" onPress={handleSubmit(onSubmit)} />
+          <View style={{paddingHorizontal: 16}}>
+            <ButtonOrange disabled={disableSubmit} title="パスワード再設定" onPress={handleSubmit(onSubmit)} />
+          </View>
         </View>
       </View>
     </SafeAreaView>
   );
 }
 const styles = StyleSheet.create({
-  container: {flex: 1, flexDirection: "column", marginTop: 5, paddingHorizontal: 22, justifyContent: "space-between"},
+  container: {flex: 1, flexDirection: "column", marginTop: 5, justifyContent: "space-between"},
   textError: {color: "red", paddingBottom: 12, paddingTop: 6},
 });

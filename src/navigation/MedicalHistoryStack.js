@@ -75,7 +75,7 @@ function MedicalHistoryStackScreen() {
         name={SCREEN_QUESIONAIRE_STEP2}
         component={QuestionaireStep2}
         options={{
-          title: "問診票入力",
+          title: "オンライン診療予約",
           headerLeft: (props) => {
             return null;
           },
@@ -85,14 +85,14 @@ function MedicalHistoryStackScreen() {
         name={SCREEN_QUESIONAIRE_STEP3}
         component={QuestionaireStep3}
         options={{
-          title: "内容確認",
+          title: "オンライン診療予約",
         }}
       />
       <MedicalHistoryStack.Screen
         name={SCREEN_QUESIONAIRE_STEP4}
         component={QuestionaireStep4}
         options={{
-          title: "問診票入力完了",
+          title: "問診票登録完了",
         }}
       />
     </MedicalHistoryStack.Navigator>

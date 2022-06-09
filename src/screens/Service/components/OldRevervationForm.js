@@ -12,6 +12,27 @@ export default function OldRevervationForm({value, handleChange}) {
         この科目の受診は初めてですか？
       </Text>
       <View>
+      <TouchableOpacity
+          style={{
+            paddingVertical: 11,
+            backgroundColor: colors.white,
+            borderTopWidth: 1,
+            borderBottomWidth: 1,
+            borderColor: colors.borderGrayE,
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "center",
+            paddingHorizontal: 16,
+          }}
+          onPress={() => handleChange(false)}
+        >
+          <Text style={{fontFamily: fonts.Hiragino, color: colors.colorTextBlack, fontSize: 12, lineHeight: 14}}>はい</Text>
+          {value === false && (
+            <View>
+              <Image source={require("@assets/images/icons/ic_check_form_choose.png")} />
+            </View>
+          )}
+        </TouchableOpacity>
         <TouchableOpacity
           style={{
             paddingVertical: 11,
@@ -26,34 +47,14 @@ export default function OldRevervationForm({value, handleChange}) {
           }}
           onPress={() => handleChange(true)}
         >
-          <Text style={{fontFamily: fonts.Hiragino, color: colors.colorTextBlack, fontSize: 12, lineHeight: 14}}>はい</Text>
+          <Text style={{fontFamily: fonts.Hiragino, color: colors.colorTextBlack, fontSize: 12, lineHeight: 14}}>いいえ</Text>
           {value === true && (
             <View>
               <Image source={require("@assets/images/icons/ic_check_form_choose.png")} />
             </View>
           )}
         </TouchableOpacity>
-        <TouchableOpacity
-          style={{
-            paddingVertical: 11,
-            backgroundColor: colors.white,
-            borderTopWidth: 1,
-            borderBottomWidth: 1,
-            borderColor: colors.borderGrayE,
-            flexDirection: "row",
-            justifyContent: "space-between",
-            alignItems: "center",
-            paddingHorizontal: 16,
-          }}
-          onPress={() => handleChange(false)}
-        >
-          <Text style={{fontFamily: fonts.Hiragino, color: colors.colorTextBlack, fontSize: 12, lineHeight: 14}}>いいえ</Text>
-          {value === false && (
-            <View>
-              <Image source={require("@assets/images/icons/ic_check_form_choose.png")} />
-            </View>
-          )}
-        </TouchableOpacity>
+
       </View>
     </View>
   );

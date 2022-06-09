@@ -13,19 +13,6 @@ import {
   mediaDevices,
   registerGlobals,
 } from "react-native-webrtc";
-const SimplePeerRN = new SimplePeer({
-  initiator: true,
-  wrtc: {
-    RTCPeerConnection,
-    RTCIceCandidate,
-    RTCSessionDescription,
-    RTCView,
-    MediaStream,
-    MediaStreamTrack,
-    mediaDevices,
-    registerGlobals,
-  },
-});
 import {cloneObject} from "../lib/base";
 import {Emitter, messages} from "../lib/emitter";
 import {getFingerprintString, sha256Messages, splitByNChars} from "./fingerprint";

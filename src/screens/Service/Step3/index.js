@@ -137,7 +137,7 @@ export default function ServiceStep3() {
                       paddingHorizontal: 16,
                     }}
                   >
-                    <View style={{flexDirection: "row"}}>
+                    <View style={{flexDirection: "row", alignItems: "center"}}>
                       <Text style={{fontFamily: fonts.NSregular, fontWeight: "bold", color: colors.colorTextBlack, fontSize: 12}}>
                         {calendar.data[item].label}：
                       </Text>
@@ -204,7 +204,7 @@ export default function ServiceStep3() {
               })}
             </View>
             <View>
-              <Text style={{fontFamily: fonts.NSbold, color: colors.colorTextBlack, padding: 16, fontSize: 16}}>タイトルが入ります</Text>
+              <Text style={{fontFamily: fonts.NSbold, color: colors.colorTextBlack, padding: 16, fontSize: 16}}>基本情報</Text>
               {DATALISTPERSON2.map((item, index) => {
                 return (
                   <React.Fragment key={`DATALISTPERSON2-${index}`}>
@@ -260,7 +260,7 @@ export default function ServiceStep3() {
             {oldReservationId && (
               <Controller
                 control={control}
-                defaultValue={false}
+                defaultValue={true}
                 name={"radioStatus"}
                 render={({field: {onChange, onBlur, value}}) => {
                   return <OldRevervationForm value={value} handleChange={onChange} />;

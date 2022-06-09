@@ -40,6 +40,7 @@ instance.interceptors.request //REQUEST
       const authority = await getAuthority();
       if (authority && authority.data && authority.data.access_token) {
         const {access_token, refreshToken} = authority.data;
+        console.log("access_token", access_token);
         headers["Authorization"] = `Bearer ${access_token}`;
       }
 
@@ -85,16 +86,16 @@ instance.interceptors.response.use(
         response: {status: 1001, message: error.message},
         data: {message: error.message},
       };
-    }
-    else if (error?.response?.data?.message === "User is not logged in."
+    } else if (
+      error?.response?.data?.message === "User is not logged in."
       // && error.response.status === 401
-      ) {
+    ) {
       // removeAuthority();
       AsyncStorage.removeItem("@access_token");
       removeAuthority();
       navigationRef.current.resetRoot({
         index: 0,
-        routes: [{ name: SCREEN_WELCOME }],
+        routes: [{name: SCREEN_WELCOME}],
       });
     }
     return {response: error.response, data: error?.response?.data ?? {}};

@@ -49,7 +49,7 @@ export default function StepsComponent({currentStep = 1, isStepSchedule = false,
                   <Text
                     style={{
                       fontSize: 12,
-                      paddingLeft: 2,
+                      // paddingLeft: 2,
                       fontFamily: fonts.Hiragino,
                       fontWeight: "bold",
                       lineHeight: 12,
@@ -77,7 +77,7 @@ export default function StepsComponent({currentStep = 1, isStepSchedule = false,
                   <Text
                     style={{
                       fontSize: 12,
-                      paddingLeft: 2,
+                      // paddingLeft: 2,
                       fontFamily: fonts.Hiragino,
                       fontWeight: "bold",
                       lineHeight: 12,

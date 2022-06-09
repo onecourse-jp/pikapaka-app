@@ -82,21 +82,6 @@ export default function ServiceStep5({route}) {
               </Text>
             </View>
           </View>
-          {/* <View>
-            <Text
-              style={{
-                fontFamily: fonts.NSregular,
-                fontSize: 14,
-                color: colors.textBlack,
-                textAlign: "center",
-                lineHeight: 21,
-                marginTop: 26,
-                marginBottom: 16,
-              }}
-            >
-              {" 診察前に『必ず』事前問診票にお答えください。\n（回答していただかないと受診ができません）"}
-            </Text>
-          </View> */}
           <View style={{paddingHorizontal: 16, marginTop: 20}}>
             <Button label="問診票の入力へ進む" onPress={handleSubmit} />
           </View>

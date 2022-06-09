@@ -47,9 +47,6 @@ export default function ForgotPassword() {
     <SafeAreaView style={{flex: 1, backgroundColor: colors.backgroundTheme}}>
       <View style={[styles.container]}>
         <View>
-          {/* <Text style={{fontSize: 30, marginBottom: 11, textAlign: "center", marginTop: 60}}>Tケアクリニック</Text>
-          <Text style={{fontSize: 20, marginBottom: 53, textAlign: "center"}}>パスワード再設定</Text>
-          <Text style={{fontSize: 16, textAlign: "center"}}>メールアドレスを入力</Text> */}
           <View style={{width: "100%", marginVertical: 16}}>
             <Controller
               control={control}
@@ -83,22 +80,12 @@ export default function ForgotPassword() {
               name="email"
             />
           </View>
-          {/* <Button disabled={disableSubmit} label="メールを送信" onPress={handleSubmit(onSubmit)} /> */}
           <View style={{paddingHorizontal: 16}}>
             {errors.email && <Text style={styles.textError}>メールエラー</Text>}
             {errorApi.length > 0 && <Text style={styles.textError}>{errorApi}</Text>}
             <ButtonOrange disabled={disableSubmit} title="メールを送信" onPress={handleSubmit(onSubmit)} />
           </View>
         </View>
-        {/* <View style={{bottom: 30, width: "100%"}}>
-          <TouchableOpacity
-            onPress={() => {
-              navigation.navigate(SCREEN_WELCOME);
-            }}
-          >
-            <Text style={{fontSize: 13, color: colors.textBlack, textAlign: "center"}}>ログインはこちら</Text>
-          </TouchableOpacity>
-        </View> */}
       </View>
     </SafeAreaView>
   );
