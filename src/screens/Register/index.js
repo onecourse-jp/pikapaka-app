@@ -42,9 +42,9 @@ export default function Register() {
     if (response.status === 200) {
       console.log("response", data);
       setDisableSubmit(false);
-      Alert.alert("", "新規登録が成功です。", [
+      Alert.alert("", "登録完了しました。", [
         {
-          text: "はい",
+          text: "OK",
           onPress: () =>
             navigationRef.current.resetRoot({
               index: 0,
