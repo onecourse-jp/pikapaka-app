@@ -72,8 +72,6 @@ export default function QuestionaireStep2({route}) {
       ],
     },
   ];
-  const CustomerInformation2 = [{key: "gender", label: "性別", placeholder: "お名前（漢字）を入力", option: true, value: null}];
-
   const validateEmail = (email) => {
     const resultValidate = String(email)
       .toLowerCase()

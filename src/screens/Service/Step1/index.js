@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {StyleSheet, Text, View, SafeAreaView, Image, Dimensions, TouchableOpacity, FlatList} from "react-native";
+import {StyleSheet, Text, View, SafeAreaView, Image, Dimensions, TouchableOpacity, FlatList, Alert} from "react-native";
 import {useThemeColors, Button} from "react-native-theme-component";
 import DropDownPicker from "react-native-dropdown-picker";
 import {useNavigation} from "@react-navigation/native";
@@ -9,6 +9,8 @@ import {SCREEN_SERVICE_STEP2} from "@screens/screens.constants";
 import {useDispatch, useSelector} from "react-redux";
 import ModalPortal from "react-native-modal";
 import {updateCalendar} from "@actions/calendarAction";
+import {getReservation} from "@services/auth";
+import {SCREEN_DETAIL_CALENDAR} from "../../screens.constants";
 
 let {width, height} = Dimensions.get("window");
 
@@ -28,25 +30,73 @@ const DATA = [
 ];
 
 export default function ServiceStep1() {
+  const user = useSelector((state) => state.users?.userDetails);
   const colors = useThemeColors();
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const calendar = useSelector((state) => state?.calendar);
   const defaultValueStep1 = calendar?.data?.step1 ? JSON.stringify(calendar?.data?.step1) : null;
-  const [open, setOpen] = useState(false);
+  const [idNeedFinish, setIdNeedFinish] = useState(false);
   const [value, setValue] = useState(null);
   const [valueChoose, setValueChoose] = useState(null);
-  const [items, setItems] = useState(DATA);
+  const [needFinish, setNeedFinish] = useState(false);
   const [isPopup, setIsPopup] = useState(false);
 
+  const getData = async () => {
+    if (user) {
+      global.showLoadingView();
+      const {response, data} = await getReservation({});
+      if (response?.status === 200) {
+        const listCalendar = data?.data?.data;
+        let statusFinish = false;
+        listCalendar.map((item) => {
+          if (item.status === 2) {
+            console.log("item.st", item.id);
+            statusFinish = true;
+            setIdNeedFinish(item.id);
+          }
+        });
+        setNeedFinish(statusFinish);
+        global.hideLoadingView();
+      } else {
+        global.hideLoadingView();
+        console.log("response getReservation", response);
+      }
+    }
+  };
+  const alertFinish = (id) => {
+    Alert.alert(
+      "",
+      `まだ問診票に記入していない予定があります。 新しい予約を作成する前に、問診票を完了してください。`,
+      [
+        {
+          text: "いいえ",
+          onPress: () => {},
+        },
+        {
+          text: "はい",
+          onPress: () => {
+            navigation.navigate(SCREEN_DETAIL_CALENDAR, {id: id});
+          },
+        },
+      ],
+      {cancelable: true},
+    );
+  };
+
+  useEffect(() => {
+    getData();
+  }, [calendar]);
+
   const handleSubmit = () => {
+    console.log("needFinish", needFinish);
+    if (needFinish) return alertFinish(idNeedFinish);
     if (value) {
       dispatch(updateCalendar({data: {step1: value}, currentStep: 2}));
       navigation.navigate(SCREEN_SERVICE_STEP2);
     }
   };
   const _renderItem = ({item}) => {
-    console.log("itemmmmmmmmmmm", item);
     const valueItem = JSON.parse(item.value);
     return (
       <TouchableOpacity onPress={() => setValueChoose(valueItem)}>
@@ -110,9 +160,6 @@ export default function ServiceStep1() {
           <FlatList
             horizontal={false}
             data={DATA}
-            contentContainerStyle={{
-              paddingHorizontal: 28,
-            }}
             renderItem={(item, index) => _renderItem(item, index)}
             keyExtractor={(item) => item.label}
           />

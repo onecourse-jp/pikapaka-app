@@ -2,10 +2,12 @@ import React, {useState, useEffect} from "react";
 import {View, Image, TouchableOpacity, SafeAreaView, Platform, Dimensions, Text, FlatList, Alert} from "react-native";
 import {WebView} from "react-native-webview";
 import {useNavigation} from "@react-navigation/core";
+import {navigationRef} from "src/navigation/NavigationService";
 import ModalPortal from "react-native-modal";
 import {useDispatch, useSelector} from "react-redux";
+import {changeStatusCalendar} from "@actions/calendarAction";
 import {messages} from "../../screens/CallLogic/lib/emitter";
-import {SCREEN_DETAIL_CALENDAR} from "../../screens/screens.constants";
+import {SCREEN_CALL, SCREEN_DETAIL_CALENDAR} from "../../screens/screens.constants";
 let {width, height} = Dimensions.get("window");
 const dataPopup = [];
 
@@ -15,10 +17,13 @@ export default function ModalWebView({route}) {
   const [isNext, setIsNext] = useState(false);
   useEffect(async () => {
     if (isNext) {
+      dispatch(changeStatusCalendar());
       if (Platform.OS == "web") {
         window.close();
       } else {
-        navigation.navigate(SCREEN_DETAIL_CALENDAR, {id: route?.params?.isCallVideo});
+        navigation.goBack();
+        navigation.goBack();
+        navigation.goBack();
       }
     }
   }, [isNext]);
@@ -39,15 +44,7 @@ export default function ModalWebView({route}) {
       />
     );
   };
-  // console.log('modalWeb', navigation);
-  const handleMessage = (message) => {
-    // console.log('handle messs', message.nativeEvent.data);
-    // navigation.setOptions({ title: message.nativeEvent.data.href });
-  };
-  const INJECTED_JAVASCRIPT = `(function() {
-    window.ReactNativeWebView.postMessage(JSON.stringify(window.location));
-})();`;
-  // console.log('routeParamsData', route.params.data);
+
   const onMessage = (message) => {
     console.log("messagemessage", message);
   };
@@ -57,15 +54,15 @@ export default function ModalWebView({route}) {
       `退出しますか？`,
       [
         {
+          text: "いいえ",
+          onPress: () => {},
+        },
+        {
           text: "はい",
           onPress: () => {
             messages.emit("closeCall");
             navigation.navigate(SCREEN_DETAIL_CALENDAR, {id: route?.params?.isCallVideo});
           },
-        },
-        {
-          text: "いいえ",
-          onPress: () => {},
         },
       ],
       {cancelable: true},
@@ -150,8 +147,7 @@ export default function ModalWebView({route}) {
             console.log("request.url", request?.url, route?.params?.data);
             try {
               if (route.params.data) {
-                const {success_url, cancel_url} = route?.params?.data?.session;
-                if (request.url.includes("https://test-tcare.lisod.vn/pay/payment-success")) {
+                if (request?.url === route?.params?.data) {
                   console.log("succeessssss");
                   setIsNext(true);
                   return false;

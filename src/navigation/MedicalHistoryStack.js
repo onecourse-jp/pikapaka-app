@@ -46,7 +46,7 @@ function MedicalHistoryStackScreen() {
           },
         }}
       />
-      <MedicalHistoryStack.Screen
+      {/* <MedicalHistoryStack.Screen
         name={SCREEN_DETAIL_CALENDAR}
         component={DetailCalender}
         options={{
@@ -62,7 +62,7 @@ function MedicalHistoryStackScreen() {
           shadowOpacity: 0, // remove shadow on iOS
           elevation: 0, // remove shadow on Android
         }}
-      />
+      /> */}
       <MedicalHistoryStack.Screen name={SCREEN_PAYMENT} component={PaymentScreen} options={{title: "お会計"}} />
       <MedicalHistoryStack.Screen
         name={SCREEN_EDIT_CALENDAR}

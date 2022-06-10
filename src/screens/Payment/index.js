@@ -31,6 +31,7 @@ export default function Payment({route}) {
       global.hideLoadingView();
       global.showWebView({
         url: data?.data?.url,
+        data: data.data.success_url,
       });
     } else {
       console.log("err createStripeCheckoutSession", data);
@@ -71,170 +72,267 @@ export default function Payment({route}) {
             content="本日の金額は下記の通りです。お支払いの手続きをお願いいたします。"
           />
           <StepsComponent currentStep={screenStep} isStepAll={true} />
-          {billData && (
-            <View style={{paddingHorizontal: 16, borderRadius: 4}}>
-              <View style={{marginBottom: 20, paddingHorizontal: 16, backgroundColor: colors.white}}>
-                <Text style={{fontFamily: fonts.NSbold, fontSize: 15, color: colors.textBlack, lineHeight: 23, marginTop: 23}}>
-                  支払明細
-                </Text>
-                <View>
-                  <View
-                    style={{
-                      flexDirection: "row",
-                      borderBottomWidth: 1,
-                      borderBottomColor: colors.borderGrayE,
-                      justifyContent: "space-between",
-                    }}
-                  >
-                    <Text style={{fontFamily: fonts.RobotoRegular, fontSize: 15, color: colors.colorTextBlack, lineHeight: 44}}>
-                      診察料金
-                    </Text>
-                    <Text style={{fontFamily: fonts.RobotoRegular, fontSize: 15, color: colors.colorTextBlack, lineHeight: 44}}>
-                      {billData?.bill?.medical_examination_fee}円
-                    </Text>
-                  </View>
-                  <View
-                    style={{
-                      flexDirection: "row",
-                      borderBottomWidth: 1,
-                      borderBottomColor: colors.borderGrayE,
-                      justifyContent: "space-between",
-                    }}
-                  >
-                    <TouchableOpacity
-                      onPress={() => setShowDetailMedicine(!showDetailMedicine)}
-                      style={{flexDirection: "row", justifyContent: "center", marginTop: 6, alignItems: "center"}}
+          <View>
+            <Text
+              style={{
+                fontFamily: fonts.NSbold,
+                paddingHorizontal: 16,
+                marginBottom: 12,
+                fontSize: 15,
+                color: colors.colorTextBlack,
+                lineHeight: 23,
+                marginTop: 23,
+              }}
+            >
+              支払明細
+            </Text>
+            {billData && (
+              <View style={{paddingHorizontal: 16, borderRadius: 4}}>
+                <View style={{marginBottom: 20, paddingHorizontal: 16, backgroundColor: colors.white}}>
+                  <View>
+                    <View
+                      style={{
+                        flexDirection: "row",
+                        borderBottomWidth: 1,
+                        borderBottomColor: colors.borderGrayE,
+                        justifyContent: "space-between",
+                      }}
                     >
                       <Text
-                        style={{
-                          fontFamily: fonts.RobotoRegular,
-                          fontSize: 15,
-                          color: colors.colorTextBlack,
-                          lineHeight: 44,
-                          marginRight: 4,
-                        }}
+                        style={{fontFamily: fonts.Hiragino, fontWeight: "bold", fontSize: 15, color: colors.colorTextBlack, lineHeight: 44}}
                       >
-                        処方箋料金
+                        診察料金
                       </Text>
-                      <Image
-                        style={
-                          showDetailMedicine
-                            ? {
-                                transform: [{rotate: "180deg"}],
-                              }
-                            : {}
-                        }
-                        source={require("@assets/images/icons/flow_dropdown.png")}
-                      />
-                    </TouchableOpacity>
-                    <Text style={{fontFamily: fonts.RobotoRegular, fontSize: 15, color: colors.colorTextBlack, lineHeight: 44}}>
-                      {billData?.bill?.medicine_fee}円
-                    </Text>
-                  </View>
-                  {showDetailMedicine && (
-                    <View>
-                      {billData?.medicines.map((item, index) => {
-                        return (
-                          <View key={`medicines-${index}`} style={{flexDirection: "row", justifyContent: "space-between"}}>
-                            <Text
-                              style={{
-                                fontFamily: fonts.RobotoRegular,
-                                fontSize: 14,
-                                fontWeight: "bold",
-                                color: colors.colorTextBlack,
-                                lineHeight: 24,
-                              }}
-                            >
-                              {item.name}
-                            </Text>
-                            <Text style={{fontFamily: fonts.RobotoRegular, fontSize: 13, color: colors.colorTextBlack, lineHeight: 24}}>
-                              {item.price}円
-                            </Text>
-                          </View>
-                        );
-                      })}
-                      {billData?.plans.map((item, index) => {
-                        return (
-                          <>
-                            <View key={`plans-${index}`} style={{flexDirection: "row", justifyContent: "space-between"}}>
+                      <Text style={{fontFamily: fonts.Hiragino, fontSize: 15, color: colors.colorTextBlack, lineHeight: 44}}>
+                        ¥{billData?.bill?.medical_examination_fee}
+                      </Text>
+                    </View>
+                    <View
+                      style={{
+                        flexDirection: "row",
+                        borderBottomWidth: 1,
+                        borderBottomColor: colors.borderGrayE,
+                        justifyContent: "space-between",
+                      }}
+                    >
+                      <TouchableOpacity
+                        onPress={() => setShowDetailMedicine(!showDetailMedicine)}
+                        style={{flexDirection: "row", justifyContent: "center", marginTop: 6, alignItems: "center"}}
+                      >
+                        <Text
+                          style={{
+                            fontFamily: fonts.Hiragino,
+                            fontSize: 15,
+                            color: colors.colorTextBlack,
+                            fontWeight: "bold",
+                            lineHeight: 44,
+                            marginRight: 4,
+                          }}
+                        >
+                          処方箋料金
+                        </Text>
+                        <Image
+                          style={
+                            showDetailMedicine
+                              ? {
+                                  transform: [{rotate: "180deg"}],
+                                }
+                              : {}
+                          }
+                          source={require("@assets/images/icons/flow_dropdown.png")}
+                        />
+                      </TouchableOpacity>
+                      <Text style={{fontFamily: fonts.Hiragino, fontSize: 15, color: colors.colorTextBlack, lineHeight: 44}}>
+                        ¥{billData?.bill?.medicine_fee}
+                      </Text>
+                    </View>
+                    {showDetailMedicine && (
+                      <View>
+                        {billData?.medicines.map((item, index) => {
+                          return (
+                            <View key={`medicines-${index}`} style={{flexDirection: "row", justifyContent: "space-between"}}>
                               <Text
                                 style={{
-                                  fontFamily: fonts.RobotoRegular,
+                                  fontFamily: fonts.Hiragino,
                                   fontSize: 14,
-                                  color: colors.colorTextBlack,
                                   fontWeight: "bold",
-                                  lineHeight: 22,
-                                  maxWidth: 250,
+                                  color: colors.colorTextBlack,
+                                  lineHeight: 24,
                                 }}
                               >
                                 {item.name}
                               </Text>
-                              <Text style={{fontFamily: fonts.RobotoRegular, fontSize: 13, color: colors.colorTextBlack, lineHeight: 22}}>
-                                {item.price}円
+                              <Text style={{fontFamily: fonts.Hiragino, fontSize: 13, color: colors.colorTextBlack, lineHeight: 24}}>
+                                ¥{item.price}
                               </Text>
                             </View>
-                            <View>
-                              {item?.item?.map((el, ind) => {
-                                return (
-                                  <Text
-                                    key={`item?.item-${ind}`}
-                                    style={{fontFamily: fonts.RobotoRegular, fontSize: 13, color: colors.colorTextBlack, lineHeight: 22}}
-                                  >
-                                    {el}
-                                  </Text>
-                                );
-                              })}
-                            </View>
-                          </>
-                        );
-                      })}
+                          );
+                        })}
+                        {billData?.plans.map((item, index) => {
+                          return (
+                            <>
+                              <View key={`plans-${index}`} style={{flexDirection: "row", justifyContent: "space-between"}}>
+                                <Text
+                                  style={{
+                                    fontFamily: fonts.Hiragino,
+                                    fontSize: 14,
+                                    color: colors.colorTextBlack,
+                                    fontWeight: "bold",
+                                    lineHeight: 22,
+                                    maxWidth: 250,
+                                  }}
+                                >
+                                  {item.name}
+                                </Text>
+                                <Text style={{fontFamily: fonts.Hiragino, fontSize: 13, color: colors.colorTextBlack, lineHeight: 22}}>
+                                  ¥{item.price}
+                                </Text>
+                              </View>
+                              <View>
+                                {item?.item?.map((el, ind) => {
+                                  return (
+                                    <Text
+                                      key={`item?.item-${ind}`}
+                                      style={{fontFamily: fonts.Hiragino, fontSize: 13, color: colors.colorTextBlack, lineHeight: 22}}
+                                    >
+                                      {el}
+                                    </Text>
+                                  );
+                                })}
+                              </View>
+                            </>
+                          );
+                        })}
+                      </View>
+                    )}
+                    <View
+                      style={{
+                        flexDirection: "row",
+                        borderBottomWidth: 1,
+                        borderBottomColor: colors.borderGrayE,
+                        justifyContent: "space-between",
+                      }}
+                    >
+                      <Text style={{fontFamily: fonts.Hiragino, fontSize: 15, color: colors.colorTextBlack, lineHeight: 44}}>送料</Text>
+                      <Text style={{fontFamily: fonts.Hiragino, fontSize: 15, color: colors.colorTextBlack, lineHeight: 44}}>
+                        ¥{billData?.bill?.postage}
+                      </Text>
                     </View>
-                  )}
-                  <View
-                    style={{
-                      flexDirection: "row",
-                      borderBottomWidth: 1,
-                      borderBottomColor: colors.borderGrayE,
-                      justifyContent: "space-between",
-                    }}
-                  >
-                    <Text style={{fontFamily: fonts.RobotoRegular, fontSize: 15, color: colors.colorTextBlack, lineHeight: 44}}>送料</Text>
-                    <Text style={{fontFamily: fonts.RobotoRegular, fontSize: 15, color: colors.colorTextBlack, lineHeight: 44}}>
-                      {billData?.bill?.postage}円
-                    </Text>
-                  </View>
-                  <View style={{flexDirection: "row", justifyContent: "space-between"}}>
-                    <Text style={{fontFamily: fonts.RobotoBold, fontSize: 19, color: colors.textBlack, fontWeight: "bold", lineHeight: 44}}>
-                      合計
-                    </Text>
-                    <Text style={{fontFamily: fonts.RobotoBold, fontSize: 19, color: colors.textBlack, fontWeight: "bold", lineHeight: 44}}>
-                      {billData?.bill?.total}円
-                    </Text>
+                    <View style={{flexDirection: "row", justifyContent: "space-between"}}>
+                      <Text
+                        style={{
+                          fontFamily: fonts.RobotoBold,
+                          fontSize: 19,
+                          color: colors.colorTextBlack,
+                          fontWeight: "bold",
+                          lineHeight: 44,
+                        }}
+                      >
+                        合計
+                      </Text>
+                      <Text
+                        style={{
+                          fontFamily: fonts.RobotoBold,
+                          fontSize: 19,
+                          color: colors.colorTextBlack,
+                          fontWeight: "bold",
+                          lineHeight: 44,
+                        }}
+                      >
+                        ¥{billData?.bill?.total}
+                      </Text>
+                    </View>
                   </View>
                 </View>
               </View>
-            </View>
-          )}
-          <View style={{marginTop: 10, paddingHorizontal: 16, width: "100%"}}>
-            <Button variant="primary" label={global.t("action_payment")} onPress={handleAction} />
+            )}
           </View>
-          <View style={{marginTop: 10, paddingHorizontal: 16, width: "100%"}}>
-            <Text style={{textAlign: "center", fontSize: 16, color: colors.textBlack, fontWeight: "bold", lineHeight: 23}}>
-              {global.t("question_confirm_adrress_delivery")}
+          <View>
+            <Text
+              style={{
+                fontFamily: fonts.NSbold,
+                paddingHorizontal: 16,
+                marginBottom: 12,
+                fontSize: 15,
+                color: colors.colorTextBlack,
+                lineHeight: 23,
+                marginTop: 23,
+              }}
+            >
+              配送先
             </Text>
-            <Text style={{textAlign: "center", fontSize: 15, color: colors.primaryColor, lineHeight: 26}}>
-              {billData?.bill?.reservation?.shipping_postal_code} {billData?.bill?.reservation?.shipping_address}
-            </Text>
-            <View style={{flexDirection: "row", alignItems: "center", justifyContent: "center"}}>
-              <TouchableOpacity onPress={() => navigation.navigate(SCREEN_EDIT_PROFILE)} style={{marginRight: 16}}>
-                <Text style={{fontSize: 14, fontFamily: fonts.Hiragino, color: colors.textBlue, lineHeight: 21}}>登録住所変更</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() => navigation.navigate(SCREEN_EDIT_DELIVERY_ADDRESS, {data: billData.bill.reservation, action: onRefresh})}
-              >
-                <Text style={{fontSize: 14, fontFamily: fonts.Hiragino, color: colors.textBlue, lineHeight: 21}}>登録住所以外に配送</Text>
-              </TouchableOpacity>
+
+            <View style={{paddingHorizontal: 16, borderRadius: 4}}>
+              <View style={{paddingHorizontal: 16, backgroundColor: colors.white}}>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    borderBottomWidth: 1,
+                    borderBottomColor: colors.borderGrayE,
+                    paddingVertical: 15,
+                  }}
+                >
+                  <Text
+                    style={{
+                      fontFamily: fonts.Hiragino,
+                      fontWeight: "bold",
+                      width: "30%",
+                      fontSize: 12,
+                      color: colors.colorTextBlack,
+                      lineHeight: 16,
+                    }}
+                  >
+                    郵便番号
+                  </Text>
+                  <Text style={{fontFamily: fonts.Hiragino, width: "70%", fontSize: 12, color: colors.colorTextBlack, lineHeight: 16}}>
+                    {billData?.bill?.reservation?.shipping_postal_code}
+                  </Text>
+                </View>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    paddingVertical: 15,
+                  }}
+                >
+                  <Text
+                    style={{
+                      fontFamily: fonts.Hiragino,
+                      fontWeight: "bold",
+                      width: "30%",
+                      fontSize: 12,
+                      color: colors.colorTextBlack,
+                      lineHeight: 16,
+                    }}
+                  >
+                    住所
+                  </Text>
+                  <Text style={{fontFamily: fonts.Hiragino, width: "70%", fontSize: 12, color: colors.colorTextBlack, lineHeight: 16}}>
+                    {billData?.bill?.reservation?.shipping_address}
+                  </Text>
+                </View>
+                <View style={{flexDirection: "row", alignItems: "center", justifyContent: "center", marginBottom: 16}}>
+                  <TouchableOpacity onPress={() => navigation.navigate(SCREEN_EDIT_PROFILE)} style={{width: "40%"}}>
+                    <Text
+                      style={{fontSize: 12, textAlign: "right", fontFamily: fonts.Hiragino, color: colors.accentOrange, lineHeight: 21}}
+                    >
+                      登録住所変更
+                    </Text>
+                  </TouchableOpacity>
+                  <View style={{height: "100%", width: 1, marginHorizontal: 16, backgroundColor: colors.borderGrayE}}></View>
+                  <TouchableOpacity
+                    onPress={() => navigation.navigate(SCREEN_EDIT_DELIVERY_ADDRESS, {data: billData.bill.reservation, action: onRefresh})}
+                    style={{width: "40%"}}
+                  >
+                    <Text style={{fontSize: 12, fontFamily: fonts.Hiragino, color: colors.accentOrange, lineHeight: 21}}>
+                      登録住所以外に配送
+                    </Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
             </View>
+          </View>
+          <View style={{marginTop: 30, paddingHorizontal: 16, width: "100%"}}>
+            <Button variant="primary" label={global.t("action_payment")} onPress={handleAction} />
           </View>
         </ScrollView>
       </View>

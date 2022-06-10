@@ -7,7 +7,7 @@ import StepsComponent from "@components/StepsComponent";
 import GuideComponent from "@components/GuideComponent";
 import moment from "moment";
 import {SCREEN_QUESIONAIRE_STEP4} from "@screens/screens.constants";
-import {updateMedicalHistory} from "@actions/medicalHistoryAction";
+import {changeStatusCalendar} from "@actions/calendarAction";
 import {createReservationAnswer} from "@services/auth";
 
 export default function QuestionaireStep3({route}) {
@@ -30,7 +30,7 @@ export default function QuestionaireStep3({route}) {
     console.log("dataConfirm", dataConfirm);
     const {response, data} = await createReservationAnswer(dataConfirm);
     if (response.status === 200) {
-      console.log("datadata createReservationAnswer", data?.data);
+      dispatch(changeStatusCalendar());
       navigation.navigate(SCREEN_QUESIONAIRE_STEP4, {calendarData: calendarData});
     } else {
       console.log("errrrrrrr response", response);
@@ -44,6 +44,7 @@ export default function QuestionaireStep3({route}) {
         dataQuestion?.map((item, index) => {
           newResult.push({label: item.title, value: dataConfirm?.data[index]?.content_answer});
         });
+        console.log("resultQuestion", newResult);
         setResultQuestion(newResult);
       }
     } catch (error) {
@@ -99,13 +100,20 @@ export default function QuestionaireStep3({route}) {
               }}
             >{`問診`}</Text>
             {resultQuestion.map((item, index) => {
-              console.log("resultQuestion", item);
               return (
                 <View key={`med-${index}`} style={{backgroundColor: colors.white, flexDirection: "row", padding: 16}}>
-                  <Text style={{fontFamily: fonts.Hiragino, color: colors.gray3, width: "40%", fontSize: 15, lineHeight: 15}}>
+                  <Text style={{fontFamily: fonts.Hiragino, color: colors.gray3, width: "65%", fontSize: 15, lineHeight: 18}}>
                     {item.label}
                   </Text>
-                  <Text style={{fontFamily: fonts.NSregular, color: colors.gray1, fontSize: 15, lineHeight: 15}}>
+                  <Text
+                    style={{
+                      fontFamily: fonts.NSregular,
+                      color: colors.gray1,
+                      width: "35%",
+                      fontSize: 15,
+                      lineHeight: 18,
+                    }}
+                  >
                     {typeof item?.value == "string" ? (
                       <Text>{item?.value}</Text>
                     ) : (
@@ -133,10 +141,10 @@ export default function QuestionaireStep3({route}) {
             {DATALISTPERSON.map((item, index) => {
               return (
                 <View key={`per-${index}`} style={{backgroundColor: colors.white, flexDirection: "row", padding: 16}}>
-                  <Text style={{fontFamily: fonts.Hiragino, color: colors.gray3, width: "40%", fontSize: 15, lineHeight: 15}}>
+                  <Text style={{fontFamily: fonts.Hiragino, color: colors.gray3, width: "40%", fontSize: 15, lineHeight: 18}}>
                     {item.label}
                   </Text>
-                  <Text style={{fontFamily: fonts.NSregular, color: colors.gray1, fontSize: 15, lineHeight: 15}}>{item.value}</Text>
+                  <Text style={{fontFamily: fonts.NSregular, color: colors.gray1, fontSize: 15, lineHeight: 18}}>{item.value}</Text>
                 </View>
               );
             })}
@@ -144,7 +152,7 @@ export default function QuestionaireStep3({route}) {
           <View style={{marginTop: 10, paddingHorizontal: 16}}>
             <Button label="入力を完了する" onPress={handleSubmit} />
           </View>
-          <View style={{marginTop: 8, paddingHorizontal: 16}}>
+          <View style={{marginTop: 8, paddingHorizontal: 16, marginBottom: 30}}>
             <Button variant="secondary" label="内容を修正する" onPress={() => navigation.goBack()} />
           </View>
         </ScrollView>

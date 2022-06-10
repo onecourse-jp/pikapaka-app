@@ -54,7 +54,10 @@ export default function HistorySkinCare({category_medical = 0}) {
     }, 1000);
   }, []);
   const goDetailScreenWithStatus = (item) => {
-    navigation.navigate(SCREEN_DETAIL_CALENDAR, {id: item?.id});
+    navigation.navigate("SERVICE");
+    setTimeout(() => {
+      navigation.navigate(SCREEN_DETAIL_CALENDAR, {id: item?.id});
+    }, 200);
   };
   return (
     <>
