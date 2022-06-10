@@ -143,5 +143,9 @@
   "question_confirm_adrress_delivery": "配送先の住所は下記で間違いありませんか？",
   "message.old_password_incorrect": "old password is not correct",
   "message": {"old_password_incorrect": "old password is not correct"},
-  "online_medical_care_app": "オンライン診療アプリ"
+  "online_medical_care_app": "オンライン診療アプリ",
+  "gender": "性別",
+  "postal_code": "郵便番号",
+  "address": "住所",
+  "name": "お名前（漢字）"
 }

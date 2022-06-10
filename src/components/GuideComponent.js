@@ -16,7 +16,7 @@ export default function GuideComponent({title = "", content = "", note = ""}) {
           {title}
         </Text>
         {content?.length > 0 && (
-          <Text style={{fontSize: 14, lineHeight: 21, fontFamily: fonts.Hiragino, fontWeight: "400", color: colors.colorTextBlack}}>
+          <Text style={{fontSize: 12, lineHeight: 18, fontFamily: fonts.Hiragino, fontWeight: "400", color: colors.colorTextBlack}}>
             {content}
           </Text>
         )}

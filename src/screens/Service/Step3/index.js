@@ -33,6 +33,7 @@ export default function ServiceStep3() {
   const dispatch = useDispatch();
   const calendar = useSelector((state) => state?.calendar);
   const user = useSelector((state) => state?.users?.userDetails);
+  console.log("user?.smoking", user?.smoking);
   const [oldReservationId, setOldReservationId] = useState(null);
   console.log("user?.medical_history", typeof user?.medical_history);
   const {
@@ -272,7 +273,7 @@ export default function ServiceStep3() {
               <Button label="内容確認へ進む" onPress={handleSubmit(onSubmit)} />
             </View>
             <View style={{marginTop: 11, paddingHorizontal: 16, paddingBottom: 30}}>
-              <Button variant="secondary" label="日付選択選択へ戻る" onPress={() => navigation.navigate(SCREEN_SERVICE_STEP2)} />
+              <Button variant="secondary" label="日付選択へ戻る" onPress={() => navigation.navigate(SCREEN_SERVICE_STEP2)} />
             </View>
           </ScrollView>
         </KeyboardAvoidingView>

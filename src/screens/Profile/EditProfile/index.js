@@ -118,7 +118,7 @@ export default function EditProfile() {
         {label: "女性", value: 2},
       ],
     },
-    {key: "birthday", title: "生年月日", placeholder: "フリガナを入力", value: user?.birthday},
+    {key: "birthday", title: "生年月日", placeholder: "フリガナを入力 (yyyy-mm-dd)", value: user?.birthday},
     {key: "email", title: "メールアドレス", placeholder: "フリガナを入力", value: user?.email, disabel: true},
     {key: "phone_number", title: "電話番号", placeholder: "電話番号を入力", value: user?.phone_number},
   ];

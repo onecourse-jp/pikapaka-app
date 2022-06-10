@@ -47,7 +47,7 @@ export default function ListTime({data = null, hourPicked}) {
         }}
       >
         <Text style={{fontSize: 14, color: data?.slot > 0 ? colors.accentOrange : colors.gray4}}>
-          {data?.slot > 0 ? `あと${data?.slot}枠` : "✕"}
+          {data?.slot > 0 ? `残り${data?.slot}枠` : "✕"}
         </Text>
       </View>
     </View>
