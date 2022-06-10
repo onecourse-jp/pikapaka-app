@@ -130,7 +130,7 @@ export default function LoginScreen({route}) {
         />
         {errors.password && (
           <Text style={styles.textError}>
-            {errors.password.type === "required" ? "パスワードが必要です" : `パスワードの長さが8を超える`}.
+            {errors.password.type === "required" ? "パスワードが必要です" : `パスワードは８文字以上必要です`}.
           </Text>
         )}
         {errorApi.length > 0 && <Text style={styles.textError}>{errorApi}</Text>}
