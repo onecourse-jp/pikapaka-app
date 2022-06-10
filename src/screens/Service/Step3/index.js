@@ -33,6 +33,7 @@ export default function ServiceStep3() {
   const dispatch = useDispatch();
   const calendar = useSelector((state) => state?.calendar);
   const user = useSelector((state) => state?.users?.userDetails);
+  console.log("user?.smoking", user?.smoking);
   const [oldReservationId, setOldReservationId] = useState(null);
   console.log("user?.medical_history", typeof user?.medical_history);
   const {

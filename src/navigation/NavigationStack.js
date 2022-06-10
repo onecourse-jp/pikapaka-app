@@ -158,6 +158,7 @@ function App() {
         </Stack.Screen>
 
         <Stack.Group screenOptions={defaultStackNavigation.screenOptions}>
+          
           <Stack.Screen name={SCREEN_REGISTER} component={RegisterScreen} options={{title: "メールアドレスで新規登録"}} />
           <Stack.Screen name={SCREEN_WELCOME} component={Welcome} options={{headerShown: false}} />
           <Stack.Screen name={SCREEN_LOGIN} component={Login} options={{title: "メールアドレスでログイン"}} />

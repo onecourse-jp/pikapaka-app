@@ -195,7 +195,7 @@ export default function ItemQuestionForm({item, valueData = null, changeData = (
         <Text
           style={{
             color: colors.textBlack,
-            width: type === "questionAdmin" && (item.label === 4 || item.label === 3) ? "80%" : "40%",
+            width: type === "questionAdmin" ? "65%" : "40%",
             fontSize: 15,
             marginRight: 11,
             lineHeight: 21,
@@ -206,7 +206,7 @@ export default function ItemQuestionForm({item, valueData = null, changeData = (
         <View
           style={{
             flexDirection: "row",
-            width: type === "questionAdmin" && (item.label === 4 || item.label === 3) ? "20%" : "60%",
+            width: type === "questionAdmin" ? "35%" : "60%",
             justifyContent: "flex-start",
             alignItems: "center",
           }}

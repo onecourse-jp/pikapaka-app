@@ -4,6 +4,8 @@
 
 ```sh
 
+# copy file .env
+$ cp .env.test .env
 # if you previously installed this package globaly run this command first to uninstall the previous version:
 $ yarn
 # Run Web/Ios/Android development
@@ -11,6 +13,9 @@ $ yarn
 $ yarn web
 
 # IOS (simulator)
+$ cd ios
+$ pod install
+$ cd ..
 $ yarn ios
 
 # Android (connected device)

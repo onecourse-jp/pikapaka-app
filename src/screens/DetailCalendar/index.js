@@ -15,7 +15,7 @@ export default function DetailCalender({route}) {
   const idCalendar = route?.params?.id;
   const fromScreen = route?.params?.fromScreen;
   const [refreshing, setRefreshing] = React.useState(false);
-  const screenStep = 2;
+  const [screenStep, setCurrentStep] = useState(2);
   const navigation = useNavigation();
   const [dataCalendar, setDataCalendar] = useState(null);
 
@@ -39,7 +39,14 @@ export default function DetailCalender({route}) {
       const {response, data} = await getReservationById(idCalendar);
       if (response?.status === 200) {
         setDataCalendar(data?.data);
-        console.log("datadatadata", data?.data);
+        console.log("response getReservationById", data?.data);
+        if (data?.data?.status === 1) {
+          setCurrentStep(3);
+        } else if (data?.data?.status === 2) {
+          setCurrentStep(2);
+        } else if (data?.data?.status >= 3) {
+          setCurrentStep(4);
+        }
       } else {
         console.log("response getReservationById", response?.status);
       }
@@ -122,7 +129,12 @@ export default function DetailCalender({route}) {
             </View>
           )}
           <View style={{marginTop: 8, paddingHorizontal: 16}}>
-            <Button label={dataCalendar?.status === 1 ? "入室して接続準備を行う" : "問診票を記入する"} onPress={handleSubmit} />
+            <Button
+              label={
+                dataCalendar?.status === 1 ? "入室して接続準備を行う" : dataCalendar?.status === 2 ? "問診票を記入する" : "支払いへ進む"
+              }
+              onPress={handleSubmit}
+            />
             <TouchableOpacity
               onPress={handleEditCalendar}
               disabled={dataCalendar?.status > 2 ? true : false}

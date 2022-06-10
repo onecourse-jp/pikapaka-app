@@ -137,7 +137,9 @@ export default function ServiceStep4() {
                   }}
                 >
                   <Text style={{color: colors.colorTextBlack, width: "40%", fontWeight: "bold", fontSize: 15}}>{item.label}</Text>
-                  <Text style={{color: colors.textBlack, width: "60%", textAlign: "left", fontSize: 15}}>{item.value}</Text>
+                  <Text style={{color: colors.textBlack, width: "60%", paddingHorizontal: 16, textAlign: "left", fontSize: 15}}>
+                    {item.value}
+                  </Text>
                 </View>
               );
             })}
@@ -174,7 +176,7 @@ export default function ServiceStep4() {
                 >
                   <Text style={{color: colors.colorTextBlack, fontWeight: "bold", fontSize: 14}}>{item.label}</Text>
                   {item.option && item.data && Array.isArray(item.value) && (
-                    <View style={{width: "60%"}}>
+                    <View style={{width: "60%", paddingHorizontal: 16}}>
                       {item.value.map((el, ind) => {
                         return (
                           <Text key={`med-item-${ind}`} style={{color: colors.textBlack, fontSize: 14, textAlign: "left", lineHeight: 18}}>
@@ -185,12 +187,30 @@ export default function ServiceStep4() {
                     </View>
                   )}
                   {item.option && !item.data && (
-                    <Text style={{color: colors.textBlack, fontSize: 14, textAlign: "left", width: "60%", lineHeight: 18}}>
+                    <Text
+                      style={{
+                        color: colors.textBlack,
+                        fontSize: 14,
+                        textAlign: "left",
+                        width: "60%",
+                        paddingHorizontal: 16,
+                        lineHeight: 18,
+                      }}
+                    >
                       {item.value === 1 ? "有" : "無"}
                     </Text>
                   )}
                   {!item.option && (
-                    <Text style={{color: colors.textBlack, fontSize: 14, textAlign: "left", width: "60%", lineHeight: 18}}>
+                    <Text
+                      style={{
+                        color: colors.textBlack,
+                        fontSize: 14,
+                        textAlign: "left",
+                        width: "60%",
+                        paddingHorizontal: 16,
+                        lineHeight: 18,
+                      }}
+                    >
                       {item.value}
                     </Text>
                   )}
