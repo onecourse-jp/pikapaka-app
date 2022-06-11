@@ -53,14 +53,14 @@ export default function EditCalendar({route}) {
       global.hideLoadingView();
       dispatch(changeStatusCalendar());
       navigation.navigate(SCREEN_HISTORY);
-      Alert.alert("", "解除が完了しました。", [
+      Alert.alert("", "予約のキャンセルが完了しました。", [
         {
           text: "OK",
           style: "cancel",
         },
       ]);
     } else {
-      Alert.alert("Alert Title", "Ops! Error. Please try again", [
+      Alert.alert("Alert Title", "キャンセルできませんでした。もう一度お試しください", [
         {
           text: "OK",
           style: "cancel",
@@ -74,7 +74,7 @@ export default function EditCalendar({route}) {
       "予約をキャンセルしますか？",
       [
         {
-          text: "Cancel",
+          text: "戻る",
           onPress: () => console.log("Cancel Pressed"),
           style: "cancel",
         },
