@@ -229,7 +229,7 @@ function App() {
           }}
         >
           <Stack.Screen name={SCREEN_MODAL_LOADER} component={LoadingView} options={{headerShown: false, animation: "none"}} />
-          <Stack.Screen name={SCREEN_MODAL_BOTTOM} component={ModalBottom} options={{headerShown: false, animation: "none"}} />
+          <Stack.Screen name={SCREEN_MODAL_BOTTOM} component={ModalBottom} options={{headerShown: false}} />
         </Stack.Group>
       </Stack.Navigator>
     </NavigationContainer>

@@ -15,6 +15,7 @@ import {
   SCREEN_QUESIONAIRE_STEP3,
   SCREEN_QUESIONAIRE_STEP4,
   SCREEN_PAYMENT,
+  SCREEN_DETAIL_CALENDAR_AFTER_PAYMENT,
 } from "@screens/screens.constants";
 import QuestionaireStep1 from "@screens/Questionnaire/Step1";
 import ServiceStep2 from "@screens/Service/Step2";

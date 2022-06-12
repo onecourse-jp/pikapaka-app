@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {StyleSheet, Text, View, ScrollView, SafeAreaView, TouchableOpacity, RefreshControl, Dimensions} from "react-native";
+import {StyleSheet, Text, View, ScrollView, SafeAreaView, TouchableOpacity, RefreshControl, Dimensions, Image} from "react-native";
 import {useThemeColors, useThemeFonts, Button} from "react-native-theme-component";
 import {useNavigation} from "@react-navigation/native";
 import ModalPortal from "react-native-modal";
@@ -14,6 +14,7 @@ export default function DetailAfterPayment({route}) {
   const idCalendar = route?.params?.id;
   const fromScreen = route?.params?.fromScreen;
   const [refreshing, setRefreshing] = useState(false);
+  const [isPopup, setIsPopup] = useState(false);
   const [imagePreview, setImagePreview] = useState("");
   const [screenStep, setCurrentStep] = useState(2);
   const navigation = useNavigation();
@@ -56,14 +57,19 @@ export default function DetailAfterPayment({route}) {
     }, 1000);
   }, []);
 
-  const _renderItem = ({item}) => {
+  const _renderItem = (item, index) => {
     return (
-      <TouchableOpacity onPress={() => setImagePreview(item.image)}>
+      <TouchableOpacity
+        key={`Image-renderItem-${index}`}
+        onPress={() => {
+          setImagePreview(item?.image);
+          setIsPopup(true);
+        }}
+      >
         <Image
-          key={`Image-renderItem-${index}`}
           style={{width: (width - 70) / 2, height: 163, backgroundColor: "#C4C4C4", marginTop: 8}}
           source={{
-            uri: item.image,
+            uri: item?.image,
           }}
         />
       </TouchableOpacity>
@@ -99,7 +105,6 @@ export default function DetailAfterPayment({route}) {
             }}
           >
             <Image
-              key={`Image-renderItem-${index}`}
               style={{width: width - 20, backgroundColor: "#C4C4C4", marginTop: 8}}
               source={{
                 uri: imagePreview,
@@ -111,17 +116,40 @@ export default function DetailAfterPayment({route}) {
       <View style={[styles.container]}>
         <ScrollView refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />} contentContainerStyle={{}}>
           <View>
-            <Text>診断情報</Text>
+            <Text style={{padding: 16, fontWeight: "700", fontSize: 12, lineHeight: 16}}>診断情報</Text>
             <View
               style={{
                 flexDirection: "row",
                 borderBottomWidth: 1,
                 borderBottomColor: colors.borderGrayE,
+                backgroundColor: colors.white,
                 justifyContent: "space-between",
+                paddingHorizontal: 16,
               }}
             >
-              <Text style={{fontFamily: fonts.Hiragino, fontSize: 15, color: colors.colorTextBlack, lineHeight: 44}}>診断日時</Text>
-              <Text style={{fontFamily: fonts.Hiragino, fontSize: 15, color: colors.colorTextBlack, lineHeight: 44}}>
+              <Text
+                style={{
+                  fontFamily: fonts.Hiragino,
+                  fontWeight: "600",
+                  width: "40%",
+                  fontSize: 12,
+                  color: colors.colorTextBlack,
+                  lineHeight: 14,
+                  paddingVertical: 16,
+                }}
+              >
+                診断日時
+              </Text>
+              <Text
+                style={{
+                  fontFamily: fonts.Hiragino,
+                  fontSize: 12,
+                  width: "60%",
+                  color: colors.colorTextBlack,
+                  lineHeight: 14,
+                  paddingVertical: 16,
+                }}
+              >
                 2022年5月5日 15:30〜14:00
               </Text>
             </View>
@@ -130,11 +158,34 @@ export default function DetailAfterPayment({route}) {
                 flexDirection: "row",
                 borderBottomWidth: 1,
                 borderBottomColor: colors.borderGrayE,
+                backgroundColor: colors.white,
                 justifyContent: "space-between",
+                paddingHorizontal: 16,
               }}
             >
-              <Text style={{fontFamily: fonts.Hiragino, fontSize: 15, color: colors.colorTextBlack, lineHeight: 44}}>診療科目</Text>
-              <Text style={{fontFamily: fonts.Hiragino, fontSize: 15, color: colors.colorTextBlack, lineHeight: 44}}>
+              <Text
+                style={{
+                  fontFamily: fonts.Hiragino,
+                  fontWeight: "600",
+                  width: "40%",
+                  fontSize: 12,
+                  color: colors.colorTextBlack,
+                  lineHeight: 14,
+                  paddingVertical: 16,
+                }}
+              >
+                診療科目
+              </Text>
+              <Text
+                style={{
+                  fontFamily: fonts.Hiragino,
+                  fontSize: 12,
+                  width: "60%",
+                  color: colors.colorTextBlack,
+                  lineHeight: 14,
+                  paddingVertical: 16,
+                }}
+              >
                 スキンケア - 美白
               </Text>
             </View>
@@ -143,33 +194,62 @@ export default function DetailAfterPayment({route}) {
                 flexDirection: "row",
                 borderBottomWidth: 1,
                 borderBottomColor: colors.borderGrayE,
+                backgroundColor: colors.white,
                 justifyContent: "space-between",
+                paddingHorizontal: 16,
               }}
             >
-              <Text style={{fontFamily: fonts.Hiragino, fontSize: 15, color: colors.colorTextBlack, lineHeight: 44}}>担当医師</Text>
-              <Text style={{fontFamily: fonts.Hiragino, fontSize: 15, color: colors.colorTextBlack, lineHeight: 44}}>山田太郎</Text>
+              <Text
+                style={{
+                  fontFamily: fonts.Hiragino,
+                  fontSize: 12,
+                  fontWeight: "600",
+                  width: "40%",
+                  color: colors.colorTextBlack,
+                  lineHeight: 14,
+                  paddingVertical: 16,
+                }}
+              >
+                担当医師
+              </Text>
+              <Text
+                style={{
+                  fontFamily: fonts.Hiragino,
+                  fontSize: 12,
+                  width: "60%",
+                  color: colors.colorTextBlack,
+                  lineHeight: 14,
+                  paddingVertical: 16,
+                }}
+              >
+                山田太郎
+              </Text>
             </View>
           </View>
           <View>
-            <Text>相談内容</Text>
+            <Text style={{padding: 16, fontWeight: "700", fontSize: 12, lineHeight: 16}}>相談内容</Text>
             <View
               style={{
                 flexDirection: "row",
                 borderBottomWidth: 1,
                 borderBottomColor: colors.borderGrayE,
+                backgroundColor: colors.white,
                 justifyContent: "space-between",
+                paddingHorizontal: 16,
               }}
             >
-              <Text style={{fontFamily: fonts.Hiragino, fontSize: 15, color: colors.colorTextBlack, lineHeight: 44}}>
+              <Text style={{fontFamily: fonts.Hiragino, fontSize: 12, color: colors.colorTextBlack, lineHeight: 14, paddingVertical: 16}}>
                 ここに相談内容が入ります。ここに相談内容が入ります。ここに相談内容が入ります。ここに相談内容が入ります。ここに相談内容が入ります。ここに相談内容が入ります。ここに相談内容が入ります。ここに相談内容が入ります。ここに相談内容が入ります。
               </Text>
             </View>
           </View>
           <View>
-            <Text>受診画像</Text>
-            {[{}, {}, {}].map((item, index) => {
-              return _renderItem(item, index);
-            })}
+            <Text style={{padding: 16, fontWeight: "700", fontSize: 12, lineHeight: 16}}>受診画像</Text>
+            <View style={{flexDirection: "row", paddingHorizontal: 20, justifyContent: "space-between", flexWrap: "wrap"}}>
+              {[{}, {}, {}].map((item, index) => {
+                return _renderItem(item, index);
+              })}
+            </View>
           </View>
         </ScrollView>
       </View>
