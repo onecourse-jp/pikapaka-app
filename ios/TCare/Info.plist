@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>ja</string>
 	<key>CFBundleDisplayName</key>
-	<string>Pikapaka</string>
+	<string>ピカパカヘルスケア</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIcons</key>
@@ -84,7 +84,7 @@
 	<key>FacebookClientToken</key>
 	<string>d7425f6f69f1cc813ed5660d6711b637</string>
 	<key>FacebookDisplayName</key>
-	<string>Pikapaka</string>
+	<string>ピカパカヘルスケア</string>
 	<key>LSApplicationCategoryType</key>
 	<string></string>
 	<key>LSApplicationQueriesSchemes</key>
