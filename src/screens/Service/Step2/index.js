@@ -57,7 +57,7 @@ export default function ServiceStep2() {
 
   const handleSubmit = async () => {
     if (datePicked === null) {
-      alert("You must pick a date");
+      alert("日付を選択する必要があります");
       return;
     }
     if (hourPicked === null) {
