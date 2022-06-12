@@ -111,12 +111,11 @@ export default function QuestionaireStep2({route}) {
             <View>
               <Text style={{fontFamily: fonts.NSbold, paddingHorizontal: 16, fontSize: 16, marginTop: 16}}>問診</Text>
               {dataQuestion.map((item, index) => {
-                console.log("errors", errors);
                 return (
                   <React.Fragment key={`DATALISTPERSON-${index}`}>
                     <Controller
                       control={control}
-                      rules={{required: true}}
+                      rules={{required: item.status === 1 ? true : false}}
                       name={`data.${index}`}
                       render={({field: {onChange, onBlur, value}}) => {
                         return <ItemQuestionForm item={item} valueData={value} changeData={onChange} type={"questionAdmin"} />;

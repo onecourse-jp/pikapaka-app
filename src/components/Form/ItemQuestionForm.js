@@ -291,7 +291,7 @@ export default function ItemQuestionForm({item, valueData = null, changeData = (
             </Text>
             <ScrollView
               persistentScrollbar={true}
-              showsVerticalScrollIndicator ={true}
+              showsVerticalScrollIndicator={true}
               indicatorStyle={"black"}
               contentContainerStyle={{padding: 20}}
               // containerStyle={{ paddingRight: 14 }}
@@ -339,11 +339,11 @@ export default function ItemQuestionForm({item, valueData = null, changeData = (
                 paddingHorizontal: 18,
                 paddingVertical: 12,
                 borderWidth: 1,
-                borderColor: colors.textBlue,
+                borderColor: colors.accentOrange,
               }}
               onPress={getValueForm}
             >
-              <Text style={{fontFamily: fonts.NSregular, fontSize: 19, lineHeight: 20, color: colors.textBlue}}>同意</Text>
+              <Text style={{fontFamily: fonts.NSregular, fontSize: 19, lineHeight: 20, color: colors.accentOrange}}>同意</Text>
             </TouchableOpacity>
           </View>
         </View>
