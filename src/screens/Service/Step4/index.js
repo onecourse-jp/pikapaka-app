@@ -278,10 +278,10 @@ export default function ServiceStep4() {
           </View>
 
           <View style={{marginTop: 37, paddingHorizontal: 16}}>
-            <Button label="内容確認へ進む" onPress={handleSubmit} />
+            <Button label="予約内容を確定する" onPress={handleSubmit} />
           </View>
           <View style={{marginTop: 11, paddingHorizontal: 16}}>
-            <Button variant="secondary" label="予約内容を確定" onPress={() => navigation.goBack()} />
+            <Button variant="secondary" label="情報の入力に戻る" onPress={() => navigation.goBack()} />
           </View>
         </ScrollView>
       </View>
