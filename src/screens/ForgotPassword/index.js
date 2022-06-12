@@ -64,7 +64,7 @@ export default function ForgotPassword() {
                         backgroundColor: colors.white,
                         flex: 1,
                       }}
-                      placeholder={"ご登録のメールアドレス"}
+                      placeholder={"ご登録中のメールアドレス"}
                       placeholderTextColor={colors.textPlaceholder}
                       onChangeText={(text) => {
                         onChange(text);
@@ -81,7 +81,7 @@ export default function ForgotPassword() {
             />
           </View>
           <View style={{paddingHorizontal: 16}}>
-            {errors.email && <Text style={styles.textError}>メールエラー</Text>}
+            {errors.email && <Text style={styles.textError}>ーメールアドレスを間違えています。</Text>}
             {errorApi.length > 0 && <Text style={styles.textError}>{errorApi}</Text>}
             <ButtonOrange disabled={disableSubmit} title="メールを送信" onPress={handleSubmit(onSubmit)} />
           </View>

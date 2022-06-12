@@ -152,7 +152,7 @@ export default function QuestionaireStep3({route}) {
             })}
           </View>
           <View style={{marginTop: 10, paddingHorizontal: 16}}>
-            <Button label="入力を完了する" onPress={handleSubmit} />
+            <Button label="問診内容を確定する" onPress={handleSubmit} />
           </View>
           <View style={{marginTop: 8, paddingHorizontal: 16, marginBottom: 30}}>
             <Button variant="secondary" label="内容を修正する" onPress={() => navigation.goBack()} />
