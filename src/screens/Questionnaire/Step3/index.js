@@ -114,13 +114,15 @@ export default function QuestionaireStep3({route}) {
                       width: "35%",
                       fontSize: 12,
                       lineHeight: 18,
+                      paddingLeft: 12,
+                      textAlign: "justify",
                     }}
                   >
                     {typeof item?.value == "string" ? (
                       <Text>{item?.value}</Text>
                     ) : (
                       item?.value?.map((el, index) => {
-                        return index + 1 < item.value.length ? `${el}, ` : el;
+                        return index + 1 < item.value.length ? `${el}\n` : el;
                       })
                     )}
                   </Text>

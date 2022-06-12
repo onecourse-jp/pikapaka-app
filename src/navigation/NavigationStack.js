@@ -36,12 +36,7 @@ import ExaminationContent from "@screens/EditCalendar/ExaminationContent";
 import DeliveryAddress from "@screens/EditCalendar/DeliveryAddress";
 import DeliveryAddressPayment from "@screens/Payment/EditDeliveryAdrress";
 import Confirm from "@screens/EditCalendar/Confirm";
-import PaymentScreen from "@screens/Payment";
-import EditName from "@screens/Profile/EditProfile/EditName";
-import EditFurigana from "@screens/Profile/EditProfile/EditFurigana";
-import EditGender from "@screens/Profile/EditProfile/EditGender";
-import EditAllergy from "@screens/Profile/EditProfile/EditAllergy";
-import EditMedicine from "@screens/Profile/EditProfile/EditMedicine";
+
 
 import {
   SCREEN_LOGIN,
@@ -71,11 +66,7 @@ import {
   SCREEN_EDIT_CALENDAR_ADDRESS,
   SCREEN_EDIT_CALENDAR_CONFIRM,
   SCREEN_EDIT_DELIVERY_ADDRESS,
-  SCREEN_EDIT_NAME,
-  SCREEN_EDIT_FURIGANA,
-  SCREEN_EDIT_GENDER,
-  SCREEN_EDIT_ALLERGY,
-  SCREEN_EDIT_MEDICINE,
+
 } from "@screens/screens.constants";
 import {navigationRef} from "./NavigationService";
 
@@ -166,11 +157,7 @@ function App() {
           <Stack.Screen name={SCREEN_WEB_VIEW} component={ModalWebView} options={{headerShown: true}} />
           <Stack.Screen name={SCREEN_PROFILE} component={ProfileScreen} options={{title: "マイページ"}} />
 
-          <Stack.Screen name={SCREEN_EDIT_NAME} component={EditName} options={{title: "名前を変更"}} />
-          <Stack.Screen name={SCREEN_EDIT_FURIGANA} component={EditFurigana} options={{title: "名前を変更"}} />
-          <Stack.Screen name={SCREEN_EDIT_GENDER} component={EditGender} options={{title: "性別を変更"}} />
-          <Stack.Screen name={SCREEN_EDIT_ALLERGY} component={EditAllergy} options={{title: "アレルギーの変更"}} />
-          <Stack.Screen name={SCREEN_EDIT_MEDICINE} component={EditMedicine} options={{title: "服薬中の薬の変更"}} />
+
 
           <Stack.Screen name={SCREEN_EDIT_PROFILE} component={EditProfile} options={{title: "情報編集"}} />
           <Stack.Screen name={SCREEN_CALL} component={CallScreen} options={{headerShown: false}} />

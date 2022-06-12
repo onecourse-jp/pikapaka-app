@@ -60,7 +60,7 @@ const dataMedicalHistory = [
     label: "脳疾患",
   },
   {
-    value: 1,
+    value: 10,
     label: "その他",
   },
 ];

@@ -32,20 +32,19 @@ export default function EditAllergy({route}) {
   ];
   const onSubmit = async (dataSubmit) => {
     let allergies = isAllergyStatus === true ? 1 : 2;
-    let content_allergies = []
+    let content_allergies = [];
     for (let i = 1; i <= Object.keys(dataSubmit).length; i++) {
-        if (typeof dataSubmit["allergy_"+i] != "undefined" ) {
-             content_allergies.push(dataSubmit["allergy_"+i])
-        }
-      
+      if (typeof dataSubmit["allergy_" + i] != "undefined") {
+        content_allergies.push(dataSubmit["allergy_" + i]);
+      }
     }
-    content_allergies = isAllergyStatus === true ? content_allergies : []
+    content_allergies = isAllergyStatus === true ? content_allergies : [];
     let newDataSubmit = {
-        allergies,
-        content_allergies
+      allergies,
+      content_allergies,
     };
     console.log("dataSubmit", newDataSubmit);
-    
+
     if (Object.keys(dataSubmit).length > 0) {
       try {
         const {data, response} = await updateProfileWithToken(newDataSubmit);
@@ -87,11 +86,29 @@ export default function EditAllergy({route}) {
       <View style={{width: "100%", marginBottom: 14}}>
         <View style={{paddingTop: 12, paddingBottom: 12, backgroundColor: colors.backgroundTheme}}>
           <View>
-            <Text style={{fontFamily: fonts.NSbold, fontSize: 16, color: colors.colorTextBlack, lineHeight: 23}}>アレルギーの有無</Text>
+            <Text
+              style={{
+                fontFamily: fonts.Hiragino,
+                fontWeight: "700",
+                paddingHorizontal: 16,
+                fontSize: 16,
+                color: colors.colorTextBlack,
+                lineHeight: 23,
+              }}
+            >
+              アレルギーの有無
+            </Text>
           </View>
         </View>
         <TouchableOpacity
-          style={{flexDirection: "row", justifyContent: "space-between", paddingVertical: 16, borderTopWidth: 1, borderColor: "#EEEEEE", backgroundColor: colors.white}}
+          style={{
+            flexDirection: "row",
+            justifyContent: "space-between",
+            padding: 16,
+            borderTopWidth: 1,
+            borderColor: "#EEEEEE",
+            backgroundColor: colors.white,
+          }}
           onPress={() => {
             setIsAllergyStatus(true);
           }}
@@ -100,7 +117,14 @@ export default function EditAllergy({route}) {
           {isAllergyStatus && <Image source={require("@assets/images/v_green.png")} />}
         </TouchableOpacity>
         <TouchableOpacity
-          style={{flexDirection: "row", justifyContent: "space-between", paddingVertical: 16, borderTopWidth: 1, borderColor: "#EEEEEE", backgroundColor: colors.white}}
+          style={{
+            flexDirection: "row",
+            justifyContent: "space-between",
+            padding: 16,
+            borderTopWidth: 1,
+            borderColor: "#EEEEEE",
+            backgroundColor: colors.white,
+          }}
           onPress={() => {
             setIsAllergyStatus(false);
           }}
@@ -108,60 +132,79 @@ export default function EditAllergy({route}) {
           <Text>なし</Text>
           {!isAllergyStatus && <Image source={require("@assets/images/v_green.png")} />}
         </TouchableOpacity>
-        <View style={{paddingTop: 12, paddingBottom: 12, backgroundColor: colors.backgroundTheme}}>
-          <View>
-            <Text style={{fontFamily: fonts.NSbold, fontSize: 16, color: colors.colorTextBlack, lineHeight: 23}}>アレルギーの内容</Text>
-          </View>
-        </View>
-        {ListAllergy.map((item, index) => {
-          return (
-            <React.Fragment key={`ListAllergy-${index}`}>
-              <Controller
-                control={control}
-                name={item.key}
-                defaultValue={route.params.data.content_allergies[index]}
-                render={({field: {onChange, onBlur, value}}) => {
-                  return (
-                    <View
-                      style={{
-                        flexDirection: "row",
-                        justifyContent: "space-between",
-                        alignItems: "center",
-                        borderTopWidth: 1,
-                        borderTopColor: "#EEEEEE",
-                      }}
-                    >
-                      <Text style={{width: 120, fontSize: 12, color: isAllergyStatus ? colors.colorTextBlack : colors.gray7 }}>{item.title}</Text>
-                      <TextInput
-                        style={{
-                          color: colors.textBlack,
-                          backgroundColor: colors.white,
-                          flex: 1,
-                          fontSize: 12
-                        }}
-                        placeholder={item.placeholder}
-                        placeholderTextColor={colors.textPlaceholder}
-                        onChangeText={(text) => {
-                          onChange(text);
-                        }}
-                        onBlur={onBlur}
-                        value={value}
-                        editable={isAllergyStatus}
-                      />
-                    </View>
-                  );
-                }}
-              />
-            </React.Fragment>
-          );
-        })}
+        {isAllergyStatus && (
+          <>
+            <View style={{paddingTop: 12, paddingBottom: 12, backgroundColor: colors.backgroundTheme}}>
+              <View>
+                <Text
+                  style={{
+                    fontFamily: fonts.Hiragino,
+                    fontWeight: "700",
+                    paddingHorizontal: 16,
+                    fontSize: 16,
+                    color: colors.colorTextBlack,
+                    lineHeight: 23,
+                  }}
+                >
+                  アレルギーの内容
+                </Text>
+              </View>
+            </View>
+            {ListAllergy.map((item, index) => {
+              return (
+                <React.Fragment key={`ListAllergy-${index}`}>
+                  <Controller
+                    control={control}
+                    name={item.key}
+                    defaultValue={route.params.data.content_allergies[index]}
+                    render={({field: {onChange, onBlur, value}}) => {
+                      return (
+                        <View
+                          style={{
+                            flexDirection: "row",
+                            justifyContent: "space-between",
+                            alignItems: "center",
+                            borderTopWidth: 1,
+                            borderTopColor: "#EEEEEE",
+                            backgroundColor: colors.white,
+                            paddingHorizontal: 16,
+                          }}
+                        >
+                          <Text style={{width: 120, fontSize: 12, color: isAllergyStatus ? colors.colorTextBlack : colors.gray7}}>
+                            {item.title}
+                          </Text>
+                          <TextInput
+                            style={{
+                              color: colors.textBlack,
+                              backgroundColor: colors.white,
+                              flex: 1,
+                              fontSize: 12,
+                            }}
+                            placeholder={item.placeholder}
+                            placeholderTextColor={colors.textPlaceholder}
+                            onChangeText={(text) => {
+                              onChange(text);
+                            }}
+                            onBlur={onBlur}
+                            value={value}
+                            editable={isAllergyStatus}
+                          />
+                        </View>
+                      );
+                    }}
+                  />
+                </React.Fragment>
+              );
+            })}
+          </>
+        )}
       </View>
       <ButtonOrange disabled={disableSubmit} title="変更する" onPress={handleSubmit(onSubmit)} />
     </View>
   );
 }
 const styles = StyleSheet.create({
-  container: {paddingHorizontal: 20},
+  container: {flex: 1},
   wrapButton: {paddingHorizontal: 10, marginBottom: 20},
   textError: {color: "red", marginTop: 5},
   box: {

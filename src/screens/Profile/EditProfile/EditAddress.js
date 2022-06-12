@@ -8,7 +8,7 @@ import ButtonOrange from "../../../components/Button/ButtonOrange";
 import {updateProfileWithToken} from "@services/profile";
 import {updateUserProfile} from "@actions/users";
 
-export default function EditName({route}) {
+export default function EditAddress({route}) {
   const colors = useThemeColors();
   const navigation = useNavigation();
   const [disableSubmit, setDisableSubmit] = useState(false);
@@ -68,8 +68,8 @@ export default function EditName({route}) {
           rules={{
             required: true,
           }}
-          name="name"
-          defaultValue={route.params.data.name}
+          name="address"
+          defaultValue={route.params.data.address}
           render={({field: {onChange, onBlur, value}}) => {
             return (
               <View
@@ -102,7 +102,7 @@ export default function EditName({route}) {
             );
           }}
         />
-        {errors.name && <Text style={styles.textError}>{global.t("is_require")}</Text>}
+        {errors.address && <Text style={styles.textError}>{global.t("is_require")}</Text>}
       </View>
       <View style={{paddingHorizontal: 16}}>
         <ButtonOrange disabled={disableSubmit} title="変更する" onPress={handleSubmit(onSubmit)} />

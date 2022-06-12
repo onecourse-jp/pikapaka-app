@@ -62,7 +62,14 @@ export default function EditGender({route}) {
     <View style={[styles.container, {backgroundColor: colors.backgroundTheme}]}>
       <View style={{width: "100%", marginBottom: 14}}>
         <TouchableOpacity
-          style={{flexDirection: "row", justifyContent: "space-between", paddingVertical: 16, borderTopWidth: 1, borderColor: "#EEEEEE"}}
+          style={{
+            flexDirection: "row",
+            justifyContent: "space-between",
+            padding: 16,
+            backgroundColor: colors.white,
+            borderTopWidth: 1,
+            borderColor: "#EEEEEE",
+          }}
           onPress={() => {
             setIsGenderStatus(true);
           }}
@@ -71,7 +78,14 @@ export default function EditGender({route}) {
           {isGenderStatus && <Image source={require("@assets/images/v_green.png")} />}
         </TouchableOpacity>
         <TouchableOpacity
-          style={{flexDirection: "row", justifyContent: "space-between", paddingVertical: 16, borderTopWidth: 1, borderColor: "#EEEEEE"}}
+          style={{
+            flexDirection: "row",
+            justifyContent: "space-between",
+            padding: 16,
+            backgroundColor: colors.white,
+            borderTopWidth: 1,
+            borderColor: "#EEEEEE",
+          }}
           onPress={() => {
             setIsGenderStatus(false);
           }}
@@ -80,12 +94,14 @@ export default function EditGender({route}) {
           {!isGenderStatus && <Image source={require("@assets/images/v_green.png")} />}
         </TouchableOpacity>
       </View>
-      <ButtonOrange disabled={disableSubmit} title="変更する" onPress={onSubmit} />
+      <View style={{paddingHorizontal: 16}}>
+        <ButtonOrange disabled={disableSubmit} title="変更する" onPress={onSubmit} />
+      </View>
     </View>
   );
 }
 const styles = StyleSheet.create({
-  container: {paddingHorizontal: 20},
+  container: {flex: 1},
   wrapButton: {paddingHorizontal: 10, marginBottom: 20},
   textError: {color: "red", marginTop: 5},
 });
