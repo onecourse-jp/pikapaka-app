@@ -21,7 +21,7 @@ const DATA = [
 ];
 
 export default function ModalBottomAction({navigation, route}) {
-  const {callback, value} = route.params;
+  const {callback} = route.params;
   const [valueChoose, setValueChoose] = useState(null);
   const colors = useThemeColors();
   console.log("callback", callback);

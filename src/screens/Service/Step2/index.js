@@ -69,6 +69,7 @@ export default function ServiceStep2() {
       return;
     }
     const _isLogin = await isLogin();
+    console.log("_isLogin", _isLogin);
     const formatDatePicker = moment(datePicked).format("YYYY年MM月DD日");
     hourPicked.datePicked = datePicked;
     const jsonStringValue = JSON.stringify(hourPicked);

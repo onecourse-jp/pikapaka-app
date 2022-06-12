@@ -27,13 +27,14 @@ export default function ForgotPassword() {
     const params = {email: dataSubmit.email};
     const {response, data} = await sendForgotPasswordRequest(params);
     if (response?.status === 200) {
+      global.hideLoadingView();
       navigation.navigate(SCREEN_RESET_PASSWORD, params);
     } else {
+      global.hideLoadingView();
       console.log("response err", data);
       setErrorApi(global.t(data.errors));
     }
     setDisableSubmit(false);
-    global.hideLoadingView();
   };
   const validateEmail = (email) => {
     const resultValidate = String(email)
