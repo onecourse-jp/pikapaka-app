@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {StyleSheet, Text, View, SafeAreaView, Image, Dimensions, TouchableOpacity, FlatList, Alert} from "react-native";
+import {StyleSheet, Text, View, SafeAreaView, Image, Dimensions, TouchableOpacity, FlatList, Alert, ScrollView} from "react-native";
 import {useThemeColors, Button} from "react-native-theme-component";
 import DropDownPicker from "react-native-dropdown-picker";
 import {useNavigation} from "@react-navigation/native";
@@ -13,21 +13,6 @@ import {getReservation} from "@services/auth";
 import {SCREEN_DETAIL_CALENDAR} from "../../screens.constants";
 
 let {width, height} = Dimensions.get("window");
-
-const DATA = [
-  {label: "スキンケア (美白)", value: '{"label":"選択中の科目","value":"スキンケア (美白)","key":"skinCare","data":"1"}'},
-  {label: "スキンケア (美肌)", value: '{"label":"選択中の科目","value":"スキンケア (美肌)","key":"skinCare","data":"2"}'},
-  {
-    label: "スキンケア (アンチエイジング)",
-    value: '{"label":"選択中の科目","value":"スキンケア (アンチエイジング)","key":"skinCare","data":"3"}',
-  },
-  {label: "スキンケア (保湿)", value: '{"label":"選択中の科目","value":"スキンケア (保湿)","key":"skinCare","data":"4"}'},
-  {label: "ダイエット", value: '{"label":"選択中の科目","value":"ダイエット","key":"diet","data":"5"}'},
-  {label: "ピル（ピル）", value: '{"label":"選択中の科目","value":"ピル (ピル）","key":"pill","data":"6"}'},
-  {label: "ピル （アフターピル）", value: '{"label":"選択中の科目","value":"ピル（アフターピル）","key":"pill","data":"7"}'},
-  {label: "ED", value: '{"label":"選択中の科目","value":"ED","key":"ed","data":"8"}'},
-  {label: "AGA", value: '{"label":"選択中の科目","value":"AGA","key":"aga","data":"9"}'},
-];
 
 export default function ServiceStep1() {
   const user = useSelector((state) => state.users?.userDetails);
@@ -96,10 +81,10 @@ export default function ServiceStep1() {
       navigation.navigate(SCREEN_SERVICE_STEP2);
     }
   };
-  const _renderItem = ({item}) => {
+  const _renderItem = (item, index) => {
     const valueItem = JSON.parse(item.value);
     return (
-      <TouchableOpacity onPress={() => setValueChoose(valueItem)}>
+      <TouchableOpacity key={`_renderItem-${index}`} onPress={() => setValueChoose(valueItem)}>
         <Text
           style={{
             color: valueChoose?.data == valueItem?.data ? colors.colorTextBlack : "#C1C1C1",
@@ -126,14 +111,14 @@ export default function ServiceStep1() {
 
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: colors.backgroundTheme}}>
-      <ModalPortal
+      {/* <ModalPortal
         isVisible={isPopup}
         animationInTiming={500}
         animationOutTiming={500}
         backdropTransitionInTiming={500}
         backdropTransitionOutTiming={500}
-        swipeDirection="down"
-        scrollHorizontal={true}
+        // swipeDirection="down"
+        // scrollHorizontal={true}
         style={{justifyContent: "flex-end", flex: 1, margin: 0}}
       >
         <View
@@ -154,23 +139,25 @@ export default function ServiceStep1() {
           >
             <TouchableOpacity style={{width: "100%", paddingRight: 28}} onPress={confirmValue}>
               <Text style={{fontSize: 18, textAlign: "right", color: colors.textBlue}}>完了</Text>
-              {/* <Image source={require("@assets/images/icons/close_black.png")} style={{width: 20, height: 20}} resizeMode="cover" /> */}
             </TouchableOpacity>
           </View>
-          <FlatList
-            horizontal={false}
-            data={DATA}
-            renderItem={(item, index) => _renderItem(item, index)}
-            keyExtractor={(item) => item.label}
-          />
+          <ScrollView>
+            {DATA.map((item, index) => {
+              return _renderItem(item, index);
+            })}
+          </ScrollView>
         </View>
-      </ModalPortal>
+      </ModalPortal> */}
       <View style={[styles.container]}>
         <GuideComponent title="オンライン診療をご希望ですか？" content="まずは診療科目とメニューをお選びください。" />
         <StepsComponent />
         <View style={{flexDirection: "column", flex: 1}}>
           <TouchableOpacity
-            onPress={() => setIsPopup(true)}
+            onPress={() =>
+              global.showModalBottom({value: value}, (valueCallBack) => {
+                setValue(valueCallBack);
+              })
+            }
             style={{
               flexDirection: "row",
               padding: 16,

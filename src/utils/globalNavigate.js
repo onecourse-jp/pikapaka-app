@@ -1,7 +1,14 @@
 import * as RootNavigator from "src/navigation/NavigationService";
 import {Platform, Linking, Alert} from "react-native";
 import {CommonActions} from "@react-navigation/native";
-import {SCREEN_WELCOME, SCREEN_WEB_VIEW, SCREEN_CALL, SCREEN_SERVICE_STEP3, SCREEN_MODAL_LOADER} from "../screens/screens.constants";
+import {
+  SCREEN_WELCOME,
+  SCREEN_WEB_VIEW,
+  SCREEN_CALL,
+  SCREEN_SERVICE_STEP3,
+  SCREEN_MODAL_LOADER,
+  SCREEN_MODAL_BOTTOM,
+} from "../screens/screens.constants";
 import {setAuthority} from "./authority";
 import {dataMedicalHistory} from "../data";
 import AsyncStorage from "@react-native-community/async-storage";
@@ -71,6 +78,13 @@ export const showLoadingView = (options) => {
   RootNavigator.navigate(SCREEN_MODAL_LOADER, options ?? {});
 };
 
+export const showModalBottom = (options, callback) => {
+  RootNavigator.navigate(SCREEN_MODAL_BOTTOM, {
+    callback,
+    ...options,
+  });
+};
+
 export const hideLoadingView = () => {
   if (RootNavigator?.getCurrentRoute()?.name === SCREEN_MODAL_LOADER) {
     RootNavigator.goBack();
@@ -116,6 +130,7 @@ export const renderColorStatus = ({type = "text", status = 1}) => {
 global.goToMain = goToMain;
 global.renderColorStatus = renderColorStatus;
 global.showLoadingView = showLoadingView;
+global.showModalBottom = showModalBottom;
 global.hideLoadingView = hideLoadingView;
 global.processSignIn = processSignIn;
 global.alertNeedLogin = alertNeedLogin;

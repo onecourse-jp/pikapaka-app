@@ -26,6 +26,7 @@ import QuestionaireStep3 from "../screens/Questionnaire/Step3";
 import QuestionaireStep4 from "../screens/Questionnaire/Step4";
 import ServiceStep1 from "@screens/Service/Step1";
 import DetailCalender from "@screens/DetailCalendar";
+import DetailAfterPayment from "@screens/DetailCalendar/DetailAfterPayment";
 import ServiceScreen from "@screens/Service";
 import EditCalendar from "@screens/EditCalendar";
 import {defaultStackNavigation} from "@config/navigations";
@@ -83,6 +84,23 @@ function ServiceStackScreen() {
         component={DetailCalender}
         options={{
           title: "オンライン診療",
+          headerTitleAlign: "center",
+          headerStyle: {
+            // backgroundColor: Colors.color.COLOR_BACKGROUND,
+          },
+          headerTintColor: "#000000",
+          headerTitleStyle: {
+            fontWeight: "500",
+          },
+          shadowOpacity: 0, // remove shadow on iOS
+          elevation: 0, // remove shadow on Android
+        }}
+      />
+      <ServiceStack.Screen
+        name={SCREEN_DETAIL_CALENDAR_AFTER_PAYMENT}
+        component={DetailAfterPayment}
+        options={{
+          title: "履歴詳細",
           headerTitleAlign: "center",
           headerStyle: {
             // backgroundColor: Colors.color.COLOR_BACKGROUND,
