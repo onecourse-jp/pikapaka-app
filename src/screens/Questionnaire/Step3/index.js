@@ -71,7 +71,7 @@ export default function QuestionaireStep3({route}) {
           <GuideComponent title={"以下の内容で間違いがなければ、問診内容を確定してください。"} />
           <StepsComponent currentStep={screenStep} isStepSchedule={true} />
           <View style={{flexDirection: "row", alignItems: "center", paddingHorizontal: 16}}>
-            <Text style={{fontFamily: fonts.Hiragino, fontSize: 13, color: colors.gray1, width: "40%", lineHeight: 23, marginBottom: 16}}>
+            <Text style={{fontFamily: fonts.Hiragino, fontSize: 13, color: colors.gray1, width: "30%", lineHeight: 23, marginBottom: 16}}>
               診療科目：
             </Text>
             <Text
@@ -79,7 +79,7 @@ export default function QuestionaireStep3({route}) {
                 fontFamily: fonts.Hiragino,
                 fontSize: 13,
                 color: colors.gray7,
-                width: "60%",
+                width: "70%",
                 lineHeight: 23,
                 marginBottom: 16,
               }}
@@ -92,7 +92,7 @@ export default function QuestionaireStep3({route}) {
               style={{
                 fontFamily: fonts.Hiragino,
                 paddingHorizontal: 16,
-                fontSize: 16,
+                fontSize: 14,
                 color: colors.colorTextBlack,
                 fontWeight: "700",
                 marginTop: 16,
@@ -102,7 +102,9 @@ export default function QuestionaireStep3({route}) {
             {resultQuestion.map((item, index) => {
               return (
                 <View key={`med-${index}`} style={{backgroundColor: colors.white, flexDirection: "row", padding: 16}}>
-                  <Text style={{fontFamily: fonts.Hiragino, color: colors.gray3, width: "65%", fontSize: 15, lineHeight: 18}}>
+                  <Text
+                    style={{fontFamily: fonts.Hiragino, color: colors.gray3, width: "65%", paddingRight: 10, fontSize: 12, lineHeight: 18}}
+                  >
                     {item.label}
                   </Text>
                   <Text
@@ -110,7 +112,7 @@ export default function QuestionaireStep3({route}) {
                       fontFamily: fonts.NSregular,
                       color: colors.gray1,
                       width: "35%",
-                      fontSize: 15,
+                      fontSize: 12,
                       lineHeight: 18,
                     }}
                   >
@@ -131,7 +133,7 @@ export default function QuestionaireStep3({route}) {
               style={{
                 fontFamily: fonts.Hiragino,
                 paddingHorizontal: 16,
-                fontSize: 16,
+                fontSize: 14,
                 color: colors.colorTextBlack,
                 fontWeight: "700",
                 marginTop: 16,
@@ -141,10 +143,10 @@ export default function QuestionaireStep3({route}) {
             {DATALISTPERSON.map((item, index) => {
               return (
                 <View key={`per-${index}`} style={{backgroundColor: colors.white, flexDirection: "row", padding: 16}}>
-                  <Text style={{fontFamily: fonts.Hiragino, color: colors.gray3, width: "40%", fontSize: 15, lineHeight: 18}}>
+                  <Text style={{fontFamily: fonts.Hiragino, color: colors.gray3, width: "40%", fontSize: 12, lineHeight: 18}}>
                     {item.label}
                   </Text>
-                  <Text style={{fontFamily: fonts.NSregular, color: colors.gray1, fontSize: 15, lineHeight: 18}}>{item.value}</Text>
+                  <Text style={{fontFamily: fonts.NSregular, color: colors.gray1, fontSize: 12, lineHeight: 18}}>{item.value}</Text>
                 </View>
               );
             })}

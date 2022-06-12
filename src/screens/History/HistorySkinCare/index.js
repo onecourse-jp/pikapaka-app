@@ -6,6 +6,7 @@ import {useNavigation} from "@react-navigation/native";
 import moment from "moment";
 import {ScrollView} from "react-native-gesture-handler";
 import {getReservation} from "@services/auth";
+import {navigationRef} from "src/navigation/NavigationService";
 import Pagination from "../../../components/Layout/Pagination";
 import {SCREEN_QUESIONAIRE_STEP1, SCREEN_SERVICE_STEP1} from "@screens/screens.constants";
 import {SCREEN_DETAIL_CALENDAR} from "../../screens.constants";
