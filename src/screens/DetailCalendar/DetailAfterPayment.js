@@ -20,25 +20,12 @@ export default function DetailAfterPayment({route}) {
   const navigation = useNavigation();
   const [dataCalendar, setDataCalendar] = useState(null);
 
-  const handleSubmit = () => {
-    console.log("dataCalendar?.statusdataCalendar?.status", dataCalendar?.status);
-    if (dataCalendar?.status === 1) {
-      navigation.navigate(SCREEN_CONNECT_DOCTOR, {data: dataCalendar});
-    } else if (dataCalendar?.status === 2) {
-      navigation.navigate(SCREEN_QUESIONAIRE_STEP2, {data: dataCalendar});
-    } else if (dataCalendar?.status === 3) {
-      navigation.navigate(SCREEN_PAYMENT, {id: dataCalendar.id});
-    }
-  };
-  const handleEditCalendar = () => {
-    navigation.navigate(SCREEN_EDIT_CALENDAR, {data: dataCalendar});
-  };
-
   const actionGetCalendar = async () => {
     if (idCalendar) {
       global.showLoadingView();
       const {response, data} = await getReservationById(idCalendar);
       if (response?.status === 200) {
+        console.log("data getReservationById", data?.data);
         setDataCalendar(data?.data);
       } else {
         console.log("response getReservationById", response?.status);
@@ -131,7 +118,7 @@ export default function DetailAfterPayment({route}) {
                 style={{
                   fontFamily: fonts.Hiragino,
                   fontWeight: "600",
-                  width: "40%",
+                  width: "35%",
                   fontSize: 12,
                   color: colors.colorTextBlack,
                   lineHeight: 14,
@@ -144,13 +131,13 @@ export default function DetailAfterPayment({route}) {
                 style={{
                   fontFamily: fonts.Hiragino,
                   fontSize: 12,
-                  width: "60%",
+                  width: "65%",
                   color: colors.colorTextBlack,
                   lineHeight: 14,
                   paddingVertical: 16,
                 }}
               >
-                2022年5月5日 15:30〜14:00
+                {`${moment(dataCalendar?.date).format("YYYY年MM月DD日")} ${dataCalendar?.time_start}~${dataCalendar?.time_end}`}
               </Text>
             </View>
             <View
@@ -167,7 +154,7 @@ export default function DetailAfterPayment({route}) {
                 style={{
                   fontFamily: fonts.Hiragino,
                   fontWeight: "600",
-                  width: "40%",
+                  width: "35%",
                   fontSize: 12,
                   color: colors.colorTextBlack,
                   lineHeight: 14,
@@ -180,13 +167,13 @@ export default function DetailAfterPayment({route}) {
                 style={{
                   fontFamily: fonts.Hiragino,
                   fontSize: 12,
-                  width: "60%",
+                  width: "65%",
                   color: colors.colorTextBlack,
                   lineHeight: 14,
                   paddingVertical: 16,
                 }}
               >
-                スキンケア - 美白
+                {global.t(`categoryTitle.${dataCalendar?.detail_category_medical_of_customer}`)}
               </Text>
             </View>
             <View
@@ -204,7 +191,7 @@ export default function DetailAfterPayment({route}) {
                   fontFamily: fonts.Hiragino,
                   fontSize: 12,
                   fontWeight: "600",
-                  width: "40%",
+                  width: "35%",
                   color: colors.colorTextBlack,
                   lineHeight: 14,
                   paddingVertical: 16,
@@ -216,13 +203,13 @@ export default function DetailAfterPayment({route}) {
                 style={{
                   fontFamily: fonts.Hiragino,
                   fontSize: 12,
-                  width: "60%",
+                  width: "65%",
                   color: colors.colorTextBlack,
                   lineHeight: 14,
                   paddingVertical: 16,
                 }}
               >
-                山田太郎
+                {dataCalendar?.doctor?.furigana}
               </Text>
             </View>
           </View>
@@ -239,14 +226,22 @@ export default function DetailAfterPayment({route}) {
               }}
             >
               <Text style={{fontFamily: fonts.Hiragino, fontSize: 12, color: colors.colorTextBlack, lineHeight: 14, paddingVertical: 16}}>
-                ここに相談内容が入ります。ここに相談内容が入ります。ここに相談内容が入ります。ここに相談内容が入ります。ここに相談内容が入ります。ここに相談内容が入ります。ここに相談内容が入ります。ここに相談内容が入ります。ここに相談内容が入ります。
+                {dataCalendar?.content_to_doctor}
               </Text>
             </View>
           </View>
           <View>
             <Text style={{padding: 16, fontWeight: "700", fontSize: 12, lineHeight: 16}}>受診画像</Text>
-            <View style={{flexDirection: "row", paddingHorizontal: 20, justifyContent: "space-between", flexWrap: "wrap"}}>
-              {[{}, {}, {}].map((item, index) => {
+            <View
+              style={{
+                flexDirection: "row",
+                paddingHorizontal: 20,
+                justifyContent: "space-between",
+                backgroundColor: colors.white,
+                flexWrap: "wrap",
+              }}
+            >
+              {dataCalendar?.image?.map((item, index) => {
                 return _renderItem(item, index);
               })}
             </View>
