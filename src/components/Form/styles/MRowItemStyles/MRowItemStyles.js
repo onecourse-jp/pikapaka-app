@@ -141,19 +141,23 @@ export const styles = StyleSheet.create({
   checkbox: {
     width: 24,
     height: 24,
-    paddingTop: 2,
-    marginTop: 5,
     // borderWidth: 1,
     // borderColor: Colors.color.COLOR_NEW_YORK_PINK,
     // borderRadius: 5,
   },
+  checkboxSelected: {
+    width: 24,
+    height: 24,
+    // borderWidth: 1,
+    borderColor: "white",
+    // borderRadius: 5,
+  },
   selectedRow: {
-    // backgroundColor: Colors.color.COLOR_BACKGROUND,
-    minWidth: width - 72,
+    backgroundColor: "#FFEFE0",
+    width: width - 80,
     borderRadius: 15,
     marginTop: 8,
     borderBottomColor: Colors.color.COLOR_WHITE,
-    width: width - 200,
   },
   label: {
     marginLeft: 10,
@@ -163,20 +167,19 @@ export const styles = StyleSheet.create({
 
   labelRow: {
     // paddingRight: 16,
-    backgroundColor: "red",
     textAlign: "justify",
     paddingHorizontal: 8,
     maxWidth: "90%",
     minHeight: 36,
     alignSelf: "center",
     textAlignVertical: "center",
+    fontSize: 36,
   },
   rowCheckbox: {
-    minWidth: width - 72,
+    width: width - 80,
     marginTop: 8,
     alignItems: "flex-start",
     borderRadius: 15,
-    backgroundColor: "transparent",
     borderBottomColor: Colors.color.COLOR_WHITE,
   },
   rowCheckbox2: {

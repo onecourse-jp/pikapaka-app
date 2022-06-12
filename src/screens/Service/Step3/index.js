@@ -33,7 +33,6 @@ export default function ServiceStep3() {
   const dispatch = useDispatch();
   const calendar = useSelector((state) => state?.calendar);
   const user = useSelector((state) => state?.users?.userDetails);
-  console.log("user?.smoking", user?.smoking);
   const [oldReservationId, setOldReservationId] = useState(null);
   console.log("user?.medical_history", typeof user?.medical_history);
   const {
@@ -91,9 +90,21 @@ export default function ServiceStep3() {
   ];
   const DATALISTPERSON2 = [
     {key: "allergies", title: "アレルギーの有無", placeholder: "選択", value: user?.allergies ?? null, label: 4},
-    {key: "content_allergies", title: "アレルギーの内容", placeholder: "アレルギー内容を入力", value: user?.content_allergies ?? null},
+    {
+      key: "content_allergies",
+      require: false,
+      title: "アレルギーの内容",
+      placeholder: "アレルギー内容を入力",
+      value: user?.content_allergies ?? null,
+    },
     {key: "take_medicines", title: "服薬中の薬の有無", placeholder: "選択", value: user?.take_medicines ?? null, label: 4},
-    {key: "content_medicines", title: "服用中薬の内容", placeholder: "薬の内容をを入力", value: user?.content_medicines ?? null},
+    {
+      key: "content_medicines",
+      title: "服用中薬の内容",
+      require: false,
+      placeholder: "薬の内容をを入力",
+      value: user?.content_medicines ?? null,
+    },
     {key: "pregnancy", title: "妊娠有無", placeholder: "選択", value: user?.pregnancy ?? null, label: 4},
     {key: "smoking", title: "喫煙有無", placeholder: "選択", value: user?.smoking ?? null, label: 4},
     {
@@ -212,7 +223,7 @@ export default function ServiceStep3() {
                     <Controller
                       control={control}
                       rules={{
-                        required: true,
+                        required: item?.require === false ? false : true,
                       }}
                       defaultValue={item.value}
                       name={item.key}

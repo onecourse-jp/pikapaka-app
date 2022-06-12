@@ -6,9 +6,10 @@ import {useNavigation} from "@react-navigation/native";
 import moment from "moment";
 import {ScrollView} from "react-native-gesture-handler";
 import {getReservation} from "@services/auth";
+import {navigationRef} from "src/navigation/NavigationService";
 import Pagination from "../../../components/Layout/Pagination";
 import {SCREEN_QUESIONAIRE_STEP1, SCREEN_SERVICE_STEP1} from "@screens/screens.constants";
-import {SCREEN_DETAIL_CALENDAR} from "../../screens.constants";
+import {SCREEN_DETAIL_CALENDAR, SCREEN_DETAIL_CALENDAR_AFTER_PAYMENT, SCREEN_PAYMENT} from "../../screens.constants";
 
 export default function HistorySkinCare({category_medical = 0}) {
   const user = useSelector((state) => state.users);
@@ -55,9 +56,19 @@ export default function HistorySkinCare({category_medical = 0}) {
   }, []);
   const goDetailScreenWithStatus = (item) => {
     navigation.navigate("SERVICE");
-    setTimeout(() => {
-      navigation.navigate(SCREEN_DETAIL_CALENDAR, {id: item?.id});
-    }, 200);
+    if (item.status == 3 || item.status == 5) {
+      setTimeout(() => {
+        navigation.navigate(SCREEN_PAYMENT, {id: item?.id});
+      }, 200);
+    } else if (item.status === 4 || item.status === 6) {
+      setTimeout(() => {
+        navigation.navigate(SCREEN_DETAIL_CALENDAR_AFTER_PAYMENT, {id: item?.id});
+      }, 200);
+    } else {
+      setTimeout(() => {
+        navigation.navigate(SCREEN_DETAIL_CALENDAR, {id: item?.id});
+      }, 200);
+    }
   };
   return (
     <>

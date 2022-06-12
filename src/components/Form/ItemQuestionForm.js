@@ -4,9 +4,10 @@ import {useThemeColors, useThemeFonts} from "react-native-theme-component";
 import {styles} from "./styles/MRowItemStyles/MRowItemStyles";
 import SelectMultiple from "react-native-select-multiple";
 import Modal from "react-native-modal";
-import onl from "@assets/images/onl.png";
-import off from "@assets/images/off.png";
-
+import onl from "@assets/images/icons/onl.png";
+import off from "@assets/images/icons/off.png";
+import onlCheckbox from "@assets/images/icons/onlCheckbox.png";
+import offCheckbox from "@assets/images/icons/offCheckbox.png";
 const {width, height} = Dimensions.get("window");
 
 export default function ItemQuestionForm({item, valueData = null, changeData = () => {}, mutiple = false, type = "default"}) {
@@ -159,8 +160,9 @@ export default function ItemQuestionForm({item, valueData = null, changeData = (
       >
         <Text
           style={{
-            marginLeft: 10,
+            marginLeft: 2,
             paddingRight: 30,
+            fontSize: 16,
             marginTop: Platform.OS === "android" ? -5 : 0,
             textAlign: "justify",
           }}
@@ -289,6 +291,7 @@ export default function ItemQuestionForm({item, valueData = null, changeData = (
             </Text>
             <ScrollView
               persistentScrollbar={true}
+              showsVerticalScrollIndicator={true}
               indicatorStyle={"black"}
               contentContainerStyle={{padding: 20}}
               // containerStyle={{ paddingRight: 14 }}
@@ -305,8 +308,9 @@ export default function ItemQuestionForm({item, valueData = null, changeData = (
                 rowStyle={styles.rowCheckbox}
                 labelStyle={styles.labelRow}
                 checkboxStyle={styles.checkbox}
-                // selectedCheckboxSource={onl}
-                // checkboxSource={off}
+                selectedCheckboxStyle={styles.checkboxSelected}
+                selectedCheckboxSource={item.label === 3 ? onlCheckbox : onl}
+                checkboxSource={item.label === 3 ? offCheckbox : off}
                 selectedRowStyle={styles.selectedRow}
               />
             </ScrollView>
@@ -335,11 +339,11 @@ export default function ItemQuestionForm({item, valueData = null, changeData = (
                 paddingHorizontal: 18,
                 paddingVertical: 12,
                 borderWidth: 1,
-                borderColor: colors.textBlue,
+                borderColor: colors.accentOrange,
               }}
               onPress={getValueForm}
             >
-              <Text style={{fontFamily: fonts.NSregular, fontSize: 19, lineHeight: 20, color: colors.textBlue}}>同意</Text>
+              <Text style={{fontFamily: fonts.NSregular, fontSize: 19, lineHeight: 20, color: colors.accentOrange}}>同意</Text>
             </TouchableOpacity>
           </View>
         </View>

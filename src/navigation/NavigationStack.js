@@ -19,6 +19,7 @@ import ForgotPassword from "@screens/ForgotPassword";
 import BottomTabbarNavigator from "./BottomTabbarNavigator";
 
 import LoadingView from "../components/LoadingView";
+import ModalBottom from "@components/modals/ModalBottomAction";
 import TermsOfService from "@screens/TCareClinic/TermsOfService";
 import PrivacyPolicy from "@screens/TCareClinic/PrivacyPolicy";
 import CommercialLaw from "@screens/TCareClinic/CommercialLaw";
@@ -54,6 +55,7 @@ import {
   SCREEN_FORGOT_PASSWORD,
   SCREEN_RESET_PASSWORD,
   SCREEN_MODAL_LOADER,
+  SCREEN_MODAL_BOTTOM,
   SCREEN_TERMS_OF_SERVICE,
   SCREEN_PRIVACY_POLICY,
   SCREEN_COMMERCIAL_LAW,
@@ -158,7 +160,6 @@ function App() {
         </Stack.Screen>
 
         <Stack.Group screenOptions={defaultStackNavigation.screenOptions}>
-          
           <Stack.Screen name={SCREEN_REGISTER} component={RegisterScreen} options={{title: "メールアドレスで新規登録"}} />
           <Stack.Screen name={SCREEN_WELCOME} component={Welcome} options={{headerShown: false}} />
           <Stack.Screen name={SCREEN_LOGIN} component={Login} options={{title: "メールアドレスでログイン"}} />
@@ -228,6 +229,7 @@ function App() {
           }}
         >
           <Stack.Screen name={SCREEN_MODAL_LOADER} component={LoadingView} options={{headerShown: false, animation: "none"}} />
+          <Stack.Screen name={SCREEN_MODAL_BOTTOM} component={ModalBottom} options={{headerShown: false}} />
         </Stack.Group>
       </Stack.Navigator>
     </NavigationContainer>

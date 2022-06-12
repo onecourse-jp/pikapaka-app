@@ -21,9 +21,7 @@ export default function ModalWebView({route}) {
       if (Platform.OS == "web") {
         window.close();
       } else {
-        navigation.goBack();
-        navigation.goBack();
-        navigation.goBack();
+        navigation.navigate("HistoryStack");
       }
     }
   }, [isNext]);
