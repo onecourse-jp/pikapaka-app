@@ -33,7 +33,7 @@ export default function ResetPassword() {
     const {response, data} = await resetPasswordRequest(params);
     if (response?.status === 200) {
       console.log("data", data);
-      Alert.alert("パスワード再設定", "パスワード再設定が成功です。", [
+      Alert.alert("パスワード再設定", "パスワードの再設定に成功しました。", [
         {
           text: "戻る",
           onPress: () =>
@@ -185,7 +185,7 @@ export default function ResetPassword() {
                       flex: 1,
                     }}
                     type={"password"}
-                    placeholder={"パスワードをもう一度入力"}
+                    placeholder={"パスワードをもう一度入力してください"}
                     placeholderTextColor={colors.textPlaceholder}
                     secureTextEntry={showConfirmPassword ? false : true}
                     onChangeText={(text) => {
