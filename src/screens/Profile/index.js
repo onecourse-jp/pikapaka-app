@@ -12,10 +12,13 @@ import {
   SCREEN_EDIT_GENDER,
   SCREEN_EDIT_ALLERGY,
   SCREEN_EDIT_MEDICINE,
+  SCREEN_EDIT_ADDRESS,
+  SCREEN_EDIT_POSTAL_CODE,
+  SCREEN_EDIT_YES_NO_FORM,
+  SCREEN_EDIT_MEDICAL_HISTORY,
 } from "@screens/screens.constants";
 import {getProfile} from "@services/search";
 import moment from "moment";
-import {SCREEN_CALL, SCREEN_PAYMENT} from "../screens.constants";
 import Arrow_right from "../../assets/images/SvgComponents/arrow_right";
 
 export default function Profile({navigation}) {
@@ -83,8 +86,22 @@ export default function Profile({navigation}) {
     // {key: "phone_number", label: "電話番号", content: profile?.phone_number},
   ];
   const listTextProfile2 = [
-    {key: "postal_code", label: "郵便番号", content: profile?.postal_code},
-    {key: "address", label: "住所", content: profile?.address},
+    {
+      key: "postal_code",
+      label: "郵便番号",
+      content: profile?.postal_code,
+      action: () => {
+        navigation.navigate(SCREEN_EDIT_POSTAL_CODE, {data: user, label: "郵便番号"});
+      },
+    },
+    {
+      key: "address",
+      label: "住所",
+      content: profile?.address,
+      action: () => {
+        navigation.navigate(SCREEN_EDIT_ADDRESS, {data: user, label: "住所"});
+      },
+    },
   ];
   const listTextProfile3 = [
     {
@@ -99,6 +116,10 @@ export default function Profile({navigation}) {
       key: "content_allergies",
       label: "アレルギーの内容",
       content: profile?.allergies === 1 ? profile?.content_allergies ?? "" : "",
+      action: () => {
+        navigation.navigate(SCREEN_EDIT_ALLERGY, {data: user});
+      },
+      hideIcon: true,
     },
     {
       key: "take_medicines",
@@ -108,12 +129,29 @@ export default function Profile({navigation}) {
         navigation.navigate(SCREEN_EDIT_MEDICINE, {data: user});
       },
     },
-    {key: "pregnancy", label: "妊娠有無", content: profile?.pregnancy === 1 ? "有" : profile?.pregnancy === null ? "あり" : "無"},
-    {key: "smoking", label: "喫煙有無", content: profile?.smoking === 1 ? "有" : profile?.smoking === null ? "あり" : "無"},
+    {
+      key: "pregnancy",
+      label: "妊娠有無",
+      content: profile?.pregnancy === 1 ? "有" : profile?.pregnancy === null ? "あり" : "無",
+      action: () => {
+        navigation.navigate(SCREEN_EDIT_YES_NO_FORM, {data: user, key: "pregnancy", value: profile?.pregnancy, label: "妊娠有無"});
+      },
+    },
+    {
+      key: "smoking",
+      label: "喫煙有無",
+      content: profile?.smoking === 1 ? "有" : profile?.smoking === null ? "あり" : "無",
+      action: () => {
+        navigation.navigate(SCREEN_EDIT_YES_NO_FORM, {data: user, key: "smoking", value: profile?.smoking, label: "喫煙有無"});
+      },
+    },
     {
       key: "medical_history",
       label: "既往歴",
       content: global.renderMedicalHistory(profile?.medical_history),
+      action: () => {
+        navigation.navigate(SCREEN_EDIT_MEDICAL_HISTORY, {data: user, key: "medical_history", value: profile?.medical_history, label: "喫煙有無"});
+      },
     },
   ];
 
@@ -138,13 +176,15 @@ export default function Profile({navigation}) {
 
             {listTextProfile.map((item, index) => {
               return (
-                <View
+                <TouchableOpacity
+                  onPress={item.action}
                   key={index}
                   style={{
                     paddingTop: 12,
                     paddingBottom: 12,
                     borderTopWidth: 1,
                     borderColor: "#EEEEEE",
+                    backgroundColor: colors.white,
                   }}
                 >
                   <View style={{flexDirection: "row", justifyContent: "space-between", paddingHorizontal: 16}}>
@@ -164,12 +204,10 @@ export default function Profile({navigation}) {
                         <Arrow_right color={colors.headerComponent} />
                       </TouchableOpacity>
                     ) : (
-                      <TouchableOpacity onPress={item.action}>
-                        <Arrow_right color={colors.grayC} />
-                      </TouchableOpacity>
+                      <TouchableOpacity onPress={item.action}>{!item?.hideIcon && <Arrow_right color={colors.grayC} />}</TouchableOpacity>
                     )}
                   </View>
-                </View>
+                </TouchableOpacity>
               );
             })}
           </View>
@@ -181,13 +219,15 @@ export default function Profile({navigation}) {
           <View>
             {listTextProfile2.map((item, index) => {
               return (
-                <View
+                <TouchableOpacity
+                  onPress={item.action}
                   key={index}
                   style={{
                     paddingTop: 12,
                     paddingBottom: 12,
                     borderTopWidth: 1,
                     borderColor: "#EEEEEE",
+                    backgroundColor: colors.white,
                   }}
                 >
                   <View style={{flexDirection: "row", justifyContent: "space-between", paddingHorizontal: 16}}>
@@ -199,12 +239,9 @@ export default function Profile({navigation}) {
                     >
                       {item.content}
                     </Text>
-
-                    <TouchableOpacity onPress={item.action}>
-                      <Arrow_right color={colors.grayC} />
-                    </TouchableOpacity>
+                    {!item?.hideIcon && <Arrow_right color={colors.grayC} />}
                   </View>
-                </View>
+                </TouchableOpacity>
               );
             })}
           </View>
@@ -216,13 +253,15 @@ export default function Profile({navigation}) {
           <View>
             {listTextProfile3.map((item, index) => {
               return (
-                <View
+                <TouchableOpacity
+                  onPress={item.action}
                   key={`listTextProfile3-${index}`}
                   style={{
                     paddingTop: 12,
                     paddingBottom: 12,
                     borderTopWidth: 1,
                     borderColor: "#EEEEEE",
+                    backgroundColor: colors.white,
                   }}
                 >
                   <View style={{flexDirection: "row", justifyContent: "space-between", paddingHorizontal: 16}}>
@@ -234,15 +273,13 @@ export default function Profile({navigation}) {
                     >
                       {item.content}
                     </Text>
-                    <TouchableOpacity onPress={item.action}>
-                      <Arrow_right color={colors.grayC} />
-                    </TouchableOpacity>
+                    {!item?.hideIcon && <Arrow_right color={colors.grayC} />}
                   </View>
-                </View>
+                </TouchableOpacity>
               );
             })}
           </View>
-          <View style={{marginTop: 15, marginBottom: 15, justifyContent: "center", alignItems: "center"}}>
+          {/* <View style={{marginTop: 15, marginBottom: 15, justifyContent: "center", alignItems: "center"}}>
             <TouchableOpacity
               onPress={() => navigation.navigate(SCREEN_EDIT_PROFILE)}
               style={{
@@ -258,22 +295,7 @@ export default function Profile({navigation}) {
             >
               <Text style={{color: colors.textBlue, textAlign: "center", lineHeight: 22}}>情報を編集する</Text>
             </TouchableOpacity>
-            {/* <TouchableOpacity
-              onPress={() => navigation.navigate(SCREEN_CALL)}
-              style={{
-                flexDirection: "row",
-                justifyContent: "center",
-                alignItems: "center",
-                width: 300,
-                height: 32,
-                borderWidth: 1,
-                borderColor: colors.textBlue,
-                margin: 0,
-              }}
-            >
-              <Text style={{color: colors.textBlue, textAlign: "center", lineHeight: 22}}>SCREEN_CALL</Text>
-            </TouchableOpacity> */}
-          </View>
+          </View> */}
         </ScrollView>
       </View>
     </SafeAreaView>
