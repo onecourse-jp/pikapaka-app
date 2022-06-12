@@ -65,6 +65,7 @@ export default function ServiceStep3() {
       content_to_doctor: dataSubmit.contentConsultation,
     };
     if (oldReservationId && dataSubmit.radioStatus) dataReservation.old_reservation_id = oldReservationId;
+    if (!oldReservationId && dataSubmit.radioStatus) dataReservation.old_reservation_id = null;
     dispatch(
       updateCalendar({
         data: {step3: {...dataReservation}},
@@ -76,10 +77,16 @@ export default function ServiceStep3() {
   };
 
   useEffect(async () => {
-    const paramsCheckRevervation = {user_id: user.id, detail_category_medical_of_customer: calendar?.data?.step1.data};
-    const {response, data} = await checkReservation(paramsCheckRevervation);
-    if (response?.status === 200) {
-      setOldReservationId(data?.data?.id);
+    try {
+      const paramsCheckRevervation = {user_id: user?.id, detail_category_medical_of_customer: calendar?.data?.step1.data};
+      if (user?.id) {
+        const {response, data} = await checkReservation(paramsCheckRevervation);
+        if (response?.status === 200) {
+          setOldReservationId(data?.data?.id);
+        }
+      }
+    } catch (error) {
+      console.log("error");
     }
   }, []);
 
@@ -269,16 +276,14 @@ export default function ServiceStep3() {
                 }}
               />
             </View>
-            {oldReservationId && (
-              <Controller
-                control={control}
-                defaultValue={true}
-                name={"radioStatus"}
-                render={({field: {onChange, onBlur, value}}) => {
-                  return <OldRevervationForm value={value} handleChange={onChange} />;
-                }}
-              />
-            )}
+            <Controller
+              control={control}
+              defaultValue={false}
+              name={"radioStatus"}
+              render={({field: {onChange, onBlur, value}}) => {
+                return <OldRevervationForm value={value} handleChange={onChange} />;
+              }}
+            />
 
             <View style={{marginTop: 37, paddingHorizontal: 16}}>
               <Button label="内容確認へ進む" onPress={handleSubmit(onSubmit)} />

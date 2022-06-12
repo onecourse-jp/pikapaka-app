@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {StyleSheet, Text, View, Alert, TextInput, SafeAreaView, TouchableOpacity} from "react-native";
+import {StyleSheet, Text, View, Alert, TextInput, SafeAreaView, TouchableOpacity, Image} from "react-native";
 import {useForm, Controller} from "react-hook-form";
 import {navigationRef} from "src/navigation/NavigationService";
 import {useNavigation, useRoute} from "@react-navigation/native";
@@ -60,6 +60,9 @@ export default function ResetPassword() {
       <View style={[styles.container]}>
         <View>
           <View style={{width: "100%", marginBottom: 14}}>
+            <View style={{padding: 16}}>
+              <Text>{`パスワード再設定の申請を受け付けました。\nメールをご確認ください。`}</Text>
+            </View>
             <Controller
               control={control}
               rules={{
