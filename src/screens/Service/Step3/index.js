@@ -10,6 +10,7 @@ import {
   TouchableOpacity,
   KeyboardAvoidingView,
   Platform,
+  RefreshControl,
 } from "react-native";
 import {useForm, Controller} from "react-hook-form";
 import {useThemeColors, useThemeFonts, Button} from "react-native-theme-component";
@@ -17,10 +18,9 @@ import {useNavigation} from "@react-navigation/native";
 import {useDispatch, useSelector} from "react-redux";
 import StepsComponent from "@components/StepsComponent";
 import GuideComponent from "@components/GuideComponent";
-import {SCREEN_SERVICE_STEP4} from "@screens/screens.constants";
+import {SCREEN_SERVICE_STEP4, SCREEN_EDIT_ALLERGY, SCREEN_EDIT_MEDICINE, SCREEN_SERVICE_STEP2} from "@screens/screens.constants";
 import {updateCalendar} from "@actions/calendarAction";
 import {dataMedicalHistory} from "../../../data";
-import {SCREEN_SERVICE_STEP2} from "../../screens.constants";
 import {checkReservation} from "@services/auth";
 import ItemQuestionForm from "../../../components/Form/ItemQuestionForm";
 import OldRevervationForm from "../components/OldRevervationForm";
@@ -30,18 +30,84 @@ export default function ServiceStep3() {
   const fonts = useThemeFonts();
   const screenStep = 3;
   const navigation = useNavigation();
+  const [refreshing, setRefreshing] = useState(false);
   const dispatch = useDispatch();
   const calendar = useSelector((state) => state?.calendar);
-  const user = useSelector((state) => state?.users?.userDetails);
+  const userDetails = useSelector((state) => state?.users?.userDetails);
+  const [user, setUser] = useState(userDetails);
   const [oldReservationId, setOldReservationId] = useState(null);
-  console.log("user?.medical_history", typeof user?.medical_history);
   const {
     control,
     handleSubmit,
     formState: {errors},
+    reset,
   } = useForm({
     required: true,
   });
+
+  useEffect(() => {
+    setUser(userDetails);
+    setDataPerson2([
+      {
+        key: "allergies",
+        title: "アレルギーの有無",
+        placeholder: "選択",
+        value: userDetails?.allergies ?? null,
+        label: 4,
+        action: () => {
+          navigation.navigate(SCREEN_EDIT_ALLERGY, {data: user});
+        },
+      },
+      {
+        key: "content_allergies",
+        require: false,
+        title: "アレルギーの内容",
+        placeholder: "アレルギー内容を入力",
+        value: renderContentAllergies(userDetails?.content_allergies) ?? null,
+        action: () => {
+          navigation.navigate(SCREEN_EDIT_ALLERGY, {data: user});
+        },
+      },
+      {
+        key: "take_medicines",
+        title: "服薬中の薬の有無",
+        placeholder: "選択",
+        value: userDetails?.take_medicines ?? null,
+        label: 4,
+        action: () => {
+          navigation.navigate(SCREEN_EDIT_MEDICINE, {data: user});
+        },
+      },
+      {
+        key: "content_medicines",
+        title: "服用中薬の内容",
+        require: false,
+        placeholder: "薬の内容をを入力",
+        value: renderContentAllergies(userDetails?.content_medicines) ?? null,
+        action: () => {
+          navigation.navigate(SCREEN_EDIT_MEDICINE, {data: user});
+        },
+      },
+      {key: "pregnancy", title: "妊娠有無", placeholder: "選択", value: userDetails?.pregnancy ?? null, label: 4},
+      {key: "smoking", title: "喫煙有無", placeholder: "選択", value: userDetails?.smoking ?? null, label: 4},
+      {
+        key: "medical_history",
+        label: "既往歴",
+        title: "既往歴",
+        placeholder: "選択",
+        label: 3,
+        value: userDetails?.medical_history ?? null,
+        data: dataMedicalHistory,
+      },
+    ]);
+    setDataPerson([
+      {key: "furigana", title: "名前フリガナ", placeholder: "フリガナを入力", value: userDetails?.furigana ?? null},
+      {key: "email", title: "メールアドレス", placeholder: "メールアドレスを入力", value: userDetails?.email ?? null},
+      {key: "phone_number", title: "電話番号", placeholder: "電話番号を入力", value: userDetails?.phone_number ?? null},
+    ]);
+    reset();
+    console.log("userDetailsuserDetailsuserDetailsuserDetailsuserDetails",userDetails?.medical_history);
+  }, [userDetails]);
   // const [changeFunction, setChangeFunction] = useState(() => {});
   // const [valueModal, setValueModal] = useState(null);
   // const [titleModal, setTitleModal] = useState(null);
@@ -90,41 +156,10 @@ export default function ServiceStep3() {
     }
   }, []);
 
-  const DATALISTPERSON = [
-    {key: "furigana", title: "名前フリガナ", placeholder: "フリガナを入力", value: user?.furigana ?? null},
-    {key: "email", title: "メールアドレス", placeholder: "メールアドレスを入力", value: user?.email ?? null},
-    {key: "phone_number", title: "電話番号", placeholder: "電話番号を入力", value: user?.phone_number ?? null},
-  ];
-  const DATALISTPERSON2 = [
-    {key: "allergies", title: "アレルギーの有無", placeholder: "選択", value: user?.allergies ?? null, label: 4},
-    {
-      key: "content_allergies",
-      require: false,
-      title: "アレルギーの内容",
-      placeholder: "アレルギー内容を入力",
-      value: user?.allergies === 1 ? renderContentAllergies(user?.content_allergies) : null,
-    },
-    {key: "take_medicines", title: "服薬中の薬の有無", placeholder: "選択", value: user?.take_medicines ?? null, label: 4},
-    {
-      key: "content_medicines",
-      title: "服用中薬の内容",
-      require: false,
-      placeholder: "薬の内容をを入力",
-      value: user?.content_medicines ?? null,
-    },
-    {key: "pregnancy", title: "妊娠有無", placeholder: "選択", value: user?.pregnancy ?? null, label: 4},
-    {key: "smoking", title: "喫煙有無", placeholder: "選択", value: user?.smoking ?? null, label: 4},
-    {
-      key: "medical_history",
-      label: "既往歴",
-      title: "既往歴",
-      placeholder: "選択",
-      label: 3,
-      value: user?.medical_history ?? null,
-      data: dataMedicalHistory,
-    },
-  ];
-
+  // const DATALISTPERSON = ;
+  // const DATALISTPERSON2 = ;
+  const [dataPerson, setDataPerson] = useState([]);
+  const [dataPerson2, setDataPerson2] = useState([]);
   const validateEmail = (email) => {
     const resultValidate = String(email)
       .toLowerCase()
@@ -134,17 +169,27 @@ export default function ServiceStep3() {
     return resultValidate ? true : false;
   };
 
+  const onRefresh = React.useCallback(() => {
+    setRefreshing(true);
+    reset();
+    setTimeout(() => {
+      setRefreshing(false);
+    }, 1000);
+  }, []);
+
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: colors.backgroundTheme}}>
       <View style={[styles.container]}>
         <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} style={{flex: 1}}>
-          <ScrollView contentContainerStyle={{flexGrow: 1}}>
+          <ScrollView
+            contentContainerStyle={{flexGrow: 1}}
+            refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
+          >
             <GuideComponent title="診察に関する情報とお名前、ご連絡先をご記入ください。" />
             <StepsComponent currentStep={screenStep} />
             {Object.keys(calendar.data).map((item, index) => {
               const step = item.match(/\d+/)[0];
               if (Number(step) < screenStep) {
-                console.log("Number(step)", screenStep, Number(step));
                 return (
                   <View
                     key={`data-${index}`}
@@ -186,7 +231,7 @@ export default function ServiceStep3() {
             </View>
             <View>
               <Text style={{fontFamily: fonts.NSbold, color: colors.colorTextBlack, padding: 16, fontSize: 16}}>お名前・ご連絡先</Text>
-              {DATALISTPERSON.map((item, index) => {
+              {dataPerson.map((item, index) => {
                 return (
                   <React.Fragment key={`DATALISTPERSON-${index}`}>
                     <Controller
@@ -224,7 +269,7 @@ export default function ServiceStep3() {
             </View>
             <View>
               <Text style={{fontFamily: fonts.NSbold, color: colors.colorTextBlack, padding: 16, fontSize: 16}}>基本情報</Text>
-              {DATALISTPERSON2.map((item, index) => {
+              {dataPerson2.map((item, index) => {
                 return (
                   <React.Fragment key={`DATALISTPERSON2-${index}`}>
                     <Controller

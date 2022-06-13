@@ -40,7 +40,7 @@ export default function ItemQuestionForm({item, valueData = null, changeData = (
       let newListCheckBox = [];
       if (typeof item?.value == "string" || typeof item?.value == "number") {
         item.data.map((el, index) => {
-          if (el.value == item.value) {
+          if (el.value == item.value || item.value?.includes(el.value)) {
             newValue.push(item.data[index].label);
             newListCheckBox.push({label: item.data[index].label, value: item.data[index].value});
           }
@@ -51,7 +51,7 @@ export default function ItemQuestionForm({item, valueData = null, changeData = (
           newListCheckBox.push({label: item?.data[el]?.label, value: item?.data[el]?.value});
         });
       }
-
+      console.log("newValuenewValuenewValue", item.value, item.data);
       setValueRowItem(newValue);
       setListCheckbox(newListCheckBox);
     }
@@ -146,6 +146,7 @@ export default function ItemQuestionForm({item, valueData = null, changeData = (
     }
     setShowPopup(false);
   };
+
   const renderLabel = (label) => {
     return (
       <View
@@ -176,7 +177,9 @@ export default function ItemQuestionForm({item, valueData = null, changeData = (
     <>
       <TouchableOpacity
         onPress={() => {
-          if (item.label === 4 || item.label === 3) {
+          if (item?.action) {
+            item?.action();
+          } else if (item.label === 4 || item.label === 3) {
             setShowPopup(true);
           } else {
             refInput.current.focus();

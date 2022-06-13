@@ -26,7 +26,7 @@ export default function EditYesNoForm({route}) {
   const onSubmit = async (dataSubmit) => {
     let changeValue = status === true ? 1 : 2;
     let newDataSubmit = {};
-    newDataSubmit[route?.params?.data?.key] = changeValue;
+    newDataSubmit[route?.params?.key] = changeValue;
     console.log("dataSubmit", newDataSubmit);
     try {
       const {data, response} = await updateProfileWithToken(newDataSubmit);

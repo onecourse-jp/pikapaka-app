@@ -53,7 +53,8 @@ export default function Profile({navigation}) {
     {
       key: "name",
       label: "名前",
-      content: profile?.name,
+      placeholder: "フリガナを入力",
+      content: profile?.name ?? null,
       action: () => {
         navigation.navigate(SCREEN_EDIT_NAME, {data: user});
       },
@@ -61,23 +62,26 @@ export default function Profile({navigation}) {
     {
       key: "furigana",
       label: "フリガナ",
-      content: profile?.furigana,
+      placeholder: "フリガナを入力",
+      content: profile?.furigana ?? null,
       action: () => {
         navigation.navigate(SCREEN_EDIT_FURIGANA, {data: user});
       },
     },
     {
       key: "gender",
+      placeholder: "選択",
       label: "性別",
-      content: profile?.gender == 1 ? "男性" : "女性",
+      content: profile?.gender ? (profile?.gender == 1 ? "男性" : "女性") : null,
       action: () => {
         navigation.navigate(SCREEN_EDIT_GENDER, {data: user});
       },
     },
     {
       key: "birthday",
+      placeholder: "フリガナを入力",
       label: "生年月日",
-      content: profile?.birthday ? moment(new Date(profile?.birthday)).format("YYYY年MM月DD日") : "",
+      content: profile?.birthday ? moment(new Date(profile?.birthday)).format("YYYY年MM月DD日") : null,
       action: () => {
         navigation.navigate(SCREEN_EDIT_BIRTHDAY, {data: user});
       },
@@ -86,6 +90,7 @@ export default function Profile({navigation}) {
     {
       key: "password",
       label: "パスワード",
+      placeholder: "フリガナを入力",
       content: "パスワードを変更",
       action: () => {
         navigation.navigate(SCREEN_CHANGE_PASSWORD);
@@ -97,7 +102,8 @@ export default function Profile({navigation}) {
     {
       key: "postal_code",
       label: "郵便番号",
-      content: profile?.postal_code,
+      placeholder: "選択",
+      content: profile?.postal_code ?? null,
       action: () => {
         navigation.navigate(SCREEN_EDIT_POSTAL_CODE, {data: user, label: "郵便番号"});
       },
@@ -105,7 +111,8 @@ export default function Profile({navigation}) {
     {
       key: "address",
       label: "住所",
-      content: profile?.address,
+      placeholder: "選択",
+      content: profile?.address ?? null,
       action: () => {
         navigation.navigate(SCREEN_EDIT_ADDRESS, {data: user, label: "住所"});
       },
@@ -115,15 +122,17 @@ export default function Profile({navigation}) {
     {
       key: "allergies",
       label: "アレルギーの有無",
-      content: profile?.allergies === 1 ? "有" : profile?.allergies === null ? "あり" : "無",
+      placeholder: "選択",
+      content: profile?.allergies ?? null,
       action: () => {
-        navigation.navigate(SCREEN_EDIT_ALLERGY, {data: user});
+        navigation.navigate(SCREEN_EDIT_ALLERGY, {data: profile});
       },
     },
     {
       key: "content_allergies",
       label: "アレルギーの内容",
-      content: profile?.allergies === 1 ? renderContentAllergies(profile?.content_allergies) : "",
+      placeholder: "フリガナを入力",
+      content: profile?.allergies === 1 ? renderContentAllergies(profile?.content_allergies) : null,
       action: () => {
         navigation.navigate(SCREEN_EDIT_ALLERGY, {data: profile});
       },
@@ -132,7 +141,8 @@ export default function Profile({navigation}) {
     {
       key: "take_medicines",
       label: "服薬中の薬の有無",
-      content: profile?.take_medicines === 1 ? "有" : profile?.take_medicines === null ? "あり" : "無",
+      placeholder: "選択",
+      content: profile?.take_medicines ?? null,
       action: () => {
         navigation.navigate(SCREEN_EDIT_MEDICINE, {data: user});
       },
@@ -140,7 +150,8 @@ export default function Profile({navigation}) {
     {
       key: "pregnancy",
       label: "妊娠有無",
-      content: profile?.pregnancy === 1 ? "有" : profile?.pregnancy === null ? "あり" : "無",
+      placeholder: "選択",
+      content: profile?.pregnancy ?? null,
       action: () => {
         navigation.navigate(SCREEN_EDIT_YES_NO_FORM, {data: user, key: "pregnancy", value: profile?.pregnancy, label: "妊娠有無"});
       },
@@ -148,7 +159,8 @@ export default function Profile({navigation}) {
     {
       key: "smoking",
       label: "喫煙有無",
-      content: profile?.smoking === 1 ? "有" : profile?.smoking === null ? "あり" : "無",
+      placeholder: "選択",
+      content: profile?.smoking ?? null,
       action: () => {
         navigation.navigate(SCREEN_EDIT_YES_NO_FORM, {data: user, key: "smoking", value: profile?.smoking, label: "喫煙有無"});
       },
@@ -156,6 +168,7 @@ export default function Profile({navigation}) {
     {
       key: "medical_history",
       label: "既往歴",
+      placeholder: "選択",
       content: global.renderMedicalHistory(profile?.medical_history),
       action: () => {
         navigation.navigate(SCREEN_EDIT_MEDICAL_HISTORY, {
@@ -208,7 +221,7 @@ export default function Profile({navigation}) {
                       <Text
                         style={{fontFamily: fonts.NSregular, fontSize: 12, color: colors.gray1, lineHeight: 14, flex: 1, textAlign: "left"}}
                       >
-                        {item.content}
+                        {item.content || item.placeholder}
                       </Text>
                     )}
                     {item.key === "password" ? (
@@ -250,7 +263,7 @@ export default function Profile({navigation}) {
                     <Text
                       style={{fontFamily: fonts.NSregular, fontSize: 12, color: colors.gray1, lineHeight: 14, flex: 1, textAlign: "left"}}
                     >
-                      {item.content}
+                      {item.content || item.placeholder}
                     </Text>
                     {!item?.hideIcon && <Arrow_right color={colors.grayC} />}
                   </View>
@@ -284,7 +297,7 @@ export default function Profile({navigation}) {
                     <Text
                       style={{fontFamily: fonts.NSregular, fontSize: 12, color: colors.gray1, lineHeight: 14, flex: 1, textAlign: "left"}}
                     >
-                      {item.content}
+                      {item.content || item.placeholder}
                     </Text>
                     {!item?.hideIcon && <Arrow_right color={colors.grayC} />}
                   </View>
