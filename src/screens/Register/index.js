@@ -106,7 +106,7 @@ export default function Register() {
                 name="email"
               />
 
-              {errors.email && <Text style={styles.textError}>メールエラー</Text>}
+              {errors.email && <Text style={styles.textError}>正しいメールアドレスを入力してください。</Text>}
 
               <Controller
                 control={control}
