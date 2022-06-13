@@ -248,7 +248,7 @@ export default function ItemQuestionForm({item, valueData = null, changeData = (
               ]}
               keyboardType={item.key === "phone_number" || item.key === "postal_code" ? "number-pad" : "default"}
               value={typeof valueData === "string" ? valueData : null}
-              placeholder={item?.placeholder || "○○を入力"}
+              placeholder={item?.placeholder || "入力してください"}
               secureTextEntry={item.key === "newPassword" || item.key === "confirmPassword" ? true : false}
               // placeholder={item.placeholder}
               placeholderTextColor={colors.textPlaceholder}
