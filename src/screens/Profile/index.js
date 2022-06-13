@@ -20,7 +20,7 @@ import {
 import {getProfile} from "@services/search";
 import moment from "moment";
 import Arrow_right from "../../assets/images/SvgComponents/arrow_right";
-import { SCREEN_EDIT_BIRTHDAY } from "../screens.constants";
+import {SCREEN_EDIT_BIRTHDAY} from "../screens.constants";
 
 export default function Profile({navigation}) {
   const colors = useThemeColors();
@@ -123,9 +123,9 @@ export default function Profile({navigation}) {
     {
       key: "content_allergies",
       label: "アレルギーの内容",
-      content: profile?.allergies === 1 ? profile?.content_allergies ?? "" : "",
+      content: profile?.allergies === 1 ? renderContentAllergies(profile?.content_allergies) : "",
       action: () => {
-        navigation.navigate(SCREEN_EDIT_ALLERGY, {data: user});
+        navigation.navigate(SCREEN_EDIT_ALLERGY, {data: profile});
       },
       hideIcon: true,
     },

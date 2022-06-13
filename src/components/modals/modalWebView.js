@@ -66,7 +66,7 @@ export default function ModalWebView({route}) {
       {cancelable: true},
     );
   };
-
+  
   React.useLayoutEffect(() => {
     if (route?.params?.isCallVideo) {
       navigation.setOptions({

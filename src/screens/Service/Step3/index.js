@@ -102,7 +102,7 @@ export default function ServiceStep3() {
       require: false,
       title: "アレルギーの内容",
       placeholder: "アレルギー内容を入力",
-      value: user?.content_allergies ?? null,
+      value: user?.allergies === 1 ? renderContentAllergies(user?.content_allergies) : null,
     },
     {key: "take_medicines", title: "服薬中の薬の有無", placeholder: "選択", value: user?.take_medicines ?? null, label: 4},
     {

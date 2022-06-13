@@ -15,6 +15,8 @@ export default function EditAllergy({route}) {
   const [disableSubmit, setDisableSubmit] = useState(false);
   const dispatch = useDispatch();
   const [isAllergyStatus, setIsAllergyStatus] = useState(route?.params?.data?.allergies === 1 ? true : false);
+
+  const content_allergies = route?.params?.data?.content_allergies || null;
   const {
     control,
     handleSubmit,
@@ -150,16 +152,13 @@ export default function EditAllergy({route}) {
               </View>
             </View>
             {ListAllergy.map((item, index) => {
+              console.log("route?.params?.data?.content_allergies", route?.params?.data?.content_allergies);
               return (
                 <React.Fragment key={`ListAllergy-${index}`}>
                   <Controller
                     control={control}
                     name={item.key}
-                    defaultValue={
-                      route?.params?.data?.content_allergies && route?.params?.data?.content_allergies[index]
-                        ? route?.params?.data?.content_allergies[index]
-                        : ""
-                    }
+                    defaultValue={content_allergies ? content_allergies[index] : null}
                     render={({field: {onChange, onBlur, value}}) => {
                       return (
                         <View
@@ -209,7 +208,7 @@ export default function EditAllergy({route}) {
 const styles = StyleSheet.create({
   container: {flex: 1},
   wrapButton: {paddingHorizontal: 10, marginBottom: 20},
-  textError: {color: "red", marginTop: 5},
+  textError: {color: "red", marginTop: 5, paddingHorizontal: 16},
   box: {
     paddingHorizontal: 16,
   },

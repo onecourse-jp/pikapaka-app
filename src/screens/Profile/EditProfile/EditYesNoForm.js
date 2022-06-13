@@ -12,7 +12,6 @@ export default function EditYesNoForm({route}) {
   const colors = useThemeColors();
   const fonts = useThemeFonts();
   const navigation = useNavigation();
-  const [disableSubmit, setDisableSubmit] = useState(true);
   const dispatch = useDispatch();
   console.log("route", route?.params?.data);
   const [status, setStatus] = useState(route?.params?.data?.value === 1 ? true : false);
@@ -115,7 +114,7 @@ export default function EditYesNoForm({route}) {
           {!status && <Image source={require("@assets/images/v_green.png")} />}
         </TouchableOpacity>
       </View>
-      <ButtonOrange disabled={disableSubmit} title="変更する" onPress={handleSubmit(onSubmit)} />
+      <ButtonOrange title="変更する" onPress={handleSubmit(onSubmit)} />
     </View>
   );
 }
