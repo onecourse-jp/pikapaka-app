@@ -39,7 +39,7 @@ export default function ChangePassword() {
       if (response.status == 200) {
         dispatch(updateUserProfile(data.data));
         global.hideLoadingView();
-        Alert.alert("Update Password", "Success", [
+        Alert.alert("パスワードを更新しました", "", [
           {
             text: "OK",
             onPress: () => {
@@ -57,7 +57,7 @@ export default function ChangePassword() {
     } catch (error) {
       console.log("error", error);
       global.hideLoadingView();
-      Alert.alert("Update Password", "Update fail. Please try again.", [
+      Alert.alert("パスワードを更新しました", "パスワードを更新できませんでした。もう一度お試しください。", [
         {
           text: "OK",
           onPress: () => {},
@@ -70,7 +70,7 @@ export default function ChangePassword() {
     {
       key: "oldPassword",
       title: "現在のパスワード",
-      placeholder: "今ご登録のパスワードを入力",
+      placeholder: "登録中のパスワードを入力",
       state: isOldPasswordVisible,
       togglePassword: () => {
         setIsOldPasswordVisible(!isOldPasswordVisible);
