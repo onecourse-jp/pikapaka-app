@@ -1,5 +1,5 @@
 import React, {useEffect} from "react";
-import {View, Text, Image, StyleSheet, FlatList} from "react-native";
+import {View, Text, Image, StyleSheet, Dimensions} from "react-native";
 import {useSelector, useDispatch} from "react-redux";
 import {useThemeColors, useThemeFonts} from "react-native-theme-component";
 import {useNavigation} from "@react-navigation/native";
@@ -8,6 +8,7 @@ import Flow_1 from "@assets/images/SvgComponents/Flow_1";
 import Flow_2 from "@assets/images/SvgComponents/Flow_2";
 import Flow_3 from "@assets/images/SvgComponents/Flow_3";
 import Flow_4 from "@assets/images/SvgComponents/Flow_4";
+const {width} = Dimensions.get("window");
 export default function FlowMedicalCare({styleColor = "", imageUrls = []}) {
   const navigation = useNavigation();
   const fonts = useThemeFonts();
@@ -40,7 +41,7 @@ export default function FlowMedicalCare({styleColor = "", imageUrls = []}) {
         alignItems: "center",
       }}
     >
-      <Text style={{fontSize: 24, fontWeight: "700", color: styleColor, marginBottom: 15, textAlign: "center"}}>
+      <Text style={{fontSize: width < 380 ? 20 : 24, fontWeight: "700", color: styleColor, marginBottom: 15, textAlign: "center"}}>
         {global.t("Flow_from_reservation_to_medicine")}
       </Text>
       <View style={{height: 2, width: 20, backgroundColor: styleColor, marginBottom: 20}}></View>

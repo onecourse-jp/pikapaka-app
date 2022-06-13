@@ -162,9 +162,6 @@ function ServiceStackScreen() {
         component={QuestionaireStep2}
         options={{
           title: "オンライン診療予約",
-          headerLeft: (props) => {
-            return null;
-          },
         }}
       />
       <ServiceStack.Screen

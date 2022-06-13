@@ -13,8 +13,8 @@ export default function EditGender({route}) {
   const navigation = useNavigation();
   const [disableSubmit, setDisableSubmit] = useState(false);
   const dispatch = useDispatch();
-  console.log("route", route.params.data);
-  const [isGenderStatus, setIsGenderStatus] = useState(route.params.data.gender === 1 ? true : false);
+  console.log("route", route?.params?.data);
+  const [isGenderStatus, setIsGenderStatus] = useState(route?.params?.data?.gender === 1 ? true : false);
 
   const onSubmit = async () => {
     let gender = isGenderStatus === true ? 1 : 2;

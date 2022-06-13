@@ -13,7 +13,7 @@ export default function EditName({route}) {
   const navigation = useNavigation();
   const [disableSubmit, setDisableSubmit] = useState(false);
   const dispatch = useDispatch();
-  console.log("route", route.params.data);
+  console.log("route", route?.params?.data);
   const {
     control,
     handleSubmit,
@@ -69,7 +69,7 @@ export default function EditName({route}) {
             required: true,
           }}
           name="name"
-          defaultValue={route.params.data.name}
+          defaultValue={route?.params?.data?.name}
           render={({field: {onChange, onBlur, value}}) => {
             return (
               <View

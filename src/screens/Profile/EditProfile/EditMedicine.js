@@ -14,8 +14,8 @@ export default function EditMedicine({route}) {
   const navigation = useNavigation();
   const [disableSubmit, setDisableSubmit] = useState(false);
   const dispatch = useDispatch();
-  console.log("route", route.params.data);
-  const [isMedicineStatus, setIsMedicineStatus] = useState(route.params.data.take_medicines === 1 ? true : false);
+  console.log("route", route?.params?.data);
+  const [isMedicineStatus, setIsMedicineStatus] = useState(route?.params?.data?.take_medicines === 1 ? true : false);
   const {
     control,
     handleSubmit,
@@ -156,7 +156,7 @@ export default function EditMedicine({route}) {
                   <Controller
                     control={control}
                     name={item.key}
-                    defaultValue={route.params.data.content_medicines[index]}
+                    defaultValue={route?.params?.data?.content_medicines[index]}
                     render={({field: {onChange, onBlur, value}}) => {
                       return (
                         <View

@@ -20,6 +20,7 @@ import {
 import {getProfile} from "@services/search";
 import moment from "moment";
 import Arrow_right from "../../assets/images/SvgComponents/arrow_right";
+import { SCREEN_EDIT_BIRTHDAY } from "../screens.constants";
 
 export default function Profile({navigation}) {
   const colors = useThemeColors();
@@ -73,8 +74,15 @@ export default function Profile({navigation}) {
         navigation.navigate(SCREEN_EDIT_GENDER, {data: user});
       },
     },
-    {key: "birthday", label: "生年月日", content: profile?.birthday ? moment(new Date(profile?.birthday)).format("YYYY年MM月DD日") : ""},
-    {key: "email", label: "メールアドレス", content: profile?.email},
+    {
+      key: "birthday",
+      label: "生年月日",
+      content: profile?.birthday ? moment(new Date(profile?.birthday)).format("YYYY年MM月DD日") : "",
+      action: () => {
+        navigation.navigate(SCREEN_EDIT_BIRTHDAY, {data: user});
+      },
+    },
+    {key: "email", label: "メールアドレス", content: profile?.email, hideIcon: true},
     {
       key: "password",
       label: "パスワード",
@@ -150,7 +158,12 @@ export default function Profile({navigation}) {
       label: "既往歴",
       content: global.renderMedicalHistory(profile?.medical_history),
       action: () => {
-        navigation.navigate(SCREEN_EDIT_MEDICAL_HISTORY, {data: user, key: "medical_history", value: profile?.medical_history, label: "喫煙有無"});
+        navigation.navigate(SCREEN_EDIT_MEDICAL_HISTORY, {
+          data: user,
+          key: "medical_history",
+          value: profile?.medical_history,
+          label: "喫煙有無",
+        });
       },
     },
   ];

@@ -207,12 +207,12 @@ class MyApp extends Component {
 }
 
 const updateDialogOptions = {
-  title: "(Phát hiện bản cập nhật mới)",
-  mandatoryUpdateMessage: "Bạn có muốn cài đặt bản cập nhật mới không?",
-  mandatoryContinueButtonLabel: "(Cập nhật)",
+  title: "(新しいバージョンが発生しました)",
+  mandatoryUpdateMessage: "新しいバージョンが更新してよろしいですか?",
+  mandatoryContinueButtonLabel: "(更新する)",
   optionalUpdateMessage: "",
-  optionalIgnoreButtonLabel: "Bỏ qua",
-  optionalInstallButtonLabel: "Đồng ý",
+  optionalIgnoreButtonLabel: "戻る",
+  optionalInstallButtonLabel: "OK",
 };
 
 export default codePush({

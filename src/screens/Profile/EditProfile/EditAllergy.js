@@ -14,8 +14,7 @@ export default function EditAllergy({route}) {
   const navigation = useNavigation();
   const [disableSubmit, setDisableSubmit] = useState(false);
   const dispatch = useDispatch();
-  console.log("route", route.params.data);
-  const [isAllergyStatus, setIsAllergyStatus] = useState(route.params.data.allergies === 1 ? true : false);
+  const [isAllergyStatus, setIsAllergyStatus] = useState(route?.params?.data?.allergies === 1 ? true : false);
   const {
     control,
     handleSubmit,
@@ -156,7 +155,11 @@ export default function EditAllergy({route}) {
                   <Controller
                     control={control}
                     name={item.key}
-                    defaultValue={route.params.data.content_allergies[index]}
+                    defaultValue={
+                      route?.params?.data?.content_allergies && route?.params?.data?.content_allergies[index]
+                        ? route?.params?.data?.content_allergies[index]
+                        : ""
+                    }
                     render={({field: {onChange, onBlur, value}}) => {
                       return (
                         <View

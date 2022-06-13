@@ -144,7 +144,7 @@ export default function ModalWebView({route}) {
           onShouldStartLoadWithRequest={(request) => {
             console.log("request.url", request?.url, route?.params?.data);
             try {
-              if (route.params.data) {
+              if (route?.params?.data) {
                 if (request?.url === route?.params?.data) {
                   console.log("succeessssss");
                   setIsNext(true);

@@ -13,7 +13,7 @@ export default function EditAddress({route}) {
   const navigation = useNavigation();
   const [disableSubmit, setDisableSubmit] = useState(false);
   const dispatch = useDispatch();
-  console.log("route", route.params.data);
+  console.log("route", route?.params?.data);
   const {
     control,
     handleSubmit,
@@ -69,7 +69,7 @@ export default function EditAddress({route}) {
             required: true,
           }}
           name="address"
-          defaultValue={route.params.data.address}
+          defaultValue={route?.params?.data?.address}
           render={({field: {onChange, onBlur, value}}) => {
             return (
               <View

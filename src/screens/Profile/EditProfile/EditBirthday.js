@@ -8,12 +8,11 @@ import ButtonOrange from "../../../components/Button/ButtonOrange";
 import {updateProfileWithToken} from "@services/profile";
 import {updateUserProfile} from "@actions/users";
 
-export default function EditPostalCode({route}) {
+export default function EditBirthday({route}) {
   const colors = useThemeColors();
   const navigation = useNavigation();
   const [disableSubmit, setDisableSubmit] = useState(false);
   const dispatch = useDispatch();
-  console.log("route", route?.params?.data);
   const {
     control,
     handleSubmit,
@@ -59,7 +58,6 @@ export default function EditPostalCode({route}) {
         ]);
       }
     }
-    global.hideLoadingView();
   };
   return (
     <View style={[styles.container, {backgroundColor: colors.backgroundTheme}]}>
@@ -69,8 +67,8 @@ export default function EditPostalCode({route}) {
           rules={{
             required: true,
           }}
-          name="postal_code"
-          defaultValue={route?.params?.data?.postal_code}
+          name="birthday"
+          defaultValue={route?.params?.data?.birthday}
           render={({field: {onChange, onBlur, value}}) => {
             return (
               <View
@@ -84,7 +82,7 @@ export default function EditPostalCode({route}) {
                   backgroundColor: colors.white,
                 }}
               >
-                <Text style={{width: 120, fontWeight: "600", color: colors.colorTextBlack}}>郵便番号</Text>
+                <Text style={{width: 120, fontWeight: "600", color: colors.colorTextBlack}}>名前</Text>
                 <TextInput
                   style={{
                     color: colors.textBlack,
@@ -98,7 +96,6 @@ export default function EditPostalCode({route}) {
                   }}
                   onBlur={onBlur}
                   value={value}
-                  keyboardType="number-pad"
                 />
               </View>
             );
@@ -113,7 +110,7 @@ export default function EditPostalCode({route}) {
   );
 }
 const styles = StyleSheet.create({
-  container: {flex: 1, paddingVertical: 16},
+  container: {paddingVertical: 20, flex: 1},
   wrapButton: {paddingHorizontal: 10, marginBottom: 20},
   textError: {color: "red", marginTop: 5},
 });
