@@ -174,7 +174,7 @@ export default function ItemForm({item, valueData = null, changeData = () => {},
                   }}
                   onPress={actionChoose}
                 >
-                  <Text style={{fontFamily: fonts.NSregular, fontSize: 19, lineHeight: 20, color: colors.textBlue}}>同意</Text>
+                  <Text style={{fontFamily: fonts.NSregular, fontSize: 19, lineHeight: 20, color: colors.textBlue}}>選択</Text>
                 </TouchableOpacity>
               </View>
             </View>
