@@ -63,7 +63,7 @@ export default function EditAllergy({route}) {
         if (response.status == 200) {
           dispatch(updateUserProfile(data.data));
           global.hideLoadingView();
-          Alert.alert("", "個人情報の編集が完了しました。", [
+          Alert.alert("", "アレルギーを更新しました。", [
             {
               text: "はい",
               onPress: () => {
