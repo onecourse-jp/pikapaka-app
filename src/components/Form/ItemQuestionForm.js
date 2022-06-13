@@ -343,7 +343,7 @@ export default function ItemQuestionForm({item, valueData = null, changeData = (
               }}
               onPress={getValueForm}
             >
-              <Text style={{fontFamily: fonts.NSregular, fontSize: 19, lineHeight: 20, color: colors.accentOrange}}>同意</Text>
+              <Text style={{fontFamily: fonts.NSregular, fontSize: 19, lineHeight: 20, color: colors.accentOrange}}>選択</Text>
             </TouchableOpacity>
           </View>
         </View>
