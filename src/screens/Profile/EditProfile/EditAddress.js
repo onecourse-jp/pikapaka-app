@@ -23,7 +23,7 @@ export default function EditAddress({route}) {
   });
   const onSubmit = async (dataSubmit) => {
     console.log("dataSubmit", dataSubmit);
-    global.showLoadingView()
+    global.showLoadingView();
     if (Object.keys(dataSubmit).length > 0) {
       try {
         const {data, response} = await updateProfileWithToken(dataSubmit);
@@ -113,5 +113,5 @@ export default function EditAddress({route}) {
 const styles = StyleSheet.create({
   container: {paddingVertical: 20, flex: 1},
   wrapButton: {paddingHorizontal: 10, marginBottom: 20},
-  textError: {color: "red", marginTop: 5},
+  textError: {color: "red", marginTop: 5, paddingHorizontal: 16},
 });

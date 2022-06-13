@@ -65,6 +65,9 @@ export class WebRTC extends Emitter {
       });
       this.emit("disconnect");
     });
+    this.io.on("adminUploadNewPicture", () => {
+      console.log("adminUploadNewPictureadminUploadNewPicture");
+    });
     this.io.on("connect_error", (err) => {
       // alert('connect_error');
 

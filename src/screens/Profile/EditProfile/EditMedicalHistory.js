@@ -71,59 +71,61 @@ export default function EditMedicalHistory({route}) {
     }
   };
   return (
-    <View style={[styles.container, {backgroundColor: colors.backgroundTheme}]}>
-      <View style={{width: "100%", marginBottom: 14}}>
-        <View style={{paddingTop: 12, paddingBottom: 12, backgroundColor: colors.backgroundTheme}}>
-          <View>
-            <Text
-              style={{
-                fontFamily: fonts.Hiragino,
-                fontWeight: "700",
-                paddingHorizontal: 16,
-                fontSize: 16,
-                color: colors.colorTextBlack,
-                lineHeight: 23,
-              }}
-            >
-              アレルギーの有無
-            </Text>
-          </View>
-        </View>
-        {dataMedicalHistory.map((item, index) => {
-          if (item.value != 0) {
-            return (
-              <TouchableOpacity
-                key={`dataMedicalHistory-${index}`}
+    <SafeAreaView style={[styles.container, {backgroundColor: colors.backgroundTheme}]}>
+      <ScrollView contentContainerStyle={{paddingBottom: 20}}>
+        <View style={{width: "100%", marginBottom: 14}}>
+          <View style={{paddingTop: 12, paddingBottom: 12, backgroundColor: colors.backgroundTheme}}>
+            <View>
+              <Text
                 style={{
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                  padding: 16,
-                  borderTopWidth: 1,
-                  borderColor: "#EEEEEE",
-                  backgroundColor: listValue && item?.value && listValue?.includes(item?.value) ? colors.bgAccentOrange : colors.white,
+                  fontFamily: fonts.Hiragino,
+                  fontWeight: "700",
+                  paddingHorizontal: 16,
+                  fontSize: 16,
+                  color: colors.colorTextBlack,
+                  lineHeight: 23,
                 }}
-                onPress={() => checkAndTickValue(item.value)}
               >
-                <Text
+                アレルギーの有無
+              </Text>
+            </View>
+          </View>
+          {dataMedicalHistory.map((item, index) => {
+            if (item.value != 0) {
+              return (
+                <TouchableOpacity
+                  key={`dataMedicalHistory-${index}`}
                   style={{
-                    color: listValue && item?.value && listValue?.includes(item?.value) ? colors.accentOrange : colors.colorTextBlack,
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    padding: 16,
+                    borderTopWidth: 1,
+                    borderColor: "#EEEEEE",
+                    backgroundColor: listValue && item?.value && listValue?.includes(item?.value) ? colors.bgAccentOrange : colors.white,
                   }}
+                  onPress={() => checkAndTickValue(item.value)}
                 >
-                  {item.label}
-                </Text>
-              </TouchableOpacity>
-            );
-          }
-        })}
-      </View>
-      <ButtonOrange disabled={disableSubmit} title="変更する" onPress={handleSubmit(onSubmit)} />
-    </View>
+                  <Text
+                    style={{
+                      color: listValue && item?.value && listValue?.includes(item?.value) ? colors.accentOrange : colors.colorTextBlack,
+                    }}
+                  >
+                    {item.label}
+                  </Text>
+                </TouchableOpacity>
+              );
+            }
+          })}
+        </View>
+        <ButtonOrange disabled={disableSubmit} title="変更する" onPress={handleSubmit(onSubmit)} />
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 const styles = StyleSheet.create({
   container: {flex: 1},
   wrapButton: {paddingHorizontal: 10, marginBottom: 20},
-  textError: {color: "red", marginTop: 5},
+  textError: {color: "red", marginTop: 5, paddingHorizontal: 16},
   box: {
     paddingHorizontal: 16,
   },

@@ -164,38 +164,38 @@ class MyApp extends Component {
     );
   }
   codePushStatusDidChange(status) {
-    switch (status) {
-      case codePush.SyncStatus.CHECKING_FOR_UPDATE:
-        console.log("Checking for updates.");
-        break;
-      case codePush.SyncStatus.DOWNLOADING_PACKAGE:
-        console.log("Downloading package.");
-        this.setState({isPopUp: true});
-        // global.toast.show('showCallUi', {
-        //   placement: 'top',
-        //   duration: 600000,
-        //   animationType: 'slide-in',
-        //   offsetTop: height / 2 - 20,
-        //   offset: height / 2 - 20, // offset for both top and bottom toasts
-        //   swipeEnabled: false,
-        //   renderToast: (toastOptions) => {n
-        //     return <ActivityIndicator size="large" color="#D87B76" />;
-        //   },
-        // });
-        break;
-      case codePush.SyncStatus.INSTALLING_UPDATE:
-        console.log("Installing update.");
-        break;
-      case codePush.SyncStatus.UP_TO_DATE:
-        console.log("Up-to-date.");
-        break;
-      case codePush.SyncStatus.UPDATE_INSTALLED:
-        console.log("Update installed.");
-        this.setState({isPopUp: false});
+    // switch (status) {
+    //   case codePush.SyncStatus.CHECKING_FOR_UPDATE:
+    //     console.log("Checking for updates.");
+    //     break;
+    //   case codePush.SyncStatus.DOWNLOADING_PACKAGE:
+    //     console.log("Downloading package.");
+    //     this.setState({isPopUp: true});
+    //     // global.toast.show('showCallUi', {
+    //     //   placement: 'top',
+    //     //   duration: 600000,
+    //     //   animationType: 'slide-in',
+    //     //   offsetTop: height / 2 - 20,
+    //     //   offset: height / 2 - 20, // offset for both top and bottom toasts
+    //     //   swipeEnabled: false,
+    //     //   renderToast: (toastOptions) => {n
+    //     //     return <ActivityIndicator size="large" color="#D87B76" />;
+    //     //   },
+    //     // });
+    //     break;
+    //   case codePush.SyncStatus.INSTALLING_UPDATE:
+    //     console.log("Installing update.");
+    //     break;
+    //   case codePush.SyncStatus.UP_TO_DATE:
+    //     console.log("Up-to-date.");
+    //     break;
+    //   case codePush.SyncStatus.UPDATE_INSTALLED:
+    //     console.log("Update installed.");
+    //     this.setState({isPopUp: false});
 
-        // global.toast.hideAll();
-        break;
-    }
+    //     // global.toast.hideAll();
+    //     break;
+    // }
   }
 
   codePushDownloadDidProgress(progress) {

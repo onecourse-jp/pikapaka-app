@@ -7,6 +7,7 @@ import {useThemeColors, Button} from "react-native-theme-component";
 import ButtonOrange from "../../../components/Button/ButtonOrange";
 import {updateProfileWithToken} from "@services/profile";
 import {updateUserProfile} from "@actions/users";
+import moment from "moment";
 
 export default function EditBirthday({route}) {
   const colors = useThemeColors();
@@ -20,6 +21,11 @@ export default function EditBirthday({route}) {
   } = useForm({
     required: true,
   });
+  const validateBirthday = (day) => {
+    const resultValidate = moment(day).format("YYYY-MM-DD");
+    console.log("validateBirthday", resultValidate);
+    return resultValidate && resultValidate != "Invalid date" ? true : false;
+  };
   const onSubmit = async (dataSubmit) => {
     console.log("dataSubmit", dataSubmit);
     global.showLoadingView();
@@ -66,6 +72,7 @@ export default function EditBirthday({route}) {
           control={control}
           rules={{
             required: true,
+            validate: (value) => validateBirthday(value),
           }}
           name="birthday"
           defaultValue={route?.params?.data?.birthday}
@@ -82,14 +89,15 @@ export default function EditBirthday({route}) {
                   backgroundColor: colors.white,
                 }}
               >
-                <Text style={{width: 120, fontWeight: "600", color: colors.colorTextBlack}}>名前</Text>
+                <Text style={{width: "30%", fontWeight: "600", color: colors.colorTextBlack}}>名前</Text>
                 <TextInput
                   style={{
                     color: colors.textBlack,
                     backgroundColor: colors.white,
                     flex: 1,
+                    fontSize: 14,
                   }}
-                  placeholder="山田太郎"
+                  placeholder="フリガナを入力 (yyyy-mm-dd)"
                   placeholderTextColor={colors.textPlaceholder}
                   onChangeText={(text) => {
                     onChange(text);
@@ -101,7 +109,7 @@ export default function EditBirthday({route}) {
             );
           }}
         />
-        {errors.name && <Text style={styles.textError}>{global.t("is_require")}</Text>}
+        {errors.birthday && <Text style={styles.textError}> 年／月／日のフォーマットで入力してください。</Text>}
       </View>
       <View style={{paddingHorizontal: 16}}>
         <ButtonOrange disabled={disableSubmit} title="変更する" onPress={handleSubmit(onSubmit)} />
@@ -112,5 +120,5 @@ export default function EditBirthday({route}) {
 const styles = StyleSheet.create({
   container: {paddingVertical: 20, flex: 1},
   wrapButton: {paddingHorizontal: 10, marginBottom: 20},
-  textError: {color: "red", marginTop: 5},
+  textError: {color: "red", marginTop: 5, paddingHorizontal: 16},
 });

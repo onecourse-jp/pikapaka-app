@@ -109,10 +109,35 @@ export const renderMedicalHistory = (array) => {
   let result = "";
   if (array) {
     if (typeof array === "string" || typeof array === "number") {
-      result += `${dataMedicalHistory[array]?.label}\n`;
+      result += `${dataMedicalHistory[array]?.label}`;
     } else {
       array?.map((item, index) => {
-        result += `${dataMedicalHistory[item]?.label}\n`;
+        result += `${dataMedicalHistory[item]?.label}${index + 1 < array.length ? "\n" : ""}`;
+      });
+    }
+  }
+  return result;
+};
+
+export const renderContentAllergies = (content_allergies) => {
+  let result = "";
+  if (content_allergies) {
+    if (typeof content_allergies === "string") {
+      try {
+        const newArray = JSON.parse(content_allergies);
+        newArray.map((item, index) => {
+          if (item != null) {
+            result += `${item}${index + 1 < newArray.length ? "\n" : ""}`;
+          }
+        });
+      } catch (error) {
+        console.log("err", error);
+      }
+    } else {
+      content_allergies?.map((item, index) => {
+        if (item != null) {
+          result += `${item}${index + 1 < content_allergies.length ? "\n" : ""}`;
+        }
       });
     }
   }
@@ -136,4 +161,5 @@ global.processSignIn = processSignIn;
 global.alertNeedLogin = alertNeedLogin;
 global.showWebView = showWebView;
 global.renderMedicalHistory = renderMedicalHistory;
+global.renderContentAllergies = renderContentAllergies;
 global.goToServiceStep3 = goToServiceStep3;

@@ -113,5 +113,6 @@ const styles = StyleSheet.create({
   container: {paddingVertical: 20, flex: 1},
 
   wrapButton: {paddingHorizontal: 10, marginBottom: 20},
-  textError: {color: "red", marginTop: 5},
+  textError: {color: "red", marginTop: 5, paddingHorizontal: 16},
+
 });
