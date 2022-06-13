@@ -30,7 +30,6 @@ export default function ChangePassword() {
   const onSubmit = async (dataSubmit) => {
     global.showLoadingView();
     global.showLoadingView();
-    console.log("dataSubmit", dataSubmit);
     if (dataSubmit.newPassword != dataSubmit.confirmPassword) {
       return setErrorApi("password confirm incorrect");
     }
@@ -47,9 +46,7 @@ export default function ChangePassword() {
             },
           },
         ]);
-        console.log("data changePasswordRequest", data);
       } else {
-        console.log("err changePasswordRequest", data);
         global.hideLoadingView();
         console.log("err changePasswordRequest", data);
         setErrorApi(global.t(data?.message));
@@ -99,7 +96,7 @@ export default function ChangePassword() {
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: colors.backgroundTheme}}>
       <View style={[styles.container]}>
-        <ScrollView contentContainerStyle={{paddingHorizontal: 16}}>
+        <ScrollView contentContainerStyle={{}}>
           <View style={{flexDirection: "column", justifyContent: "space-between", flex: 1}}>
             <View>
               {INFORMATIONBASIC.map((item, index) => {
@@ -118,7 +115,9 @@ export default function ChangePassword() {
                               justifyContent: "space-between",
                               alignItems: "center",
                               borderTopWidth: 1,
-                              borderTopColor: "#EEEEEE",
+                              borderTopColor: colors.borderGrayE,
+                              backgroundColor: colors.white,
+                              paddingHorizontal: 16,
                             }}
                           >
                             <Text style={{width: 120, fontSize: 12}}>{item.title}</Text>
@@ -138,7 +137,7 @@ export default function ChangePassword() {
                               value={value}
                               secureTextEntry={item.state}
                             />
-                            <TouchableOpacity onPress={item.togglePassword}>
+                            <TouchableOpacity style={{paddingHorizontal: 8}} onPress={item.togglePassword}>
                               <Image source={require("@assets/images/show_hide_password.png")} />
                             </TouchableOpacity>
                           </View>
@@ -157,7 +156,7 @@ export default function ChangePassword() {
               })}
               {errorApi?.length > 0 && <Text style={styles.textError}>{errorApi}</Text>}
             </View>
-            <View style={{marginTop: 30}}>
+            <View style={{marginTop: 30, paddingHorizontal: 16}}>
               <ButtonOrange title="パスワード再設定" onPress={handleSubmit(onSubmit)} />
               {/* <ButtonProfile title="情報を編集する" color={colors.headerComponent} onPress={handleSubmit(onSubmit)} />
               <ButtonProfile title="キャンセル" onPress={() => {}} hasBorder={true} color={colors.headerComponent} /> */}

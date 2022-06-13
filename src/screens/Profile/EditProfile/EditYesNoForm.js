@@ -14,8 +14,8 @@ export default function EditYesNoForm({route}) {
   const navigation = useNavigation();
   const [disableSubmit, setDisableSubmit] = useState(true);
   const dispatch = useDispatch();
-  console.log("route", route.params.data);
-  const [status, setStatus] = useState(route.params.data.value === 1 ? true : false);
+  console.log("route", route?.params?.data);
+  const [status, setStatus] = useState(route?.params?.data?.value === 1 ? true : false);
   const {
     control,
     handleSubmit,
@@ -27,7 +27,7 @@ export default function EditYesNoForm({route}) {
   const onSubmit = async (dataSubmit) => {
     let changeValue = status === true ? 1 : 2;
     let newDataSubmit = {};
-    newDataSubmit[route.params.data.key] = changeValue;
+    newDataSubmit[route?.params?.data?.key] = changeValue;
     console.log("dataSubmit", newDataSubmit);
     try {
       const {data, response} = await updateProfileWithToken(newDataSubmit);

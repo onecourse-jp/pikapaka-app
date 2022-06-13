@@ -13,7 +13,7 @@ export default function EditPostalCode({route}) {
   const navigation = useNavigation();
   const [disableSubmit, setDisableSubmit] = useState(false);
   const dispatch = useDispatch();
-  console.log("route", route.params.data);
+  console.log("route", route?.params?.data);
   const {
     control,
     handleSubmit,
@@ -70,7 +70,7 @@ export default function EditPostalCode({route}) {
             required: true,
           }}
           name="postal_code"
-          defaultValue={route.params.data.postal_code}
+          defaultValue={route?.params?.data?.postal_code}
           render={({field: {onChange, onBlur, value}}) => {
             return (
               <View
