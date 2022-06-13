@@ -30,7 +30,7 @@ export default function EditAddress({route}) {
         if (response.status == 200) {
           dispatch(updateUserProfile(data.data));
           global.hideLoadingView();
-          Alert.alert("", "個人情報の編集が完了しました。", [
+          Alert.alert("", "住所を更新しました。", [
             {
               text: "はい",
               onPress: () => {
@@ -83,7 +83,7 @@ export default function EditAddress({route}) {
                   backgroundColor: colors.white,
                 }}
               >
-                <Text style={{width: 120, fontWeight: "600", color: colors.colorTextBlack}}>名前</Text>
+                <Text style={{width: 120, fontWeight: "600", color: colors.colorTextBlack}}>住所</Text>
                 <TextInput
                   style={{
                     color: colors.textBlack,
