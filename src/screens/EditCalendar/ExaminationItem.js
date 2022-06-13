@@ -108,7 +108,7 @@ export default function ExaminationItem({route}) {
           </View>
         </ScrollView>
         <View style={{marginTop: 60, paddingHorizontal: 16}}>
-          <Button label="変更内容を確認へ進む" onPress={handleSubmit(handleConfirm)} />
+          <Button label="変更内容の確認へ進む" onPress={handleSubmit(handleConfirm)} />
         </View>
       </View>
     </SafeAreaView>
