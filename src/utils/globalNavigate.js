@@ -116,6 +116,7 @@ export const renderMedicalHistory = (array) => {
       });
     }
   }
+  if (result.length === 0) return null;
   return result;
 };
 
@@ -141,6 +142,7 @@ export const renderContentAllergies = (content_allergies) => {
       });
     }
   }
+  if (result.length === 0) return null;
   return result;
 };
 
