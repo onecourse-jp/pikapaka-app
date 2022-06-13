@@ -15,6 +15,7 @@ import {
   SCREEN_EDIT_ADDRESS,
   SCREEN_EDIT_YES_NO_FORM,
   SCREEN_EDIT_MEDICAL_HISTORY,
+  SCREEN_EDIT_BIRTHDAY,
 } from "../screens/screens.constants";
 import ProfileScreen from "@screens/Profile";
 import PaymentScreen from "@screens/Payment";
@@ -27,6 +28,7 @@ import EditPostalCode from "../screens/Profile/EditProfile/EditPostalCode";
 import EditAddress from "../screens/Profile/EditProfile/EditAddress";
 import EditYesNoForm from "../screens/Profile/EditProfile/EditYesNoForm";
 import EditMedicalHistory from "../screens/Profile/EditProfile/EditMedicalHistory";
+import EditBirthday from "../screens/Profile/EditProfile/EditBirthday";
 
 const ProfileStack = createNativeStackNavigator();
 function ProfileStackScreen() {
@@ -64,6 +66,13 @@ function ProfileStackScreen() {
         component={EditPostalCode}
         options={{
           title: "郵便番号",
+        }}
+      />
+      <ProfileStack.Screen
+        name={SCREEN_EDIT_BIRTHDAY}
+        component={EditBirthday}
+        options={{
+          title: "生年月日",
         }}
       />
       <ProfileStack.Screen

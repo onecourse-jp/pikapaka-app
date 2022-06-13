@@ -80,7 +80,7 @@ export default function SkinCare() {
           <View style={{height: 10}}></View>
 
           <OnlineMedicalCare
-            title={global.t("what_is_medical_diet")}
+            title={global.t("what_is_skin_care")}
             textFormat={[
               "メディカルスキンケアとは、医療用医薬品による肌治療。皮膚科医学に基づいた低価格のスキンケアです。",
               "Tケアクリニックのオンライン診療では、医師がしっかりとあなたのお肌の悩みに向き合い、内服薬や外用薬などを組み合わせ、カスタマイズされた処方を提案します。",

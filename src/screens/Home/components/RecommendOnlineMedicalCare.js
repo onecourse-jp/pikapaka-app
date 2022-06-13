@@ -1,10 +1,18 @@
 import React, {useEffect} from "react";
-import {View, Text, Image, TouchableOpacity, FlatList} from "react-native";
+import {View, Text, Image, Dimensions} from "react-native";
 import {useSelector, useDispatch} from "react-redux";
 import {useThemeColors, useThemeFonts} from "react-native-theme-component";
 import {useNavigation} from "@react-navigation/native";
 
-export default function RecommendOnlineMedicalCare({textFormat = [], styleColor = "", title = "こんな方におすすめ", description = [], circleColor=""}) {
+const {width} = Dimensions.get("window");
+
+export default function RecommendOnlineMedicalCare({
+  textFormat = [],
+  styleColor = "",
+  title = "こんな方におすすめ",
+  description = [],
+  circleColor = "",
+}) {
   const navigation = useNavigation();
   const fonts = useThemeFonts();
   const colors = useThemeColors();
@@ -18,14 +26,19 @@ export default function RecommendOnlineMedicalCare({textFormat = [], styleColor 
   ];
   return (
     <View style={{backgroundColor: colors.white, borderRadius: 18, padding: 20, flexDirection: "column"}}>
-      <Text style={{fontSize: 24, fontWeight: "700", color: styleColor, marginBottom: 15, textAlign: "center"}}>{title}</Text>
+      <Text style={{fontSize: width < 380 ? 20 : 24, fontWeight: "700", color: styleColor, marginBottom: 15, textAlign: "center"}}>
+        {title}
+      </Text>
       <View style={{flexDirection: "row", justifyContent: "center"}}>
         <View style={{height: 2, width: 20, marginBottom: 20, backgroundColor: styleColor}}></View>
       </View>
       <View style={{marginBottom: 10}}>
         {description.map((item, index) => {
           return (
-            <Text key={index} style={{fontFamily: fonts.Hiragino, fontSize: 14, lineHeight: 21, fontWeight: "400", color: colors.textHiragino}}>
+            <Text
+              key={index}
+              style={{fontFamily: fonts.Hiragino, fontSize: 14, lineHeight: 21, fontWeight: "400", color: colors.textHiragino}}
+            >
               {item}
             </Text>
           );

@@ -1,10 +1,11 @@
 import React, {useEffect} from "react";
-import {View, Text, Image, TouchableOpacity, FlatList} from "react-native";
+import {View, Text, Image, Dimensions} from "react-native";
 import {useSelector, useDispatch} from "react-redux";
 import {useThemeColors, useThemeFonts} from "react-native-theme-component";
 import {useNavigation} from "@react-navigation/native";
 import {Table, TableWrapper, Row, Rows, Col, Cols, Cell} from "react-native-table-component";
 import ButtonLinkService from "@components/Button/ButtonLinkService";
+const {width} = Dimensions.get("window");
 
 export default function ExternalMedicine() {
   const navigation = useNavigation();
@@ -63,7 +64,9 @@ export default function ExternalMedicine() {
   };
   return (
     <View style={{backgroundColor: colors.white, borderRadius: 18, padding: 20, flexDirection: "column"}}>
-      <Text style={{fontSize: 24, fontWeight: "700", color: colors.buttonSkincare, marginBottom: 15, textAlign: "center"}}>
+      <Text
+        style={{fontSize: width < 380 ? 20 : 24, fontWeight: "700", color: colors.buttonSkincare, marginBottom: 15, textAlign: "center"}}
+      >
         {global.t("external_medicine")}
       </Text>
       <View style={{flexDirection: "row", justifyContent: "center"}}>

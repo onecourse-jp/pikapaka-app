@@ -1,11 +1,12 @@
 import React, {useEffect, useState} from "react";
-import {View, Text, Image, TouchableOpacity, FlatList} from "react-native";
+import {View, Text, Image, TouchableOpacity, Dimensions} from "react-native";
 import {useSelector, useDispatch} from "react-redux";
 import {useThemeColors, useThemeFonts} from "react-native-theme-component";
 import {useNavigation} from "@react-navigation/native";
 import FAQ_see_more from "@assets/images/SvgComponents/FAQ_see_more";
 import {SCREEN_FAQ} from "@screens/screens.constants";
 import {getListFaq} from "@services/search";
+const {width} = Dimensions.get("window");
 
 export default function FAQComponent({styleColor = "", question = [], Qcolor = "", screen = 1}) {
   const navigation = useNavigation();
@@ -41,7 +42,9 @@ export default function FAQComponent({styleColor = "", question = [], Qcolor = "
 
   return (
     <View style={{backgroundColor: colors.white, borderRadius: 18, padding: 20, flexDirection: "column"}}>
-      <Text style={{fontSize: 24, color: styleColor, marginBottom: 15, textAlign: "center", fontWeight: "700"}}>よくある質問</Text>
+      <Text style={{fontSize: width < 380 ? 20 : 24, color: styleColor, marginBottom: 15, textAlign: "center", fontWeight: "700"}}>
+        よくある質問
+      </Text>
       <View style={{flexDirection: "row", justifyContent: "center"}}>
         <View style={{height: 2, width: 20, marginBottom: 4, backgroundColor: styleColor}}></View>
       </View>

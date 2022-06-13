@@ -116,6 +116,14 @@ export default function QuestionaireStep2({route}) {
                     <Controller
                       control={control}
                       rules={{required: item.status === 1 ? true : false}}
+                      defaultValue={
+                        item.status === 1
+                          ? null
+                          : {
+                              content_answer: null,
+                              question_id: item.id,
+                            }
+                      }
                       name={`data.${index}`}
                       render={({field: {onChange, onBlur, value}}) => {
                         return <ItemQuestionForm item={item} valueData={value} changeData={onChange} type={"questionAdmin"} />;
