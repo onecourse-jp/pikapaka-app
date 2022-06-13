@@ -35,7 +35,7 @@ export default function EditBirthday({route}) {
         if (response.status == 200) {
           dispatch(updateUserProfile(data.data));
           global.hideLoadingView();
-          Alert.alert("", "個人情報の編集が完了しました。", [
+          Alert.alert("", "生年月日を更新しました。", [
             {
               text: "はい",
               onPress: () => {
@@ -89,7 +89,7 @@ export default function EditBirthday({route}) {
                   backgroundColor: colors.white,
                 }}
               >
-                <Text style={{width: "30%", fontWeight: "600", color: colors.colorTextBlack}}>名前</Text>
+                <Text style={{width: "30%", fontWeight: "600", color: colors.colorTextBlack}}>生年月日</Text>
                 <TextInput
                   style={{
                     color: colors.textBlack,
