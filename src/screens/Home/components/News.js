@@ -96,7 +96,7 @@ export default function NewsComponent() {
                 fontFamily: fonts.Hiragino,
                 lineHeight: 21,
                 fontSize: 16,
-                fontWeight: "700",
+                fontWeight: "100",
                 marginBottom: 10,
               }}
             >
