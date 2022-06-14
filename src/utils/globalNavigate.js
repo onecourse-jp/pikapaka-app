@@ -128,18 +128,22 @@ export const renderContentAllergies = (content_allergies) => {
         const newArray = JSON.parse(content_allergies);
         newArray.map((item, index) => {
           if (item != null) {
-            result += `${item}${index + 1 < newArray.length ? "\n" : ""}`;
+            result += `${index > 0 ? " / " : ""}${item}`;
           }
         });
       } catch (error) {
         console.log("err", error);
       }
     } else {
-      content_allergies?.map((item, index) => {
-        if (item != null) {
-          result += `${item}${index + 1 < content_allergies.length ? "\n" : ""}`;
-        }
-      });
+      try {
+        content_allergies?.map((item, index) => {
+          if (item != null) {
+            result += `${index > 0 ? " / " : ""}${item}`;
+          }
+        });
+      } catch (error) {
+        return null;
+      }
     }
   }
   if (result.length === 0) return null;

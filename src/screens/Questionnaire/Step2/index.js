@@ -169,7 +169,7 @@ export default function QuestionaireStep2({route}) {
               })}
             </View>
 
-            <View style={{marginTop: 60, paddingHorizontal: 16}}>
+            <View style={{marginTop: 20, marginBottom: 40, paddingHorizontal: 16}}>
               <Button label="内容確認へ進む" onPress={handleSubmit(onSubmit)} />
             </View>
           </ScrollView>

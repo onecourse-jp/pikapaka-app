@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useState, useMemo} from "react";
 import {
   StyleSheet,
   Text,
@@ -18,7 +18,13 @@ import {useNavigation} from "@react-navigation/native";
 import {useDispatch, useSelector} from "react-redux";
 import StepsComponent from "@components/StepsComponent";
 import GuideComponent from "@components/GuideComponent";
-import {SCREEN_SERVICE_STEP4, SCREEN_EDIT_ALLERGY, SCREEN_EDIT_MEDICINE, SCREEN_SERVICE_STEP2} from "@screens/screens.constants";
+import {
+  SCREEN_SERVICE_STEP4,
+  SCREEN_EDIT_ALLERGY,
+  SCREEN_EDIT_MEDICINE,
+  SCREEN_EDIT_FURIGANA,
+  SCREEN_SERVICE_STEP2,
+} from "@screens/screens.constants";
 import {updateCalendar} from "@actions/calendarAction";
 import {dataMedicalHistory} from "../../../data";
 import {checkReservation} from "@services/auth";
@@ -34,6 +40,7 @@ export default function ServiceStep3() {
   const dispatch = useDispatch();
   const calendar = useSelector((state) => state?.calendar);
   const userDetails = useSelector((state) => state?.users?.userDetails);
+  console.log("userDetailsuserDetailsuserDetails", userDetails);
   const [user, setUser] = useState(userDetails);
   const [oldReservationId, setOldReservationId] = useState(null);
   const {
@@ -43,47 +50,62 @@ export default function ServiceStep3() {
     reset,
   } = useForm({
     required: true,
+    // values: useMemo(() => {
+    //   console.log("valuesvaluesvaluesvalues");
+    // }, [userDetails]),
   });
 
   useEffect(() => {
     setUser(userDetails);
     setDataPerson2([
-      {
-        key: "allergies",
-        title: "アレルギーの有無",
-        placeholder: "選択",
-        value: userDetails?.allergies ?? null,
-        label: 4,
-        action: () => {
-          navigation.navigate(SCREEN_EDIT_ALLERGY, {data: user});
-        },
-      },
+      // {
+      //   key: "allergies",
+      //   title: "アレルギーの有無",
+      //   placeholder: "選択",
+      //   value: userDetails?.allergies ?? null,
+      //   label: 4,
+      //   action: () => {
+      //     navigation.navigate(SCREEN_EDIT_ALLERGY, {data: user});
+      //   },
+      // },
       {
         key: "content_allergies",
         require: false,
         title: "アレルギーの内容",
         placeholder: "アレルギー内容を入力",
-        value: renderContentAllergies(userDetails?.content_allergies) ?? null,
+        value: userDetails?.allergies
+          ? userDetails?.allergies === 1
+            ? renderContentAllergies(userDetails?.content_allergies)
+            : "無"
+          : null,
         action: () => {
           navigation.navigate(SCREEN_EDIT_ALLERGY, {data: user});
         },
       },
-      {
-        key: "take_medicines",
-        title: "服薬中の薬の有無",
-        placeholder: "選択",
-        value: userDetails?.take_medicines ?? null,
-        label: 4,
-        action: () => {
-          navigation.navigate(SCREEN_EDIT_MEDICINE, {data: user});
-        },
-      },
+      // {
+      //   key: "take_medicines",
+      //   title: "服薬中の薬の有無",
+      //   placeholder: "選択",
+      //   value: userDetails?.take_medicines
+      //     ? userDetails?.take_medicines == 1
+      //       ? renderContentAllergies(userDetails?.content_medicines)
+      //       : "無"
+      //     : null,
+      //   label: 4,
+      //   action: () => {
+      //     navigation.navigate(SCREEN_EDIT_MEDICINE, {data: user});
+      //   },
+      // },
       {
         key: "content_medicines",
         title: "服用中薬の内容",
         require: false,
         placeholder: "薬の内容をを入力",
-        value: renderContentAllergies(userDetails?.content_medicines) ?? null,
+        value: userDetails?.take_medicines
+          ? userDetails?.take_medicines == 1
+            ? renderContentAllergies(userDetails?.content_medicines)
+            : "無"
+          : null,
         action: () => {
           navigation.navigate(SCREEN_EDIT_MEDICINE, {data: user});
         },
@@ -101,12 +123,25 @@ export default function ServiceStep3() {
       },
     ]);
     setDataPerson([
-      {key: "furigana", title: "名前フリガナ", placeholder: "フリガナを入力", value: userDetails?.furigana ?? null},
-      {key: "email", title: "メールアドレス", placeholder: "メールアドレスを入力", value: userDetails?.email ?? null},
+      {
+        key: "furigana",
+        title: "名前フリガナ",
+        placeholder: "フリガナを入力",
+        value: userDetails?.furigana ?? null,
+        action: () => {
+          navigation.navigate(SCREEN_EDIT_FURIGANA, {data: userDetails});
+        },
+      },
+      {
+        key: "email",
+        title: "メールアドレス",
+        placeholder: "メールアドレスを入力",
+        value: userDetails?.email ?? null,
+      },
       {key: "phone_number", title: "電話番号", placeholder: "電話番号を入力", value: userDetails?.phone_number ?? null},
     ]);
-    reset();
-    console.log("userDetailsuserDetailsuserDetailsuserDetailsuserDetails",userDetails?.medical_history);
+    reset(userDetails);
+    console.log("userDetailsuserDetailsuserDetailsuserDetailsuserDetails", userDetails);
   }, [userDetails]);
   // const [changeFunction, setChangeFunction] = useState(() => {});
   // const [valueModal, setValueModal] = useState(null);
@@ -127,7 +162,7 @@ export default function ServiceStep3() {
       content_medicines: dataSubmit.content_medicines,
       pregnancy: dataSubmit.pregnancy,
       smoking: dataSubmit.smoking,
-      medical_history: dataSubmit.medical_history,
+      medical_history: typeof dataSubmit.medical_history == "string" ? JSON.parse(dataSubmit.medical_history) : dataSubmit.medical_history,
       content_to_doctor: dataSubmit.contentConsultation,
     };
     if (oldReservationId && dataSubmit.radioStatus) dataReservation.old_reservation_id = oldReservationId;
@@ -270,6 +305,9 @@ export default function ServiceStep3() {
             <View>
               <Text style={{fontFamily: fonts.NSbold, color: colors.colorTextBlack, padding: 16, fontSize: 16}}>基本情報</Text>
               {dataPerson2.map((item, index) => {
+                if (item.key === "content_allergies") {
+                  console.log("2222", item.key, item.value);
+                }
                 return (
                   <React.Fragment key={`DATALISTPERSON2-${index}`}>
                     <Controller

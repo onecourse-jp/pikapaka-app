@@ -112,6 +112,7 @@ export default function EditMedicalHistory({route}) {
                   >
                     {item.label}
                   </Text>
+                  {listValue && item?.value && listValue?.includes(item?.value) && <Image source={require("@assets/images/v_green.png")} />}
                 </TouchableOpacity>
               );
             }

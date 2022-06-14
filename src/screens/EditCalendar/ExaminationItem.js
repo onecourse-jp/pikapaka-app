@@ -81,8 +81,8 @@ export default function ExaminationItem({route}) {
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: colors.backgroundTheme}}>
       <View style={[styles.container]}>
-        <ScrollView contentContainerStyle={{paddingHorizontal: 16}}>
-          <View>
+        <ScrollView contentContainerStyle={{}}>
+          <View style={{paddingHorizontal: 16, marginBottom: 16}}>
             <Text style={{fontFamily: fonts.SFregular, fontSize: 13, color: colors.gray1, lineHeight: 26}}>
               診察科目の変更を行う場合、現在の予約日時でご予約頂けない場合があります。
             </Text>

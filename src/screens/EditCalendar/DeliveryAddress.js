@@ -92,7 +92,7 @@ export default function DeliveryAddress({route}) {
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: colors.backgroundTheme}}>
       <View style={[styles.container]}>
-        <ScrollView contentContainerStyle={{paddingHorizontal: 16}}>
+        <ScrollView contentContainerStyle={{}}>
           <View>
             <Text style={{fontFamily: fonts.RobotoRegular, fontSize: 15, color: colors.gray1, lineHeight: 26}}>
               引っ越しなどで住所が変わられた方は

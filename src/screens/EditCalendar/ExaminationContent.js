@@ -92,9 +92,9 @@ export default function ExaminationContent({route}) {
       let newAnswerUser = answerUser.map((item, index) => {
         let arrAnswer = [];
         {
-          item.question.content != null &&
-            item.content_answer != null &&
-            item.content_answer.map((content, index) => {
+          item?.question?.content != null &&
+            item?.content_answer != null &&
+            item?.content_answer?.map((content, index) => {
               let i = item.question.content.findIndex((qs) => {
                 return qs === content;
               });
@@ -148,9 +148,20 @@ export default function ExaminationContent({route}) {
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: colors.backgroundTheme}}>
       <View style={[styles.container]}>
-        <ScrollView contentContainerStyle={{paddingHorizontal: 16}}>
+        <ScrollView contentContainerStyle={{}}>
           <View>
-            <Text style={{fontFamily: fonts.NSbold, fontSize: 16, color: colors.textBlack, lineHeight: 23}}>ご相談内容</Text>
+            <Text
+              style={{
+                fontFamily: fonts.NSbold,
+                paddingHorizontal: 16,
+                marginBottom: 16,
+                fontSize: 16,
+                color: colors.textBlack,
+                lineHeight: 23,
+              }}
+            >
+              ご相談内容
+            </Text>
             <View>
               <Controller
                 control={control}
@@ -163,7 +174,7 @@ export default function ExaminationContent({route}) {
                       style={{
                         color: colors.textBlack,
                         backgroundColor: colors.white,
-                        paddingHorizontal: 0,
+                        paddingHorizontal: 16,
                         textAlignVertical: "top",
                       }}
                       placeholder={"ここにご相談内容を記入して下さい。"}
@@ -177,7 +188,7 @@ export default function ExaminationContent({route}) {
             </View>
           </View>
           <View>
-            <Text style={{fontFamily: fonts.NSbold, fontSize: 16, marginTop: 16}}>問診</Text>
+            <Text style={{fontFamily: fonts.NSbold, fontSize: 16, paddingHorizontal: 16, marginBottom: 16, marginTop: 16}}>問診</Text>
             {dataQuestion.length > 0 &&
               dataQuestion.map((item, index) => {
                 return (
@@ -188,7 +199,7 @@ export default function ExaminationContent({route}) {
                       name={item?.key}
                       defaultValue={item?.value}
                       render={({field: {onChange, onBlur, value}}) => {
-                        return <ItemQuestionForm item={item} valueData={value} changeData={onChange} />;
+                        return <ItemQuestionForm item={item} valueData={value} changeData={onChange} type={"questionAdmin"} />;
                       }}
                     />
                   </React.Fragment>
