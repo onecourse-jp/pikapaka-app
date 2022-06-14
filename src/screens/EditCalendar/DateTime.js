@@ -54,7 +54,7 @@ export default function EditCalendar({route}) {
       dateString: moment(dataCalendar?.date).format("YYYY-MM-DD"),
     };
     if (route?.params?.type === "CHANGE_ITEM") {
-      Alert.alert("", "新しい日時に選んでください。", [
+      Alert.alert("", "新しい時間を選んでください。", [
         {
           text: "OK",
           style: "cancel",
@@ -296,7 +296,7 @@ export default function EditCalendar({route}) {
           )}
         </ScrollView>
         <View style={{marginTop: 60, paddingHorizontal: 16}}>
-          <Button label="変更内容を確認へ進む" onPress={handleSubmit} />
+          <Button label="変更内容の確認へ進む" onPress={handleSubmit} />
         </View>
       </View>
     </SafeAreaView>
