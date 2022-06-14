@@ -123,7 +123,7 @@ export default function Profile({navigation}) {
       key: "allergies",
       label: "アレルギーの有無",
       placeholder: "選択",
-      content: profile?.allergies ?? null,
+      content: profile?.allergies ? (profile?.allergies == 1 ? "有" : "無") : null,
       action: () => {
         navigation.navigate(SCREEN_EDIT_ALLERGY, {data: profile});
       },
@@ -142,7 +142,7 @@ export default function Profile({navigation}) {
       key: "take_medicines",
       label: "服薬中の薬の有無",
       placeholder: "選択",
-      content: profile?.take_medicines ?? null,
+      content: profile?.take_medicines ? (profile?.take_medicines == 1 ? "有" : "無") : null,
       action: () => {
         navigation.navigate(SCREEN_EDIT_MEDICINE, {data: user});
       },
@@ -151,7 +151,7 @@ export default function Profile({navigation}) {
       key: "pregnancy",
       label: "妊娠有無",
       placeholder: "選択",
-      content: profile?.pregnancy ?? null,
+      content: profile?.pregnancy ? (profile?.pregnancy == 1 ? "有" : "無") : null,
       action: () => {
         navigation.navigate(SCREEN_EDIT_YES_NO_FORM, {data: user, key: "pregnancy", value: profile?.pregnancy, label: "妊娠有無"});
       },
@@ -160,7 +160,7 @@ export default function Profile({navigation}) {
       key: "smoking",
       label: "喫煙有無",
       placeholder: "選択",
-      content: profile?.smoking ?? null,
+      content: profile?.smoking ? (profile?.smoking == 1 ? "有" : "無") : null,
       action: () => {
         navigation.navigate(SCREEN_EDIT_YES_NO_FORM, {data: user, key: "smoking", value: profile?.smoking, label: "喫煙有無"});
       },
