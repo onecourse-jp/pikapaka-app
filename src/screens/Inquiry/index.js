@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {StyleSheet, Text, View, TouchableOpacity, ScrollView, Image, TextInput} from "react-native";
+import {StyleSheet, Text, View, TouchableOpacity, ScrollView, Image} from "react-native";
 import {useThemeColors, useThemeFonts, Button} from "react-native-theme-component";
 import {useNavigation} from "@react-navigation/native";
 import {SafeAreaView} from "react-native-safe-area-context";
@@ -7,9 +7,10 @@ import {useDispatch, useSelector} from "react-redux";
 import styles from "./styles";
 import Headercomponent from "@components/Layout/Header";
 import TabHeaderComponent from "@components/Layout/TabHeader";
+import {SCREEN_TOP, SCREEN_NEWS, SCREEN_FAQ} from "@screens/screens.constants";
 import FooterComponent from "@components/Layout/Footer";
 
-export default function () {
+export default function ({navigation}) {
   const colors = useThemeColors();
   const fonts = useThemeFonts();
   const container = [
@@ -40,7 +41,10 @@ export default function () {
               >
                 {textFAQ}
               </Text>
-              <View style={{flexDirection: "row", alignItems: "center", justifyContent: "flex-end"}}>
+              <TouchableOpacity
+                onPress={() => navigation.navigate(SCREEN_FAQ)}
+                style={{flexDirection: "row", alignItems: "center", justifyContent: "flex-end"}}
+              >
                 <Text
                   style={{
                     marginRight: 8,
@@ -54,7 +58,7 @@ export default function () {
                   よくある質問はこちら
                 </Text>
                 <Image source={require("@assets/images/arrow_right_blue.png")}></Image>
-              </View>
+              </TouchableOpacity>
             </View>
             <View style={{height: 1, marginVertical: 40, backgroundColor: colors.lineGray02}}></View>
             <View>

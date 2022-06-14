@@ -42,6 +42,7 @@ export default function ServiceStep2() {
     global.showLoadingView();
     const {response, data} = await getDayCalendar(calendar?.data?.step1.data);
     if (response?.status === 200) {
+      console.log("getDayCalendar ", data);
       setDateFromAdmin(data.data);
     }
     global.hideLoadingView();
@@ -132,11 +133,15 @@ export default function ServiceStep2() {
   };
 
   const checkDateInData = (item) => {
-    const array = dateFromAdmin?.filter((element) => {
-      return moment(element.detail_date).format("YYYY-MM-DD") == item;
-    });
-    if (array?.length > 0) return array[0].slot;
-    return false;
+    try {
+      const array = dateFromAdmin?.filter((element) => {
+        return moment(element.detail_date).format("YYYY-MM-DD") == item;
+      });
+      if (array?.length > 0) return array[0].slot;
+      return false;
+    } catch (error) {
+      return false;
+    }
   };
 
   const SymbolRender = ({item, active, statusDay}) => {

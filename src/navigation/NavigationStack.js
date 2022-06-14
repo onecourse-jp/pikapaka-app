@@ -36,7 +36,8 @@ import ExaminationContent from "@screens/EditCalendar/ExaminationContent";
 import DeliveryAddress from "@screens/EditCalendar/DeliveryAddress";
 import DeliveryAddressPayment from "@screens/Payment/EditDeliveryAdrress";
 import Confirm from "@screens/EditCalendar/Confirm";
-
+import FAQScreen from "@screens/FAQs";
+import NewsScreen from "@screens/News";
 
 import {
   SCREEN_LOGIN,
@@ -60,13 +61,14 @@ import {
   SCREEN_CONNECT_DOCTOR,
   SCREEN_WEB_VIEW,
   SCREEN_CALL,
+  SCREEN_FAQ,
+  SCREEN_NEWS,
   SCREEN_EDIT_CALENDAR_DATETIME,
   SCREEN_EDIT_CALENDAR_EXAMINATION_ITEM,
   SCREEN_EDIT_CALENDAR_EXAMINATION_CONTENT,
   SCREEN_EDIT_CALENDAR_ADDRESS,
   SCREEN_EDIT_CALENDAR_CONFIRM,
   SCREEN_EDIT_DELIVERY_ADDRESS,
-
 } from "@screens/screens.constants";
 import {navigationRef} from "./NavigationService";
 
@@ -156,8 +158,22 @@ function App() {
           <Stack.Screen name={SCREEN_LOGIN} component={Login} options={{title: "メールアドレスでログイン"}} />
           <Stack.Screen name={SCREEN_WEB_VIEW} component={ModalWebView} options={{headerShown: true}} />
           <Stack.Screen name={SCREEN_PROFILE} component={ProfileScreen} options={{title: "マイページ"}} />
-
-
+          <Stack.Screen
+            name={SCREEN_FAQ}
+            component={FAQScreen}
+            options={{
+              title: "",
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name={SCREEN_NEWS}
+            component={NewsScreen}
+            options={{
+              title: "",
+              headerShown: false,
+            }}
+          />
 
           <Stack.Screen name={SCREEN_EDIT_PROFILE} component={EditProfile} options={{title: "情報編集"}} />
           <Stack.Screen name={SCREEN_CALL} component={CallScreen} options={{headerShown: false}} />
