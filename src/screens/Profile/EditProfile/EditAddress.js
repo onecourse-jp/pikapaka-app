@@ -90,7 +90,7 @@ export default function EditAddress({route}) {
                     backgroundColor: colors.white,
                     flex: 1,
                   }}
-                  placeholder="山田太郎"
+                  placeholder="東京都港区芝公園3丁目1-8　芝公園アネックス4"
                   placeholderTextColor={colors.textPlaceholder}
                   onChangeText={(text) => {
                     onChange(text);
