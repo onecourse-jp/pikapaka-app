@@ -81,12 +81,13 @@ export default function Profile({navigation}) {
       key: "birthday",
       placeholder: "フリガナを入力",
       label: "生年月日",
+      hideIcon: true,
       content: profile?.birthday ? moment(new Date(profile?.birthday)).format("YYYY年MM月DD日") : null,
       action: () => {
         navigation.navigate(SCREEN_EDIT_BIRTHDAY, {data: user});
       },
     },
-    {key: "email", label: "メールアドレス", content: profile?.email, hideIcon: true},
+    {key: "email", label: "メールアドレス", content: profile?.email},
     {
       key: "password",
       label: "パスワード",
@@ -119,32 +120,31 @@ export default function Profile({navigation}) {
     },
   ];
   const listTextProfile3 = [
-    {
-      key: "allergies",
-      label: "アレルギーの有無",
-      placeholder: "選択",
-      content: profile?.allergies ? (profile?.allergies == 1 ? "有" : "無") : null,
-      action: () => {
-        navigation.navigate(SCREEN_EDIT_ALLERGY, {data: profile});
-      },
-    },
+    // {
+    //   key: "allergies",
+    //   label: "アレルギーの有無",
+    //   placeholder: "選択",
+    //   content: profile?.allergies ? (profile?.allergies == 1 ? "有" : "無") : null,
+    //   action: () => {
+    //     navigation.navigate(SCREEN_EDIT_ALLERGY, {data: profile});
+    //   },
+    // },
     {
       key: "content_allergies",
-      label: "アレルギーの内容",
+      label: "アレルギーの有無",
       placeholder: "フリガナを入力",
-      content: profile?.allergies === 1 ? renderContentAllergies(profile?.content_allergies) : null,
+      content: profile?.allergies ? (profile?.allergies === 1 ? renderContentAllergies(profile?.content_allergies) : "無") : null,
       action: () => {
         navigation.navigate(SCREEN_EDIT_ALLERGY, {data: profile});
       },
-      hideIcon: true,
     },
     {
       key: "take_medicines",
       label: "服薬中の薬の有無",
       placeholder: "選択",
-      content: profile?.take_medicines ? (profile?.take_medicines == 1 ? "有" : "無") : null,
+      content: profile?.take_medicines ? (profile?.take_medicines == 1 ? renderContentAllergies(profile?.content_medicines) : "無") : null,
       action: () => {
-        navigation.navigate(SCREEN_EDIT_MEDICINE, {data: user});
+        navigation.navigate(SCREEN_EDIT_MEDICINE, {data: profile});
       },
     },
     {

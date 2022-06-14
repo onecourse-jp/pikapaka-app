@@ -27,7 +27,7 @@ export default function EditAllergy({route}) {
   const dispatch = useDispatch();
   const [isAllergyStatus, setIsAllergyStatus] = useState(route?.params?.data?.allergies === 1 ? true : false);
 
-  const content_allergies = route?.params?.data?.content_allergies ? JSON.parse(route?.params?.data?.content_allergies) : null;
+  const content_allergies = route?.params?.data?.content_allergies ? route?.params?.data?.content_allergies : null;
   const {
     control,
     handleSubmit,

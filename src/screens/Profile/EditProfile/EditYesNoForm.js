@@ -114,7 +114,9 @@ export default function EditYesNoForm({route}) {
           {!status && <Image source={require("@assets/images/v_green.png")} />}
         </TouchableOpacity>
       </View>
-      <ButtonOrange title="変更する" onPress={handleSubmit(onSubmit)} />
+      <View style={{paddingHorizontal: 16}}>
+        <ButtonOrange title="変更する" onPress={handleSubmit(onSubmit)} />
+      </View>
     </View>
   );
 }

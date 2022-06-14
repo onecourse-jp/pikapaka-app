@@ -9,7 +9,8 @@ export default function ListTime({data = null, hourPicked}) {
     <View
       style={{
         borderWidth: 1,
-        borderColor: data?.slot > 0 ? colors.gray3 : colors.gray5,
+        borderColor: data?.slot > 0 ? colors.accentOrange : colors.gray5,
+        backgroundColor: data?.constant_time?.id === hourPicked?.constant_time?.id ? colors.bgAccentOrange : colors.white,
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "space-between",
@@ -30,9 +31,9 @@ export default function ListTime({data = null, hourPicked}) {
             height: 16,
             width: 16,
             borderRadius: 16,
-            borderColor: colors.gray3,
+            borderColor: data?.slot > 0 ? colors.accentOrange : colors.gray5,
             borderWidth: 1,
-            backgroundColor: data?.constant_time?.id === hourPicked?.constant_time?.id ? colors.textBlue : colors.white,
+            backgroundColor: data?.constant_time?.id === hourPicked?.constant_time?.id ? colors.bgAccentOrange : colors.white,
           }}
         />
         <Text style={{fontSize: 14, color: data?.slot > 0 ? colors.gray3 : colors.gray4, marginLeft: 14}}>
@@ -45,8 +46,8 @@ export default function ListTime({data = null, hourPicked}) {
           alignItems: "center",
         }}
       >
-        <Text style={{fontSize: 14, color: data?.slot > 0 ? colors.textBlue : colors.gray4}}>
-          {data?.slot > 0 ? `あと${data?.slot}枠` : "✕"}
+        <Text style={{fontSize: 14, color: data?.slot > 0 ? colors.accentOrange : colors.gray4}}>
+          {data?.slot > 0 ? `残り${data?.slot}枠` : "✕"}
         </Text>
       </View>
     </View>

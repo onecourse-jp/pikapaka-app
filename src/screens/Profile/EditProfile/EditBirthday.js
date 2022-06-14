@@ -5,6 +5,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {useNavigation} from "@react-navigation/native";
 import {useThemeColors, Button} from "react-native-theme-component";
 import ButtonOrange from "../../../components/Button/ButtonOrange";
+import DateInput from "@components/items/DateInput";
 import {updateProfileWithToken} from "@services/profile";
 import {updateUserProfile} from "@actions/users";
 import moment from "moment";
@@ -13,6 +14,11 @@ export default function EditBirthday({route}) {
   const colors = useThemeColors();
   const navigation = useNavigation();
   const [disableSubmit, setDisableSubmit] = useState(false);
+  const [maxInput, setMaxInput] = useState(null);
+  const [statusErrorMax, setStatusErrorMax] = useState(false);
+  const [errorInputMax, setErrorInputMax] = useState("");
+  const [statusSubmitMax, setStatusSubmitMax] = useState([]);
+  const [currentBirthday, setCurrentBirthday] = useState(null);
   const dispatch = useDispatch();
   const {
     control,
@@ -26,12 +32,33 @@ export default function EditBirthday({route}) {
     console.log("validateBirthday", resultValidate);
     return resultValidate && resultValidate != "Invalid date" ? true : false;
   };
+  const onChangeInputMax = () => {
+    setStatusErrorMax(false);
+  };
+  const getDayInput = (data) => {
+    let DayInput = new Date(`${data.year}-${data.month}-${data.day}`);
+    setMaxInput(DayInput);
+  };
+  useEffect(() => {
+    console.log("maxinput", maxInput);
+  }, [maxInput]);
+  const getErrorInputMax = (error) => {
+    setStatusErrorMax(true);
+    setErrorInputMax(error);
+  };
+  useEffect(() => {
+    if (route?.params?.data?.birthday) {
+      setCurrentBirthday(Number(moment(route?.params?.data?.birthday).format("YYYYMMDD")));
+      console.log(Number(moment(route?.params?.data?.birthday).format("YYYYMMDD")));
+    }
+  }, [route]);
   const onSubmit = async (dataSubmit) => {
     console.log("dataSubmit", dataSubmit);
-    global.showLoadingView();
-    if (Object.keys(dataSubmit).length > 0) {
+    if (maxInput) {
+      global.showLoadingView();
       try {
-        const {data, response} = await updateProfileWithToken(dataSubmit);
+        const birthdayParams = moment(maxInput).format("YYYY-MM-DD");
+        const {data, response} = await updateProfileWithToken({birthday: birthdayParams});
         if (response.status == 200) {
           dispatch(updateUserProfile(data.data));
           global.hideLoadingView();
@@ -66,9 +93,10 @@ export default function EditBirthday({route}) {
     }
   };
   return (
-    <View style={[styles.container, {backgroundColor: colors.backgroundTheme}]}>
+    <SafeAreaView style={[styles.container, {backgroundColor: colors.backgroundTheme}]}>
       <View style={{width: "100%", marginBottom: 14}}>
-        <Controller
+        <Text style={{paddingHorizontal: 16, fontWeight: "600", color: colors.colorTextBlack}}>生年月日</Text>
+        {/* <Controller
           control={control}
           rules={{
             required: true,
@@ -109,12 +137,25 @@ export default function EditBirthday({route}) {
             );
           }}
         />
-        {errors.birthday && <Text style={styles.textError}> 年／月／日のフォーマットで入力してください。</Text>}
+        {errors.birthday && <Text style={styles.textError}> 年／月／日のフォーマットで入力してください。</Text>} */}
       </View>
-      <View style={{paddingHorizontal: 16}}>
+      <View style={{flexDirection: "row", justifyContent: "center", backgroundColor: colors.white, paddingBottom: 8}}>
+        <DateInput
+          isFromProfile={true}
+          disableInput={statusSubmitMax.length === 0 ? false : true}
+          onChangeInput={onChangeInputMax}
+          minYear={false}
+          maxYear={false}
+          currentTime={currentBirthday ? currentBirthday.toString() : null}
+          getErrorInput={getErrorInputMax}
+          getDataBirthday={(val) => getDayInput(val)}
+        />
+      </View>
+      {statusErrorMax && <Text style={styles.textError}>{errorInputMax}</Text>}
+      <View style={{paddingHorizontal: 16, marginTop: 20}}>
         <ButtonOrange disabled={disableSubmit} title="変更する" onPress={handleSubmit(onSubmit)} />
       </View>
-    </View>
+    </SafeAreaView>
   );
 }
 const styles = StyleSheet.create({

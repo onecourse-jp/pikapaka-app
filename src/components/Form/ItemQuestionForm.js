@@ -51,7 +51,6 @@ export default function ItemQuestionForm({item, valueData = null, changeData = (
           newListCheckBox.push({label: item?.data[el]?.label, value: item?.data[el]?.value});
         });
       }
-      console.log("newValuenewValuenewValue", item.value, item.data);
       setValueRowItem(newValue);
       setListCheckbox(newListCheckBox);
     }
@@ -178,6 +177,7 @@ export default function ItemQuestionForm({item, valueData = null, changeData = (
       <TouchableOpacity
         onPress={() => {
           if (item?.action) {
+            console.log("content_medicines", item?.value, valueData);
             item?.action();
           } else if (item.label === 4 || item.label === 3) {
             setShowPopup(true);
@@ -197,17 +197,21 @@ export default function ItemQuestionForm({item, valueData = null, changeData = (
           paddingHorizontal: 16,
         }}
       >
-        <Text
-          style={{
-            color: colors.textBlack,
-            width: type === "questionAdmin" ? "65%" : "40%",
-            fontSize: 15,
-            marginRight: 11,
-            lineHeight: 21,
-          }}
+        <View
+          style={{flexDirection: "row", width: type === "questionAdmin" ? "65%" : "40%", paddingRight: type === "questionAdmin" ? 16 : 2}}
         >
-          {item.title}
-        </Text>
+          <Text
+            style={{
+              color: colors.textBlack,
+              fontSize: 15,
+              marginRight: type === "questionAdmin" ? 2 : 11,
+              lineHeight: 21,
+            }}
+          >
+            {item.title}
+          </Text>
+          {item.status === 1 && <Text style={{color: "red", marginLeft: 1}}>※</Text>}
+        </View>
         <View
           style={{
             flexDirection: "row",
@@ -240,7 +244,7 @@ export default function ItemQuestionForm({item, valueData = null, changeData = (
           ) : (
             <TextInput
               ref={refInput}
-              editable={item?.disabel ? false : true}
+              editable={item?.disabel || item?.action ? false : true}
               style={[
                 styles.textInputController,
                 {
@@ -250,7 +254,7 @@ export default function ItemQuestionForm({item, valueData = null, changeData = (
                 },
               ]}
               keyboardType={item.key === "phone_number" || item.key === "postal_code" ? "number-pad" : "default"}
-              value={typeof valueData === "string" ? valueData : null}
+              value={typeof valueData === "string" ? valueData : renderContentAllergies(valueData)}
               placeholder={item?.placeholder || "入力してください"}
               secureTextEntry={item.key === "newPassword" || item.key === "confirmPassword" ? true : false}
               // placeholder={item.placeholder}

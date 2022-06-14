@@ -213,7 +213,6 @@ export function MRowSelectItemItem(props) {
     }
     if (attributeKey == 'lastActive') {
       newValue = newValue.length > 0 ? newValue[0] : 'none';
-      console.log('newValuenewValuenewValue', newValue);
     } else if (attributeKey == 'profile.annualIncome') {
       let resultLevel = [];
       if (listCheckbox.length > 0) {

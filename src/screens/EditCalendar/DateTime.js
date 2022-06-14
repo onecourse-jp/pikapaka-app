@@ -202,8 +202,14 @@ export default function EditCalendar({route}) {
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: colors.backgroundTheme}}>
       <View style={[styles.container]}>
-        <ScrollView contentContainerStyle={{paddingHorizontal: 16}}>
-          <GuideComponent text={"現在の予約日時：2020年3月31日（木）13:00〜14:00"} />
+        <ScrollView contentContainerStyle={{}}>
+          {/* <GuideComponent text={"現在の予約日時：2020年3月31日（木）13:00〜14:00"} /> */}
+          <View style={{paddingHorizontal: 16, marginBottom: 16}}>
+            <Text>現在の予約日時</Text>
+            <Text>{`${moment(dataCalendar?.date).format("YYYY年MM月DD日")}（${moment(dataCalendar?.date).format("dddd")}）${
+              dataCalendar?.time_start
+            }~${dataCalendar?.time_end}`}</Text>
+          </View>
           <Calendar
             style={[]}
             // current={moment(dataCalendar?.date).format("YYYY-MM-DD")}
@@ -219,7 +225,7 @@ export default function EditCalendar({route}) {
                         flexDirection: "column",
                         alignItems: "center",
                         justifyContent: "center",
-                        backgroundColor: datePicked === date.dateString ? colors.textBlue : colors.white,
+                        backgroundColor: datePicked === date.dateString ? colors.headerComponent : colors.white,
                       }}
                     >
                       <Text
