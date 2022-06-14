@@ -83,7 +83,7 @@ export default function ResetPassword() {
                       backgroundColor: colors.white,
                     }}
                   >
-                    <Text style={{width: 120}}>メールアドレス</Text>
+                    <Text style={{width: 120}}>コード番号</Text>
                     <TextInput
                       style={{
                         color: colors.textBlack,
