@@ -54,7 +54,7 @@ export default function NewsInMonth({data = [], month = 1}) {
                       borderRadius: 2,
                       marginRight: 10,
                       marginBottom: 4,
-                      paddingTop: 2,
+                      paddingVertical: 1,
                     }}
                   >
                     <Text style={{fontSize: 12, lineHeight: 18, fontFamily: fonts.Hiragino, color: colors.white}}>
@@ -80,7 +80,7 @@ export default function NewsInMonth({data = [], month = 1}) {
             {/* <Text style={{color: colors.textHiragino, lineHeight: 21, fontFamily: fonts.Hiragino, fontSize: 14, marginBottom: 20}}>
               {item.content}
             </Text> */}
-            <TouchableOpacity onPress={() => navigation.navigate("SERVICE")}>
+            {/* <TouchableOpacity onPress={() => navigation.navigate("SERVICE")}>
               <Text
                 style={{
                   color: colors.colorHome10,
@@ -90,7 +90,7 @@ export default function NewsInMonth({data = [], month = 1}) {
                   textDecorationLine: "underline",
                 }}
               >{`ご予約はこちら >`}</Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
           </View>
         );
       })}
