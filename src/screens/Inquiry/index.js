@@ -17,7 +17,7 @@ export default function ({navigation}) {
     "ここにテキストが入ります。\nここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。",
     "ここにテキストが入ります。\nここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。",
   ];
-  const textFAQ = "お客さまから寄せられたよくある質問を掲載しています。\nNお問い合わせ前にご確認ください。";
+  const textFAQ = "お客さまから寄せられたよくある質問を掲載しています。\nお問い合わせ前にご確認ください。";
   const inquiryPhone = "0120-927-232（通話料無料）\n受付時間 9:00～19:00（年中無休）";
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: colors.backgroundTheme}}>
