@@ -66,7 +66,7 @@ export default function ModalWebView({route}) {
       {cancelable: true},
     );
   };
-  
+
   React.useLayoutEffect(() => {
     if (route?.params?.isCallVideo) {
       navigation.setOptions({
@@ -139,6 +139,7 @@ export default function ModalWebView({route}) {
           mediaPlaybackRequiresUserAction={false}
           source={{
             uri: route?.params?.url,
+            // html: '<div><video autoplay playsInline src="https://www.w3schools.com/html/mov_bbb.mp4" ></video></div>',
           }}
           onMessage={onMessage}
           onShouldStartLoadWithRequest={(request) => {

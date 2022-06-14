@@ -40,7 +40,7 @@ export default function NewsInMonth({data = [], month = 1}) {
           >
             <View style={{flexDirection: "row", marginBottom: 5, flexWrap: "wrap", width: "100%"}}>
               <Text style={{color: colors.colorHome10, fontFamily: fonts.Futura, fontSize: 16, marginRight: 10, fontWeight: "500"}}>
-                {moment(item?.createdAt).format("YYYY.MM.DD")}
+                {moment(item?.created_at).format("YYYY.MM.DD")}
               </Text>
               {item?.label?.map((el, ind) => {
                 const indexLabel = el;

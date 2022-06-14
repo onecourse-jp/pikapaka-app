@@ -192,7 +192,6 @@ class MyApp extends Component {
     //   case codePush.SyncStatus.UPDATE_INSTALLED:
     //     console.log("Update installed.");
     //     this.setState({isPopUp: false});
-
     //     // global.toast.hideAll();
     //     break;
     // }
@@ -215,9 +214,11 @@ const updateDialogOptions = {
   optionalInstallButtonLabel: "OK",
 };
 
-export default codePush({
-  updateDialog: updateDialogOptions,
-  deploymentKey: Config.CODEPUSH_DEPLOYMENT_KEY,
-  installMode: codePush.InstallMode.IMMEDIATE,
-})(MyApp);
+// export default codePush({
+//   updateDialog: updateDialogOptions,
+//   deploymentKey: Config.CODEPUSH_DEPLOYMENT_KEY,
+//   installMode: codePush.InstallMode.IMMEDIATE,
+// })(MyApp);
 // export default withInAppNotification(Entrypoint);
+
+export default MyApp;
