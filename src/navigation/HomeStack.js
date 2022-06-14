@@ -11,6 +11,11 @@ import {
   SCREEN_TOP_AGA,
   SCREEN_FAQ,
   SCREEN_TOP,
+  SCREEN_TERMS_OF_SERVICE,
+  SCREEN_PRIVACY_POLICY,
+  SCREEN_COMMERCIAL_LAW,
+  SCREEN_COMPANY_INFO,
+  SCREEN_INQUIRY,
 } from "@screens/screens.constants";
 import HomeScreen from "@screens/Home";
 import TopSkinCareScreen from "@screens/Home/TopSkinCare";
@@ -25,6 +30,11 @@ import {defaultStackNavigation} from "@config/navigations";
 import Colors from "@config/styles";
 import I18n from "src/i18n";
 import LocalizationContext from "@context/LocalizationContext";
+import TermsOfService from "@screens/TCareClinic/TermsOfService";
+import PrivacyPolicy from "@screens/TCareClinic/PrivacyPolicy";
+import CommercialLaw from "@screens/TCareClinic/CommercialLaw";
+import CompanyInfo from "@screens/TCareClinic/CompanyInfo";
+import Inquiry from "@screens/Inquiry";
 
 const HomeStack = createNativeStackNavigator();
 function HomeStackScreen() {
@@ -194,6 +204,11 @@ function HomeStackScreen() {
           elevation: 0, // remove shadow on Android
         }}
       />
+      <HomeStack.Screen name={SCREEN_TERMS_OF_SERVICE} component={TermsOfService} options={{headerShown: false}} />
+      <HomeStack.Screen name={SCREEN_PRIVACY_POLICY} component={PrivacyPolicy} options={{headerShown: false}} />
+      <HomeStack.Screen name={SCREEN_COMMERCIAL_LAW} component={CommercialLaw} options={{headerShown: false}} />
+      <HomeStack.Screen name={SCREEN_COMPANY_INFO} component={CompanyInfo} options={{headerShown: false}} />
+      <HomeStack.Screen name={SCREEN_INQUIRY} component={Inquiry} options={{headerShown: false}} />
     </HomeStack.Navigator>
     // </ChatProvider>
   );

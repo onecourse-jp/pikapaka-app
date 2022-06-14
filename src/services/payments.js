@@ -32,3 +32,6 @@ export async function cancelStripePayment(params) {
 export async function getBillPayment(params) {
   return request("/auth/get-bill", {method: "GET", params: params});
 }
+export async function paymentStripe(params) {
+  return request("/auth/payment-stripe", {method: "POST", data: params});
+}

@@ -12,6 +12,7 @@ export default function FAQComponent({styleColor = "", question = [], Qcolor = "
   const navigation = useNavigation();
   const fonts = useThemeFonts();
   const [questionData, setQuestionData] = useState([]);
+  const [listValue, setListValue] = useState([]);
   const colors = useThemeColors();
 
   const getFaq = async (params) => {
@@ -32,6 +33,16 @@ export default function FAQComponent({styleColor = "", question = [], Qcolor = "
     return [];
   };
 
+  const checkAndTickValue = (val) => {
+    let newList = [...listValue];
+    if (listValue?.includes(val)) {
+      newList.splice(newList.indexOf(val), 1);
+    } else {
+      newList.push(val);
+    }
+    setListValue(newList);
+  };
+
   useEffect(() => {
     const params = {status_public: 1, limit: 3};
     if (screen != 0) {
@@ -50,54 +61,95 @@ export default function FAQComponent({styleColor = "", question = [], Qcolor = "
       </View>
       {questionData.map((item, index) => {
         return (
-          <View
+          <TouchableOpacity
             key={`item.text-${index}`}
+            onPress={() => checkAndTickValue(item.id)}
             style={{
-              flexDirection: "row",
-              alignItems: "center",
               borderBottomWidth: index + 1 < questionData.length ? 1 : 0,
               paddingVertical: 16,
               borderBottomColor: "#DDDEE1",
             }}
           >
             {/* <Image source={require("@assets/images/icons/ic_question.png")} /> */}
-            <View
-              style={{
-                backgroundColor: Qcolor,
-                flexDirection: "row",
-                alignItems: "center",
-                borderRadius: 4,
-                justifyContent: "center",
-                width: 34,
-                height: 34,
-              }}
-            >
-              <Text
+            <View style={{flexDirection: "row", marginBottom: 16}}>
+              <View
                 style={{
-                  fontFamily: fonts.Futura,
-                  color: colors.white,
-                  fontSize: 18,
-                  fontWeight: "500",
-                  lineHeight: 24,
+                  backgroundColor: Qcolor,
+                  flexDirection: "row",
+                  alignItems: "center",
+                  borderRadius: 4,
+                  justifyContent: "center",
+                  width: 34,
+                  height: 34,
                 }}
               >
-                Q
+                <Text
+                  style={{
+                    fontFamily: fonts.Futura,
+                    color: colors.white,
+                    fontSize: 18,
+                    fontWeight: "500",
+                    lineHeight: 24,
+                  }}
+                >
+                  Q
+                </Text>
+              </View>
+              <Text
+                style={{
+                  fontFamily: fonts.Hiragino,
+                  fontSize: 14,
+                  flex: 1,
+                  color: colors.textHiragino,
+                  lineHeight: 21,
+                  textAlign: "left",
+                  marginLeft: 11,
+                }}
+              >
+                {item.question}
               </Text>
             </View>
-            <Text
-              style={{
-                fontFamily: fonts.Hiragino,
-                fontSize: 14,
-                flex: 1,
-                color: colors.textHiragino,
-                lineHeight: 21,
-                textAlign: "left",
-                marginLeft: 11,
-              }}
-            >
-              {item.question}
-            </Text>
-          </View>
+            {listValue?.includes(item?.id) && (
+              <View style={{flexDirection: "row"}}>
+                <View
+                  style={{
+                    backgroundColor: Qcolor,
+                    flexDirection: "row",
+                    alignItems: "center",
+                    borderRadius: 4,
+                    justifyContent: "center",
+                    width: 34,
+                    height: 34,
+                  }}
+                >
+                  <Text
+                    style={{
+                      fontFamily: fonts.Futura,
+                      color: colors.white,
+                      fontSize: 18,
+                      fontWeight: "500",
+                      lineHeight: 24,
+                    }}
+                  >
+                    A
+                  </Text>
+                </View>
+                <Text
+                  style={{
+                    fontFamily: fonts.Hiragino,
+                    fontSize: 14,
+                    flex: 1,
+                    color: colors.textHiragino,
+                    lineHeight: 21,
+                    textAlign: "left",
+                    marginLeft: 11,
+                  }}
+                >
+                  {item.answer}
+                </Text>
+              </View>
+            )}
+          </TouchableOpacity>
         );
       })}
       <View style={{flexDirection: "row", justifyContent: "flex-end"}}>

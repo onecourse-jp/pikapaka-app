@@ -16,7 +16,7 @@ import {useForm, Controller} from "react-hook-form";
 import {navigationRef} from "src/navigation/NavigationService";
 import {useNavigation} from "@react-navigation/native";
 import {register} from "@services/auth";
-import {SCREEN_WELCOME} from "@screens/screens.constants";
+import {SCREEN_WELCOME, SCREEN_TERMS_OF_SERVICE, SCREEN_PRIVACY_POLICY} from "@screens/screens.constants";
 import ButtonOrange from "../../components/Button/ButtonOrange";
 
 export default function Register() {
@@ -155,7 +155,11 @@ export default function Register() {
               <View style={{flexDirection: "row", marginTop: 14, flexWrap: "wrap", alignItems: "center"}}>
                 <Text style={{fontSize: 13, textAlign: "center", flexDirection: "row", alignItems: "center"}}>
                   登録またはログインすることで、
-                  <TouchableOpacity>
+                  <TouchableOpacity
+                    onPress={() => {
+                      navigation.navigate(SCREEN_TERMS_OF_SERVICE, {currentIndex: 1});
+                    }}
+                  >
                     <Text
                       style={{fontSize: 13, position: "relative", top: 3, color: colors.headerComponent, textDecorationLine: "underline"}}
                     >
@@ -163,7 +167,11 @@ export default function Register() {
                     </Text>
                   </TouchableOpacity>
                   と
-                  <TouchableOpacity>
+                  <TouchableOpacity
+                    onPress={() => {
+                      navigation.navigate(SCREEN_PRIVACY_POLICY, {currentIndex: 1});
+                    }}
+                  >
                     <Text
                       style={{fontSize: 13, position: "relative", top: 3, color: colors.headerComponent, textDecorationLine: "underline"}}
                     >

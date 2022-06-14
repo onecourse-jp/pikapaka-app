@@ -6,15 +6,17 @@ import {useDispatch, useSelector} from "react-redux";
 import StepsComponent from "@components/StepsComponent";
 import GuideComponent from "@components/GuideComponent";
 import {getReservationById} from "@services/auth";
-import {createStripeCheckoutSession} from "@services/payments";
+import {createStripeCheckoutSession, paymentStripe} from "@services/payments";
 import {SCREEN_EDIT_PROFILE, SCREEN_EDIT_DELIVERY_ADDRESS} from "@screens/screens.constants";
 import {getBillPayment} from "@services/payments";
+import {SCREEN_EDIT_ADDRESS} from "../screens.constants";
 export default function Payment({route}) {
   const colors = useThemeColors();
   const fonts = useThemeFonts();
   const idCalendar = route?.params?.id;
   const [refreshing, setRefreshing] = useState(false);
   const [showDetailMedicine, setShowDetailMedicine] = useState(false);
+  const [errorApi, setErrorApi] = useState("");
   const [billData, setBillData] = useState(null);
   console.log("idCalendar", idCalendar);
   const screenStep = 4;
@@ -22,6 +24,32 @@ export default function Payment({route}) {
 
   const handleAction = async () => {
     global.showLoadingView();
+    paymentMobile();
+  };
+  const paymentMobile = async () => {
+    const paramsData = {
+      reservation_form_id: idCalendar,
+      amount: billData.bill?.total,
+      cart_number: "4242424242424242",
+      exp_month: 6,
+      exp_year: 2023,
+      cvc: "123",
+    };
+    try {
+      const {response, data} = await paymentStripe(paramsData);
+      if (response && response.status == 200) {
+        console.log("data paymentStripe", data);
+        global.hideLoadingView();
+      } else {
+        console.log("err createStripeCheckoutSession", data);
+        setErrorApi("Error!");
+        global.hideLoadingView();
+      }
+    } catch (error) {
+      setErrorApi("Error!");
+    }
+  };
+  const paymentStripeWeb = async () => {
     const paramsData = {
       reservation_form_id: idCalendar,
     };
@@ -38,7 +66,6 @@ export default function Payment({route}) {
       global.hideLoadingView();
     }
   };
-
   const actionGetBill = async () => {
     if (idCalendar) {
       global.showLoadingView();
@@ -62,6 +89,8 @@ export default function Payment({route}) {
       setRefreshing(false);
     }, 1000);
   }, []);
+
+  const formatMoney = (money) => {};
 
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: colors.backgroundTheme}}>
@@ -170,8 +199,8 @@ export default function Payment({route}) {
                         })}
                         {billData?.plans.map((item, index) => {
                           return (
-                            <>
-                              <View key={`plans-${index}`} style={{flexDirection: "row", justifyContent: "space-between"}}>
+                            <React.Fragment key={`plans-${index}`}>
+                              <View style={{flexDirection: "row", justifyContent: "space-between"}}>
                                 <Text
                                   style={{
                                     fontFamily: fonts.Hiragino,
@@ -200,7 +229,7 @@ export default function Payment({route}) {
                                   );
                                 })}
                               </View>
-                            </>
+                            </React.Fragment>
                           );
                         })}
                       </View>
@@ -311,7 +340,7 @@ export default function Payment({route}) {
                   </Text>
                 </View>
                 <View style={{flexDirection: "row", alignItems: "center", justifyContent: "center", marginBottom: 16}}>
-                  <TouchableOpacity onPress={() => navigation.navigate(SCREEN_EDIT_PROFILE)} style={{width: "40%"}}>
+                  <TouchableOpacity onPress={() => navigation.navigate(SCREEN_EDIT_ADDRESS)} style={{width: "40%"}}>
                     <Text
                       style={{fontSize: 12, textAlign: "right", fontFamily: fonts.Hiragino, color: colors.accentOrange, lineHeight: 21}}
                     >

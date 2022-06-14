@@ -110,15 +110,24 @@ export default function DeliveryAddress({route}) {
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: colors.backgroundTheme}}>
       <View style={[styles.container]}>
-        <ScrollView contentContainerStyle={{paddingHorizontal: 16}}>
+        <ScrollView contentContainerStyle={{}}>
           <View>
-            <Text style={{fontFamily: fonts.RobotoRegular, fontSize: 15, color: colors.gray1, lineHeight: 26}}>
+            <Text style={{fontFamily: fonts.RobotoRegular, paddingHorizontal: 16, fontSize: 15, color: colors.gray1, lineHeight: 26}}>
               引っ越しなどで住所が変わられた方は
               <Text style={{color: colors.headerComponent}}>マイページ</Text>
               から変更を行って下さい。
             </Text>
           </View>
-          <Text style={{fontFamily: fonts.NSbold, fontSize: 16, color: colors.textBlack, lineHeight: 23, marginVertical: 7}}>
+          <Text
+            style={{
+              fontFamily: fonts.NSbold,
+              fontSize: 16,
+              paddingHorizontal: 16,
+              color: colors.textBlack,
+              lineHeight: 23,
+              marginVertical: 7,
+            }}
+          >
             今回の配送先を指定
           </Text>
           <View>
