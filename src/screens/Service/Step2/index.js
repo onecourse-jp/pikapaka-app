@@ -62,7 +62,7 @@ export default function ServiceStep2() {
       return;
     }
     if (hourPicked === null) {
-      Alert.alert("", "日時に選んでください。", [
+      Alert.alert("", "時間を選んでください。", [
         {
           text: "はい",
         },
