@@ -20,9 +20,8 @@ export default function RecommendOnlineMedicalCare({
     "仕事などが忙しく、クリニックに行く時間がない",
     "家の近くに悩みを相談できるクリニックがない",
     "クリニック・薬局などの待ち時間が嫌",
-    "家の近くに悩みを相談できるクリニックがない",
     "薬をすぐに処方してもらいたい",
-    "いう方などに 費用を抑えたいが、信頼のあるクリニックがよい",
+    "費用を抑えたいが、信頼のあるクリニックがよい",
   ];
   return (
     <View style={{backgroundColor: colors.white, borderRadius: 18, padding: 20, flexDirection: "column"}}>

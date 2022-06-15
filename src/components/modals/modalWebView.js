@@ -135,8 +135,14 @@ export default function ModalWebView({route}) {
         <WebView
           useWebKit
           originWhitelist={["*"]}
-          allowsInlineMediaPlayback
           mediaPlaybackRequiresUserAction={false}
+          mediaCapturePermissionGrantType={"grantIfSameHostElsePrompt"}
+          allowsInlineMediaPlayback
+          javaScriptEnabled
+          scalesPageToFit
+          javaScriptEnabledAndroid
+          useWebkit
+          startInLoadingState={true}
           source={{
             uri: route?.params?.url,
             // html: '<div><video autoplay playsInline src="https://www.w3schools.com/html/mov_bbb.mp4" ></video></div>',
