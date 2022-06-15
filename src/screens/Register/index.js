@@ -133,7 +133,7 @@ export default function Register() {
                       }}
                       onBlur={onBlur}
                       value={value}
-                      maxLength={30}
+                      maxLength={80}
                     />
                     <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
                       <Image source={require("@assets/images/show_hide_password.png")} />
@@ -151,7 +151,7 @@ export default function Register() {
                   {errors.password.type === "required" ? "パスワードが必要です" : `7文字以上の半角英数字`}.
                 </Text>
               )}
-              {errorApi.length > 0 && <Text style={styles.textError}>{errorApi}</Text>}
+              {errorApi?.length > 0 && <Text style={styles.textError}>{errorApi}</Text>}
               <View style={{flexDirection: "row", marginTop: 14, flexWrap: "wrap", alignItems: "center"}}>
                 <Text style={{fontSize: 13, textAlign: "center", flexDirection: "row", alignItems: "center"}}>
                   登録またはログインすることで、
