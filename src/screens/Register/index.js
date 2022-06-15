@@ -55,7 +55,15 @@ export default function Register() {
     } else {
       setDisableSubmit(false);
       // setErrorApi(global.t(data.errors));
-      setErrorApi(data.errors);
+      if (data?.errors) {
+        if (typeof data.errors == " string") {
+          setErrorApi(data.errors);
+        } else {
+          setErrorApi("新規登録ができませんでした。もう一度確認してください。");
+        }
+      } else {
+        setErrorApi("新規登録ができませんでした。もう一度確認してください。");
+      }
     }
     global.hideLoadingView();
   };
