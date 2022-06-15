@@ -41,7 +41,7 @@ export default function EditMedicalHistory({route}) {
         console.log("updateProfileWithToken", data.data);
         dispatch(updateUserProfile(data.data));
         global.hideLoadingView();
-        Alert.alert("", "個人情報の編集が完了しました。", [
+        Alert.alert("", "既往歴の編集が完了しました。", [
           {
             text: "はい",
             onPress: () => {
@@ -86,7 +86,7 @@ export default function EditMedicalHistory({route}) {
                   lineHeight: 23,
                 }}
               >
-                アレルギーの有無
+                該当する既往歴を選択してください
               </Text>
             </View>
           </View>
