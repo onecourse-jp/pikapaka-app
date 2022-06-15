@@ -7,6 +7,7 @@ import ModalPortal from "react-native-modal";
 import {useDispatch, useSelector} from "react-redux";
 import {changeStatusCalendar} from "@actions/calendarAction";
 import {messages} from "../../screens/CallLogic/lib/emitter";
+import {requestMultiple, PERMISSIONS} from "react-native-permissions";
 import {SCREEN_CALL, SCREEN_DETAIL_CALENDAR} from "../../screens/screens.constants";
 let {width, height} = Dimensions.get("window");
 const dataPopup = [];
@@ -15,6 +16,7 @@ export default function ModalWebView({route}) {
   const [isPopup, setIsPopup] = useState(false);
   const dispatch = useDispatch();
   const [isNext, setIsNext] = useState(false);
+  const [urlWebView, setUrlWebView] = useState(null);
   useEffect(async () => {
     if (isNext) {
       dispatch(changeStatusCalendar());
@@ -87,6 +89,30 @@ export default function ModalWebView({route}) {
     }
   }, [navigation]);
 
+  useEffect(() => {
+    if (route?.params?.isCallVideo) {
+      requestMultiple([
+        PERMISSIONS.IOS.CAMERA,
+        PERMISSIONS.IOS.MICROPHONE,
+        PERMISSIONS.ANDROID.CAMERA,
+        PERMISSIONS.ANDROID.MICROPHONE,
+      ]).then((statuses) => {
+        console.log("Camera", statuses[PERMISSIONS.IOS.CAMERA]);
+        console.log("Microphone", statuses[PERMISSIONS.IOS.MICROPHONE]);
+        // let path = RNFS.MainBundlePath + "/www";
+        // let server = new StaticServer(8080, path, {keepAlive: true});
+        // server.start().then((url) => {
+        //   url = "http://localhost:8080";
+        //   setUrlWebView(`${url}/?room=random`);
+        //   console.log("Serving at URL", url);
+        // });
+        setUrlWebView(route?.params?.url);
+      });
+    } else {
+      setUrlWebView(route?.params?.url);
+    }
+  }, []);
+
   return (
     <SafeAreaView style={{flex: 1, position: "relative"}}>
       <View style={{flex: 1, position: "relative"}}>
@@ -132,40 +158,43 @@ export default function ModalWebView({route}) {
             />
           </View>
         </ModalPortal>
-        <WebView
-          useWebKit
-          originWhitelist={["*"]}
-          mediaPlaybackRequiresUserAction={false}
-          mediaCapturePermissionGrantType={"grantIfSameHostElsePrompt"}
-          allowsInlineMediaPlayback
-          javaScriptEnabled
-          scalesPageToFit
-          javaScriptEnabledAndroid
-          useWebkit
-          startInLoadingState={true}
-          source={{
-            // uri: route?.params?.url,
-            html: '<div><video autoplay playsInline src="https://www.w3schools.com/html/mov_bbb.mp4" ></video></div>',
-          }}
-          onMessage={onMessage}
-          onShouldStartLoadWithRequest={(request) => {
-            console.log("request.url", request?.url, route?.params?.data);
-            try {
-              if (route?.params?.data) {
-                if (request?.url === route?.params?.data) {
-                  console.log("succeessssss");
-                  setIsNext(true);
-                  return false;
+        {urlWebView && (
+          <WebView
+            useWebKit
+            originWhitelist={["*"]}
+            mediaPlaybackRequiresUserAction={false}
+            mediaCapturePermissionGrantType={"grantIfSameHostElsePrompt"}
+            allowsInlineMediaPlayback
+            javaScriptEnabled
+            scalesPageToFit
+            javaScriptEnabledAndroid
+            useWebkit
+            startInLoadingState={true}
+            source={{
+              uri: urlWebView,
+              // html: '<div><video autoplay playsInline src="https://www.w3schools.com/html/mov_bbb.mp4" ></video></div>',
+            }}
+            onMessage={onMessage}
+            onShouldStartLoadWithRequest={(request) => {
+              console.log("request.url", request?.url, route?.params?.data);
+              try {
+                if (route?.params?.data) {
+                  if (request?.url === route?.params?.data) {
+                    console.log("succeessssss");
+                    setIsNext(true);
+                    return false;
+                  }
                 }
+              } catch (e) {
+                console.log("eeee", e);
+                return false;
               }
-            } catch (e) {
-              console.log("eeee", e);
-              return false;
-            }
 
-            return true;
-          }}
-        />
+              return true;
+            }}
+          />
+        )}
+
         {route?.params?.isCallVideo && (
           <View
             style={{
