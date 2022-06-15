@@ -42,6 +42,9 @@ export async function setupWebRTC(state, room) {
       messages?.emit("setRemoteStream");
     }
   });
+  webrtc.on("adminUploadPicture", () => {
+    console.log("adminUpload");
+  });
 
   webrtc.on("connected", ({peer}) => {
     console.log("connectedconnected", peer, state?.status);

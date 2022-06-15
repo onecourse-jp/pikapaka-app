@@ -111,7 +111,9 @@ export class WebRTCPeer extends Emitter {
       this.emit("data", data);
       this.emit("message", {data}); // Channel compat
     });
-
+    this.peer.on("adminUploadPicture", () => {
+      console.log("adminUploadPicture");
+    });
     // Connection succeeded
     this.peer.on("connect", (event) => {
       console.log(" this.peer.on(connect");
