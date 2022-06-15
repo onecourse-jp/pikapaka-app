@@ -2,7 +2,7 @@
 
 import io from "socket.io-client";
 import {SIGNAL_SERVER_URL} from "../config";
-import {Emitter} from "../lib/emitter";
+import {Emitter, mé} from "../lib/emitter";
 import {state} from "../state";
 import {WebRTCPeer} from "./webrtc-peer";
 import socket from "socket.io-client/lib/socket";
@@ -93,11 +93,10 @@ export class WebRTC extends Emitter {
       const local = this.io.id;
 
       state.vapidPublicKey = vapidPublicKey;
-
       // We will try to establish a separate connection to all of them
       // If the new participant (us) initiates the connections, the others do
       // not need to get updates about new peers
-      this.io.on("signal", ({from, signal}) => {
+      this.io.on("signal", ({from, signal, adminUploadPicture}) => {
         // log('received signal', from, to === local, initiator)
         // If we are not already connected, do it now
         let peer = this.peerConnections[from];

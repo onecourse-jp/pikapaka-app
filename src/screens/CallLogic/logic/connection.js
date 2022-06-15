@@ -35,6 +35,7 @@ export async function setupWebRTC(state, room) {
   webrtc.on("status", (info) => {
     state.status = info.status;
     console.log("state.statusstate.status", info.status);
+    messages?.emit("checkPitureUpload");
     if (info?.status?.length == 0) {
       messages?.emit("offRemoteStream");
     }
@@ -76,6 +77,7 @@ export async function setupWebRTC(state, room) {
 
   // Listening to new messages from Remote Client and emitting to Local client
   webrtc.on("chatMessage", (info) => {
+    console.log("chatMessagechatMessagechatMessagechatMessage", info);
     messages.emit("newMessage", info);
   });
 
