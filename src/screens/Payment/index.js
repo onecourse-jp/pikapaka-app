@@ -8,8 +8,13 @@ import GuideComponent from "@components/GuideComponent";
 import {getReservationById} from "@services/auth";
 import {createStripeCheckoutSession, paymentStripe} from "@services/payments";
 import {SCREEN_EDIT_PROFILE, SCREEN_EDIT_DELIVERY_ADDRESS} from "@screens/screens.constants";
+import {useForm, Controller} from "react-hook-form";
+import ItemQuestionForm from "../../components/Form/ItemQuestionForm";
 import {getBillPayment} from "@services/payments";
 import {SCREEN_EDIT_ADDRESS} from "../screens.constants";
+import BillPayment from "./BillPayment";
+import CardExpInput from "@components/items/CardExpInput";
+
 export default function Payment({route}) {
   const colors = useThemeColors();
   const fonts = useThemeFonts();
@@ -18,30 +23,51 @@ export default function Payment({route}) {
   const [showDetailMedicine, setShowDetailMedicine] = useState(false);
   const [errorApi, setErrorApi] = useState("");
   const [billData, setBillData] = useState(null);
+  const [dataExp, setDataExp] = useState(null);
+
   console.log("idCalendar", idCalendar);
+
   const screenStep = 4;
   const navigation = useNavigation();
+  const {
+    control,
+    handleSubmit,
+    formState: {errors},
+    reset,
+  } = useForm({
+    required: true,
+  });
 
-  const handleAction = async () => {
+  const onSubmit = async (dataSubmit) => {
     global.showLoadingView();
-    paymentMobile();
+    paymentMobile(dataSubmit);
   };
-  const paymentMobile = async () => {
+  const paymentMobile = async (dataSubmit) => {
     const paramsData = {
+      // reservation_form_id: idCalendar,
+      // amount: billData.bill?.total,
+      // cart_number: dataSubmit.cart_number,
+      // exp_month: dataExp.exp_month,
+      // exp_year: dataExp.exp_year,
+      // cvc: dataSubmit.cvc,
+      // cart_name: dataSubmit.cart_name,
       reservation_form_id: idCalendar,
       amount: billData.bill?.total,
-      cart_number: "4242424242424242",
-      exp_month: 6,
-      exp_year: 2023,
-      cvc: "123",
+      cart_number: 4242424242424242,
+      exp_month: 12,
+      exp_year: 30,
+      cvc: 333,
+      cart_name: dataSubmit.cart_name,
     };
     try {
       const {response, data} = await paymentStripe(paramsData);
+      console.log(" paramsData", paramsData);
       if (response && response.status == 200) {
         console.log("data paymentStripe", data);
+        navigation.goBack();
         global.hideLoadingView();
       } else {
-        console.log("err createStripeCheckoutSession", data);
+        console.log("err paymentStripe", data);
         setErrorApi("Error!");
         global.hideLoadingView();
       }
@@ -90,6 +116,40 @@ export default function Payment({route}) {
     }, 1000);
   }, []);
 
+  const PaymentForm = [
+    {
+      key: "cart_number",
+      label: "カード番号",
+      title: "カード番号",
+      placeholder: "1234 5678 9012 3456",
+      content: null,
+      maxlength: 16,
+    },
+    {
+      key: "cart_name",
+      label: "カード名義",
+      title: "カード名義",
+      placeholder: "YAMADA TAROU",
+      content: null,
+    },
+    {
+      key: "exp",
+      title: "カード番号",
+      placeholder: "MM/YY",
+      label: "有効期限",
+      content: null,
+    },
+    {
+      key: "cvc",
+      placeholder: "3桁または4桁の数字",
+      title: "セキュリティコード（CVC）",
+      label: "セキュリティコード（CVC）",
+      hideIcon: true,
+      content: null,
+      maxlength: 3,
+    },
+  ];
+
   const formatMoney = (money) => {};
 
   return (
@@ -101,181 +161,7 @@ export default function Payment({route}) {
             content="本日の金額は下記の通りです。お支払いの手続きをお願いいたします。"
           />
           <StepsComponent currentStep={screenStep} isStepAll={true} />
-          <View>
-            <Text
-              style={{
-                fontFamily: fonts.NSbold,
-                paddingHorizontal: 16,
-                marginBottom: 12,
-                fontSize: 15,
-                color: colors.colorTextBlack,
-                lineHeight: 23,
-                marginTop: 23,
-              }}
-            >
-              支払明細
-            </Text>
-            {billData && (
-              <View style={{paddingHorizontal: 16, borderRadius: 4}}>
-                <View style={{marginBottom: 20, paddingHorizontal: 16, backgroundColor: colors.white}}>
-                  <View>
-                    <View
-                      style={{
-                        flexDirection: "row",
-                        borderBottomWidth: 1,
-                        borderBottomColor: colors.borderGrayE,
-                        justifyContent: "space-between",
-                      }}
-                    >
-                      <Text
-                        style={{fontFamily: fonts.Hiragino, fontWeight: "bold", fontSize: 15, color: colors.colorTextBlack, lineHeight: 44}}
-                      >
-                        診察料金
-                      </Text>
-                      <Text style={{fontFamily: fonts.Hiragino, fontSize: 15, color: colors.colorTextBlack, lineHeight: 44}}>
-                        ¥{billData?.bill?.medical_examination_fee}
-                      </Text>
-                    </View>
-                    <View
-                      style={{
-                        flexDirection: "row",
-                        borderBottomWidth: 1,
-                        borderBottomColor: colors.borderGrayE,
-                        justifyContent: "space-between",
-                      }}
-                    >
-                      <TouchableOpacity
-                        onPress={() => setShowDetailMedicine(!showDetailMedicine)}
-                        style={{flexDirection: "row", justifyContent: "center", marginTop: 6, alignItems: "center"}}
-                      >
-                        <Text
-                          style={{
-                            fontFamily: fonts.Hiragino,
-                            fontSize: 15,
-                            color: colors.colorTextBlack,
-                            fontWeight: "bold",
-                            lineHeight: 44,
-                            marginRight: 4,
-                          }}
-                        >
-                          処方箋料金
-                        </Text>
-                        <Image
-                          style={
-                            showDetailMedicine
-                              ? {
-                                  transform: [{rotate: "180deg"}],
-                                }
-                              : {}
-                          }
-                          source={require("@assets/images/icons/flow_dropdown.png")}
-                        />
-                      </TouchableOpacity>
-                      <Text style={{fontFamily: fonts.Hiragino, fontSize: 15, color: colors.colorTextBlack, lineHeight: 44}}>
-                        ¥{billData?.bill?.medicine_fee}
-                      </Text>
-                    </View>
-                    {showDetailMedicine && (
-                      <View>
-                        {billData?.medicines.map((item, index) => {
-                          return (
-                            <View key={`medicines-${index}`} style={{flexDirection: "row", justifyContent: "space-between"}}>
-                              <Text
-                                style={{
-                                  fontFamily: fonts.Hiragino,
-                                  fontSize: 14,
-                                  fontWeight: "bold",
-                                  color: colors.colorTextBlack,
-                                  lineHeight: 24,
-                                }}
-                              >
-                                {item.name}
-                              </Text>
-                              <Text style={{fontFamily: fonts.Hiragino, fontSize: 13, color: colors.colorTextBlack, lineHeight: 24}}>
-                                ¥{item.price}
-                              </Text>
-                            </View>
-                          );
-                        })}
-                        {billData?.plans.map((item, index) => {
-                          return (
-                            <React.Fragment key={`plans-${index}`}>
-                              <View style={{flexDirection: "row", justifyContent: "space-between"}}>
-                                <Text
-                                  style={{
-                                    fontFamily: fonts.Hiragino,
-                                    fontSize: 14,
-                                    color: colors.colorTextBlack,
-                                    fontWeight: "bold",
-                                    lineHeight: 22,
-                                    maxWidth: 250,
-                                  }}
-                                >
-                                  {item.name}
-                                </Text>
-                                <Text style={{fontFamily: fonts.Hiragino, fontSize: 13, color: colors.colorTextBlack, lineHeight: 22}}>
-                                  ¥{item.price}
-                                </Text>
-                              </View>
-                              <View>
-                                {item?.item?.map((el, ind) => {
-                                  return (
-                                    <Text
-                                      key={`item?.item-${ind}`}
-                                      style={{fontFamily: fonts.Hiragino, fontSize: 13, color: colors.colorTextBlack, lineHeight: 22}}
-                                    >
-                                      {el}
-                                    </Text>
-                                  );
-                                })}
-                              </View>
-                            </React.Fragment>
-                          );
-                        })}
-                      </View>
-                    )}
-                    <View
-                      style={{
-                        flexDirection: "row",
-                        borderBottomWidth: 1,
-                        borderBottomColor: colors.borderGrayE,
-                        justifyContent: "space-between",
-                      }}
-                    >
-                      <Text style={{fontFamily: fonts.Hiragino, fontSize: 15, color: colors.colorTextBlack, lineHeight: 44}}>送料</Text>
-                      <Text style={{fontFamily: fonts.Hiragino, fontSize: 15, color: colors.colorTextBlack, lineHeight: 44}}>
-                        ¥{billData?.bill?.postage}
-                      </Text>
-                    </View>
-                    <View style={{flexDirection: "row", justifyContent: "space-between"}}>
-                      <Text
-                        style={{
-                          fontFamily: fonts.RobotoBold,
-                          fontSize: 19,
-                          color: colors.colorTextBlack,
-                          fontWeight: "bold",
-                          lineHeight: 44,
-                        }}
-                      >
-                        合計
-                      </Text>
-                      <Text
-                        style={{
-                          fontFamily: fonts.RobotoBold,
-                          fontSize: 19,
-                          color: colors.colorTextBlack,
-                          fontWeight: "bold",
-                          lineHeight: 44,
-                        }}
-                      >
-                        ¥{billData?.bill?.total}
-                      </Text>
-                    </View>
-                  </View>
-                </View>
-              </View>
-            )}
-          </View>
+          <BillPayment billData={billData} />
           <View>
             <Text
               style={{
@@ -290,7 +176,6 @@ export default function Payment({route}) {
             >
               配送先
             </Text>
-
             <View style={{paddingHorizontal: 16, borderRadius: 4}}>
               <View style={{paddingHorizontal: 16, backgroundColor: colors.white}}>
                 <View
@@ -360,8 +245,81 @@ export default function Payment({route}) {
               </View>
             </View>
           </View>
+          <View>
+            <View style={{paddingTop: 12, paddingBottom: 12, backgroundColor: colors.backgroundTheme}}>
+              <View style={[styles.box]}>
+                <Text style={{fontFamily: fonts.NSbold, fontSize: 16, color: colors.colorTextBlack, lineHeight: 23}}>お客様情報</Text>
+              </View>
+            </View>
+
+            <View>
+              <Text style={{fontFamily: fonts.NSbold, color: colors.colorTextBlack, padding: 16, fontSize: 16}}>お客様情報</Text>
+              {PaymentForm.map((item, index) => {
+                if (item.key !== "exp") {
+                  return (
+                    <React.Fragment key={`PaymentForm-${index}`}>
+                      <Controller
+                        control={control}
+                        rules={item?.maxlength ? {required: true, maxLength: item?.maxlength} : {required: true}}
+                        defaultValue={item.value}
+                        name={item.key}
+                        render={({field: {onChange, onBlur, value}}) => {
+                          return <ItemQuestionForm item={item} valueData={value} changeData={onChange} />;
+                        }}
+                      />
+                      {errors[item.key] && item?.maxlength && <Text style={styles.textError}>{item?.maxlength}</Text>}
+                      {errors[item.key] && (
+                        <Text style={styles.textError}>
+                          {global.t(item.label)}
+                          {global.t("is_require")}
+                        </Text>
+                      )}
+                    </React.Fragment>
+                  );
+                } else {
+                  return (
+                    <React.Fragment key={`PaymentForm-${index}`}>
+                      <View
+                        style={{
+                          flexDirection: "row",
+                          alignItems: "center",
+                          justifyContent: "space-between",
+                          backgroundColor: colors.white,
+                          paddingHorizontal: 16,
+                        }}
+                      >
+                        <Text
+                          syle={{
+                            color: colors.textBlack,
+                            fontSize: 15,
+                            lineHeight: 21,
+                          }}
+                        >
+                          {item.label}
+                        </Text>
+                        <View style={{width: "60%"}}>
+                          <CardExpInput
+                            getDataBirthday={(data) => {
+                              console.log("hahahah", data);
+                              setDataExp(data);
+                            }}
+                            getErrorInput={(data) => {
+                              console.log("getErrorInput", data);
+                            }}
+                            onChangeInput={() => {
+                              console.log("onChangeInput");
+                            }}
+                          />
+                        </View>
+                      </View>
+                    </React.Fragment>
+                  );
+                }
+              })}
+            </View>
+          </View>
           <View style={{marginTop: 30, paddingHorizontal: 16, width: "100%"}}>
-            <Button variant="primary" label={global.t("action_payment")} onPress={handleAction} />
+            <Button variant="primary" label={global.t("action_payment")} onPress={handleSubmit(onSubmit)} />
           </View>
         </ScrollView>
       </View>
@@ -373,4 +331,5 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "column",
   },
+  textError: {color: "red", marginTop: 5, textAlign: "right", paddingHorizontal: 16},
 });

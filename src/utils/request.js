@@ -25,8 +25,8 @@ const codeMessage = {
 // config axios- fix CORS
 console.log("Config", Config.API_URL);
 const instance = axios.create({
-  baseURL: Config.API_URL,
-  //baseURL: "https://staging-api-matching.lisod.vn/v1",
+  // baseURL: Config.API_URL,
+  baseURL: "https://test-tcare.lisod.vn/api",
   timeout: 60000,
   withCredentials: false,
 });
