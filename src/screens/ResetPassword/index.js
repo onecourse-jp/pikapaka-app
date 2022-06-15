@@ -207,7 +207,7 @@ export default function ResetPassword() {
               name="corfirmpassword"
             />
             {errors.corfirmpassword && <Text style={styles.textError}>入力されたパスワードが一致しません。</Text>}
-            {errorApi.length > 0 && <Text style={styles.textError}>{errorApi}</Text>}
+            {errorApi?.length > 0 && <Text style={styles.textError}>{errorApi}</Text>}
           </View>
           <View style={{paddingHorizontal: 16}}>
             <ButtonOrange disabled={disableSubmit} title="パスワード再設定" onPress={handleSubmit(onSubmit)} />

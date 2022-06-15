@@ -144,8 +144,8 @@ export default function ModalWebView({route}) {
           useWebkit
           startInLoadingState={true}
           source={{
-            uri: route?.params?.url,
-            // html: '<div><video autoplay playsInline src="https://www.w3schools.com/html/mov_bbb.mp4" ></video></div>',
+            // uri: route?.params?.url,
+            html: '<div><video autoplay playsInline src="https://www.w3schools.com/html/mov_bbb.mp4" ></video></div>',
           }}
           onMessage={onMessage}
           onShouldStartLoadWithRequest={(request) => {

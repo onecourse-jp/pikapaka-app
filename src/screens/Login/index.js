@@ -133,7 +133,7 @@ export default function LoginScreen({route}) {
             {errors.password.type === "required" ? "パスワードが必要です" : `パスワードは８文字以上必要です`}.
           </Text>
         )}
-        {errorApi.length > 0 && <Text style={styles.textError}>{errorApi}</Text>}
+        {errorApi?.length > 0 && <Text style={styles.textError}>{errorApi}</Text>}
       </View>
       {/* <Button disabled={disableSubmit} label={global.t("login")} onPress={handleSubmit(onSubmit)} /> */}
       <View style={{paddingHorizontal: 16}}>
