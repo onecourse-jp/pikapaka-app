@@ -83,7 +83,7 @@ export default function ForgotPassword() {
           </View>
           <View style={{paddingHorizontal: 16}}>
             {errors.email && <Text style={styles.textError}>メールアドレスが違います。</Text>}
-            {errorApi.length > 0 && <Text style={styles.textError}>{errorApi}</Text>}
+            {errorApi?.length > 0 && <Text style={styles.textError}>{errorApi}</Text>}
             <ButtonOrange disabled={disableSubmit} title="メールを送信" onPress={handleSubmit(onSubmit)} />
           </View>
         </View>
