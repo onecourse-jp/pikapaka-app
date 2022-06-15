@@ -1,5 +1,5 @@
 import * as React from "react";
-import {View, Text, TextInput, TouchableWithoutFeedback, Keyboard} from "react-native";
+import {View, Text, TextInput, TouchableWithoutFeedback, Keyboard, Platform} from "react-native";
 import PropTypes from "prop-types";
 import {min} from "lodash";
 export default class DateInput extends React.Component {
@@ -45,11 +45,13 @@ export default class DateInput extends React.Component {
       minYear: null,
       maxYear: null,
       isFocused: false,
+      hasChange: false,
     };
   }
   handleTextChange(date) {
     if (!this.props.disableInput) {
       this.props.onChangeInput();
+      this.setState({hasChange: true});
       const mask = Array.prototype.filter.call(this.state.mask, (v) => v.isTextField);
       console.log("this.state.date", this.state.date);
       const M = Array.prototype.filter
@@ -125,7 +127,9 @@ export default class DateInput extends React.Component {
   }
 
   render() {
-    const {mask, disableInput} = this.state;
+    const {mask, disableInput, date, hasChange} = this.state;
+    const timeInput =
+      date.length === 0 && !hasChange && this.props?.currentTime && this.props.currentTime.length > 0 ? this.props.currentTime : date;
     return (
       <View
         style={{
@@ -151,22 +155,22 @@ export default class DateInput extends React.Component {
           ref={(ref) => {
             this.input = ref;
           }}
-          value={this.state.date}
+          value={timeInput}
           onChangeText={this.handleTextChange.bind(this)}
         />
         {mask.map((v, key) => (
           <TouchableWithoutFeedback disabled={this.props.disableInput} key={key} onPress={() => this.input.focus()}>
-            <View style={{paddingHorizontal: this.props.isFromProfile ? 2 : 6}}>
+            <View style={{paddingHorizontal: Platform.OS == "ios" ? 2 : 0}}>
               {v.isTextField ? (
                 <View pointerEvents={"none"}>
                   <TextInput
                     placeholder={v.text}
                     placeholderTextColor={"#aaa"}
-                    value={this.state.date[v.index]}
+                    value={timeInput[v.index]}
                     style={{
-                      padding: 2,
+                      padding: Platform.OS == "ios" ? 2 : 0,
                       textAlign: "center",
-                      fontSize: this.props.isFromProfile ? 14 : 20,
+                      fontSize: 14,
                       backgroundColor: "#fff",
                       borderBottomWidth: 1,
                       borderBottomColor: this.state.isFocused && this.state.date.length === v.index ? this.props.activeColor : "#aaa",
@@ -175,7 +179,7 @@ export default class DateInput extends React.Component {
                   />
                 </View>
               ) : (
-                <Text style={{fontSize: 20, color: "#aaa"}}>{v.text}</Text>
+                <Text style={{fontSize: 14, color: "#aaa"}}>{v.text}</Text>
               )}
             </View>
           </TouchableWithoutFeedback>
