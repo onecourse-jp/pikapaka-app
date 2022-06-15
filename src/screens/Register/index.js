@@ -144,7 +144,7 @@ export default function Register() {
               />
             </View>
             <View style={{paddingHorizontal: 16}}>
-              {/* <Text style={{fontSize: 30, marginBottom: 88, textAlign: "center", marginTop: 60}}>Tケアクリニック</Text>
+              {/* <Text style={{fontSize: 30, marginBottom: 88, textAlign: "center", marginTop: 60}}>ピカパカヘルスケア</Text>
               <Text style={{fontSize: 16, marginBottom: 14, textAlign: "center"}}>メールアドレスで新規登録</Text> */}
               {errors.password && (
                 <Text style={styles.textError}>

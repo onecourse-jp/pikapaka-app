@@ -89,7 +89,7 @@ export default function EditFurigana({route}) {
                     backgroundColor: colors.white,
                     flex: 1,
                   }}
-                  placeholder="山田太郎"
+                  placeholder="ヤマダ タロウ"
                   placeholderTextColor={colors.textPlaceholder}
                   onChangeText={(text) => {
                     onChange(text);

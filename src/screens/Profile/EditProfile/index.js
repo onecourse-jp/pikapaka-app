@@ -105,7 +105,7 @@ export default function EditProfile() {
     return resultValidate && resultValidate != "Invalid date" ? true : false;
   };
   const INFORMATIONBASIC = [
-    {key: "name", title: "お名前（漢字）", placeholder: "フリガナを入力", value: user?.name},
+    {key: "name", title: "お名前（漢字）", placeholder: "名前を入力", value: user?.name},
     {key: "furigana", title: "名前フリガナ", placeholder: "フリガナを入力", value: user?.furigana},
     {
       key: "gender",
@@ -118,19 +118,19 @@ export default function EditProfile() {
         {label: "女性", value: 2},
       ],
     },
-    {key: "birthday", title: "生年月日", placeholder: "フリガナを入力 (yyyy-mm-dd)", value: user?.birthday},
-    {key: "email", title: "メールアドレス", placeholder: "フリガナを入力", value: user?.email, disabel: true},
+    {key: "birthday", title: "生年月日", placeholder: "生年月日を入力 (yyyy-mm-dd)", value: user?.birthday},
+    {key: "email", title: "メールアドレス", placeholder: "メールアドレスを入力", value: user?.email, disabel: true},
     {key: "phone_number", title: "電話番号", placeholder: "電話番号を入力", value: user?.phone_number},
   ];
   const INFORMATIONPLACE = [
-    {key: "postal_code", title: "郵便番号", placeholder: "選択", value: user?.postal_code},
-    {key: "address", title: "住所", placeholder: "選択", value: user?.address},
+    {key: "postal_code", title: "郵便番号", placeholder: "郵便番号を入力", value: user?.postal_code},
+    {key: "address", title: "住所", placeholder: "住所を入力", value: user?.address},
   ];
   const DATALISTPERSON = [
-    {key: "allergies", title: "アレルギーの有無", value: user?.allergies, placeholder: "選択", label: 4},
-    {key: "content_allergies", title: "アレルギーの内容", value: user?.content_allergies, placeholder: "フリガナを入力"},
-    {key: "take_medicines", title: "服薬中の薬の有無", value: user?.take_medicines, label: 4, placeholder: "選択"},
-    {key: "content_medicines", title: "服用中薬の内容", value: user?.content_medicines, placeholder: "フリガナを入力"},
+    {key: "allergies", title: "アレルギーの有無", value: user?.allergies, placeholder: "アレルギーの内容を入力", label: 4},
+    {key: "content_allergies", title: "アレルギーの内容", value: user?.content_allergies, placeholder: "アレルギーの内容を入力"},
+    {key: "take_medicines", title: "服薬中の薬の有無", value: user?.take_medicines, label: 4, placeholder: "服薬中の薬を入力"},
+    {key: "content_medicines", title: "服用中薬の内容", value: user?.content_medicines, placeholder: "服薬中の薬を入力"},
     {key: "pregnancy", title: "妊娠有無", value: user?.pregnancy, placeholder: "選択", label: 4},
     {key: "smoking", title: "喫煙有無", value: user?.smoking, placeholder: "選択", label: 4},
     {

@@ -30,7 +30,7 @@ export default function EditPostalCode({route}) {
         if (response.status == 200) {
           dispatch(updateUserProfile(data.data));
           global.hideLoadingView();
-          Alert.alert("", "個人情報の編集が完了しました。", [
+          Alert.alert("", "郵便番号の編集が完了しました。", [
             {
               text: "はい",
               onPress: () => {
@@ -91,7 +91,7 @@ export default function EditPostalCode({route}) {
                     backgroundColor: colors.white,
                     flex: 1,
                   }}
-                  placeholder="山田太郎"
+                  placeholder="105-0011"
                   placeholderTextColor={colors.textPlaceholder}
                   onChangeText={(text) => {
                     onChange(text);
