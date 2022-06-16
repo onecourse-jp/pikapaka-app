@@ -68,6 +68,7 @@ export default function ModalViewListImageOnCall({navigation, route}) {
             flexDirection: "row",
             justifyContent: "flex-end",
             marginBottom: 30,
+            paddingHorizontal: 24,
           }}
         >
           <TouchableOpacity style={{width: 20, height: 20, paddingHorizontal: 24}} onPress={() => navigation.goBack()}>
