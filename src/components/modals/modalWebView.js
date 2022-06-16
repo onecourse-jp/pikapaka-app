@@ -10,10 +10,8 @@ import {messages} from "../../screens/CallLogic/lib/emitter";
 import {requestMultiple, PERMISSIONS} from "react-native-permissions";
 import {SCREEN_CALL, SCREEN_DETAIL_CALENDAR} from "../../screens/screens.constants";
 let {width, height} = Dimensions.get("window");
-const dataPopup = [];
 
 export default function ModalWebView({route}) {
-  const [isPopup, setIsPopup] = useState(false);
   const dispatch = useDispatch();
   const [isNext, setIsNext] = useState(false);
   const [urlWebView, setUrlWebView] = useState(null);
@@ -33,21 +31,6 @@ export default function ModalWebView({route}) {
     navigation.setOptions({title: route?.params?.url});
   }, [navigation]);
 
-  const _renderItem = ({item}) => {
-    console.log("rendered item");
-    return (
-      <Image
-        style={{width: (width - 70) / 2, height: 163, backgroundColor: "#C4C4C4", marginTop: 8}}
-        source={{
-          uri: item.image,
-        }}
-      />
-    );
-  };
-
-  const onMessage = (message) => {
-    console.log("messagemessage", message);
-  };
   const quitRoomCall = () => {
     Alert.alert(
       "",
@@ -115,48 +98,6 @@ export default function ModalWebView({route}) {
 
   return (
     <SafeAreaView style={{flex: 1, position: "relative"}}>
-      <ModalPortal
-        isVisible={isPopup}
-        animationInTiming={500}
-        animationOutTiming={500}
-        backdropTransitionInTiming={500}
-        backdropTransitionOutTiming={500}
-        swipeDirection="down"
-        scrollHorizontal={true}
-        style={{justifyContent: "flex-end", flex: 1, margin: 0}}
-      >
-        <View
-          style={{
-            height: height - 60,
-            backgroundColor: "white",
-            borderTopLeftRadius: 8,
-            borderTopRightRadius: 8,
-            paddingVertical: 25,
-            paddingHorizontal: 28,
-          }}
-        >
-          <View
-            style={{
-              width: "100%",
-              flexDirection: "row",
-              justifyContent: "space-between",
-            }}
-          >
-            <Text style={{fontSize: 18, color: "#000000"}}>受信画像</Text>
-            <TouchableOpacity onPress={() => setIsPopup(false)}>
-              <Image source={require("@assets/images/icons/close_black.png")} style={{width: 20, height: 20}} resizeMode="cover" />
-            </TouchableOpacity>
-          </View>
-          <FlatList
-            numColumns={2}
-            horizontal={false}
-            columnWrapperStyle={{justifyContent: "space-between"}}
-            data={dataPopup}
-            renderItem={(item, index) => _renderItem(item, index)}
-            keyExtractor={(item) => item.id}
-          />
-        </View>
-      </ModalPortal>
       <View style={{flex: 1, position: "relative"}}>
         {urlWebView && (
           <WebView
@@ -221,7 +162,11 @@ export default function ModalWebView({route}) {
               <TouchableOpacity onPress={quitRoomCall}>
                 <Image style={{width: 50, height: 50}} source={require("@assets/images/icons/ic_quit_room_call.png")} />
               </TouchableOpacity>
-              <TouchableOpacity onPress={() => setIsPopup(true)}>
+              <TouchableOpacity
+                onPress={() => {
+                  global.showModalListImage({id: route?.params?.isCallVideo});
+                }}
+              >
                 <Image style={{width: 50, height: 50}} source={require("@assets/images/icons/ic_photo_call.png")} />
               </TouchableOpacity>
             </View>
