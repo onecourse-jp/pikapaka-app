@@ -232,7 +232,7 @@ function App() {
         </Stack.Group>
         <Stack.Group
           screenOptions={{
-            presentation: "modal",
+            presentation: "fullScreenModal",
           }}
         >
           <Stack.Screen name={SCREEN_WEB_VIEW} component={ModalWebView} options={{headerShown: true}} />

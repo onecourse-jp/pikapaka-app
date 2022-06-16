@@ -161,22 +161,16 @@ export default function ModalWebView({route}) {
         {urlWebView && (
           <WebView
             useWebKit
-            style={{backgroundColor: "#000000"}}
+            style={{width: "100%", height: "100%"}}
             originWhitelist={["*"]}
             allowsInlineMediaPlayback={true}
             mediaPlaybackRequiresUserAction={false}
             allowsFullscreenVideo={false}
             javaScriptEnabled
-            scalesPageToFit
             javaScriptEnabledAndroid
             useWebkit
             startInLoadingState={true}
-            allowFileAccess
             scrollEnabled={false}
-            allowUniversalAccessFromFileURLs
-            allowFileAccessFromFileURLs
-            domStorageEnabled
-            keyboardDisplayRequiresUserAction={false}
             mixedContentMode="always"
             source={{
               uri: urlWebView,
