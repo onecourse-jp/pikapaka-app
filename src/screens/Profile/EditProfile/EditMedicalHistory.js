@@ -36,6 +36,7 @@ export default function EditMedicalHistory({route}) {
 
   const onSubmit = async (dataSubmit) => {
     try {
+      console.log("listValue", listValue);
       const {data, response} = await updateProfileWithToken({medical_history: listValue});
       if (response.status == 200) {
         console.log("updateProfileWithToken", data.data);

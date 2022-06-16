@@ -16,6 +16,7 @@ import {
   SCREEN_EDIT_POSTAL_CODE,
   SCREEN_EDIT_YES_NO_FORM,
   SCREEN_EDIT_MEDICAL_HISTORY,
+  SCREEN_EDIT_PHONE_NUMBER,
 } from "@screens/screens.constants";
 import {getProfile} from "@services/search";
 import moment from "moment";
@@ -55,6 +56,8 @@ export default function Profile({navigation}) {
       label: "名前",
       placeholder: "フリガナを入力",
       content: profile?.name ?? null,
+      hideIcon: false,
+      hideItem: false,
       action: () => {
         navigation.navigate(SCREEN_EDIT_NAME, {data: user});
       },
@@ -64,6 +67,8 @@ export default function Profile({navigation}) {
       label: "フリガナ",
       placeholder: "フリガナを入力",
       content: profile?.furigana ?? null,
+      hideIcon: false,
+      hideItem: false,
       action: () => {
         navigation.navigate(SCREEN_EDIT_FURIGANA, {data: user});
       },
@@ -73,6 +78,8 @@ export default function Profile({navigation}) {
       placeholder: "選択",
       label: "性別",
       content: profile?.gender ? (profile?.gender == 1 ? "男性" : "女性") : null,
+      hideIcon: false,
+      hideItem: false,
       action: () => {
         navigation.navigate(SCREEN_EDIT_GENDER, {data: user});
       },
@@ -81,18 +88,32 @@ export default function Profile({navigation}) {
       key: "birthday",
       placeholder: "フリガナを入力",
       label: "生年月日",
-      hideIcon: true,
       content: profile?.birthday ? moment(new Date(profile?.birthday)).format("YYYY年MM月DD日") : null,
+      hideIcon: false,
+      hideItem: false,
       action: () => {
         navigation.navigate(SCREEN_EDIT_BIRTHDAY, {data: user});
       },
     },
-    {key: "email", label: "メールアドレス", content: profile?.email},
+    {key: "email", label: "メールアドレス", content: profile?.email, hideIcon: true, hideItem: false},
+    {
+      key: "phone_number",
+      label: "電話番号",
+      placeholder: "電話番号を入力",
+      content: profile?.phone_number ?? null,
+      hideIcon: false,
+      hideItem: false,
+      action: () => {
+        navigation.navigate(SCREEN_EDIT_PHONE_NUMBER, {data: user});
+      },
+    },
     {
       key: "password",
       label: "パスワード",
       placeholder: "フリガナを入力",
       content: "パスワードを変更",
+      hideIcon: true,
+      hideItem: true,
       action: () => {
         navigation.navigate(SCREEN_CHANGE_PASSWORD);
       },
@@ -105,6 +126,8 @@ export default function Profile({navigation}) {
       label: "郵便番号",
       placeholder: "選択",
       content: profile?.postal_code ?? null,
+      hideIcon: false,
+      hideItem: false,
       action: () => {
         navigation.navigate(SCREEN_EDIT_POSTAL_CODE, {data: user, label: "郵便番号"});
       },
@@ -114,6 +137,8 @@ export default function Profile({navigation}) {
       label: "住所",
       placeholder: "選択",
       content: profile?.address ?? null,
+      hideIcon: false,
+      hideItem: false,
       action: () => {
         navigation.navigate(SCREEN_EDIT_ADDRESS, {data: user, label: "住所"});
       },
@@ -134,6 +159,8 @@ export default function Profile({navigation}) {
       label: "アレルギーの有無",
       placeholder: "フリガナを入力",
       content: profile?.allergies ? (profile?.allergies === 1 ? renderContentAllergies(profile?.content_allergies) : "無") : null,
+      hideIcon: false,
+      hideItem: false,
       action: () => {
         navigation.navigate(SCREEN_EDIT_ALLERGY, {data: profile});
       },
@@ -143,6 +170,8 @@ export default function Profile({navigation}) {
       label: "服薬中の薬の有無",
       placeholder: "選択",
       content: profile?.take_medicines ? (profile?.take_medicines == 1 ? renderContentAllergies(profile?.content_medicines) : "無") : null,
+      hideIcon: false,
+      hideItem: false,
       action: () => {
         navigation.navigate(SCREEN_EDIT_MEDICINE, {data: profile});
       },
@@ -152,6 +181,8 @@ export default function Profile({navigation}) {
       label: "妊娠有無",
       placeholder: "選択",
       content: profile?.pregnancy ? (profile?.pregnancy == 1 ? "有" : "無") : null,
+      hideIcon: false,
+      hideItem: false,
       action: () => {
         navigation.navigate(SCREEN_EDIT_YES_NO_FORM, {data: user, key: "pregnancy", value: profile?.pregnancy, label: "妊娠有無"});
       },
@@ -161,6 +192,8 @@ export default function Profile({navigation}) {
       label: "喫煙有無",
       placeholder: "選択",
       content: profile?.smoking ? (profile?.smoking == 1 ? "有" : "無") : null,
+      hideIcon: false,
+      hideItem: false,
       action: () => {
         navigation.navigate(SCREEN_EDIT_YES_NO_FORM, {data: user, key: "smoking", value: profile?.smoking, label: "喫煙有無"});
       },
@@ -170,6 +203,8 @@ export default function Profile({navigation}) {
       label: "既往歴",
       placeholder: "選択",
       content: global.renderMedicalHistory(profile?.medical_history),
+      hideIcon: false,
+      hideItem: false,
       action: () => {
         navigation.navigate(SCREEN_EDIT_MEDICAL_HISTORY, {
           data: user,
@@ -201,40 +236,49 @@ export default function Profile({navigation}) {
             </View>
 
             {listTextProfile.map((item, index) => {
-              return (
-                <TouchableOpacity
-                  onPress={item.action}
-                  key={index}
-                  style={{
-                    paddingTop: 12,
-                    paddingBottom: 12,
-                    borderTopWidth: 1,
-                    borderColor: "#EEEEEE",
-                    backgroundColor: colors.white,
-                  }}
-                >
-                  <View style={{flexDirection: "row", justifyContent: "space-between", paddingHorizontal: 16}}>
-                    <Text style={{fontFamily: fonts.NSbold, fontSize: 12, color: colors.textBlack, lineHeight: 14, width: 120}}>
-                      {item.label}
-                    </Text>
-                    {item.key !== "password" && (
-                      <Text
-                        style={{fontFamily: fonts.NSregular, fontSize: 12, color: colors.gray1, lineHeight: 14, flex: 1, textAlign: "left"}}
-                      >
-                        {item.content || item.placeholder}
+              if (!item?.hideItem) {
+                return (
+                  <TouchableOpacity
+                    onPress={item.action}
+                    key={index}
+                    style={{
+                      paddingTop: 12,
+                      paddingBottom: 12,
+                      borderTopWidth: 1,
+                      borderColor: "#EEEEEE",
+                      backgroundColor: colors.white,
+                    }}
+                  >
+                    <View style={{flexDirection: "row", justifyContent: "space-between", paddingHorizontal: 16}}>
+                      <Text style={{fontFamily: fonts.NSbold, fontSize: 12, color: colors.textBlack, lineHeight: 14, width: 120}}>
+                        {item.label}
                       </Text>
-                    )}
-                    {item.key === "password" ? (
-                      <TouchableOpacity style={{flexDirection: "row", alignItems: "center"}} onPress={item.action}>
-                        <Text style={{color: colors.headerComponent, marginRight: 5}}>変更する</Text>
-                        <Arrow_right color={colors.headerComponent} />
-                      </TouchableOpacity>
-                    ) : (
-                      <TouchableOpacity onPress={item.action}>{!item?.hideIcon && <Arrow_right color={colors.grayC} />}</TouchableOpacity>
-                    )}
-                  </View>
-                </TouchableOpacity>
-              );
+                      {item.key !== "password" && (
+                        <Text
+                          style={{
+                            fontFamily: fonts.NSregular,
+                            fontSize: 12,
+                            color: colors.gray1,
+                            lineHeight: 14,
+                            flex: 1,
+                            textAlign: "left",
+                          }}
+                        >
+                          {item.content || item.placeholder}
+                        </Text>
+                      )}
+                      {item.key === "password" ? (
+                        <TouchableOpacity style={{flexDirection: "row", alignItems: "center"}} onPress={item.action}>
+                          <Text style={{color: colors.headerComponent, marginRight: 5}}>変更する</Text>
+                          <Arrow_right color={colors.headerComponent} />
+                        </TouchableOpacity>
+                      ) : (
+                        <>{!item?.hideIcon && <Arrow_right color={colors.grayC} />}</>
+                      )}
+                    </View>
+                  </TouchableOpacity>
+                );
+              }
             })}
           </View>
           <View style={{paddingTop: 12, paddingBottom: 12, backgroundColor: colors.backgroundTheme}}>
