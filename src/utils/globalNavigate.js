@@ -146,7 +146,7 @@ export const renderContentAllergies = (content_allergies) => {
       }
     }
   }
-  if (result.length === 0) return null;
+  if (result.length === 0) return "あり";
   return result;
 };
 

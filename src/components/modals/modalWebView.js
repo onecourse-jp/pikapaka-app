@@ -115,7 +115,6 @@ export default function ModalWebView({route}) {
 
   return (
     <SafeAreaView style={{flex: 1, position: "relative"}}>
-      {" "}
       <ModalPortal
         isVisible={isPopup}
         animationInTiming={500}

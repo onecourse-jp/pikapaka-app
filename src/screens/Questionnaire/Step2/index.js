@@ -7,7 +7,13 @@ import {useForm, Controller} from "react-hook-form";
 import StepsComponent from "@components/StepsComponent";
 import GuideComponent from "@components/GuideComponent";
 import moment from "moment";
-import {SCREEN_QUESIONAIRE_STEP3} from "@screens/screens.constants";
+import {
+  SCREEN_QUESIONAIRE_STEP3,
+  SCREEN_EDIT_NAME,
+  SCREEN_EDIT_POSTAL_CODE,
+  SCREEN_EDIT_ADDRESS,
+  SCREEN_EDIT_GENDER,
+} from "@screens/screens.constants";
 import {updateMedicalHistory} from "@actions/medicalHistoryAction";
 import {getQuestionFormCalendar} from "@services/profile";
 import ItemForm from "../components/ItemForm";
@@ -21,15 +27,76 @@ export default function QuestionaireStep2({route}) {
   const dispatch = useDispatch();
   const calendarData = route?.params?.data;
   const medicalHistory = useSelector((state) => state?.medicalHistory);
-  const user = useSelector((state) => state?.users?.userDetails);
+  const userDetails = useSelector((state) => state?.users?.userDetails);
+  const [user, setUser] = useState(userDetails);
   const [dataQuestion, setDataQuestion] = useState([]);
+  const [dataPerson, setDataPerson] = useState([]);
+  const [currentValueSubmit, setCurrentValueSubmit] = useState({});
   const {
     control,
     handleSubmit,
+    reset,
+    watch,
     formState: {errors},
   } = useForm({
     required: true,
   });
+  useEffect(() => {
+    setUser(userDetails);
+    const valueClone = {...currentValueSubmit};
+    // const valueToReset = valueClone.data;
+    reset({data: valueClone.data, ...userDetails});
+    setDataPerson([
+      {
+        key: "name",
+        title: "お名前（漢字）",
+        placeholder: "お名前（漢字）を入力",
+        value: userDetails?.name ?? null,
+        action: () => {
+          navigation.navigate(SCREEN_EDIT_NAME, {data: userDetails});
+        },
+      },
+      {
+        key: "postal_code",
+        title: "郵便番号",
+        placeholder: "郵便番号を入力",
+        value: userDetails?.postal_code ?? null,
+        action: () => {
+          navigation.navigate(SCREEN_EDIT_POSTAL_CODE, {data: userDetails, label: "郵便番号"});
+        },
+      },
+      {
+        key: "address",
+        title: "住所",
+        placeholder: "住所を入力",
+        value: userDetails?.address ?? null,
+        action: () => {
+          navigation.navigate(SCREEN_EDIT_ADDRESS, {data: userDetails, label: "住所"});
+        },
+      },
+      {
+        key: "gender",
+        title: "性別",
+        placeholder: "選択",
+        value: userDetails?.gender ?? null,
+        label: 4,
+        data: [
+          {label: "男性", value: 1},
+          {label: "女性", value: 2},
+        ],
+        action: () => {
+          navigation.navigate(SCREEN_EDIT_GENDER, {data: userDetails});
+        },
+      },
+    ]);
+
+  }, [userDetails]);
+
+  useEffect(() => {
+    const subscription = watch((value, {name, type}) => setCurrentValueSubmit(value));
+    // console.log()
+    return () => subscription.unsubscribe();
+  }, [watch]);
 
   const onSubmit = (dataSubmit) => {
     console.log("dataSubmit", dataSubmit);
@@ -56,22 +123,6 @@ export default function QuestionaireStep2({route}) {
     getAnswerForm();
   }, []);
 
-  const DATALISTPERSON = [
-    {key: "name", title: "お名前（漢字）", placeholder: "お名前（漢字）を入力", value: user?.name ?? null},
-    {key: "postal_code", title: "郵便番号", placeholder: "郵便番号を入力", value: user?.postal_code ?? null},
-    {key: "address", title: "住所", placeholder: "住所を入力", value: user?.address ?? null},
-    {
-      key: "gender",
-      title: "性別",
-      placeholder: "選択",
-      value: user?.gender ?? null,
-      label: 4,
-      data: [
-        {label: "男性", value: 1},
-        {label: "女性", value: 2},
-      ],
-    },
-  ];
   const validateEmail = (email) => {
     const resultValidate = String(email)
       .toLowerCase()
@@ -136,7 +187,7 @@ export default function QuestionaireStep2({route}) {
             </View>
             <View>
               <Text style={{fontFamily: fonts.NSbold, fontSize: 16, paddingHorizontal: 16, marginTop: 16}}>お客様情報</Text>
-              {DATALISTPERSON.map((item, index) => {
+              {dataPerson.map((item, index) => {
                 return (
                   <React.Fragment key={`DATALISTPERSON-${index}`}>
                     <Controller
