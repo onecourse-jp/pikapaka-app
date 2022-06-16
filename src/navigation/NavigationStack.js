@@ -29,7 +29,6 @@ import EditProfile from "@screens/Profile/EditProfile";
 import ChangePassword from "@screens/Profile/ChangePassword";
 import ConnectDoctor from "../screens/ConnectDoctor";
 import ModalWebView from "../components/modals/modalWebView";
-import CallScreen from "@screens/Call";
 import DateTime from "@screens/EditCalendar/DateTime";
 import ExaminationItem from "@screens/EditCalendar/ExaminationItem";
 import ExaminationContent from "@screens/EditCalendar/ExaminationContent";
@@ -60,7 +59,6 @@ import {
   SCREEN_CHANGE_PASSWORD,
   SCREEN_CONNECT_DOCTOR,
   SCREEN_WEB_VIEW,
-  SCREEN_CALL,
   SCREEN_FAQ,
   SCREEN_NEWS,
   SCREEN_EDIT_CALENDAR_DATETIME,
@@ -175,7 +173,6 @@ function App() {
           />
 
           <Stack.Screen name={SCREEN_EDIT_PROFILE} component={EditProfile} options={{title: "情報編集"}} />
-          <Stack.Screen name={SCREEN_CALL} component={CallScreen} options={{headerShown: false}} />
           <Stack.Screen name={SCREEN_CHANGE_PASSWORD} component={ChangePassword} options={{title: "パスワードを変更"}} />
           <Stack.Screen name={SCREEN_TERMS_OF_SERVICE} component={TermsOfService} options={{headerShown: false}} />
           <Stack.Screen name={SCREEN_PRIVACY_POLICY} component={PrivacyPolicy} options={{headerShown: false}} />
