@@ -62,7 +62,7 @@ export default function EditMedicine({route}) {
         if (response.status == 200) {
           dispatch(updateUserProfile(data.data));
           global.hideLoadingView();
-          Alert.alert("", "有無の設定が完了しました。", [
+          Alert.alert("", "薬の内容を更新しました。", [
             {
               text: "はい",
               onPress: () => {
