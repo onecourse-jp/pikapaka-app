@@ -33,7 +33,7 @@ export default function EditYesNoForm({route}) {
       if (response.status == 200) {
         dispatch(updateUserProfile(data.data));
         global.hideLoadingView();
-        Alert.alert("", "有無の設定が完了しました。", [
+        Alert.alert("", "設定が完了しました。", [
           {
             text: "はい",
             onPress: () => {
