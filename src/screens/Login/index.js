@@ -85,7 +85,7 @@ export default function LoginScreen({route}) {
                   }}
                   onBlur={onBlur}
                   value={value}
-                  maxLength={30}
+                  maxLength={80}
                 />
               </View>
             );
@@ -119,7 +119,6 @@ export default function LoginScreen({route}) {
                 }}
                 onBlur={onBlur}
                 value={value}
-                maxLength={30}
               />
               <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
                 <Image source={require("@assets/images/show_hide_password.png")} />
