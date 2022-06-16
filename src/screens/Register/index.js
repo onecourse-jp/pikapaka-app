@@ -106,7 +106,7 @@ export default function Register() {
                         }}
                         onBlur={onBlur}
                         value={value}
-                        maxLength={30}
+                        maxLength={80}
                       />
                     </View>
                   );

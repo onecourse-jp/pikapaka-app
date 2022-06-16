@@ -42,7 +42,7 @@ export default function ({route}) {
 
   const handleAction = async () => {
     global.showWebView({
-      url: `https://t-care-develop.web.app/user/call-to-doctor/?room=${dataCalendar.id}`,
+      url: `https://t-care-staging.web.app/user/call-to-doctor/?room=${dataCalendar.id}`,
       isCallVideo: dataCalendar.id,
     });
   };
