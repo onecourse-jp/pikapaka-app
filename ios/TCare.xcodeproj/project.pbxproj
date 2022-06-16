@@ -79,6 +79,7 @@
 		00E356EE1AD99517003FC87E /* TCareTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TCareTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* TCareTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TCareTests.m; sourceTree = "<group>"; };
+		0D24DB4E2859DB8C00F7EB42 /* TCare.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = TCare.entitlements; path = TCare/TCare.entitlements; sourceTree = "<group>"; };
 		0D255ED22727E85F0038B08B /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		0D4FF0A427424B6900CF6241 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		0D733BCA276060E200B84DB5 /* AppCenter-Config.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AppCenter-Config.plist"; sourceTree = "<group>"; };
@@ -216,6 +217,7 @@
 		13B07FAE1A68108700A75B9A /* TCare */ = {
 			isa = PBXGroup;
 			children = (
+				0D24DB4E2859DB8C00F7EB42 /* TCare.entitlements */,
 				0D7947B926FDCA1F00B0202D /* GoogleService-Info.plist */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
@@ -1026,7 +1028,7 @@
 				CODE_SIGN_ENTITLEMENTS = TCare/TCare.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = 5634LD444J;
 				ENABLE_BITCODE = NO;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
@@ -1170,7 +1172,7 @@
 				CODE_SIGN_ENTITLEMENTS = TCare/TCare.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = 5634LD444J;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = TCare/Info.plist;

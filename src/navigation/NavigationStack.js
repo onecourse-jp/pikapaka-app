@@ -156,7 +156,6 @@ function App() {
           <Stack.Screen name={SCREEN_REGISTER} component={RegisterScreen} options={{title: "メールアドレスで新規登録"}} />
           <Stack.Screen name={SCREEN_WELCOME} component={Welcome} options={{headerShown: false}} />
           <Stack.Screen name={SCREEN_LOGIN} component={Login} options={{title: "メールアドレスでログイン"}} />
-          <Stack.Screen name={SCREEN_WEB_VIEW} component={ModalWebView} options={{headerShown: true}} />
           <Stack.Screen name={SCREEN_PROFILE} component={ProfileScreen} options={{title: "マイページ"}} />
           <Stack.Screen
             name={SCREEN_FAQ}
@@ -234,6 +233,14 @@ function App() {
           <Stack.Screen name={SCREEN_MODAL_LOADER} component={LoadingView} options={{headerShown: false, animation: "none"}} />
           <Stack.Screen name={SCREEN_MODAL_BOTTOM} component={ModalBottom} options={{headerShown: false}} />
         </Stack.Group>
+        <Stack.Group
+          screenOptions={{
+            presentation: "modal",
+          }}
+        >
+          <Stack.Screen name={SCREEN_WEB_VIEW} component={ModalWebView} options={{headerShown: true}} />
+        </Stack.Group>
+
       </Stack.Navigator>
     </NavigationContainer>
   );
