@@ -64,7 +64,6 @@ export default function ModalViewListImageOnCall({navigation, route}) {
         <View
           style={{
             width: "100%",
-            flex: 1,
             flexDirection: "row",
             justifyContent: "flex-end",
             marginBottom: 30,
