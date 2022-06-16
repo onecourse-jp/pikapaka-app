@@ -8,6 +8,7 @@ import {
   SCREEN_SERVICE_STEP3,
   SCREEN_MODAL_LOADER,
   SCREEN_MODAL_BOTTOM,
+  SCREEN_MODAL_LIST_IMAGE_CALL,
 } from "../screens/screens.constants";
 import {setAuthority} from "./authority";
 import {dataMedicalHistory} from "../data";
@@ -81,6 +82,12 @@ export const showLoadingView = (options) => {
 export const showModalBottom = (options, callback) => {
   RootNavigator.navigate(SCREEN_MODAL_BOTTOM, {
     callback,
+    ...options,
+  });
+};
+
+export const showModalListImage = (options) => {
+  RootNavigator.navigate(SCREEN_MODAL_LIST_IMAGE_CALL, {
     ...options,
   });
 };
@@ -162,6 +169,7 @@ global.goToMain = goToMain;
 global.renderColorStatus = renderColorStatus;
 global.showLoadingView = showLoadingView;
 global.showModalBottom = showModalBottom;
+global.showModalListImage = showModalListImage;
 global.hideLoadingView = hideLoadingView;
 global.processSignIn = processSignIn;
 global.alertNeedLogin = alertNeedLogin;

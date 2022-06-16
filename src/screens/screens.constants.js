@@ -58,6 +58,7 @@ export const SCREEN_DIALOG = "Modal";
 export const SCREEN_POPUP = "Popup";
 export const SCREEN_MODAL_LOADER = "LoadingView";
 export const SCREEN_MODAL_BOTTOM = "SCREEN_MODAL_BOTTOM";
+export const SCREEN_MODAL_LIST_IMAGE_CALL = "SCREEN_MODAL_LIST_IMAGE_CALL";
 
 export const SCREEN_MODAL_MESSAGE = "CustomModal";
 export const SCREEN_MODAL_MESSAGE_2 = "CustomModal2";

@@ -27,15 +27,11 @@ export default function ({route}) {
   useEffect(async () => {
     if (dataCalendar?.id) {
       console.log("dataCalendar?.id", dataCalendar?.id);
-      // messages.on("setLocalStream", (videoSrc) => {
-      //   console.log("setLocalStream", videoSrc);
-      // });
       messages.on("setRemoteStream", (videoSrc) => {
         console.log("setRemoteStream", videoSrc);
         setStatusDoctor(true);
       });
       messages.on("offRemoteStream", () => {
-        console.log("offRemoteStream");
       });
       setup(dataCalendar.id);
     }
@@ -53,7 +49,7 @@ export default function ({route}) {
         <TouchableOpacity
           onPress={() => {
             messages.emit("closeCall");
-            navigation.goBack();
+            navigation.goBack()
           }}
           style={{
             justifyContent: "center",

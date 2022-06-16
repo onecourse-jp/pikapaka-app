@@ -60,10 +60,9 @@ export default function EditMedicine({route}) {
       try {
         const {data, response} = await updateProfileWithToken(newDataSubmit);
         if (response.status == 200) {
-          console.log("dadadadad", data.data);
           dispatch(updateUserProfile(data.data));
           global.hideLoadingView();
-          Alert.alert("", "個人情報の編集が完了しました。", [
+          Alert.alert("", "有無の設定が完了しました。", [
             {
               text: "はい",
               onPress: () => {
