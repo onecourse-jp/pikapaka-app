@@ -115,66 +115,74 @@ export default function ModalWebView({route}) {
 
   return (
     <SafeAreaView style={{flex: 1, position: "relative"}}>
-      <View style={{flex: 1, position: "relative"}}>
-        <ModalPortal
-          isVisible={isPopup}
-          animationInTiming={500}
-          animationOutTiming={500}
-          backdropTransitionInTiming={500}
-          backdropTransitionOutTiming={500}
-          swipeDirection="down"
-          scrollHorizontal={true}
-          style={{justifyContent: "flex-end", flex: 1, margin: 0}}
+      {" "}
+      <ModalPortal
+        isVisible={isPopup}
+        animationInTiming={500}
+        animationOutTiming={500}
+        backdropTransitionInTiming={500}
+        backdropTransitionOutTiming={500}
+        swipeDirection="down"
+        scrollHorizontal={true}
+        style={{justifyContent: "flex-end", flex: 1, margin: 0}}
+      >
+        <View
+          style={{
+            height: height - 60,
+            backgroundColor: "white",
+            borderTopLeftRadius: 8,
+            borderTopRightRadius: 8,
+            paddingVertical: 25,
+            paddingHorizontal: 28,
+          }}
         >
           <View
             style={{
-              height: height - 60,
-              backgroundColor: "white",
-              borderTopLeftRadius: 8,
-              borderTopRightRadius: 8,
-              paddingVertical: 25,
-              paddingHorizontal: 28,
+              width: "100%",
+              flexDirection: "row",
+              justifyContent: "space-between",
             }}
           >
-            <View
-              style={{
-                width: "100%",
-                flexDirection: "row",
-                justifyContent: "space-between",
-              }}
-            >
-              <Text style={{fontSize: 18, color: "#000000"}}>受信画像</Text>
-              <TouchableOpacity onPress={() => setIsPopup(false)}>
-                <Image source={require("@assets/images/icons/close_black.png")} style={{width: 20, height: 20}} resizeMode="cover" />
-              </TouchableOpacity>
-            </View>
-            <FlatList
-              numColumns={2}
-              horizontal={false}
-              columnWrapperStyle={{justifyContent: "space-between"}}
-              data={dataPopup}
-              renderItem={(item, index) => _renderItem(item, index)}
-              keyExtractor={(item) => item.id}
-            />
+            <Text style={{fontSize: 18, color: "#000000"}}>受信画像</Text>
+            <TouchableOpacity onPress={() => setIsPopup(false)}>
+              <Image source={require("@assets/images/icons/close_black.png")} style={{width: 20, height: 20}} resizeMode="cover" />
+            </TouchableOpacity>
           </View>
-        </ModalPortal>
+          <FlatList
+            numColumns={2}
+            horizontal={false}
+            columnWrapperStyle={{justifyContent: "space-between"}}
+            data={dataPopup}
+            renderItem={(item, index) => _renderItem(item, index)}
+            keyExtractor={(item) => item.id}
+          />
+        </View>
+      </ModalPortal>
+      <View style={{flex: 1, position: "relative"}}>
         {urlWebView && (
           <WebView
             useWebKit
+            style={{backgroundColor: "#000000"}}
             originWhitelist={["*"]}
+            allowsInlineMediaPlayback={true}
             mediaPlaybackRequiresUserAction={false}
-            mediaCapturePermissionGrantType={"grantIfSameHostElsePrompt"}
-            allowsInlineMediaPlayback
+            allowsFullscreenVideo={false}
             javaScriptEnabled
             scalesPageToFit
             javaScriptEnabledAndroid
             useWebkit
             startInLoadingState={true}
+            allowFileAccess
+            scrollEnabled={false}
+            allowUniversalAccessFromFileURLs
+            allowFileAccessFromFileURLs
+            domStorageEnabled
+            keyboardDisplayRequiresUserAction={false}
+            mixedContentMode="always"
             source={{
               uri: urlWebView,
               // html: '<div><video autoplay playsInline src="https://www.w3schools.com/html/mov_bbb.mp4" ></video></div>',
             }}
-            onMessage={onMessage}
             onShouldStartLoadWithRequest={(request) => {
               console.log("request.url", request?.url, route?.params?.data);
               try {
