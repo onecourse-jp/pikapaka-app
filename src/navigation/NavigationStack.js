@@ -20,6 +20,8 @@ import BottomTabbarNavigator from "./BottomTabbarNavigator";
 
 import LoadingView from "../components/LoadingView";
 import ModalBottom from "@components/modals/ModalBottomAction";
+import ModalViewListImageOnCall from "@components/modals/ModalViewListImageOnCall";
+
 import TermsOfService from "@screens/TCareClinic/TermsOfService";
 import PrivacyPolicy from "@screens/TCareClinic/PrivacyPolicy";
 import CommercialLaw from "@screens/TCareClinic/CommercialLaw";
@@ -67,6 +69,7 @@ import {
   SCREEN_EDIT_CALENDAR_ADDRESS,
   SCREEN_EDIT_CALENDAR_CONFIRM,
   SCREEN_EDIT_DELIVERY_ADDRESS,
+  SCREEN_MODAL_LIST_IMAGE_CALL,
 } from "@screens/screens.constants";
 import {navigationRef} from "./NavigationService";
 
@@ -229,6 +232,7 @@ function App() {
         >
           <Stack.Screen name={SCREEN_MODAL_LOADER} component={LoadingView} options={{headerShown: false, animation: "none"}} />
           <Stack.Screen name={SCREEN_MODAL_BOTTOM} component={ModalBottom} options={{headerShown: false}} />
+          <Stack.Screen name={SCREEN_MODAL_LIST_IMAGE_CALL} component={ModalViewListImageOnCall} options={{headerShown: false}} />
         </Stack.Group>
         <Stack.Group
           screenOptions={{
@@ -237,7 +241,6 @@ function App() {
         >
           <Stack.Screen name={SCREEN_WEB_VIEW} component={ModalWebView} options={{headerShown: true}} />
         </Stack.Group>
-
       </Stack.Navigator>
     </NavigationContainer>
   );
