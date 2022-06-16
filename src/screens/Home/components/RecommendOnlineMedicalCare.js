@@ -19,8 +19,8 @@ export default function RecommendOnlineMedicalCare({
   const TextFormat = [
     "仕事などが忙しく、クリニックに行く時間がない",
     "家の近くに悩みを相談できるクリニックがない",
-    "クリニック・薬局などの待ち時間が嫌",
     "薬をすぐに処方してもらいたい",
+    "クリニック・薬局などの待ち時間が嫌",
     "費用を抑えたいが、信頼のあるクリニックがよい",
   ];
   return (
