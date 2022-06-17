@@ -70,9 +70,9 @@ export default function ModalViewListImageOnCall({navigation, route}) {
             paddingHorizontal: 24,
           }}
         >
-          <></>
-          <Text>受診画像</Text>
-          <TouchableOpacity style={{width: 20, height: 20, paddingHorizontal: 24}} onPress={() => navigation.goBack()}>
+          <View style={{width: 20}}></View>
+          <Text style={{fontWeight: "700", color: colors.colorTextBlack}}>受診画像</Text>
+          <TouchableOpacity style={{width: 20, height: 20, paddingRight: 24}} onPress={() => navigation.goBack()}>
             <Image source={require("@assets/images/icons/close_black.png")} style={{width: 20, height: 20}} resizeMode="cover" />
           </TouchableOpacity>
         </View>
