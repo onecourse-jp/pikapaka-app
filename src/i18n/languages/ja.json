@@ -20,7 +20,8 @@
     "6": "診察完了",
     "7": "キャンセル"
   },
-
+  "Yourcardnumberisincorrect": "カード番号が間違っています。",
+  "Yourcard'sexpirationyearisinvalid": "  カードの有効期限は無効です。",
   "LoginScreenTitle": "ログイン・新規登録",
   "LoginWithGoogleTitle": "Googleでログイン・登録",
   "LOGIN_FAIL": "メールアドレス・パスワードが間違えています",

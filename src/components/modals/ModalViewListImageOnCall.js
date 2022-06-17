@@ -65,11 +65,13 @@ export default function ModalViewListImageOnCall({navigation, route}) {
           style={{
             width: "100%",
             flexDirection: "row",
-            justifyContent: "flex-end",
+            justifyContent: "space-between",
             marginBottom: 30,
             paddingHorizontal: 24,
           }}
         >
+          <></>
+          <Text>受診画像</Text>
           <TouchableOpacity style={{width: 20, height: 20, paddingHorizontal: 24}} onPress={() => navigation.goBack()}>
             <Image source={require("@assets/images/icons/close_black.png")} style={{width: 20, height: 20}} resizeMode="cover" />
           </TouchableOpacity>

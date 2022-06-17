@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "@georstat/react-native-image-cache": "^1.3.0",
-    "@invertase/react-native-apple-authentication": "^2.1.2",
+    "@invertase/react-native-apple-authentication": "2.1.2",
     "@notifee/react-native": "^4.0.0",
     "@react-native-community/async-storage": "^1.12.1",
     "@react-native-community/cameraroll": "^4.0.4",

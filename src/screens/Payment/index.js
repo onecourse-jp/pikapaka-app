@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {StyleSheet, Text, View, ScrollView, SafeAreaView, TouchableOpacity, RefreshControl, Image} from "react-native";
+import {StyleSheet, Text, View, ScrollView, SafeAreaView, TouchableOpacity, RefreshControl, Image, Alert} from "react-native";
 import {useThemeColors, useThemeFonts, Button} from "react-native-theme-component";
 import {useNavigation} from "@react-navigation/native";
 import {useDispatch, useSelector} from "react-redux";
@@ -12,12 +12,14 @@ import {useForm, Controller} from "react-hook-form";
 import ItemQuestionForm from "../../components/Form/ItemQuestionForm";
 import {getBillPayment} from "@services/payments";
 import {SCREEN_EDIT_ADDRESS} from "../screens.constants";
+import {changeStatusCalendar} from "@actions/calendarAction";
 import BillPayment from "./BillPayment";
 import CardExpInput from "@components/items/CardExpInput";
 
 export default function Payment({route}) {
   const colors = useThemeColors();
   const fonts = useThemeFonts();
+  const dispatch = useDispatch();
   const idCalendar = route?.params?.id;
   const [refreshing, setRefreshing] = useState(false);
   const [showDetailMedicine, setShowDetailMedicine] = useState(false);
@@ -39,39 +41,53 @@ export default function Payment({route}) {
   });
 
   const onSubmit = async (dataSubmit) => {
-    global.showLoadingView();
     paymentMobile(dataSubmit);
   };
   const paymentMobile = async (dataSubmit) => {
     const paramsData = {
-      // reservation_form_id: idCalendar,
-      // amount: billData.bill?.total,
-      // cart_number: dataSubmit.cart_number,
-      // exp_month: dataExp.exp_month,
-      // exp_year: dataExp.exp_year,
-      // cvc: dataSubmit.cvc,
-      // cart_name: dataSubmit.cart_name,
+      cart_number: dataSubmit.cart_number,
+      exp_month: dataExp.exp_month,
+      exp_year: dataExp.exp_year,
+      cvc: dataSubmit.cvc,
+      // cart_number: 4242424242424242,
+      // exp_month: 12,
+      // exp_year: 30,
+      // cvc: 333,
       reservation_form_id: idCalendar,
       amount: billData.bill?.total,
-      cart_number: 4242424242424242,
-      exp_month: 12,
-      exp_year: 30,
-      cvc: 333,
       cart_name: dataSubmit.cart_name,
     };
+    console.log("paramsData", paramsData);
     try {
+      global.showLoadingView();
+      global.showLoadingView();
       const {response, data} = await paymentStripe(paramsData);
       console.log(" paramsData", paramsData);
       if (response && response.status == 200) {
         console.log("data paymentStripe", data);
-        navigation.goBack();
+        dispatch(changeStatusCalendar());
         global.hideLoadingView();
+        Alert.alert("", "支払い完了", [
+          {
+            text: "OK",
+            onPress: () => {
+              navigation.goBack();
+            },
+          },
+        ]);
       } else {
         console.log("err paymentStripe", data);
-        setErrorApi("Error!");
         global.hideLoadingView();
+        if (data?.message && typeof data?.message == "string") {
+          let errorMessage = data?.message.split(" ").join("");
+          errorMessage = errorMessage.split(".").join("");
+          setErrorApi(global.t(errorMessage));
+        } else {
+          setErrorApi("Error!");
+        }
       }
     } catch (error) {
+      console.log("err paymentStripe", error);
       setErrorApi("Error!");
     }
   };
@@ -122,6 +138,7 @@ export default function Payment({route}) {
       label: "カード番号",
       title: "カード番号",
       placeholder: "1234 5678 9012 3456",
+      typePad: "number",
       content: null,
       maxlength: 16,
     },
@@ -144,9 +161,10 @@ export default function Payment({route}) {
       placeholder: "3桁または4桁の数字",
       title: "セキュリティコード（CVC）",
       label: "セキュリティコード（CVC）",
+      typePad: "number",
       hideIcon: true,
       content: null,
-      maxlength: 3,
+      maxlength: 4,
     },
   ];
 
@@ -261,13 +279,15 @@ export default function Payment({route}) {
                       <Controller
                         control={control}
                         rules={item?.maxlength ? {required: true, maxLength: item?.maxlength} : {required: true}}
-                        defaultValue={item.value}
+                        defaultValue={item?.value}
                         name={item.key}
                         render={({field: {onChange, onBlur, value}}) => {
                           return <ItemQuestionForm item={item} valueData={value} changeData={onChange} />;
                         }}
                       />
-                      {errors[item.key] && item?.maxlength && <Text style={styles.textError}>{item?.maxlength}</Text>}
+                      {errors[item.key] && item?.maxlength && (
+                        <Text style={styles.textError}>入力ボックスは{item?.maxlength}文字の長さである必要があります</Text>
+                      )}
                       {errors[item.key] && (
                         <Text style={styles.textError}>
                           {global.t(item.label)}
@@ -318,7 +338,8 @@ export default function Payment({route}) {
               })}
             </View>
           </View>
-          <View style={{marginTop: 30, paddingHorizontal: 16, width: "100%"}}>
+          {errorApi?.length > 0 && <Text style={styles.textError}>{errorApi}</Text>}
+          <View style={{marginVertical: 30, paddingHorizontal: 16, width: "100%"}}>
             <Button variant="primary" label={global.t("action_payment")} onPress={handleSubmit(onSubmit)} />
           </View>
         </ScrollView>
@@ -331,5 +352,5 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "column",
   },
-  textError: {color: "red", marginTop: 5, textAlign: "right", paddingHorizontal: 16},
+  textError: {color: "red", marginTop: 5, textAlign: "left", paddingHorizontal: 16},
 });
