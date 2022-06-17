@@ -54,7 +54,7 @@ export default function Profile({navigation}) {
     {
       key: "name",
       label: "名前",
-      placeholder: "フリガナを入力",
+      placeholder: "名前を入力",
       content: profile?.name ?? null,
       hideIcon: false,
       hideItem: false,
@@ -86,7 +86,7 @@ export default function Profile({navigation}) {
     },
     {
       key: "birthday",
-      placeholder: "フリガナを入力",
+      placeholder: "生年月日を入力",
       label: "生年月日",
       content: profile?.birthday ? moment(new Date(profile?.birthday)).format("YYYY年MM月DD日") : null,
       hideIcon: false,
@@ -110,7 +110,7 @@ export default function Profile({navigation}) {
     {
       key: "password",
       label: "パスワード",
-      placeholder: "フリガナを入力",
+      placeholder: "パスワードを入力",
       content: "パスワードを変更",
       hideIcon: true,
       hideItem: true,
@@ -124,7 +124,7 @@ export default function Profile({navigation}) {
     {
       key: "postal_code",
       label: "郵便番号",
-      placeholder: "選択",
+      placeholder: "郵便番号を入力",
       content: profile?.postal_code ?? null,
       hideIcon: false,
       hideItem: false,
@@ -135,7 +135,7 @@ export default function Profile({navigation}) {
     {
       key: "address",
       label: "住所",
-      placeholder: "選択",
+      placeholder: "住所を入力",
       content: profile?.address ?? null,
       hideIcon: false,
       hideItem: false,
@@ -157,7 +157,7 @@ export default function Profile({navigation}) {
     {
       key: "content_allergies",
       label: "アレルギーの有無",
-      placeholder: "フリガナを入力",
+      placeholder: "アレルギーを入力",
       content: profile?.allergies ? (profile?.allergies === 1 ? renderContentAllergies(profile?.content_allergies) : "無") : null,
       hideIcon: false,
       hideItem: false,
@@ -168,7 +168,7 @@ export default function Profile({navigation}) {
     {
       key: "take_medicines",
       label: "服薬中の薬の有無",
-      placeholder: "選択",
+      placeholder: "服薬中の薬を入力",
       content: profile?.take_medicines ? (profile?.take_medicines == 1 ? renderContentAllergies(profile?.content_medicines) : "無") : null,
       hideIcon: false,
       hideItem: false,
