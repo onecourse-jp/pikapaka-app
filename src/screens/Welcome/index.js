@@ -173,6 +173,18 @@ export default function WelcomeScreen({route}) {
             </View>
             <View style={{marginTop: 10, width: "100%"}}>
               <TouchableOpacity
+                style={{
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  marginTop: 10,
+                }}
+                onPress={() => {
+                  navigation.navigate("Tabbar");
+                }}
+              >
+                <Text style={{fontSize: 16, textAlign: "center", color: colors.headerComponent}}>{`TOPに戻る`}</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
                 onPress={() => {
                   navigation.navigate(SCREEN_REGISTER);
                 }}
