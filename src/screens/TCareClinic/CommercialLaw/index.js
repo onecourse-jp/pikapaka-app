@@ -18,7 +18,7 @@ export default function () {
     {name: "設立", content: "2018年12月1日", reqireForm: false},
     {name: "資本金", content: "398,900,000円（資本準備金を含む）", reqireForm: false},
     {name: "代表取締役", content: "原　基記", reqireForm: false},
-    {name: "ご旅行に関するお問い合わせ TEL", content:"03-4555-9805", reqireForm: false},
+    {name: "お問い合わせ TEL", content:"03-6820-0995", reqireForm: false},
     {name: "FAX", content: "03-3431-6811", reqireForm: false},
     {name: "インターネットでのお問い合わせ先", content: "", reqireForm: true, text: "お問い合わせフォーム >"},
     {
@@ -32,32 +32,32 @@ export default function () {
     },
     {
       name: "商品代金以外の必要料金代金",
-      content: "商品代金以外の必要料金代金：取扱手数料・振込手数料・航空保険料・燃油特別付加運賃（一部航空券のみ）",
+      content: "配送料",
       reqireForm: false,
     },
     {
       name: "販売数量",
-      content: "メール、FAX、TELにてのご案内",
+      content: "メール、チャットにてのご案内",
       reqireForm: false,
     },
     {
       name: "商品の引渡し時期",
-      content: "＜ヘルスケア事業＞\n商品（＝検査）は、引き渡し時期＝検査実施日。\n商品（＝検査キット一式）は、検査キット一式を購入依頼、決済完了後に発送。\n＜福利厚生事業＞\n搭乗の３時間前まで",
+      content: "商品（＝医薬品）は、購入依頼、決済完了後に発送。引渡し時期は、1～4日以内。",
       reqireForm: false,
     },
     {
       name: "お支払方法",
-      content: "法人売掛、クレジットカードなど",
+      content: "クレジットカード",
       reqireForm: false,
     },
     {
       name: "返品特約",
-      content: "＜ヘルスケア事業＞\n検査は受けなければキャンセル料不要。郵送キットに関しては衛生上の問題で、キャンセルは不可。返金なし。\n来店にてお預かりした検体が災害等の不可抗力や不測の事態が生じたことにより検査が実施できなかった場合は免責とさせていただき、全額返金いたします。\n＜福利厚生事業＞\nお客様の都合によるキャンセルにつきましては、出発日によりキャンセル料が発生いたします。 尚、万が一弊社の手配違いによるものに関しましては旅程保証にて対応させて頂きます。",
+      content: "購入後のキャンセルは不可。返金なし。災害等の不可抗力や不測の事態が生じたことにより商品の発送が完了できなかった場合は免責とさせていただき、全額返金いたします。",
       reqireForm: false,
     },
     {
       name: "顧客情報",
-      content: "お客様からお預かりした顧客情報はチケット手配の用途以外には一切使用いたしません。",
+      content: "お客様からお預かりした顧客情報は、オンライン診療時、医薬品の発送時、弊社サービスの紹介案内の用途以外には一切使用いたしません。",
       reqireForm: false,
     },
      {
