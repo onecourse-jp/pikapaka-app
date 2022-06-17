@@ -1,6 +1,6 @@
 {
-  "name": "PikaPaka",
-  "displayName": "PikaPaka",
+  "name": "ピカパカヘルスケア",
+  "displayName": "ピカパカヘルスケア",
   "expo": {
     "android": {
       "googleServicesFile": "./google-services.json"
