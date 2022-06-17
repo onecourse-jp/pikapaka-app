@@ -54,10 +54,16 @@ export class WebRTC extends Emitter {
       this.emit("io", {
         online: true,
       });
+      this.io.on("adminUploadNewPicture", () => {
+        console.log("adminUploadNewPictureadminUploadNewPicture");
+      });
       this.emit("connect");
       this.io.emit("join", {room});
       messages.on("closeCall", (_) => {
+        console.log("hahahahah");
         this.emit("disconnect");
+        this.io.disconnect();
+        // this.io.disconnect()
       });
     });
 

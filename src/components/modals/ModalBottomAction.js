@@ -6,13 +6,13 @@ import {useThemeColors, Button} from "react-native-theme-component";
 import Colors from "@config/styles";
 
 const DATA = [
-  {label: "スキンケア (美白)", value: '{"label":"選択中の科目","value":"スキンケア (美白)","key":"skinCare","data":"1"}'},
-  {label: "スキンケア (美肌)", value: '{"label":"選択中の科目","value":"スキンケア (美肌)","key":"skinCare","data":"2"}'},
-  {
-    label: "スキンケア (アンチエイジング)",
-    value: '{"label":"選択中の科目","value":"スキンケア (アンチエイジング)","key":"skinCare","data":"3"}',
-  },
-  {label: "スキンケア (保湿)", value: '{"label":"選択中の科目","value":"スキンケア (保湿)","key":"skinCare","data":"4"}'},
+  {label: "スキンケア", value: '{"label":"選択中の科目","value":"スキンケア","key":"skinCare","data":"1"}'},
+  // {label: "スキンケア (美肌)", value: '{"label":"選択中の科目","value":"スキンケア (美肌)","key":"skinCare","data":"2"}'},
+  // {
+  //   label: "スキンケア (アンチエイジング)",
+  //   value: '{"label":"選択中の科目","value":"スキンケア (アンチエイジング)","key":"skinCare","data":"3"}',
+  // },
+  // {label: "スキンケア (保湿)", value: '{"label":"選択中の科目","value":"スキンケア (保湿)","key":"skinCare","data":"4"}'},
   {label: "ダイエット", value: '{"label":"選択中の科目","value":"ダイエット","key":"diet","data":"5"}'},
   {label: "ピル（ピル）", value: '{"label":"選択中の科目","value":"ピル (ピル）","key":"pill","data":"6"}'},
   {label: "ピル （アフターピル）", value: '{"label":"選択中の科目","value":"ピル（アフターピル）","key":"pill","data":"7"}'},
