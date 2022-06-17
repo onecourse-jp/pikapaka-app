@@ -44,7 +44,7 @@ export default function EditYesNoForm({route}) {
         console.log("data when update", data);
       } else {
         global.hideLoadingView();
-        Alert.alert("Update Profile", "Update fail. Please try again.", [
+        Alert.alert("","個人情報の編集ができません。もう一度お願いします。", [
           {
             text: "OK",
             onPress: () => {},
@@ -54,7 +54,7 @@ export default function EditYesNoForm({route}) {
     } catch (error) {
       console.log("error", error);
       global.hideLoadingView();
-      Alert.alert("Update Profile", "Update fail. Please try again.", [
+      Alert.alert("","個人情報の編集ができません。もう一度お願いします。", [
         {
           text: "OK",
           onPress: () => {},

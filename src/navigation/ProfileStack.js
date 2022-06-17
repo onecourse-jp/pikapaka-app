@@ -17,6 +17,7 @@ import {
   SCREEN_EDIT_MEDICAL_HISTORY,
   SCREEN_EDIT_BIRTHDAY,
   SCREEN_EDIT_PHONE_NUMBER,
+  SCREEN_EDIT_EMAIL_ADDRESS,
 } from "../screens/screens.constants";
 import ProfileScreen from "@screens/Profile";
 import PaymentScreen from "@screens/Payment";
@@ -31,6 +32,7 @@ import EditYesNoForm from "../screens/Profile/EditProfile/EditYesNoForm";
 import EditMedicalHistory from "../screens/Profile/EditProfile/EditMedicalHistory";
 import EditBirthday from "../screens/Profile/EditProfile/EditBirthday";
 import EditPhoneNumber from "../screens/Profile/EditProfile/EditPhoneNumber";
+import EditEmailAddress from "@screens/Profile/EditProfile/EditEmailAddress";
 
 const ProfileStack = createNativeStackNavigator();
 function ProfileStackScreen() {
@@ -58,6 +60,7 @@ function ProfileStackScreen() {
           },
         }}
       />
+      <ProfileStack.Screen name={SCREEN_EDIT_EMAIL_ADDRESS} component={EditEmailAddress} options={{title: "メールアドレス"}} />
       <ProfileStack.Screen name={SCREEN_EDIT_NAME} component={EditName} options={{title: "名前を変更"}} />
       <ProfileStack.Screen name={SCREEN_EDIT_FURIGANA} component={EditFurigana} options={{title: "名前を変更"}} />
       <ProfileStack.Screen name={SCREEN_EDIT_GENDER} component={EditGender} options={{title: "性別を変更"}} />

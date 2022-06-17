@@ -30,7 +30,6 @@ export default function HistorySkinCare({category_medical = 0}) {
     const {response, data} = await getReservation(paramsRevervation);
     if (response?.status === 200) {
       const listCalendar = data?.data?.data;
-      console.log("data getReservation", data?.data);
       if (listCalendar?.length > 0) {
         setTotalPage(data?.data?.last_page || 1);
         setDataCalendar(listCalendar);
@@ -40,7 +39,6 @@ export default function HistorySkinCare({category_medical = 0}) {
       }
     } else {
       global.hideLoadingView();
-      console.log("response getReservation", response);
     }
   };
   useEffect(() => {

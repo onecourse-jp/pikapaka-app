@@ -20,6 +20,7 @@ export default function ItemQuestionForm({item, valueData = null, changeData = (
   ]);
   const [valueRowItem, setValueRowItem] = useState(null);
   const [listCheckbox, setListCheckbox] = useState([]);
+  console.log("item", item.key, valueData);
   const refInput = useRef(null);
   const renderValueDefault = () => {
     if (item?.label == 4 && item?.value) {
@@ -253,8 +254,10 @@ export default function ItemQuestionForm({item, valueData = null, changeData = (
                   marginRight: 0,
                 },
               ]}
-              keyboardType={item.key === "phone_number" || item.key === "postal_code" ? "number-pad" : "default"}
-              value={typeof valueData === "string" ? valueData : renderContentAllergies(valueData)}
+              keyboardType={
+                item.key === "phone_number" || item?.typePad === "number" || item.key === "postal_code" ? "number-pad" : "default"
+              }
+              value={valueData ? (typeof valueData === "string" ? valueData : renderContentAllergies(valueData)) : null}
               placeholder={item?.placeholder || "入力してください"}
               secureTextEntry={item.key === "newPassword" || item.key === "confirmPassword" ? true : false}
               // placeholder={item.placeholder}
@@ -267,6 +270,7 @@ export default function ItemQuestionForm({item, valueData = null, changeData = (
                 }
               }}
               multiline={true}
+              maxLength={item?.maxlength || 999}
             />
           )}
         </View>
