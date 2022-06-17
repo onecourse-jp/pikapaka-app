@@ -83,7 +83,7 @@ export default function ServiceStep5({route}) {
             </View>
           </View>
           <View style={{paddingHorizontal: 16, marginTop: 20}}>
-            <Button label="問診票の入力へ進む" onPress={handleSubmit} />
+            <Button label="次へ進む" onPress={handleSubmit} />
           </View>
         </ScrollView>
       </View>
