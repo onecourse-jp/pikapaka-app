@@ -30,7 +30,7 @@ export default function ServiceStep5({route}) {
       <View style={[styles.container]}>
         <ScrollView contentContainerStyle={{}}>
           <GuideComponent
-            title={"ご予約を承りました。事前に必ず問診票のご記入をお願いいたします。"}
+            title={"ご予約を承りました。初診の方は事前に必ず問診票のご記入をお願いいたします。"}
             note="※回答していただかないと受診ができません"
           />
           <StepsComponent currentStep={screenStep} />

@@ -33,7 +33,7 @@ export default function ServiceStep4() {
           navigation.navigate(SCREEN_SERVICE_STEP5, {id: data?.data?.id});
         } else {
           global.hideLoadingView();
-          alert("新しい日時の設定ができません。");
+          alert("選択した日程で予約することができませんでした。");
         }
       }
     } catch (error) {
