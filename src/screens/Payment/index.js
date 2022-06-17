@@ -67,7 +67,7 @@ export default function Payment({route}) {
         console.log("data paymentStripe", data);
         dispatch(changeStatusCalendar());
         global.hideLoadingView();
-        Alert.alert("", "支払い完了", [
+        Alert.alert("", "お支払いが完了しました。", [
           {
             text: "OK",
             onPress: () => {
@@ -82,7 +82,7 @@ export default function Payment({route}) {
           let errorMessage = data?.message.split(" ").join("");
           errorMessage = errorMessage.split(".").join("");
           if (errorMessage.includes("test")) {
-            setErrorApi("あなたのカードは拒否されました。 リクエストはテストモードでしたが、非テストを使用しました");
+            setErrorApi("お支払いが正常に完了しませんでした。カード情報をご確認ください。");
           } else {
             setErrorApi(global.t(errorMessage));
           }
