@@ -2,7 +2,7 @@
 
 import io from "socket.io-client";
 import {SIGNAL_SERVER_URL} from "../config";
-import {Emitter} from "../lib/emitter";
+import {Emitter, messages} from "../lib/emitter";
 import {state} from "../state";
 import {WebRTCPeer} from "./webrtc-peer";
 import socket from "socket.io-client/lib/socket";
@@ -56,6 +56,9 @@ export class WebRTC extends Emitter {
       });
       this.emit("connect");
       this.io.emit("join", {room});
+      messages.on("closeCall", (_) => {
+        this.emit("disconnect");
+      });
     });
 
     this.io.on("disconnect", () => {

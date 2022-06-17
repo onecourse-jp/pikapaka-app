@@ -33,7 +33,7 @@ export default function ModalBottomAction({navigation, route}) {
       <TouchableOpacity key={`_renderItem-${index}`} onPress={() => setValueChoose(valueItem)}>
         <Text
           style={{
-            color: valueChoose?.data == valueItem?.data ? colors.colorTextBlack : "#C1C1C1",
+            color: valueChoose?.data == valueItem?.data ? colors.colorTextBlack : colors.colorTextBlack,
             textAlign: "center",
             fontSize: 16,
             lineHeight: 34,

@@ -19,7 +19,7 @@ export default function ServiceStep4() {
   const dispatch = useDispatch();
   const calendar = useSelector((state) => state?.calendar);
   const dataConfirm = calendar?.data?.step3;
-
+  console.log("  dataConfirm?.old_reservation_id ", dataConfirm?.old_reservation_id);
   const handleSubmit = async () => {
     try {
       {
@@ -277,7 +277,7 @@ export default function ServiceStep4() {
             }}
           >
             <Text style={{fontFamily: fonts.NSregular, fontSize: 14, lineHeight: 15, color: colors.gray1}}>
-              {dataConfirm?.old_reservation_id ? "いいえ" : "はい"}
+              {dataConfirm?.old_reservation_id || dataConfirm?.old_reservation_id  === undefined ? "はい" : "いいえ"}
             </Text>
           </View>
 

@@ -54,11 +54,11 @@ export const SCREEN_FAQ = "SCREEN_FAQ";
 export const SCREEN_TOP = "SCREEN_TOP";
 export const SCREEN_PROFILE_CHANGE_INTRODUCE = "Profile_change_introduce";
 export const SCREEN_PROFILE_CHANGE_INTRODUCE_WITH_TEMPLATE = "Profile_change_introduce_with_template";
-
 export const SCREEN_DIALOG = "Modal";
 export const SCREEN_POPUP = "Popup";
 export const SCREEN_MODAL_LOADER = "LoadingView";
 export const SCREEN_MODAL_BOTTOM = "SCREEN_MODAL_BOTTOM";
+export const SCREEN_MODAL_LIST_IMAGE_CALL = "SCREEN_MODAL_LIST_IMAGE_CALL";
 
 export const SCREEN_MODAL_MESSAGE = "CustomModal";
 export const SCREEN_MODAL_MESSAGE_2 = "CustomModal2";
@@ -120,3 +120,5 @@ export const SCREEN_EDIT_ADDRESS = "SCREEN_EDIT_ADDRESS";
 export const SCREEN_EDIT_YES_NO_FORM = "SCREEN_EDIT_YES_NO_FORM";
 export const SCREEN_EDIT_MEDICAL_HISTORY = "SCREEN_EDIT_MEDICAL_HISTORY";
 export const SCREEN_EDIT_BIRTHDAY = "SCREEN_EDIT_BIRTHDAY";
+export const SCREEN_EDIT_PHONE_NUMBER = "SCREEN_EDIT_PHONE_NUMBER";
+

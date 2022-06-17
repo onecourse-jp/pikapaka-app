@@ -115,3 +115,8 @@ export async function createReservationAnswer(params) {
     data: params,
   });
 }
+export async function getListPictureRevervation(params) {
+  return request(`/auth/get-images?reservation_form_id=${params}`, {
+    method: "GET",
+  });
+}

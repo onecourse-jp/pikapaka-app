@@ -74,6 +74,7 @@ export async function setupWebRTC(state, room) {
   // Listening to new messages from Remote Client and emitting to Local client
   webrtc.on("chatMessage", (info) => {
     messages.emit("newMessage", info);
+    console.log("hahahhahaha");
   });
 
   let onSetLocalStream = messages.on("setLocalStream", (stream) => {

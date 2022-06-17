@@ -3,16 +3,17 @@ import {StyleSheet, Text, View, TouchableOpacity, ScrollView, Image, TextInput, 
 import {useThemeColors, useThemeFonts, Button} from "react-native-theme-component";
 import {useNavigation} from "@react-navigation/native";
 import {useDispatch, useSelector} from "react-redux";
+import {messages} from "../CallLogic/lib/emitter";
 import ButtonConnect from "./ButtonConnect";
 import Notification from "./Notification";
 import Volume from "./Volume";
 import moment from "moment";
 import {setup, startPlayStream} from "../CallLogic/state";
-import {messages} from "../CallLogic/lib/emitter";
 
 export default function ({route}) {
   const colors = useThemeColors();
   const fonts = useThemeFonts();
+  const navigation = useNavigation();
   const [statusDoctor, setStatusDoctor] = useState(false);
   const dataCalendar = route?.params?.data;
   const titleWait = `${moment(dataCalendar?.date).format("YYYY年MM月DD日")}（${moment(dataCalendar?.date).format("dddd")}）${
@@ -26,15 +27,11 @@ export default function ({route}) {
   useEffect(async () => {
     if (dataCalendar?.id) {
       console.log("dataCalendar?.id", dataCalendar?.id);
-      // messages.on("setLocalStream", (videoSrc) => {
-      //   console.log("setLocalStream", videoSrc);
-      // });
       messages.on("setRemoteStream", (videoSrc) => {
         console.log("setRemoteStream", videoSrc);
         setStatusDoctor(true);
       });
       messages.on("offRemoteStream", () => {
-        console.log("offRemoteStream");
       });
       setup(dataCalendar.id);
     }
@@ -46,7 +43,26 @@ export default function ({route}) {
       isCallVideo: dataCalendar.id,
     });
   };
-
+  React.useLayoutEffect(() => {
+    navigation.setOptions({
+      headerLeft: () => (
+        <TouchableOpacity
+          onPress={() => {
+            messages.emit("closeCall");
+            navigation.goBack()
+          }}
+          style={{
+            justifyContent: "center",
+            alignItems: "center",
+            paddingVertical: 15,
+            paddingRight: 20,
+          }}
+        >
+          <Image source={require("@assets/images/icons/ic_back.png")} resizeMode="cover" />
+        </TouchableOpacity>
+      ),
+    });
+  }, [navigation]);
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: colors.backgroundTheme, position: "relative"}}>
       <ImageBackground source={require("@assets/images/connect_doctor_bg.png")} resizeMode="cover" style={{flex: 1}}>

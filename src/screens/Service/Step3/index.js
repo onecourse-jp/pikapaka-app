@@ -24,6 +24,9 @@ import {
   SCREEN_EDIT_MEDICINE,
   SCREEN_EDIT_FURIGANA,
   SCREEN_SERVICE_STEP2,
+  SCREEN_EDIT_PHONE_NUMBER,
+  SCREEN_EDIT_YES_NO_FORM,
+  SCREEN_EDIT_MEDICAL_HISTORY,
 } from "@screens/screens.constants";
 import {updateCalendar} from "@actions/calendarAction";
 import {dataMedicalHistory} from "../../../data";
@@ -110,8 +113,31 @@ export default function ServiceStep3() {
           navigation.navigate(SCREEN_EDIT_MEDICINE, {data: user});
         },
       },
-      {key: "pregnancy", title: "妊娠有無", placeholder: "選択", value: userDetails?.pregnancy ?? null, label: 4},
-      {key: "smoking", title: "喫煙有無", placeholder: "選択", value: userDetails?.smoking ?? null, label: 4},
+      {
+        key: "pregnancy",
+        title: "妊娠有無",
+        placeholder: "選択",
+        value: userDetails?.pregnancy ?? null,
+        label: 4,
+        action: () => {
+          navigation.navigate(SCREEN_EDIT_YES_NO_FORM, {
+            data: userDetails,
+            key: "pregnancy",
+            value: userDetails?.pregnancy,
+            label: "妊娠有無",
+          });
+        },
+      },
+      {
+        key: "smoking",
+        title: "喫煙有無",
+        placeholder: "選択",
+        value: userDetails?.smoking ?? null,
+        label: 4,
+        action: () => {
+          navigation.navigate(SCREEN_EDIT_YES_NO_FORM, {data: userDetails, key: "smoking", value: userDetails?.smoking, label: "喫煙有無"});
+        },
+      },
       {
         key: "medical_history",
         label: "既往歴",
@@ -120,6 +146,14 @@ export default function ServiceStep3() {
         label: 3,
         value: userDetails?.medical_history ?? null,
         data: dataMedicalHistory,
+        action: () => {
+          navigation.navigate(SCREEN_EDIT_MEDICAL_HISTORY, {
+            data: user,
+            key: "medical_history",
+            value: userDetails?.medical_history,
+            label: "喫煙有無",
+          });
+        },
       },
     ]);
     setDataPerson([
@@ -136,12 +170,20 @@ export default function ServiceStep3() {
         key: "email",
         title: "メールアドレス",
         placeholder: "メールアドレスを入力",
+        disabel: true,
         value: userDetails?.email ?? null,
       },
-      {key: "phone_number", title: "電話番号", placeholder: "電話番号を入力", value: userDetails?.phone_number ?? null},
+      {
+        key: "phone_number",
+        title: "電話番号",
+        placeholder: "電話番号を入力",
+        value: userDetails?.phone_number ?? null,
+        action: () => {
+          navigation.navigate(SCREEN_EDIT_PHONE_NUMBER, {data: userDetails});
+        },
+      },
     ]);
     reset(userDetails);
-    console.log("userDetailsuserDetailsuserDetailsuserDetailsuserDetails", userDetails);
   }, [userDetails]);
   // const [changeFunction, setChangeFunction] = useState(() => {});
   // const [valueModal, setValueModal] = useState(null);

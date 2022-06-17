@@ -8,6 +8,7 @@ import {
   SCREEN_SERVICE_STEP3,
   SCREEN_MODAL_LOADER,
   SCREEN_MODAL_BOTTOM,
+  SCREEN_MODAL_LIST_IMAGE_CALL,
 } from "../screens/screens.constants";
 import {setAuthority} from "./authority";
 import {dataMedicalHistory} from "../data";
@@ -85,6 +86,12 @@ export const showModalBottom = (options, callback) => {
   });
 };
 
+export const showModalListImage = (options) => {
+  RootNavigator.navigate(SCREEN_MODAL_LIST_IMAGE_CALL, {
+    ...options,
+  });
+};
+
 export const hideLoadingView = () => {
   if (RootNavigator?.getCurrentRoute()?.name === SCREEN_MODAL_LOADER) {
     RootNavigator.goBack();
@@ -146,7 +153,7 @@ export const renderContentAllergies = (content_allergies) => {
       }
     }
   }
-  if (result.length === 0) return null;
+  if (result.length === 0) return "あり";
   return result;
 };
 
@@ -162,6 +169,7 @@ global.goToMain = goToMain;
 global.renderColorStatus = renderColorStatus;
 global.showLoadingView = showLoadingView;
 global.showModalBottom = showModalBottom;
+global.showModalListImage = showModalListImage;
 global.hideLoadingView = hideLoadingView;
 global.processSignIn = processSignIn;
 global.alertNeedLogin = alertNeedLogin;
