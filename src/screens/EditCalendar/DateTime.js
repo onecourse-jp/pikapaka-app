@@ -294,10 +294,10 @@ export default function EditCalendar({route}) {
               })}
             </View>
           )}
-        </ScrollView>
-        <View style={{marginTop: 60, paddingHorizontal: 16}}>
+           <View style={{marginVertical: 60 }}>
           <Button label="変更内容の確認へ進む" onPress={handleSubmit} />
         </View>
+        </ScrollView>
       </View>
     </SafeAreaView>
   );

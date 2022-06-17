@@ -160,8 +160,8 @@ export default function Register() {
                 </Text>
               )}
               {errorApi?.length > 0 && <Text style={styles.textError}>{errorApi}</Text>}
-              <View style={{flexDirection: "row", marginTop: 14, flexWrap: "wrap", alignItems: "center"}}>
-                <Text style={{fontSize: 13, textAlign: "center", flexDirection: "row", alignItems: "center"}}>
+              <View style={{flexDirection: "row", marginTop: 14, flexWrap: "wrap"}}>
+                <Text style={{fontSize: 12,  flexDirection: "row", lineHeight: 24}}>
                   登録またはログインすることで、
                   <TouchableOpacity
                     onPress={() => {
@@ -169,7 +169,7 @@ export default function Register() {
                     }}
                   >
                     <Text
-                      style={{fontSize: 13, position: "relative", top: 3, color: colors.headerComponent, textDecorationLine: "underline"}}
+                      style={{fontSize: 12, position: "relative", lineHeight: 24,top: 3, color: colors.headerComponent, textDecorationLine: "underline"}}
                     >
                       利用規約
                     </Text>
@@ -181,7 +181,7 @@ export default function Register() {
                     }}
                   >
                     <Text
-                      style={{fontSize: 13, position: "relative", top: 3, color: colors.headerComponent, textDecorationLine: "underline"}}
+                      style={{fontSize: 12, lineHeight: 24,position: "relative", top: 3, color: colors.headerComponent, textDecorationLine: "underline"}}
                     >
                       プライバシーポリシー
                     </Text>
