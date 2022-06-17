@@ -30,9 +30,11 @@ export default function () {
       content:
         "・お客様がお申込みいただいた旅行またはサービスの提供\n・当社または当社提携先の商品、サービスの案内 ・当社サービス、旅行の意見や感想、アンケートのお願い\n・当社商品またはサービスの利用促進を目的とした特典、キャンペーン案内\n・お客様の問い合わせの対応\n・お客様個人が特定されない方法による統計資料の作成\n・従業員雇用管理、福利厚生、給与計算、業務管理の為\n・お客様からの問合せ対応、商談、打合せ、連絡の為\n・当社施設の入退出管理の為\n・採用選考を実施する為 ",
     },
-    { 
+    {
       title: "（2）収集",
-      content: "・本サービスの利用者である個人\n・法人の皆様\n・提携先・協業先の従業員\n・役員の皆様\n・その他取引先の従業員\n・役員の皆様\n・当社の従業員\n・役員\n・当社採用における応募者の皆様"},
+      content:
+        "・本サービスの利用者である個人\n・法人の皆様\n・提携先・協業先の従業員\n・役員の皆様\n・その他取引先の従業員\n・役員の皆様\n・当社の従業員\n・役員\n・当社採用における応募者の皆様",
+    },
     {
       title: "（3）第三者提供",
       content:
@@ -65,13 +67,26 @@ export default function () {
     },
     {
       title: "6.情報管理",
-      content:
-        "1．情報の正確性の確保 皆様からご提供いただいた情報については、常に正確かつ最新の情報となるよう努めます。\n2．安全管理措置 当社は、情報の管理については、社内規程により、関連法令に従った適切な取扱い方法を規定し、それに基づいた実施を徹底しています。\n3．従業者の監督 当社は、当社の規程に基づき、情報の厳格な運用及び適切な従業員教育を行っております。\n4．委託先の監督 当社は、社内規程に基づき、利用目的の範囲内で要件を満たした委託先にのみ委託を行い、適切な管理を行っております。\n5．保存期間と廃棄 皆様からご提供いただいた情報については所定の方法に従って保管するものとし、不要となった場合にはすみやかに廃棄します。",
+      content: [
+        {title: "1．情報の正確性の確保", content: "皆様からご提供いただいた情報については、常に正確かつ最新の情報となるよう努めます。"},
+        {
+          title: "2．安全管理措置 当社は、",
+          content: "情報の管理については、社内規程により、関連法令に従った適切な取扱い方法を規定し、それに基づいた実施を徹底しています。",
+        },
+        {title: "3．従業者の監督 当社は、", content: "当社の規程に基づき、情報の厳格な運用及び適切な従業員教育を行っております。"},
+        {
+          title: "4．委託先の監督 当社は、",
+          content: "社内規程に基づき、利用目的の範囲内で要件を満たした委託先にのみ委託を行い、適切な管理を行っております。",
+        },
+        {
+          title: "5．保存期間と廃棄",
+          content: "皆様からご提供いただいた情報については所定の方法に従って保管するものとし、不要となった場合にはすみやかに廃棄します。",
+        },
+      ],
     },
     {
       title: "7.クッキーに関するポリシー",
-      content:
-        "",
+      content: "",
     },
     {
       title: "クッキーとは？",
@@ -114,29 +129,19 @@ export default function () {
     },
     {
       title: "",
-      content:
-        "株式会社ピカパカ代表取締役\n原　基記\n制定日2021年1月1日\n改定日 2021年9月15日\n改定日 2022年4月1日",
+      content: "株式会社ピカパカ代表取締役\n原　基記\n制定日2021年1月1日\n改定日 2021年9月15日\n改定日 2022年4月1日",
     },
     {
       title: "個人情報保護に関するお問い合わせ",
-      content:
-        "本方針、また当社が取り扱う個人情報についてのお問い合わせは下記にて承ります。",
+      content: "本方針、また当社が取り扱う個人情報についてのお問い合わせは下記にて承ります。",
     },
     {
       title: "お問い合わせ先・苦情の申出先",
-      content:
-        " 株式会社ピカパカ　個人情報お問い合わせ担当窓口\nお電話：03-4555-9805 (10：00-17：00 ※土日祝日を除く）",
+      content: " 株式会社ピカパカ　個人情報お問い合わせ担当窓口\nお電話：03-4555-9805 (10：00-17：00 ※土日祝日を除く）",
     },
-    {
-      title: "",
-      content:
-        "お問い合わせフォームはこちら >",
-    },
-    {
-      title: "反社会的勢力に対する基本方針",
-      content:
-        "",
-    },
+  ];
+
+  const content3 = [
     {
       title: "1．組織としての対応",
       content:
@@ -144,23 +149,19 @@ export default function () {
     },
     {
       title: "2．外部専門機関との連携",
-      content:
-        "平素から、警察、暴力追放運動推進センター、弁護士等の外部の専門機関と緊密な連携関係を構築することに努めます。",
+      content: "平素から、警察、暴力追放運動推進センター、弁護士等の外部の専門機関と緊密な連携関係を構築することに努めます。",
     },
     {
       title: "3．取引を含めた一切の関係遮断",
-      content:
-        "反社会的勢力に対しては、取引関係を含めて、一切の関係を遮断します。",
+      content: "反社会的勢力に対しては、取引関係を含めて、一切の関係を遮断します。",
     },
     {
       title: "4．有事における民事と刑事の法的対応",
-      content:
-        "反社会的勢力による不当要求を拒絶し、必要に応じて民事および刑事の両面から法的対応を行います。",
+      content: "反社会的勢力による不当要求を拒絶し、必要に応じて民事および刑事の両面から法的対応を行います。",
     },
     {
       title: "5．裏取引や資金提供の禁止",
-      content:
-        "反社会的勢力との裏取引は絶対に行いません。反社会的勢力への資金提供は絶対に行いません",
+      content: "反社会的勢力との裏取引は絶対に行いません。反社会的勢力への資金提供は絶対に行いません",
     },
   ];
   return (
@@ -178,12 +179,42 @@ export default function () {
             {content1.map((item, index) => {
               return (
                 <View key={index} style={{marginBottom: 40}}>
-                  <Text style={{fontWeight: "700", fontSize: 14, lineHeight: 21, textAlign: "justify", color: colors.textHiragino}}>
+                  <Text
+                    style={{
+                      fontWeight: "700",
+                      marginBottom: typeof item.content === "string" ? 0 : 20,
+                      fontSize: 14,
+                      lineHeight: 21,
+                      textAlign: "justify",
+                      color: colors.textHiragino,
+                    }}
+                  >
                     {item.title}
                   </Text>
-                  <Text style={{fontWeight: "400", fontSize: 14, lineHeight: 21, textAlign: "justify", color: colors.textHiragino}}>
-                    {item.content}
-                  </Text>
+                  {typeof item.content === "string" ? (
+                    <Text style={{fontWeight: "400", fontSize: 14, lineHeight: 21, textAlign: "justify", color: colors.textHiragino}}>
+                      {item.content}
+                    </Text>
+                  ) : (
+                    <View>
+                      {item?.content.map((el, ind) => {
+                        return (
+                          <View key={`item?.content-${ind}`} style={{marginBottom: 20}}>
+                            <Text
+                              style={{fontWeight: "700", fontSize: 14, lineHeight: 21, textAlign: "justify", color: colors.textHiragino}}
+                            >
+                              {el.title}
+                            </Text>
+                            <Text
+                              style={{fontWeight: "400", fontSize: 14, lineHeight: 21, textAlign: "justify", color: colors.textHiragino}}
+                            >
+                              {el.content}
+                            </Text>
+                          </View>
+                        );
+                      })}
+                    </View>
+                  )}
                 </View>
               );
             })}
@@ -231,6 +262,45 @@ export default function () {
             </View>
             <View style={{height: 30}}></View>
             {content2.map((item, index) => {
+              return (
+                <View key={index} style={{marginBottom: 30}}>
+                  <Text style={{fontWeight: "700", fontSize: 14, lineHeight: 21, textAlign: "justify", color: colors.textHiragino}}>
+                    {item.title}
+                  </Text>
+                  <Text style={{fontWeight: "400", fontSize: 14, lineHeight: 21, textAlign: "justify", color: colors.textHiragino}}>
+                    {item.content}
+                  </Text>
+                </View>
+              );
+            })}
+            <>
+              <TouchableOpacity
+                onPress={() => {
+                  global.showWebView({
+                    url: "https://docs.google.com/forms/d/e/1FAIpQLSdLQiPQIbCkjvr2HwBHD3ktb0WQHwFmdatHcCGzCnnlGhA4CQ/viewform",
+                  });
+                }}
+                style={{marginBottom: 30, paddingVertical: 10}}
+              >
+                <Text
+                  style={{
+                    color: colors.headerComponent,
+                    fontWeight: "600",
+                    fontSize: 14,
+                    lineHeight: 14,
+                    textDecorationLine: "underline",
+                  }}
+                >
+                  {`お問い合わせフォームはこちら >`}
+                </Text>
+              </TouchableOpacity>
+            </>
+            <View style={{alignItems: "center", marginBottom: 20}}>
+              <Text style={{fontWeight: "700", fontSize: 32, lineHeight: 48, color: colors.textHiragino, textAlign: "center"}}>
+                {`反社会的勢力に対する基本方針`}
+              </Text>
+            </View>
+            {content3.map((item, index) => {
               return (
                 <View key={index} style={{marginBottom: 40}}>
                   <Text style={{fontWeight: "700", fontSize: 14, lineHeight: 21, textAlign: "justify", color: colors.textHiragino}}>
