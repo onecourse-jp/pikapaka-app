@@ -27,6 +27,7 @@ import {
   SCREEN_EDIT_PHONE_NUMBER,
   SCREEN_EDIT_YES_NO_FORM,
   SCREEN_EDIT_MEDICAL_HISTORY,
+  SCREEN_EDIT_EMAIL_ADDRESS,
 } from "@screens/screens.constants";
 import {updateCalendar} from "@actions/calendarAction";
 import {dataMedicalHistory} from "../../../data";
@@ -170,8 +171,10 @@ export default function ServiceStep3() {
         key: "email",
         title: "メールアドレス",
         placeholder: "メールアドレスを入力",
-        disabel: true,
         value: userDetails?.email ?? null,
+        action: () => {
+          navigation.navigate(SCREEN_EDIT_EMAIL_ADDRESS, {data: user});
+        },
       },
       {
         key: "phone_number",

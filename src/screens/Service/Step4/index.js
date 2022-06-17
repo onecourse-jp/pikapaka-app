@@ -277,7 +277,7 @@ export default function ServiceStep4() {
             }}
           >
             <Text style={{fontFamily: fonts.NSregular, fontSize: 14, lineHeight: 15, color: colors.gray1}}>
-              {dataConfirm?.old_reservation_id || dataConfirm?.old_reservation_id  === undefined ? "はい" : "いいえ"}
+              { dataConfirm?.old_reservation_id  === undefined ? "はい" : "いいえ"}
             </Text>
           </View>
 

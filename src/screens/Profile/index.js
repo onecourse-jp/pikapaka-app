@@ -21,7 +21,7 @@ import {
 import {getProfile} from "@services/search";
 import moment from "moment";
 import Arrow_right from "../../assets/images/SvgComponents/arrow_right";
-import {SCREEN_EDIT_BIRTHDAY} from "../screens.constants";
+import {SCREEN_EDIT_BIRTHDAY, SCREEN_EDIT_EMAIL_ADDRESS} from "../screens.constants";
 
 export default function Profile({navigation}) {
   const colors = useThemeColors();
@@ -95,7 +95,16 @@ export default function Profile({navigation}) {
         navigation.navigate(SCREEN_EDIT_BIRTHDAY, {data: user});
       },
     },
-    {key: "email", label: "メールアドレス", content: profile?.email, hideIcon: true, hideItem: false},
+    {
+      key: "email",
+      label: "メールアドレス",
+      content: profile?.email,
+      hideIcon: true,
+      hideItem: false,
+      action: () => {
+        navigation.navigate(SCREEN_EDIT_EMAIL_ADDRESS, {data: user});
+      },
+    },
     {
       key: "phone_number",
       label: "電話番号",

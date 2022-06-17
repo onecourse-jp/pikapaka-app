@@ -27,6 +27,7 @@ import {
   SCREEN_EDIT_MEDICAL_HISTORY,
   SCREEN_EDIT_PHONE_NUMBER,
   SCREEN_EDIT_BIRTHDAY,
+  SCREEN_EDIT_EMAIL_ADDRESS,
 } from "@screens/screens.constants";
 import QuestionaireStep1 from "@screens/Questionnaire/Step1";
 import ServiceStep2 from "@screens/Service/Step2";
@@ -56,6 +57,7 @@ import EditAddress from "@screens/Profile/EditProfile/EditAddress";
 import EditYesNoForm from "@screens/Profile/EditProfile/EditYesNoForm";
 import EditMedicalHistory from "@screens/Profile/EditProfile/EditMedicalHistory";
 import EditBirthday from "@screens/Profile/EditProfile/EditBirthday";
+import EditEmailAddress from "@screens/Profile/EditProfile/EditEmailAddress";
 import EditPhoneNumber from "../screens/Profile/EditProfile/EditPhoneNumber";
 const ServiceStack = createNativeStackNavigator();
 function ServiceStackScreen() {
@@ -83,7 +85,7 @@ function ServiceStackScreen() {
           },
         }}
       /> */}
-      
+
       <ServiceStack.Screen
         name={SCREEN_SERVICE_STEP1}
         component={ServiceStep1}
@@ -118,6 +120,7 @@ function ServiceStackScreen() {
           elevation: 0, // remove shadow on Android
         }}
       />
+      <ServiceStack.Screen name={SCREEN_EDIT_EMAIL_ADDRESS} component={EditEmailAddress} options={{title: "メールアドレス"}} />
       <ServiceStack.Screen name={SCREEN_EDIT_NAME} component={EditName} options={{title: "名前を変更"}} />
       <ServiceStack.Screen name={SCREEN_EDIT_FURIGANA} component={EditFurigana} options={{title: "名前を変更"}} />
       <ServiceStack.Screen name={SCREEN_EDIT_GENDER} component={EditGender} options={{title: "性別を変更"}} />
