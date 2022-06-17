@@ -20,7 +20,6 @@ export default function ItemQuestionForm({item, valueData = null, changeData = (
   ]);
   const [valueRowItem, setValueRowItem] = useState(null);
   const [listCheckbox, setListCheckbox] = useState([]);
-  console.log("item", item.key, valueData);
   const refInput = useRef(null);
   const renderValueDefault = () => {
     if (item?.label == 4 && item?.value) {

@@ -81,7 +81,11 @@ export default function Payment({route}) {
         if (data?.message && typeof data?.message == "string") {
           let errorMessage = data?.message.split(" ").join("");
           errorMessage = errorMessage.split(".").join("");
-          setErrorApi(global.t(errorMessage));
+          if (errorMessage.includes("test")) {
+            setErrorApi("あなたのカードは拒否されました。 リクエストはテストモードでしたが、非テストを使用しました");
+          } else {
+            setErrorApi(global.t(errorMessage));
+          }
         } else {
           setErrorApi("Error!");
         }
