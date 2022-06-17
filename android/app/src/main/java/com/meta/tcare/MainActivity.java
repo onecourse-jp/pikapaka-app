@@ -29,7 +29,7 @@ public class MainActivity extends ReactActivity {
    */
   @Override
   protected String getMainComponentName() {
-    return "PikaPaka";
+    return "ピカパカヘルスケア";
   }
   @Override
   protected ReactActivityDelegate createReactActivityDelegate() {
