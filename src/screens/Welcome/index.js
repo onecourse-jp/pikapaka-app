@@ -172,18 +172,7 @@ export default function WelcomeScreen({route}) {
               </TouchableOpacity>
             </View>
             <View style={{marginTop: 10, width: "100%"}}>
-              <TouchableOpacity
-                style={{
-                  flexDirection: "column",
-                  justifyContent: "center",
-                  marginTop: 10,
-                }}
-                onPress={() => {
-                  navigation.navigate("Tabbar");
-                }}
-              >
-                <Text style={{fontSize: 16, textAlign: "center", color: colors.headerComponent}}>{`TOPに戻る`}</Text>
-              </TouchableOpacity>
+             
               <TouchableOpacity
                 onPress={() => {
                   navigation.navigate(SCREEN_REGISTER);
@@ -198,6 +187,18 @@ export default function WelcomeScreen({route}) {
                 <Text style={{fontSize: 16, textAlign: "center", fontWeight: "600", color: colors.headerComponent}}>
                   {global.t("New_registration_with_email_address")}
                 </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={{
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  marginTop: 10,
+                }}
+                onPress={() => {
+                  navigation.navigate("Tabbar");
+                }}
+              >
+                <Text style={{fontSize: 16, textAlign: "center", color: colors.headerComponent}}>{`TOPに戻る`}</Text>
               </TouchableOpacity>
             </View>
           </View>

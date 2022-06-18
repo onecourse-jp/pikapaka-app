@@ -219,6 +219,7 @@ export default function ItemQuestionForm({item, valueData = null, changeData = (
             justifyContent: "flex-start",
             alignItems: "center",
           }}
+          pointerEvents="none"
         >
           {item.label === 4 || item.label === 3 ? (
             <>
