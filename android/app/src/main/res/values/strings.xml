@@ -6,5 +6,5 @@
     <string name="facebook_app_id">333243978875136</string>
     <string name="fb_login_protocol_scheme">fb333243978875136</string>
     <string name="facebook_client_token">d7425f6f69f1cc813ed5660d6711b637</string>
-    <string name="line_channel_id" translatable="false">1657093405</string>
+    <string name="line_channel_id" translatable="false">1657233461</string>
 </resources>

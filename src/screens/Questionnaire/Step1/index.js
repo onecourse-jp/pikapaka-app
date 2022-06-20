@@ -75,7 +75,6 @@ export default function QuestionaireStep1({route}) {
                     {global.t(`status_calendar.${dataCalendar?.status}`)}
                   </Text>
                 </View>
-                <Text>hai hoang</Text>
                 <Text
                   style={{
                     fontFamily: fonts.Hiragino,
