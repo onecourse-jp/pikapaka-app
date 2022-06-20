@@ -44,7 +44,7 @@
   [self.window makeKeyAndVisible];
   [RNSplashScreen show];  // here
 
-  [LineLogin setupWithChannelID:@"1657093405" universalLinkURL:nil];
+  [LineLogin setupWithChannelID:@"1657233461" universalLinkURL:nil];
   
   return YES;
 }
