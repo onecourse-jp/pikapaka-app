@@ -30,9 +30,9 @@ export default function EditEmailAddress({route}) {
         if (response.status == 200) {
           dispatch(updateUserProfile(data.data));
           global.hideLoadingView();
-          Alert.alert("", "名前を更新しました。", [
+          Alert.alert("", "メールアドレスを更新しました", [
             {
-              text: "はい",
+              text: "OK",
               onPress: () => {
                 navigation.goBack();
               },

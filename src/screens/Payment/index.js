@@ -76,7 +76,7 @@ export default function Payment({route}) {
           },
         ]);
       } else {
-        console.log("err paymentStripe", data);
+
         global.hideLoadingView();
         if (data?.message && typeof data?.message == "string") {
           let errorMessage = data?.message.split(" ").join("");
