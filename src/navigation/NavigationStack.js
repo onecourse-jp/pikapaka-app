@@ -30,6 +30,8 @@ import Inquiry from "@screens/Inquiry";
 import EditProfile from "@screens/Profile/EditProfile";
 import ChangePassword from "@screens/Profile/ChangePassword";
 import ConnectDoctor from "../screens/ConnectDoctor";
+import ModaConnectView from "../screens/ConnectDoctor/ModaConnectView";
+
 import ModalWebView from "../components/modals/modalWebView";
 import DateTime from "@screens/EditCalendar/DateTime";
 import ExaminationItem from "@screens/EditCalendar/ExaminationItem";
@@ -70,6 +72,7 @@ import {
   SCREEN_EDIT_CALENDAR_CONFIRM,
   SCREEN_EDIT_DELIVERY_ADDRESS,
   SCREEN_MODAL_LIST_IMAGE_CALL,
+  SCREEN_CONNECT_VIEW,
 } from "@screens/screens.constants";
 import {navigationRef} from "./NavigationService";
 
@@ -233,6 +236,7 @@ function App() {
           <Stack.Screen name={SCREEN_MODAL_LOADER} component={LoadingView} options={{headerShown: false, animation: "none"}} />
           <Stack.Screen name={SCREEN_MODAL_BOTTOM} component={ModalBottom} options={{headerShown: false}} />
           <Stack.Screen name={SCREEN_MODAL_LIST_IMAGE_CALL} component={ModalViewListImageOnCall} options={{headerShown: false}} />
+          <Stack.Screen name={SCREEN_CONNECT_VIEW} component={ModaConnectView} options={{headerShown: true, title: ""}} />
         </Stack.Group>
         <Stack.Group
           screenOptions={{

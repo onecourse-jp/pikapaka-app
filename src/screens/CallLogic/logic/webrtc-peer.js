@@ -114,34 +114,28 @@ export class WebRTCPeer extends Emitter {
 
     // Connection succeeded
     this.peer.on("connect", (event) => {
-      console.log(" this.peer.on(connect");
       this.active = true;
       // p.send('whatever' + Math.random())
       this.emit("connect", event);
     });
 
     this.peer.on("stream", (stream) => {
-      console.log("this.peer.onstream", stream);
-      this.stream = stream;
-      this.emit("stream", stream);
+      // this.stream = stream;
+      // this.emit("stream", stream);
       messages?.emit("setRemoteStream", stream);
     });
   }
 
   setStream(stream) {
     if (!this.peer.streams.includes(stream)) {
-      console.log("this.peer.streams.includes");
       try {
         this.peer.streams.forEach((s) => {
-          console.log("this.peer.streams.forEach");
           try {
-            console.log("this.peer.streams.removeStream");
             this.peer.removeStream(s);
           } catch (err) {}
         });
       } catch (err) {}
       if (stream) {
-        console.log("streamstreamstreamstream");
         try {
           this.peer.addStream(stream);
         } catch (err) {}

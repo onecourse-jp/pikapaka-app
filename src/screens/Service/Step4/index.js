@@ -162,7 +162,6 @@ export default function ServiceStep4() {
               基本情報
             </Text>
             {DATALISTPERSON2.map((item, index) => {
-              console.log("item.option", item.option, item.value);
               return (
                 <View
                   key={`med-${index}`}
@@ -277,7 +276,7 @@ export default function ServiceStep4() {
             }}
           >
             <Text style={{fontFamily: fonts.NSregular, fontSize: 14, lineHeight: 15, color: colors.gray1}}>
-              { dataConfirm?.old_reservation_id  === undefined ? "はい" : "いいえ"}
+              { dataConfirm?.old_reservation_id  === false ? "はい" : "いいえ"}
             </Text>
           </View>
 

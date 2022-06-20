@@ -116,8 +116,8 @@ export default function ModalWebView({route}) {
             scrollEnabled={false}
             mixedContentMode="always"
             source={{
-              uri: "https://d872-14-248-82-148.ngrok.io/user/call-to-doctor?room=156",
-              // uri: urlWebView,
+              // uri: "https://d872-14-248-82-148.ngrok.io/user/call-to-doctor?room=156",
+              uri: urlWebView,
             }}
             onShouldStartLoadWithRequest={(request) => {
               console.log("request.url", request?.url, route?.params?.data);
