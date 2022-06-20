@@ -29,7 +29,7 @@ const dataMedicalHistory = [
   },
   {
     value: 2,
-    label: "心疾患",
+    label: "心疾患（狭心症、心筋梗塞、心不全、不整脈等）",
   },
   {
     value: 3,
@@ -37,11 +37,11 @@ const dataMedicalHistory = [
   },
   {
     value: 4,
-    label: "腎臓病",
+    label: "腎臓病（腎機能低下）",
   },
   {
     value: 5,
-    label: "肝臓病",
+    label: "肝臓病（肝機能低下）",
   },
   {
     value: 6,
