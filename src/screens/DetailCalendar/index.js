@@ -65,6 +65,7 @@ export default function DetailCalender({route}) {
   }, []);
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: colors.backgroundTheme}}>
+
       <View style={[styles.container]}>
         <ScrollView refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />} contentContainerStyle={{}}>
           <GuideComponent

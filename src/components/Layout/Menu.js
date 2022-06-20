@@ -173,12 +173,17 @@ export default function MenuComponent(props) {
           }}
         >
           <View style={{width: "100%", height: height - 100}}>
-            <ScrollView contentContainerStyle={{paddingHorizontal: 45, paddingTop: 5, paddingBottom: 40}}>
-              <View style={{flexDirection: "row", justifyContent: "flex-end", marginBottom: 10}}>
+          <View style={{flexDirection: "row", justifyContent: "flex-end", paddingRight:20, paddingTop:10}}>
                 <TouchableOpacity onPress={() => setShowMenu(false)} style={{paddingVertical: 15, paddingHorizontal: 5}}>
                   <Image source={require("@assets/images/icons/ic_close_menu.png")} />
                 </TouchableOpacity>
               </View>
+            <ScrollView contentContainerStyle={{paddingHorizontal: 45, paddingTop: 5, paddingBottom: 40}}>
+              {/* <View style={{flexDirection: "row", justifyContent: "flex-end", marginBottom: 10}}>
+                <TouchableOpacity onPress={() => setShowMenu(false)} style={{paddingVertical: 15, paddingHorizontal: 5}}>
+                  <Image source={require("@assets/images/icons/ic_close_menu.png")} />
+                </TouchableOpacity>
+              </View> */}
               <View>
                 <View>
                   <View
