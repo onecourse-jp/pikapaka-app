@@ -14,7 +14,8 @@ export default function EditYesNoForm({route}) {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   console.log("route", route?.params?.data);
-  const [status, setStatus] = useState(route?.params?.data?.value === 1 ? true : false);
+  const defaultValue = route?.params?.data?.value ? (route?.params?.data?.value === 1 ? true : false) : null;
+  const [status, setStatus] = useState(defaultValue);
   const {
     control,
     handleSubmit,
@@ -44,7 +45,7 @@ export default function EditYesNoForm({route}) {
         console.log("data when update", data);
       } else {
         global.hideLoadingView();
-        Alert.alert("","個人情報の編集ができません。もう一度お願いします。", [
+        Alert.alert("", "個人情報の編集ができません。もう一度お願いします。", [
           {
             text: "OK",
             onPress: () => {},
@@ -54,7 +55,7 @@ export default function EditYesNoForm({route}) {
     } catch (error) {
       console.log("error", error);
       global.hideLoadingView();
-      Alert.alert("","個人情報の編集ができません。もう一度お願いします。", [
+      Alert.alert("", "個人情報の編集ができません。もう一度お願いします。", [
         {
           text: "OK",
           onPress: () => {},
@@ -95,7 +96,7 @@ export default function EditYesNoForm({route}) {
           }}
         >
           <Text>あり</Text>
-          {status && <Image source={require("@assets/images/v_green.png")} />}
+          {status === true && <Image source={require("@assets/images/v_green.png")} />}
         </TouchableOpacity>
         <TouchableOpacity
           style={{
@@ -111,7 +112,7 @@ export default function EditYesNoForm({route}) {
           }}
         >
           <Text>なし</Text>
-          {!status && <Image source={require("@assets/images/v_green.png")} />}
+          {status === false && <Image source={require("@assets/images/v_green.png")} />}
         </TouchableOpacity>
       </View>
       <View style={{paddingHorizontal: 16}}>

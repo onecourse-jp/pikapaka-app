@@ -256,7 +256,7 @@ export async function setup(room) {
 
     state.stream = stream;
     updateStream();
-    // messages.emit("setLocalStream", state.stream)
+    messages.emit("setLocalStream", state.stream)
     setTimeout(switchMedia, 250);
   } catch (err) {}
 

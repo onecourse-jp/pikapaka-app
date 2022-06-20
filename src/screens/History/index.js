@@ -13,7 +13,15 @@ export default function History() {
   const layout = useWindowDimensions();
   const refTab = useRef(null);
   const [index, setIndex] = React.useState(0);
-  const listColor = [colors.buttonSkincare, colors.textDiet, colors.colorPill, colors.colorED07, colors.colorAGA07, colors.colorAGA07];
+  const listColor = [
+    colors.headerComponent,
+    colors.buttonSkincare,
+    colors.textDiet,
+    colors.colorPill,
+    colors.colorED07,
+    colors.colorAGA07,
+    colors.colorAGA07,
+  ];
   const [routes] = React.useState([
     {key: "first", title: "全て", icon: null},
     {key: "second", title: "スキンケア", icon: require("@assets/images/icons/ic_tab_1.png")},
@@ -80,6 +88,8 @@ export default function History() {
               style={{
                 flexDirection: "column",
                 width: width / 6,
+                // height: "100%",
+                justifyContent: "center",
                 alignItems: "center",
                 borderRightWidth: i + 1 < props.navigationState.routes.length ? 1 : 0,
                 borderRightColor: colors.white,
@@ -87,12 +97,8 @@ export default function History() {
                 backgroundColor: index === i ? listColor[index] : colors.colorHome02,
               }}
             >
-              {route.icon && (
-                <View>
-                  <Image source={route.icon} />
-                </View>
-              )}
-              <Text style={{color: colors.white, fontSize: 12, fontWeight: "700", marginTop: 5}}>{route.title}</Text>
+              <View style={{height: 20}}>{route.icon && <Image source={route.icon} />}</View>
+              <Text style={{color: colors.white, fontSize: 11, lineHeight: 12, fontWeight: "700", marginTop: 5}}>{route.title}</Text>
             </TouchableOpacity>
           );
         })}

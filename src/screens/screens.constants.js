@@ -77,6 +77,7 @@ export const SCREEN_PAYMENT = "SCREEN_PAYMENT";
 export const SCREEN_TRANSLATION_MODAL = "TranslationModal";
 export const SCREEN_CHAT_ACTIONS_MODAL = "ChatActionsModal";
 export const SCREEN_WEB_VIEW = "ModalWebView";
+export const SCREEN_CONNECT_VIEW = "SCREEN_CONNECT_VIEW";
 
 export const STACK_VERIFICATION = "VerificationStack";
 export const IMAGE_PICKER = "ImagePicker";

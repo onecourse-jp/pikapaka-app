@@ -44,7 +44,6 @@ export default function ServiceStep3() {
   const dispatch = useDispatch();
   const calendar = useSelector((state) => state?.calendar);
   const userDetails = useSelector((state) => state?.users?.userDetails);
-  console.log("userDetailsuserDetailsuserDetails", userDetails);
   const [user, setUser] = useState(userDetails);
   const [oldReservationId, setOldReservationId] = useState(null);
   const {
@@ -212,6 +211,7 @@ export default function ServiceStep3() {
     };
     if (oldReservationId && dataSubmit.radioStatus) dataReservation.old_reservation_id = oldReservationId;
     if (!oldReservationId && dataSubmit.radioStatus) dataReservation.old_reservation_id = null;
+    if (!dataSubmit.radioStatus) dataReservation.old_reservation_id = false;
     dispatch(
       updateCalendar({
         data: {step3: {...dataReservation}},
@@ -350,9 +350,6 @@ export default function ServiceStep3() {
             <View>
               <Text style={{fontFamily: fonts.NSbold, color: colors.colorTextBlack, padding: 16, fontSize: 16}}>基本情報</Text>
               {dataPerson2.map((item, index) => {
-                if (item.key === "content_allergies") {
-                  console.log("2222", item.key, item.value);
-                }
                 return (
                   <React.Fragment key={`DATALISTPERSON2-${index}`}>
                     <Controller
@@ -406,7 +403,7 @@ export default function ServiceStep3() {
             </View>
             <Controller
               control={control}
-              defaultValue={false}
+              defaultValue={true}
               name={"radioStatus"}
               render={({field: {onChange, onBlur, value}}) => {
                 return <OldRevervationForm value={value} handleChange={onChange} />;

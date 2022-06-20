@@ -52,7 +52,6 @@ export default function DeliveryAddress({route}) {
           shipping_address: dataAddressSubmit.shipping_address,
           shipping_postal_code: dataAddressSubmit.shipping_postal_code,
         };
-        console.log("data calendar ---", newDataCalendar);
         navigation.navigate(SCREEN_EDIT_CALENDAR_CONFIRM, {data: newDataCalendar});
         // const {data, response} = await updateShippingAddress(dataAddressSubmit);
         // console.log("data---", data)
