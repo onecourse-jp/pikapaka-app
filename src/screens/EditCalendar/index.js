@@ -46,9 +46,7 @@ export default function EditCalendar({route}) {
   };
   const handleDeleteCalendar = async () => {
     global.showLoadingView();
-    console.log("dataCalendarid", dataCalendar.id);
     const {data, response} = await deleteCalendar(dataCalendar.id);
-    console.log("data after delete", data);
     if (data.status === 200) {
       global.hideLoadingView();
       dispatch(changeStatusCalendar());

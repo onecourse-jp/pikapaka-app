@@ -40,7 +40,6 @@ instance.interceptors.request //REQUEST
       const authority = await getAuthority();
       if (authority && authority.data && authority.data.access_token) {
         const {access_token, refreshToken} = authority.data;
-        console.log("access_token", access_token);
         headers["Authorization"] = `Bearer ${access_token}`;
       }
 

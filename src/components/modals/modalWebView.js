@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useRef} from "react";
 import {View, Image, TouchableOpacity, SafeAreaView, Platform, Dimensions, Text, FlatList, Alert} from "react-native";
 import {WebView} from "react-native-webview";
 import {useNavigation} from "@react-navigation/core";
@@ -15,6 +15,7 @@ export default function ModalWebView({route}) {
   const dispatch = useDispatch();
   const [isNext, setIsNext] = useState(false);
   const [urlWebView, setUrlWebView] = useState(null);
+  const webRef = useRef();
   useEffect(async () => {
     if (isNext) {
       dispatch(changeStatusCalendar());
@@ -101,6 +102,7 @@ export default function ModalWebView({route}) {
       <View style={{flex: 1, position: "relative"}}>
         {urlWebView && (
           <WebView
+            ref={webRef}
             useWebKit
             style={{width: "100%", height: "100%"}}
             originWhitelist={["*"]}
@@ -114,8 +116,8 @@ export default function ModalWebView({route}) {
             scrollEnabled={false}
             mixedContentMode="always"
             source={{
-              uri: urlWebView,
-              // html: '<div><video autoplay playsInline src="https://www.w3schools.com/html/mov_bbb.mp4" ></video></div>',
+              uri: "https://d872-14-248-82-148.ngrok.io/user/call-to-doctor?room=156",
+              // uri: urlWebView,
             }}
             onShouldStartLoadWithRequest={(request) => {
               console.log("request.url", request?.url, route?.params?.data);
@@ -146,6 +148,7 @@ export default function ModalWebView({route}) {
               width: "100%",
               flexDirection: "row",
               justifyContent: "center",
+              backgroundColor: "rgb(0,0,0,0.9)",
             }}
           >
             <View
@@ -158,16 +161,27 @@ export default function ModalWebView({route}) {
                 paddingHorizontal: 40,
               }}
             >
-              <View style={{width: 50}}></View>
-              <TouchableOpacity onPress={quitRoomCall}>
+              <TouchableOpacity
+                style={{flexDirection: "column", alignItems: "center"}}
+                onPress={() => {
+                  webRef.current.injectJavaScript("window.switchCameraOption()");
+                }}
+              >
+                <Image style={{width: 50, height: 50}} source={require("@assets/images/icons/ic_switch_camera.png")} />
+                <Text style={{fontSize: 11, lineHeight: 16, color: "white", marginTop: 8}}>カメラ切替</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={{flexDirection: "column", alignItems: "center"}} onPress={quitRoomCall}>
                 <Image style={{width: 50, height: 50}} source={require("@assets/images/icons/ic_quit_room_call.png")} />
+                <Text style={{fontSize: 11, lineHeight: 16, color: "white", marginTop: 8}}>退室</Text>
               </TouchableOpacity>
               <TouchableOpacity
+                style={{flexDirection: "column", alignItems: "center"}}
                 onPress={() => {
                   global.showModalListImage({id: route?.params?.isCallVideo});
                 }}
               >
                 <Image style={{width: 50, height: 50}} source={require("@assets/images/icons/ic_photo_call.png")} />
+                <Text style={{fontSize: 11, lineHeight: 16, color: "white", marginTop: 8}}>受信画像</Text>
               </TouchableOpacity>
             </View>
           </View>

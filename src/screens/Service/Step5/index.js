@@ -20,6 +20,7 @@ export default function ServiceStep5({route}) {
   const calendar = useSelector((state) => state?.calendar);
   const user = useSelector((state) => state?.users?.userDetails);
   const dataConfirm = calendar?.data?.step3;
+  console.log("dataConfirm", dataConfirm);
 
   const handleSubmit = () => {
     navigation.navigate(SCREEN_QUESIONAIRE_STEP1, {id: idCalendar});
@@ -30,7 +31,7 @@ export default function ServiceStep5({route}) {
       <View style={[styles.container]}>
         <ScrollView contentContainerStyle={{}}>
           <GuideComponent
-            title={"ご予約を承りました。事前に必ず問診票のご記入をお願いいたします。"}
+            title={"ご予約を承りました。初診の方は事前に必ず問診票のご記入をお願いいたします。"}
             note="※回答していただかないと受診ができません"
           />
           <StepsComponent currentStep={screenStep} />
@@ -40,10 +41,8 @@ export default function ServiceStep5({route}) {
                 style={{
                   borderWidth: 1,
                   marginRight: 7,
-                  borderColor:
-                    dataConfirm?.status > 3 && dataConfirm?.status != 7 ? colors.bdPaymentStatusTrue : colors.bdPaymentStatusFalse,
-                  backgroundColor:
-                    dataConfirm?.status > 3 && dataConfirm?.status != 7 ? colors.bgPaymentStatusTrue : colors.bgPaymentStatusFalse,
+                  borderColor: dataConfirm?.old_reservation_id || dataConfirm?.old_reservation_id === null ? "#D38A34" : "#F65151",
+                  backgroundColor: dataConfirm?.old_reservation_id || dataConfirm?.old_reservation_id === null ? "#FBD68F" : "#FFAFAF",
                   paddingHorizontal: 8,
                   alignSelf: "flex-start",
                 }}
@@ -52,13 +51,12 @@ export default function ServiceStep5({route}) {
                   style={{
                     fontFamily: fonts.Hiragino,
                     fontSize: 12,
-                    color:
-                      dataConfirm?.status > 3 && dataConfirm?.status != 7 ? colors.textPaymentStatusTrue : colors.textPaymentStatusFalse,
+                    color: dataConfirm?.old_reservation_id || dataConfirm?.old_reservation_id === null ? "#D38A34" : "#F65151",
                     lineHeight: 20,
                     textAlign: "left",
                   }}
                 >
-                  予約受付
+                  {dataConfirm?.old_reservation_id || dataConfirm?.old_reservation_id === null ? "予約済み" : "問診票未記入"}
                 </Text>
               </View>
               <Text
