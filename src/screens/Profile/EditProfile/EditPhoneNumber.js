@@ -30,9 +30,9 @@ export default function EditPostalCode({route}) {
         if (response.status == 200) {
           dispatch(updateUserProfile(data.data));
           global.hideLoadingView();
-          Alert.alert("", "郵便番号の編集が完了しました。", [
+          Alert.alert("", "電話番号を更新しました", [
             {
-              text: "はい",
+              text: "OK",
               onPress: () => {
                 navigation.goBack();
               },
