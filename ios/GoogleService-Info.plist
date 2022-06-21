@@ -3,11 +3,11 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>417005058487-95a3foq0tsllrun6hccaj5ngbvoe74bn.apps.googleusercontent.com</string>
+	<string>417005058487-15eqhuftq0b963rq8cfo5sv2rf5nuqkn.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.417005058487-95a3foq0tsllrun6hccaj5ngbvoe74bn</string>
+	<string>com.googleusercontent.apps.417005058487-15eqhuftq0b963rq8cfo5sv2rf5nuqkn</string>
 	<key>ANDROID_CLIENT_ID</key>
-	<string>417005058487-kfcdfinfuuqs6lc4eve06adgqebu9rqd.apps.googleusercontent.com</string>
+	<string>417005058487-6a7ecscad3ufk3da6h8r996v4v9jf8h3.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
 	<string>AIzaSyBVb0KqGAbe57oi5l55J1M2dIqYUtlPAc4</string>
 	<key>GCM_SENDER_ID</key>
@@ -15,7 +15,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.meta.ja.tcare-app</string>
+	<string>jp.pikapaka.app</string>
 	<key>PROJECT_ID</key>
 	<string>test-api-sheet-excel</string>
 	<key>STORAGE_BUCKET</key>
@@ -31,6 +31,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:417005058487:ios:563ecd44ac52cfd8e3d032</string>
+	<string>1:417005058487:ios:b4556f6658cf347fe3d032</string>
 </dict>
 </plist>
