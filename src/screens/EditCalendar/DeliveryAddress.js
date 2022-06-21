@@ -30,27 +30,27 @@ export default function DeliveryAddress({route}) {
     global.showLoadingView();
     global.showLoadingView();
     let dataAddressSubmit = {};
-    if (dataSubmit.shipping_address && dataSubmit.shipping_address != dataCalendar?.shipping_address) {
-      dataAddressSubmit.shipping_address = dataSubmit.shipping_address;
+    if (dataSubmit.address && dataSubmit.address != dataCalendar?.address) {
+      dataAddressSubmit.address = dataSubmit.address;
     } else {
-      dataAddressSubmit.shipping_address = dataCalendar?.shipping_address;
+      dataAddressSubmit.address = dataCalendar?.address;
     }
 
-    if (dataSubmit.postal_code && dataSubmit.postal_code != dataCalendar?.shipping_postal_code) {
-      dataAddressSubmit.shipping_postal_code = dataSubmit.postal_code;
+    if (dataSubmit.postal_code && dataSubmit.postal_code != dataCalendar?.postal_code) {
+      dataAddressSubmit.postal_code = dataSubmit.postal_code;
     } else {
-      dataAddressSubmit.shipping_postal_code = dataCalendar?.shipping_postal_code;
+      dataAddressSubmit.postal_code = dataCalendar?.postal_code;
     }
 
     dataAddressSubmit.id = dataCalendar.id;
-    dataAddressSubmit.detail_category_medical_of_customer = dataCalendar.detail_category_medical_of_customer;
+    dataAddressSubmit.detail_category_medical_of_customer = dataCalendar?.detail_category_medical_of_customer;
     console.log("data address submit", dataAddressSubmit);
     if (Object.keys(dataAddressSubmit).length > 0) {
       try {
         let newDataCalendar = {
           ...dataCalendar,
-          shipping_address: dataAddressSubmit.shipping_address,
-          shipping_postal_code: dataAddressSubmit.shipping_postal_code,
+          address: dataAddressSubmit.address,
+          postal_code: dataAddressSubmit.postal_code,
         };
         navigation.navigate(SCREEN_EDIT_CALENDAR_CONFIRM, {data: newDataCalendar});
         // const {data, response} = await updateShippingAddress(dataAddressSubmit);
@@ -73,18 +73,18 @@ export default function DeliveryAddress({route}) {
 
   const ADDRESS = [
     {
-      key: "shipping_address",
+      key: "address",
       label: 2,
       title: "住所",
       type: 2,
-      value: dataCalendar?.shipping_address,
+      value: dataCalendar?.address,
     },
     {
       key: "postal_code",
       label: 2,
       title: "郵便番号",
       type: 2,
-      value: dataCalendar?.shipping_postal_code,
+      value: dataCalendar?.postal_code,
     },
   ];
 
@@ -92,14 +92,23 @@ export default function DeliveryAddress({route}) {
     <SafeAreaView style={{flex: 1, backgroundColor: colors.backgroundTheme}}>
       <View style={[styles.container]}>
         <ScrollView contentContainerStyle={{}}>
-          <View>
+          <View style={{paddingHorizontal: 16}}>
             <Text style={{fontFamily: fonts.RobotoRegular, fontSize: 15, color: colors.gray1, lineHeight: 26}}>
               引っ越しなどで住所が変わられた方は
               <Text style={{color: colors.headerComponent}}>マイページ</Text>
               から変更を行って下さい。
             </Text>
           </View>
-          <Text style={{fontFamily: fonts.NSbold, fontSize: 16, color: colors.textBlack, lineHeight: 23, marginVertical: 7}}>
+          <Text
+            style={{
+              fontFamily: fonts.NSbold,
+              fontSize: 16,
+              paddingHorizontal: 16,
+              color: colors.textBlack,
+              lineHeight: 23,
+              marginVertical: 7,
+            }}
+          >
             今回の配送先を指定
           </Text>
           <View>

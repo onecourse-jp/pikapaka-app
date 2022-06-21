@@ -68,38 +68,19 @@ export default function EditCalendar({route}) {
       ]);
     }
   };
-  
+
   const handleDelete = async () => {
-    // Alert.alert(
-    //   "",
-    //   "予約をキャンセルしますか？",
-    //   [
-    //     {
-    //       text: "戻る",
-    //       onPress: () => console.log("Cancel Pressed"),
-    //       style: "cancel",
-    //     },
-    //     {text: "OK", onPress: () => handleDeleteCalendar()},
-    //   ],
-    //   {cancelable: true},
-    // );
-    // toast.show("変更が完了しました", {
-    //   type: "success",
-    //   placement: "top",
-    //   duration: 2000,
-    //   animationType: "zoom-in",
-    // });
     global.showLoadingView();
     const {data, response} = await deleteCalendar(dataCalendar.id);
     if (data.status === 200) {
       global.hideLoadingView();
       dispatch(changeStatusCalendar());
       toast.show("変更が完了しました", {
-          type: "success",
-          placement: "top",
-          duration: 3000,
-          animationType: "zoom-in",
-        });
+        type: "success",
+        placement: "top",
+        duration: 3000,
+        animationType: "zoom-in",
+      });
     } else {
       Alert.alert("Alert Title", "キャンセルできませんでした。もう一度お試しください", [
         {
@@ -107,7 +88,7 @@ export default function EditCalendar({route}) {
           style: "cancel",
         },
       ]);
-  }
+    }
   };
   const CalendarComponent = ({title = null, content = null, onClick = () => {}}) => (
     <View style={{paddingVertical: 25}}>
@@ -195,6 +176,21 @@ export default function EditCalendar({route}) {
     <SafeAreaView style={{flex: 1, backgroundColor: colors.backgroundTheme}}>
       <View style={[styles.container]}>
         <ScrollView contentContainerStyle={{paddingHorizontal: 16}}>
+          {notiStatus && (
+            <View
+              style={{
+                flexDirection: "row",
+                borderWidth: 1,
+                borderColor: colors.colorGreenEditCalendar3,
+                backgroundColor: colors.colorGreenEditCalendar1,
+                paddingVertical: 9,
+                paddingHorizontal: 16,
+                marginHorizontal: 23,
+              }}
+            >
+              <Text>変更が完了しました</Text>
+            </View>
+          )}
           <CalendarComponent
             title="予約日時"
             content={`${moment(dataCalendar?.date).format("YYYY年MM月DD日")} (${moment(dataCalendar?.date).format("dddd")}) ${
@@ -225,21 +221,6 @@ export default function EditCalendar({route}) {
             </View>
           </TouchableOpacity>
         </ScrollView>
-        {notiStatus && (
-          <View
-            style={{
-              flexDirection: "row",
-              borderWidth: 1,
-              borderColor: colors.colorGreenEditCalendar3,
-              backgroundColor: colors.colorGreenEditCalendar1,
-              paddingVertical: 9,
-              paddingHorizontal: 16,
-              marginHorizontal: 23,
-            }}
-          >
-            <Text>変更が完了しました</Text>
-          </View>
-        )}
       </View>
     </SafeAreaView>
   );

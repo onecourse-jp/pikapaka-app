@@ -116,7 +116,7 @@ export default function EditCalendar({route}) {
         time_start: hourPicked?.constant_time?.time_start,
         time_end: hourPicked?.constant_time?.time_end,
       },
-      detail_category_medical_of_customer: dataCalendar.detail_category_medical_of_customer,
+      detail_category_medical_of_customer: dataCalendar?.detail_category_medical_of_customer,
     };
     let newDataCalendar = {
       ...dataCalendar,
@@ -143,7 +143,7 @@ export default function EditCalendar({route}) {
     }
   };
   const getListHourCalendar = async (date) => {
-    const params = {detail_category_medical_of_customer: dataCalendar.detail_category_medical_of_customer, date_time: date};
+    const params = {detail_category_medical_of_customer: dataCalendar?.detail_category_medical_of_customer, date_time: date};
     global.showLoadingView();
     const {response, data} = await getHourCalendar(params);
     if (response?.status === 200) {
@@ -294,9 +294,9 @@ export default function EditCalendar({route}) {
               })}
             </View>
           )}
-           <View style={{marginVertical: 60 }}>
-          <Button label="変更内容の確認へ進む" onPress={handleSubmit} />
-        </View>
+          <View style={{marginVertical: 60, paddingHorizontal: 16}}>
+            <Button label="変更内容の確認へ進む" onPress={handleSubmit} />
+          </View>
         </ScrollView>
       </View>
     </SafeAreaView>
