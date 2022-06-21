@@ -25,7 +25,8 @@ export default function EditAllergy({route}) {
   const navigation = useNavigation();
   const [disableSubmit, setDisableSubmit] = useState(false);
   const dispatch = useDispatch();
-  const [isAllergyStatus, setIsAllergyStatus] = useState(route?.params?.data?.allergies === 1 ? true : false);
+  const defaultValue = route?.params?.data?.allergies ? (route?.params?.data?.allergies === 1 ? true : false) : null;
+  const [isAllergyStatus, setIsAllergyStatus] = useState(defaultValue);
 
   const content_allergies = route?.params?.data?.content_allergies ? route?.params?.data?.content_allergies : null;
   const {

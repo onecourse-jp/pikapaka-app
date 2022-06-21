@@ -54,23 +54,27 @@ export default function ModalWebView({route}) {
   };
 
   React.useLayoutEffect(() => {
-    if (route?.params?.isCallVideo) {
-      navigation.setOptions({
-        headerLeft: () => (
-          <TouchableOpacity
-            onPress={quitRoomCall}
-            style={{
-              justifyContent: "center",
-              alignItems: "center",
-              paddingVertical: 15,
-              paddingRight: 20,
-            }}
-          >
-            <Image source={require("@assets/images/icons/ic_back.png")} resizeMode="cover" />
-          </TouchableOpacity>
-        ),
-      });
-    }
+    navigation.setOptions({
+      headerLeft: () => (
+        <TouchableOpacity
+          onPress={
+            route?.params?.isCallVideo
+              ? quitRoomCall
+              : () => {
+                  navigation.goBack();
+                }
+          }
+          style={{
+            justifyContent: "center",
+            alignItems: "center",
+            paddingVertical: 15,
+            paddingRight: 20,
+          }}
+        >
+          <Image source={require("@assets/images/icons/ic_back.png")} resizeMode="cover" />
+        </TouchableOpacity>
+      ),
+    });
   }, [navigation]);
 
   useEffect(() => {
