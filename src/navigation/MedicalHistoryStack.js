@@ -11,6 +11,7 @@ import {
   SCREEN_QUESIONAIRE_STEP2,
   SCREEN_QUESIONAIRE_STEP3,
   SCREEN_QUESIONAIRE_STEP4,
+  SCREEN_EDIT_CALENDAR_CONFIRM,
 } from "../screens/screens.constants";
 import MedicalHistoryScreen from "@screens/History";
 import DetailCalender from "@screens/DetailCalendar";
@@ -19,6 +20,7 @@ import EditCalendar from "../screens/EditCalendar";
 import QuestionaireStep2 from "../screens/Questionnaire/Step2";
 import QuestionaireStep3 from "../screens/Questionnaire/Step3";
 import QuestionaireStep4 from "../screens/Questionnaire/Step4";
+import Confirm from "@screens/EditCalendar/Confirm";
 
 const MedicalHistoryStack = createNativeStackNavigator();
 function MedicalHistoryStackScreen() {
@@ -64,6 +66,7 @@ function MedicalHistoryStackScreen() {
         }}
       /> */}
       <MedicalHistoryStack.Screen name={SCREEN_PAYMENT} component={PaymentScreen} options={{title: "お会計"}} />
+      <MedicalHistoryStack.Screen name={SCREEN_EDIT_CALENDAR_CONFIRM} component={Confirm} options={{title: "変更内容確認"}} />
       <MedicalHistoryStack.Screen
         name={SCREEN_EDIT_CALENDAR}
         component={EditCalendar}

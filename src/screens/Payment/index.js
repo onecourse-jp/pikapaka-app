@@ -67,14 +67,50 @@ export default function Payment({route}) {
         console.log("data paymentStripe", data);
         dispatch(changeStatusCalendar());
         global.hideLoadingView();
-        Alert.alert("", "お支払いが完了しました。", [
-          {
-            text: "OK",
-            onPress: () => {
-              navigation.goBack();
-            },
+        // Alert.alert("", "お支払いが完了しました。", [
+        //   {
+        //     text: "OK",
+        //     onPress: () => {
+        //       navigation.goBack();
+        //     },
+        //   },
+        // ]);
+        let toastId = global.toast.show("aaaaaa", {
+          placement: "top",
+          duration: 3000,
+          animationType: "slide-in",
+          animationDuration: 100,
+          offsetTop: 0,
+          offset: 0, // offset for both top and bottom toasts
+          swipeEnabled: true,
+          renderToast: (toastOptions) => {
+            return (
+              <TouchableOpacity
+                style={{
+                  alignSelf: "stretch",
+                  marginTop: 0,
+                  marginHorizontal: 6,
+                  borderRadius: 10,
+                  backgroundColor: "#B7EB8F",
+                }}
+                onPress={() => {
+                  global.toast.hide(toastId);
+                  navigation.navigate(SCREEN_EDIT_CALENDAR, {data: dataCalendar});
+                }}
+              >
+                <View>
+                  <Text style={{padding: 16, fontWeight: "bold"}}>{`お支払いが完了しました。`}</Text>
+                  {/* <Text style={{paddingBottom: 12, paddingHorizontal: 16}} numberOfLines={2}>
+                    <Text style={{paddingBottom: 12, paddingHorizontal: 16}}>{remoteMessage.notification.body}</Text>
+                  </Text> */}
+                </View>
+              </TouchableOpacity>
+            );
           },
-        ]);
+        });
+        setTimeout(() => {
+          navigation.goBack();
+        }, 4000);
       } else {
         global.hideLoadingView();
         if (data?.message && typeof data?.message == "string") {
