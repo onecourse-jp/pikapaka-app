@@ -19,7 +19,7 @@ import SplashScreen from "react-native-splash-screen";
 import {LogBox} from "react-native";
 console.disableYellowBox = true;
 LogBox.ignoreAllLogs(true);
-LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
+LogBox.ignoreLogs(["Warning: ..."]); // Ignore log notification by message
 import "src/config";
 import messaging from "@react-native-firebase/messaging";
 import codePush from "react-native-code-push";
@@ -89,7 +89,7 @@ function Entrypoint() {
         <PersistGate loading={<ActivityIndicator />} persistor={persistor}>
           <LocalizationContext.Provider value={localizationContext}>
             <Navigator />
-            <Toast ref={(ref) => (global["toast"] = ref)} />
+            <Toast ref={(ref) => (global["toast"] = ref)} successColor="rgba(82, 196, 26, 1)" offset={80} textStyle={{width:'100%', textAlign:'center'}} />
           </LocalizationContext.Provider>
         </PersistGate>
       </Provider>
