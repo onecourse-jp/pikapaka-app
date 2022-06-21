@@ -26,7 +26,7 @@ const codeMessage = {
 console.log("Config", Config.API_URL);
 const instance = axios.create({
   // baseURL: Config.API_URL,
-  baseURL: "https://test-tcare.lisod.vn/api",
+  baseURL: "https://staging-tcare.lisod.vn/api",
   timeout: 60000,
   withCredentials: false,
 });
