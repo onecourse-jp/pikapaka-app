@@ -20,7 +20,16 @@ export default function () {
     {name: "代表取締役", content: "原　基記", reqireForm: false},
     {name: "お問い合わせ TEL", content: "03-6820-0995", reqireForm: false},
     {name: "FAX", content: "03-3431-6811", reqireForm: false},
-    {name: "インターネットでのお問い合わせ先", content: "support_healthcare@pikapaka.co.jp", reqireForm: false},
+    {
+      name: "インターネットでのお問い合わせ先",
+      text: "お問い合わせフォームはこちら",
+      reqireForm: true,
+      action: () => {
+        global.showWebView({
+          url: "https://docs.google.com/forms/d/e/1FAIpQLSdLQiPQIbCkjvr2HwBHD3ktb0WQHwFmdatHcCGzCnnlGhA4CQ/viewform",
+        });
+      },
+    },
     {
       name: "事業内容",
       content:
@@ -103,7 +112,7 @@ export default function () {
                     {item.content}
                   </Text>
                   {item.reqireForm ? (
-                    <TouchableOpacity style={{marginTop: 20}}>
+                    <TouchableOpacity onPress={item?.action}>
                       <Text style={{textDecorationLine: "underline", color: colors.headerComponent, fontWeight: "700"}}>{item.text}</Text>
                     </TouchableOpacity>
                   ) : (

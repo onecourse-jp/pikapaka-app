@@ -25,7 +25,7 @@ export default function AboutClinic() {
           borderBottomColor: "#DDDEE1",
         }}
       >
-        <Text style={{fontFamily: fonts.Hiragino, lineHeight: 27, fontWeight: "bold", fontSize: 18, color: colors.textHiragino}}>ピカパカヘルスケア</Text>
+        <Text style={{fontFamily: fonts.Hiragino, lineHeight: 27, fontWeight: "bold", fontSize: 18, color: colors.textHiragino}}>Tケアクリニック浜松町</Text>
         <Text
           style={{
             fontFamily: fonts.Hiragino,

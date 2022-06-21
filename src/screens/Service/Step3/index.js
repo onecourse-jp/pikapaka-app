@@ -79,7 +79,7 @@ export default function ServiceStep3() {
         value: userDetails?.allergies
           ? userDetails?.allergies === 1
             ? renderContentAllergies(userDetails?.content_allergies)
-            : "無"
+            : "なし"
           : null,
         action: () => {
           navigation.navigate(SCREEN_EDIT_ALLERGY, {data: user});
@@ -107,7 +107,7 @@ export default function ServiceStep3() {
         value: userDetails?.take_medicines
           ? userDetails?.take_medicines == 1
             ? renderContentAllergies(userDetails?.content_medicines)
-            : "無"
+            : "なし"
           : null,
         action: () => {
           navigation.navigate(SCREEN_EDIT_MEDICINE, {data: user});
@@ -142,7 +142,7 @@ export default function ServiceStep3() {
         key: "medical_history",
         label: "既往歴",
         title: "既往歴",
-        placeholder: "選択",
+        placeholder: "なし",
         label: 3,
         value: userDetails?.medical_history ?? null,
         data: dataMedicalHistory,

@@ -167,7 +167,7 @@ export default function Profile({navigation}) {
       key: "content_allergies",
       label: "アレルギーの有無",
       placeholder: "アレルギーを入力",
-      content: profile?.allergies ? (profile?.allergies === 1 ? renderContentAllergies(profile?.content_allergies) : "無") : null,
+      content: profile?.allergies ? (profile?.allergies === 1 ? renderContentAllergies(profile?.content_allergies) : "なし") : null,
       hideIcon: false,
       hideItem: false,
       action: () => {
@@ -178,7 +178,7 @@ export default function Profile({navigation}) {
       key: "take_medicines",
       label: "服薬中の薬の有無",
       placeholder: "服薬中の薬を入力",
-      content: profile?.take_medicines ? (profile?.take_medicines == 1 ? renderContentAllergies(profile?.content_medicines) : "無") : null,
+      content: profile?.take_medicines ? (profile?.take_medicines == 1 ? renderContentAllergies(profile?.content_medicines) : "なし") : null,
       hideIcon: false,
       hideItem: false,
       action: () => {
@@ -189,7 +189,7 @@ export default function Profile({navigation}) {
       key: "pregnancy",
       label: "妊娠有無",
       placeholder: "選択",
-      content: profile?.pregnancy ? (profile?.pregnancy == 1 ? "有" : "無") : null,
+      content: profile?.pregnancy ? (profile?.pregnancy == 1 ? "あり" : "なし") : null,
       hideIcon: false,
       hideItem: false,
       action: () => {
@@ -200,7 +200,7 @@ export default function Profile({navigation}) {
       key: "smoking",
       label: "喫煙有無",
       placeholder: "選択",
-      content: profile?.smoking ? (profile?.smoking == 1 ? "有" : "無") : null,
+      content: profile?.smoking ? (profile?.smoking == 1 ? "あり" : "なし") : null,
       hideIcon: false,
       hideItem: false,
       action: () => {
@@ -210,7 +210,7 @@ export default function Profile({navigation}) {
     {
       key: "medical_history",
       label: "既往歴",
-      placeholder: "選択",
+      placeholder: "なし",
       content: global.renderMedicalHistory(profile?.medical_history),
       hideIcon: false,
       hideItem: false,
