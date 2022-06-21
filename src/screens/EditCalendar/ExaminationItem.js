@@ -25,17 +25,17 @@ export default function ExaminationItem({route}) {
     required: true,
   });
   const handleConfirm = (dataSubmit) => {
-    if (dataCalendar.detail_category_medical_of_customer == dataSubmit.detail_category_medical_of_customer) {
+    if (dataCalendar?.detail_category_medical_of_customer == dataSubmit.detail_category_medical_of_customer) {
       console.log("trung - return");
       return;
     }
 
-    if (dataCalendar.detail_category_medical_of_customer <= 4 && dataSubmit.detail_category_medical_of_customer <= 4) {
+    if (dataCalendar?.detail_category_medical_of_customer <= 4 && dataSubmit.detail_category_medical_of_customer <= 4) {
       setTypeUpdate("TO_CONFIRM");
       TYPESUBMIT = "TO_CONFIRM";
     }
     if (
-      (dataCalendar.detail_category_medical_of_customer == 7 || dataCalendar.detail_category_medical_of_customer == 6) &&
+      (dataCalendar?.detail_category_medical_of_customer == 7 || dataCalendar?.detail_category_medical_of_customer == 6) &&
       (dataSubmit.detail_category_medical_of_customer == 6 || dataSubmit.detail_category_medical_of_customer == 7)
     ) {
       setTypeUpdate("TO_CONFIRM");
@@ -63,12 +63,9 @@ export default function ExaminationItem({route}) {
       key: "detail_category_medical_of_customer",
       label: 4,
       title: "診察科目",
-      value: dataCalendar.detail_category_medical_of_customer,
+      value: dataCalendar?.detail_category_medical_of_customer,
       data: [
         {label: global.t("categoryTitle.1"), value: 1},
-        {label: global.t("categoryTitle.2"), value: 2},
-        {label: global.t("categoryTitle.3"), value: 3},
-        {label: global.t("categoryTitle.4"), value: 4},
         {label: global.t("categoryTitle.5"), value: 5},
         {label: global.t("categoryTitle.6"), value: 6},
         {label: global.t("categoryTitle.7"), value: 7},

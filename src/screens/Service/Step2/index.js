@@ -31,23 +31,14 @@ export default function ServiceStep2() {
   const [listHourFromAdmin, setListHourFromAdmin] = useState([]);
   const [hourPicked, setHourPicked] = useState(null);
 
-  const DATA = [
-    {time: "08:00〜10:00", status: "空きなし ✕"},
-    {time: "10:00〜12:00", status: "空きあり ○"},
-    {time: "11:00〜13:00", status: "空きなし ✕"},
-    {time: "13:00〜15:00", status: "空きあり ○"},
-    {time: "15:00〜17:00", status: "空きあり ○"},
-  ];
   useEffect(async () => {
     global.showLoadingView();
     const {response, data} = await getDayCalendar(calendar?.data?.step1.data);
     if (response?.status === 200) {
-      console.log("getDayCalendar ", data);
       setDateFromAdmin(data.data);
     }
     global.hideLoadingView();
   }, [calendar]);
-  console.log("data calendar in step 2", calendar?.data?.step1.data);
   LocaleConfig.locales["ja"] = {
     monthNames: ["年1月", "年2月", "年3月", "年4月", "年5月", "年6月", "年7月", "年8月", "年9月", "年10月", "年11月", "年12月"],
     monthNamesShort: ["年1月", "年2月", "年3月", "年4月", "年5月", "年6月", "年7月", "年8月", "年9月", "年10月", "年11月", "年12月"],
@@ -163,7 +154,6 @@ export default function ServiceStep2() {
           <GuideComponent title="オンライン診療のご希望日時をお選びください。" />
           <StepsComponent currentStep={2} />
           {Object.keys(calendar.data).map((item, index) => {
-            console.log("item", item, calendar.data[item].label, calendar.data[item].value);
             const step = item.match(/\d+/)[0];
             if (Number(step) < screenStep) {
               return (

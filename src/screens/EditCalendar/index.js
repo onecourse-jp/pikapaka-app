@@ -3,6 +3,7 @@ import {StyleSheet, Text, View, ScrollView, SafeAreaView, TouchableOpacity, Aler
 import {useThemeColors, useThemeFonts, Button} from "react-native-theme-component";
 import {useNavigation} from "@react-navigation/native";
 import {useDispatch, useSelector} from "react-redux";
+// import { useToast } from "react-native-toast-notifications";
 import {
   SCREEN_EDIT_CALENDAR_DATETIME,
   SCREEN_EDIT_CALENDAR_EXAMINATION_ITEM,
@@ -15,6 +16,7 @@ import moment from "moment";
 import {changeStatusCalendar} from "@actions/calendarAction";
 
 export default function EditCalendar({route}) {
+  // const toast = useToast();
   const colors = useThemeColors();
   const fonts = useThemeFonts();
   const dispatch = useDispatch();
@@ -66,20 +68,27 @@ export default function EditCalendar({route}) {
       ]);
     }
   };
-  const handleDelete = () => {
-    Alert.alert(
-      "",
-      "予約をキャンセルしますか？",
-      [
+
+  const handleDelete = async () => {
+    global.showLoadingView();
+    const {data, response} = await deleteCalendar(dataCalendar.id);
+    if (data.status === 200) {
+      global.hideLoadingView();
+      dispatch(changeStatusCalendar());
+      toast.show("変更が完了しました", {
+        type: "success",
+        placement: "top",
+        duration: 3000,
+        animationType: "zoom-in",
+      });
+    } else {
+      Alert.alert("Alert Title", "キャンセルできませんでした。もう一度お試しください", [
         {
-          text: "戻る",
-          onPress: () => console.log("Cancel Pressed"),
+          text: "OK",
           style: "cancel",
         },
-        {text: "OK", onPress: () => handleDeleteCalendar()},
-      ],
-      {cancelable: true},
-    );
+      ]);
+    }
   };
   const CalendarComponent = ({title = null, content = null, onClick = () => {}}) => (
     <View style={{paddingVertical: 25}}>
@@ -167,6 +176,21 @@ export default function EditCalendar({route}) {
     <SafeAreaView style={{flex: 1, backgroundColor: colors.backgroundTheme}}>
       <View style={[styles.container]}>
         <ScrollView contentContainerStyle={{paddingHorizontal: 16}}>
+          {notiStatus && (
+            <View
+              style={{
+                flexDirection: "row",
+                borderWidth: 1,
+                borderColor: colors.colorGreenEditCalendar3,
+                backgroundColor: colors.colorGreenEditCalendar1,
+                paddingVertical: 9,
+                paddingHorizontal: 16,
+                marginHorizontal: 23,
+              }}
+            >
+              <Text>変更が完了しました</Text>
+            </View>
+          )}
           <CalendarComponent
             title="予約日時"
             content={`${moment(dataCalendar?.date).format("YYYY年MM月DD日")} (${moment(dataCalendar?.date).format("dddd")}) ${
@@ -197,21 +221,6 @@ export default function EditCalendar({route}) {
             </View>
           </TouchableOpacity>
         </ScrollView>
-        {notiStatus && (
-          <View
-            style={{
-              flexDirection: "row",
-              borderWidth: 1,
-              borderColor: colors.colorGreenEditCalendar3,
-              backgroundColor: colors.colorGreenEditCalendar1,
-              paddingVertical: 9,
-              paddingHorizontal: 16,
-              marginHorizontal: 23,
-            }}
-          >
-            <Text>変更が完了しました</Text>
-          </View>
-        )}
       </View>
     </SafeAreaView>
   );

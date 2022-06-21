@@ -78,7 +78,40 @@ export default function ExaminationItem({route}) {
     if (response.status == 200) {
       global.hideLoadingView();
       console.log("data when update", data);
-      navigation.navigate(SCREEN_EDIT_CALENDAR, {data: dataCalendar, type: "SUCCESS"});
+      let toastId = global.toast.show("aaaaaa", {
+        placement: "top",
+        duration: 4000,
+        animationType: "slide-in",
+        animationDuration: 100,
+        offsetTop: 0,
+        offset: 0, // offset for both top and bottom toasts
+        swipeEnabled: true,
+        renderToast: (toastOptions) => {
+          return (
+            <TouchableOpacity
+              style={{
+                alignSelf: "stretch",
+                marginTop: 0,
+                marginHorizontal: 6,
+                borderRadius: 10,
+                backgroundColor: "#B7EB8F",
+              }}
+              onPress={() => {
+                global.toast.hide(toastId);
+                navigation.navigate(SCREEN_EDIT_CALENDAR, {data: dataCalendar});
+              }}
+            >
+              <View>
+                <Text style={{padding: 16, fontWeight: "bold"}}>{`予約のキャンセルが完了しました。`}</Text>
+                {/* <Text style={{paddingBottom: 12, paddingHorizontal: 16}} numberOfLines={2}>
+                  <Text style={{paddingBottom: 12, paddingHorizontal: 16}}>{remoteMessage.notification.body}</Text>
+                </Text> */}
+              </View>
+            </TouchableOpacity>
+          );
+        },
+      });
+      navigation.navigate(SCREEN_EDIT_CALENDAR, {data: dataCalendar});
     } else {
       global.hideLoadingView();
       console.log("response--------", response);
@@ -101,7 +134,7 @@ export default function ExaminationItem({route}) {
       <View style={[styles.container]}>
         <ScrollView contentContainerStyle={{paddingHorizontal: 16}}>
           <View>
-            <GuideComponent text={"以下の内容で間違いがなければ、変更内容を送信して下さい。"} />
+            <GuideComponent title={"以下の内容で間違いがなければ、変更内容を送信して下さい。"} />
           </View>
           <ComponentComfirm title="診察項目" content={global.t(`categoryTitle.${dataCalendar?.detail_category_medical_of_customer}`)} />
           <ComponentComfirm
@@ -165,7 +198,7 @@ export default function ExaminationItem({route}) {
               </View>
             ))}
           </View>
-          <View style={{marginTop: 24}}>
+          {/* <View style={{marginTop: 24}}>
             <Text style={{fontFamily: fonts.NSbold, fontSize: 16, color: colors.textBlack, lineHeight: 23, marginBottom: 18}}>
               診察について
             </Text>
@@ -177,11 +210,11 @@ export default function ExaminationItem({route}) {
               </Text>
               <Text style={{fontSize: 15, lineHeight: 22, color: colors.gray1, fontFamily: fonts.SFregular, marginBottom: 12}}>はい</Text>
             </View>
+          </View> */}
+          <View style={{marginTop: 60, paddingHorizontal: 16}}>
+            <Button label="変更内容を確認へ進む" onPress={handleUpdate} />
           </View>
         </ScrollView>
-        <View style={{marginTop: 60, paddingHorizontal: 16}}>
-          <Button label="変更内容を確認へ進む" onPress={handleUpdate} />
-        </View>
       </View>
     </SafeAreaView>
   );

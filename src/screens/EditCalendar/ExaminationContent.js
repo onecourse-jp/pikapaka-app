@@ -41,13 +41,14 @@ export default function ExaminationContent({route}) {
     }
   }, []);
   const onSubmit = async (dataSubmit) => {
+    console.log("dataSubmit", dataSubmit);
     let newDataCalendar = {
       ...dataCalendar,
       content_to_doctor: dataSubmit.content_to_doctor,
       answer: answerData.map((item, index) => {
         let dataContentAnswer = dataSubmit[item.id];
         if (item?.question.label == 3) {
-          dataContentAnswer = dataContentAnswer.map((ans, index) => {
+          dataContentAnswer = dataContentAnswer?.map((ans, index) => {
             return dataContentAnswer.includes(0) ? item.question.content[ans] : item.question.content[ans - 1];
           });
         }
@@ -60,6 +61,7 @@ export default function ExaminationContent({route}) {
         };
       }),
     };
+    console.log("newDataCalendar", newDataCalendar);
     if (route?.params?.type == "CHANGE_ITEM") {
       navigation.navigate(SCREEN_EDIT_CALENDAR_CONFIRM, {data: newDataCalendar, dataSubmit: dataSubmit, type: "CHANGE_ITEM"});
     } else {
@@ -71,9 +73,11 @@ export default function ExaminationContent({route}) {
     const {response, data} = await getQuestionFormCalendar(route?.params?.data?.detail_category_medical_of_customer);
     if (response?.status === 200) {
       console.log("getAnswerForm", data.data.data);
+      console.log("route?.params?.data?.answer", route?.params?.data?.answer);
       let answerUser;
       // route?.params?.data?.answer.length > 0 ? (answerUser = route?.params?.data?.answer) : (answerUser = data.data.data);
-      if (route?.params?.data?.answer.length == 0) {
+      if (route?.params?.data?.answer.length == 0 || route?.params?.data?.answer[0].content_answer === null) {
+        console.log("hrerreere");
         setUpdateStatus("NEW");
         answerUser = data.data.data.map((item, index) => {
           return {
@@ -195,21 +199,22 @@ export default function ExaminationContent({route}) {
                   <React.Fragment key={`MEDICAL_HISTORY-${index}`}>
                     <Controller
                       control={control}
-                      rules={{required: true}}
+                      rules={{required: item.status === 1 ? true : false}}
                       name={item?.key}
                       defaultValue={item?.value}
                       render={({field: {onChange, onBlur, value}}) => {
                         return <ItemQuestionForm item={item} valueData={value} changeData={onChange} type={"questionAdmin"} />;
                       }}
                     />
+                    {errors[item?.key] && <Text style={styles.textError}>{global.t("is_require")}</Text>}
                   </React.Fragment>
                 );
               })}
           </View>
+          <View style={{marginTop: 60, paddingHorizontal: 16}}>
+            <Button label="変更内容を確認へ進む" onPress={handleSubmit(onSubmit)} />
+          </View>
         </ScrollView>
-        <View style={{marginTop: 60, paddingHorizontal: 16}}>
-          <Button label="変更内容を確認へ進む" onPress={handleSubmit(onSubmit)} />
-        </View>
       </View>
     </SafeAreaView>
   );
@@ -220,4 +225,5 @@ const styles = StyleSheet.create({
     paddingVertical: 16,
     flexDirection: "column",
   },
+  textError: {color: "red", marginTop: 5, textAlign: "right"},
 });

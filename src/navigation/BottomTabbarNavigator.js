@@ -259,10 +259,10 @@ export default function BottomTabbarNavigator({route}) {
         labelStyle: {fontSize: 12, fontWeight: "bold"},
         keyboardHidesTabBar: true,
       }}
-      // tabBarOptions={{
-      //   style: keyboardVisible ? {} : tabBarStyle,
-      //   keyboardHidesTabBar: true,
-      // }}
+      tabBarOptions={{
+        style: keyboardVisible ? {} : tabBarStyle,
+        keyboardHidesTabBar: true,
+      }}
       initialRouteName={initialRoute}
     >
       <Tab.Screen

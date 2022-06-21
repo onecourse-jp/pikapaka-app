@@ -39,7 +39,7 @@ export default function DetailCalender({route}) {
       const {response, data} = await getReservationById(idCalendar);
       if (response?.status === 200) {
         setDataCalendar(data?.data);
-        console.log("response getReservationById", data?.data);
+        console.log("response getReservationById", data?.data.id);
         if (data?.data?.status === 1) {
           setCurrentStep(3);
         } else if (data?.data?.status === 2) {
@@ -65,6 +65,7 @@ export default function DetailCalender({route}) {
   }, []);
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: colors.backgroundTheme}}>
+
       <View style={[styles.container]}>
         <ScrollView refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />} contentContainerStyle={{}}>
           <GuideComponent

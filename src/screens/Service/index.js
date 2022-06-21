@@ -84,7 +84,6 @@ export default function Service() {
         >
           <Text style={{fontSize: 20, color: colors.textBlack, fontWeight: "500", marginBottom: 40}}>リストカレンダー</Text>
           {dataCalendar.map((item, index) => {
-            console.log("dataCalendar item", item);
             return (
               <TouchableOpacity
                 key={`dataCalendar-${index}`}

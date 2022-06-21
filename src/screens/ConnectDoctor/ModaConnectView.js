@@ -6,26 +6,12 @@ import {useDispatch, useSelector} from "react-redux";
 import {messages} from "../CallLogic/lib/emitter";
 import ButtonConnect from "./ButtonConnect";
 import Notification from "./Notification";
+import {setup, startPlayStream} from "../CallLogic/state";
 import Volume from "./Volume";
 import moment from "moment";
-import {SCREEN_CONNECT_VIEW} from "@screens/screens.constants";
-import {setup, startPlayStream} from "../CallLogic/state";
-import {
-  RTCPeerConnection,
-  RTCIceCandidate,
-  RTCSessionDescription,
-  RTCView,
-  MediaStream,
-  MediaStreamTrack,
-  mediaDevices,
-  registerGlobals,
-  MediaStreamConstraints,
-} from "react-native-webrtc";
-import {request, PERMISSIONS} from "react-native-permissions";
+let {width, height} = Dimensions.get("window");
 
-const {width, height} = Dimensions.get("window");
-
-export default function ({route}) {
+export default function ModaConnectView({route}) {
   const colors = useThemeColors();
   const fonts = useThemeFonts();
   const navigation = useNavigation();
@@ -51,32 +37,7 @@ export default function ({route}) {
       isCallVideo: dataCalendar.id,
     });
   };
-  const initialize = async () => {
-    if (Platform.OS === "android") {
-      request(PERMISSIONS.ANDROID.RECORD_AUDIO).then((result) => {
-        // …
-      });
-    }
 
-    const isFrontCamera = true;
-    const devices = await mediaDevices.enumerateDevices();
-
-    const facing = isFrontCamera ? "front" : "environment";
-    const videoSourceId = devices.find((device) => device.kind === "videoinput" && device.facing === facing);
-    const constraints = {
-      audio: true,
-      video: true,
-    };
-
-    const newStream = await mediaDevices.getUserMedia(constraints);
-    setLocalStream(newStream);
-    console.log("setLocalStream setLocalStream", newStream);
-    // navigation.navigate(SCREEN_CONNECT_VIEW, {data: route?.params?.data});
-  };
-
-  useEffect(async () => {
-    // initialize();
-  }, []);
   useEffect(async () => {
     if (dataCalendar?.id) {
       console.log("dataCalendar?.id", dataCalendar?.id);
@@ -84,11 +45,6 @@ export default function ({route}) {
         console.log("setRemoteStream", videoSrc);
         setStatusDoctor(true);
       });
-      messages.on("setLocalStream", (videoSrc) => {
-        console.log("setLocalStream", videoSrc);
-        setLocalStream(videoSrc);
-      });
-
       messages.on("offRemoteStream", () => {});
       setup(dataCalendar.id);
     }
@@ -100,6 +56,7 @@ export default function ({route}) {
         <TouchableOpacity
           onPress={() => {
             messages.emit("closeCall");
+            navigation.goBack();
             navigation.goBack();
           }}
           style={{
@@ -114,51 +71,30 @@ export default function ({route}) {
       ),
     });
   }, [navigation]);
+
   return (
-    <SafeAreaView style={{flex: 1, backgroundColor: colors.backgroundTheme, position: "relative"}}>
-      <ImageBackground source={require("@assets/images/connect_doctor_bg.png")} resizeMode="cover" style={{flex: 1, position: "relative"}}>
-        {localStream && (
-          <View
+    <SafeAreaView style={{flex: 1, backgroundColor: 'transparent', position: "relative"}}>
+      <View style={{flex: 1, flexDirection: "column", zIndex: 10, alignItems: "center", justifyContent: "space-between", padding: 16}}>
+        <View>
+          <Text
             style={{
-              flex: 1,
-              backgroundColor: "transparent",
-              position: "absolute",
-              bottom: 0,
-              right: 0,
-              zIndex: 5,
+              color: colors.white,
+              textAlign: "center",
+              fontSize: 17,
+              lineHeight: 26,
+              fontWeight: "400",
+              marginBottom: 10,
             }}
           >
-            <RTCView
-              style={{width: width, height: height}}
-              streamURL={localStream?.toURL()}
-              objectFit={"cover"}
-              zOrder={20}
-              mirror={true}
-            />
-          </View>
-        )}
-        <View style={{flex: 1, flexDirection: "column", zIndex: 10, alignItems: "center", justifyContent: "space-between", padding: 16}}>
-          <View>
-            <Text
-              style={{
-                color: colors.white,
-                textAlign: "center",
-                fontSize: 17,
-                lineHeight: 26,
-                fontWeight: "400",
-                marginBottom: 10,
-              }}
-            >
-              {`診察時間 \n`}
-              {titleWait}
-            </Text>
-            <Notification content={statusDoctor ? titleDoctorConnect : content} />
-          </View>
-          <View>
-            <ButtonConnect onPress={handleAction} style={{}} status={statusDoctor} />
-          </View>
+            {`診察時間 \n`}
+            {titleWait}
+          </Text>
+          <Notification content={statusDoctor ? titleDoctorConnect : content} />
         </View>
-      </ImageBackground>
+        <View>
+          <ButtonConnect onPress={handleAction} style={{}} status={statusDoctor} />
+        </View>
+      </View>
     </SafeAreaView>
   );
 }

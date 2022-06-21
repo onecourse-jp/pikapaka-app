@@ -48,9 +48,9 @@ export default function Headercomponent(props) {
           <Image style={{width: 182}} source={require("@assets/images/icons/ic_logo_top.png")} />
         </TouchableOpacity>
         <View style={{flexDirection: "row", alignItems: "center"}}>
-          <TouchableOpacity style={{paddingHorizontal: 10, paddingVertical: 15}} onPress={goProfileAction}>
+          {/* <TouchableOpacity style={{paddingHorizontal: 10, paddingVertical: 15}} onPress={goProfileAction}>
             <Image source={require("@assets/images/icons/ic_human_white_2.png")} />
-          </TouchableOpacity>
+          </TouchableOpacity> */}
           <TouchableOpacity style={{paddingLeft: 10, paddingVertical: 15}} onPress={() => setShowMenu(true)}>
             <Image source={require("@assets/images/icons/ic_menu_top.png")} />
           </TouchableOpacity>

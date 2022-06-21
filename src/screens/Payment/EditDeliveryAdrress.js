@@ -52,7 +52,6 @@ export default function DeliveryAddress({route}) {
           shipping_postal_code: dataAddressSubmit.shipping_postal_code,
           id: dataCalendar.id,
         };
-        console.log("data calendar ---", newDataCalendar);
         const {data, response} = await updateShippingAddress(newDataCalendar);
         if (response.status == 200) {
           global.hideLoadingView();
