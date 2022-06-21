@@ -31,13 +31,6 @@ export default function ServiceStep2() {
   const [listHourFromAdmin, setListHourFromAdmin] = useState([]);
   const [hourPicked, setHourPicked] = useState(null);
 
-  const DATA = [
-    {time: "08:00〜10:00", status: "空きなし ✕"},
-    {time: "10:00〜12:00", status: "空きあり ○"},
-    {time: "11:00〜13:00", status: "空きなし ✕"},
-    {time: "13:00〜15:00", status: "空きあり ○"},
-    {time: "15:00〜17:00", status: "空きあり ○"},
-  ];
   useEffect(async () => {
     global.showLoadingView();
     const {response, data} = await getDayCalendar(calendar?.data?.step1.data);

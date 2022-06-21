@@ -12,7 +12,11 @@ export default function ButtonLinkService({type = 1}) {
 
   return (
     <TouchableOpacity
-      onPress={() => navigation.navigate("SERVICE")}
+      onPress={() =>
+        global.showWebView({
+          url: "https://quickpcr.jp/",
+        })
+      }
       style={{
         backgroundColor: colors.buttonBocking,
         borderRadius: 30,

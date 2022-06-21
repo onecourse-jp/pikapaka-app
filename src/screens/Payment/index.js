@@ -58,9 +58,9 @@ export default function Payment({route}) {
       cart_name: dataSubmit.cart_name,
     };
     console.log("paramsData", paramsData);
+    global.showLoadingView();
+    global.showLoadingView();
     try {
-      global.showLoadingView();
-      global.showLoadingView();
       const {response, data} = await paymentStripe(paramsData);
       console.log(" paramsData", paramsData);
       if (response && response.status == 200) {
@@ -76,7 +76,6 @@ export default function Payment({route}) {
           },
         ]);
       } else {
-
         global.hideLoadingView();
         if (data?.message && typeof data?.message == "string") {
           let errorMessage = data?.message.split(" ").join("");
@@ -91,6 +90,7 @@ export default function Payment({route}) {
         }
       }
     } catch (error) {
+      global.hideLoadingView();
       console.log("err paymentStripe", error);
       setErrorApi("Error!");
     }
@@ -221,7 +221,7 @@ export default function Payment({route}) {
                     郵便番号
                   </Text>
                   <Text style={{fontFamily: fonts.Hiragino, width: "70%", fontSize: 12, color: colors.colorTextBlack, lineHeight: 16}}>
-                    {billData?.bill?.reservation?.shipping_postal_code}
+                    {billData?.user?.postal_code}
                   </Text>
                 </View>
                 <View
@@ -243,7 +243,7 @@ export default function Payment({route}) {
                     住所
                   </Text>
                   <Text style={{fontFamily: fonts.Hiragino, width: "70%", fontSize: 12, color: colors.colorTextBlack, lineHeight: 16}}>
-                    {billData?.bill?.reservation?.shipping_address}
+                    {billData?.user?.address}
                   </Text>
                 </View>
                 <View style={{flexDirection: "row", alignItems: "center", justifyContent: "center", marginBottom: 16}}>

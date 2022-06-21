@@ -12,7 +12,7 @@ import {
   SCREEN_INQUIRY,
 } from "@screens/screens.constants";
 
-export default function Headercomponent() {
+export default function FooterComponent() {
   const navigation = useNavigation();
   const colors = useThemeColors();
   const fonts = useThemeFonts();
