@@ -210,7 +210,7 @@ export default function Profile({navigation}) {
     {
       key: "medical_history",
       label: "既往歴",
-      placeholder: "選択",
+      placeholder: "なし",
       content: global.renderMedicalHistory(profile?.medical_history),
       hideIcon: false,
       hideItem: false,
