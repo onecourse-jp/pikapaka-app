@@ -25,14 +25,19 @@ export default function ServiceStep5({route}) {
   const handleSubmit = () => {
     navigation.navigate(SCREEN_QUESIONAIRE_STEP1, {id: idCalendar});
   };
+  const isFirstTimeExamination = dataConfirm?.old_reservation_id || dataConfirm?.old_reservation_id === null;
 
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: colors.backgroundTheme}}>
       <View style={[styles.container]}>
         <ScrollView contentContainerStyle={{}}>
           <GuideComponent
-            title={"ご予約を承りました。初診の方は事前に必ず問診票のご記入をお願いいたします。"}
-            note="※回答していただかないと受診ができません"
+            title={
+              isFirstTimeExamination
+                ? "オンライン診療の予約は完了しました。"
+                : "ご予約を承りました。\n初診の方は事前に必ず問診票のご記入をお願いいたします。"
+            }
+            note={isFirstTimeExamination ? "" : "※回答していただかないと受診ができません"}
           />
           <StepsComponent currentStep={screenStep} />
           <View style={{backgroundColor: colors.white, padding: 16}}>
@@ -41,8 +46,8 @@ export default function ServiceStep5({route}) {
                 style={{
                   borderWidth: 1,
                   marginRight: 7,
-                  borderColor: dataConfirm?.old_reservation_id || dataConfirm?.old_reservation_id === null ? "#D38A34" : "#F65151",
-                  backgroundColor: dataConfirm?.old_reservation_id || dataConfirm?.old_reservation_id === null ? "#FBD68F" : "#FFAFAF",
+                  borderColor: isFirstTimeExamination ? "#D38A34" : "#F65151",
+                  backgroundColor: isFirstTimeExamination ? "#FBD68F" : "#FFAFAF",
                   paddingHorizontal: 8,
                   alignSelf: "flex-start",
                 }}
@@ -51,12 +56,12 @@ export default function ServiceStep5({route}) {
                   style={{
                     fontFamily: fonts.Hiragino,
                     fontSize: 12,
-                    color: dataConfirm?.old_reservation_id || dataConfirm?.old_reservation_id === null ? "#D38A34" : "#F65151",
+                    color: isFirstTimeExamination ? "#D38A34" : "#F65151",
                     lineHeight: 20,
                     textAlign: "left",
                   }}
                 >
-                  {dataConfirm?.old_reservation_id || dataConfirm?.old_reservation_id === null ? "予約済み" : "問診票未記入"}
+                  {isFirstTimeExamination ? "予約済み" : "問診票未記入"}
                 </Text>
               </View>
               <Text
