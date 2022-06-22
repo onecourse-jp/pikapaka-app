@@ -316,7 +316,7 @@ export default function BottomTabbarNavigator({route}) {
 
                   <Text style={[styles.tabbarText]}>
                     {/* {AppText.bottomTab.chat} */}
-                    オンライン診療
+                    診療予約
                   </Text>
                 </View>
               </View>
@@ -328,7 +328,7 @@ export default function BottomTabbarNavigator({route}) {
                   </View>
                   <Text style={[styles.tabbarText, styles.tabbarTextDefault]}>
                     {/* {AppText.bottomTab.chat} */}
-                    オンライン診療
+                    診療予約
                   </Text>
                 </View>
               </View>
