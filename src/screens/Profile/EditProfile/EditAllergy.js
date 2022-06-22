@@ -26,6 +26,7 @@ export default function EditAllergy({route}) {
   const [disableSubmit, setDisableSubmit] = useState(false);
   const dispatch = useDispatch();
   const defaultValue = route?.params?.data?.allergies ? (route?.params?.data?.allergies === 1 ? true : false) : null;
+  console.log('defaultValue isAllergyStatus')
   const [isAllergyStatus, setIsAllergyStatus] = useState(defaultValue);
 
   const content_allergies = route?.params?.data?.content_allergies ? route?.params?.data?.content_allergies : null;
@@ -75,7 +76,7 @@ export default function EditAllergy({route}) {
           console.log("data when update", data);
         } else {
           global.hideLoadingView();
-          Alert.alert("","個人情報の編集ができません。もう一度お願いします。", [
+          Alert.alert("", "個人情報の編集ができません。もう一度お願いします。", [
             {
               text: "OK",
               onPress: () => {},
@@ -85,7 +86,7 @@ export default function EditAllergy({route}) {
       } catch (error) {
         console.log("error", error);
         global.hideLoadingView();
-        Alert.alert("","個人情報の編集ができません。もう一度お願いします。", [
+        Alert.alert("", "個人情報の編集ができません。もう一度お願いします。", [
           {
             text: "OK",
             onPress: () => {},
@@ -128,7 +129,7 @@ export default function EditAllergy({route}) {
             }}
           >
             <Text>あり</Text>
-            {isAllergyStatus && <Image source={require("@assets/images/v_green.png")} />}
+            {isAllergyStatus === true && <Image source={require("@assets/images/v_green.png")} />}
           </TouchableOpacity>
           <TouchableOpacity
             style={{
@@ -144,7 +145,7 @@ export default function EditAllergy({route}) {
             }}
           >
             <Text>なし</Text>
-            {!isAllergyStatus && <Image source={require("@assets/images/v_green.png")} />}
+            {isAllergyStatus === false && <Image source={require("@assets/images/v_green.png")} />}
           </TouchableOpacity>
           {isAllergyStatus && (
             <>

@@ -116,49 +116,41 @@ export default function ({route}) {
   }, [navigation]);
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: colors.backgroundTheme, position: "relative"}}>
-      <ImageBackground source={require("@assets/images/connect_doctor_bg.png")} resizeMode="cover" style={{flex: 1, position: "relative"}}>
-        {localStream && (
-          <View
+      {localStream && (
+        <View
+          style={{
+            flex: 1,
+            backgroundColor: "transparent",
+            position: "absolute",
+            bottom: 0,
+            right: 0,
+            zIndex: 5,
+          }}
+        >
+          <RTCView style={{width: width, height: height}} streamURL={localStream?.toURL()} objectFit={"cover"} zOrder={20} mirror={true} />
+        </View>
+      )}
+      <View style={{flex: 1, flexDirection: "column", zIndex: 10, alignItems: "center", justifyContent: "space-between", padding: 16}}>
+        <View>
+          <Text
             style={{
-              flex: 1,
-              backgroundColor: "transparent",
-              position: "absolute",
-              bottom: 0,
-              right: 0,
-              zIndex: 5,
+              color: colors.white,
+              textAlign: "center",
+              fontSize: 17,
+              lineHeight: 26,
+              fontWeight: "400",
+              marginBottom: 10,
             }}
           >
-            <RTCView
-              style={{width: width, height: height}}
-              streamURL={localStream?.toURL()}
-              objectFit={"cover"}
-              zOrder={20}
-              mirror={true}
-            />
-          </View>
-        )}
-        <View style={{flex: 1, flexDirection: "column", zIndex: 10, alignItems: "center", justifyContent: "space-between", padding: 16}}>
-          <View>
-            <Text
-              style={{
-                color: colors.white,
-                textAlign: "center",
-                fontSize: 17,
-                lineHeight: 26,
-                fontWeight: "400",
-                marginBottom: 10,
-              }}
-            >
-              {`診察時間 \n`}
-              {titleWait}
-            </Text>
-            <Notification content={statusDoctor ? titleDoctorConnect : content} />
-          </View>
-          <View>
-            <ButtonConnect onPress={handleAction} style={{}} status={statusDoctor} />
-          </View>
+            {`診察時間 \n`}
+            {titleWait}
+          </Text>
+          <Notification content={statusDoctor ? titleDoctorConnect : content} />
         </View>
-      </ImageBackground>
+        <View>
+          <ButtonConnect onPress={handleAction} style={{}} status={statusDoctor} />
+        </View>
+      </View>
     </SafeAreaView>
   );
 }

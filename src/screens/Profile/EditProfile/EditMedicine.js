@@ -25,7 +25,8 @@ export default function EditMedicine({route}) {
   const navigation = useNavigation();
   const [disableSubmit, setDisableSubmit] = useState(false);
   const dispatch = useDispatch();
-  const [isMedicineStatus, setIsMedicineStatus] = useState(route?.params?.data?.take_medicines === 1 ? true : false);
+  const defaultValue = route?.params?.data?.take_medicines ? (route?.params?.data?.take_medicines === 1 ? true : false) : null;
+  const [isMedicineStatus, setIsMedicineStatus] = useState(defaultValue);
   const content_medicines = route?.params?.data?.content_medicines ? route?.params?.data?.content_medicines : null;
   const {
     control,
@@ -125,7 +126,7 @@ export default function EditMedicine({route}) {
             }}
           >
             <Text>あり</Text>
-            {isMedicineStatus && <Image source={require("@assets/images/v_green.png")} />}
+            {isMedicineStatus === true && <Image source={require("@assets/images/v_green.png")} />}
           </TouchableOpacity>
           <TouchableOpacity
             style={{
@@ -141,7 +142,7 @@ export default function EditMedicine({route}) {
             }}
           >
             <Text>なし</Text>
-            {!isMedicineStatus && <Image source={require("@assets/images/v_green.png")} />}
+            {isMedicineStatus === false && <Image source={require("@assets/images/v_green.png")} />}
           </TouchableOpacity>
           {isMedicineStatus && (
             <>
