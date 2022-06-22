@@ -12,12 +12,16 @@
 #ifdef FB_SONARKIT_ENABLED
 #import <SKIOSNetworkPlugin/SKIOSNetworkAdapter.h>
 #endif
-
+#import <AppsFlyerLib/AppsFlyerLib.h>
+#import <UserNotifications/UserNotifications.h>
 #import <AppCenterReactNative.h>
 #import <AppCenterReactNativeAnalytics.h>
 #import <AppCenterReactNativeCrashes.h>
 @implementation AppDelegate
-
+// Start the AppsFlyer SDK
+- (void)sendLaunch:(UIApplication *)application {
+    [[AppsFlyerLib shared] start];
+}
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
 //  [Bugsnag start];
@@ -25,7 +29,7 @@
 #ifdef FB_SONARKIT_ENABLED
 #endif
 //  [RNSplashScreen show];  // here
-  
+
   [FIRApp configure];
   [AppCenterReactNative register];
   [AppCenterReactNativeAnalytics registerWithInitiallyEnabled:true];
@@ -43,7 +47,31 @@
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
   [RNSplashScreen show];  // here
+  // Override point for customization after application launch.
+  /** APPSFLYER INIT **/
+  [[AppsFlyerLib shared] setAppsFlyerDevKey:@"NEvX4Z6NHrffjMAzoxtJpS"];
+  [[AppsFlyerLib shared] setAppleAppID:@"id1628953261"];
+  /* Uncomment the following line to see AppsFlyer debug logs */
+  [AppsFlyerLib shared].isDebug = true;
+  
+  // SceneDelegate support
+  [[NSNotificationCenter defaultCenter] addObserver:self
+     selector:@selector(sendLaunch:)
+     name:UIApplicationDidBecomeActiveNotification
+     object:nil];
+    if (@available(iOS 10, *)) {
+        UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+        center.delegate = self;
+        [center requestAuthorizationWithOptions:(UNAuthorizationOptionSound | UNAuthorizationOptionAlert | UNAuthorizationOptionBadge) completionHandler:^(BOOL granted, NSError * _Nullable error) {
+        }];
+    }
 
+    else {
+        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes: UIUserNotificationTypeAlert | UIUserNotificationTypeSound | UIUserNotificationTypeBadge categories:nil];
+        [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+    }
+
+  [[UIApplication sharedApplication] registerForRemoteNotifications];
   [LineLogin setupWithChannelID:@"1657233461" universalLinkURL:nil];
   
   return YES;
@@ -78,6 +106,7 @@
 -(BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray<id<UIUserActivityRestoring>> * _Nullable))restorationHandler{
   return [RCTLinkingManager application:application continueUserActivity:userActivity restorationHandler:restorationHandler] || [LineLogin application:application continue:userActivity restorationHandler:restorationHandler];
 }
+
 @end
 
 

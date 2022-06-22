@@ -11,6 +11,7 @@ target 'TCare' do
     :hermes_enabled => false
     )
     permissions_path = '../node_modules/react-native-permissions/ios'
+  pod 'AppsFlyerFramework'
   pod 'Firebase'
   pod 'Firebase/Crashlytics'
   pod 'Firebase/Analytics'
