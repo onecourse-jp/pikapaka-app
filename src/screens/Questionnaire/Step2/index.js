@@ -89,7 +89,6 @@ export default function QuestionaireStep2({route}) {
         },
       },
     ]);
-
   }, [userDetails]);
 
   useEffect(() => {

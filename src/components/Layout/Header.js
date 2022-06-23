@@ -34,7 +34,7 @@ export default function Headercomponent(props) {
         }}
       >
         <TouchableOpacity
-          style={{height: "100%", flexDirection: "row", alignItems: "center" }}
+          style={{height: "100%", flexDirection: "row", alignItems: "center", width: 225}}
           onPress={() => {
             const navigationCurrentName = RootNavigator?.getCurrentRoute()?.name;
             if (navigationCurrentName != "Home") {
@@ -45,7 +45,7 @@ export default function Headercomponent(props) {
             }
           }}
         >
-          <Image style={{width: 182}} source={require("@assets/images/icons/ic_logo_top.png")} />
+          <Image style={{width: 225}} source={require("@assets/images/icons/ic_logo_top.png")} />
         </TouchableOpacity>
         <View style={{flexDirection: "row", alignItems: "center"}}>
           {/* <TouchableOpacity style={{paddingHorizontal: 10, paddingVertical: 15}} onPress={goProfileAction}>

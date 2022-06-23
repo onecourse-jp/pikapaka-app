@@ -15,7 +15,7 @@ export default function Top({navigation, route}) {
   const colors = useThemeColors();
   const [index, setIndex] = React.useState(currentIndex - 1);
   const [routes] = React.useState([
-    {key: "first", title: "スキンケア"},
+    {key: "first", title: "スキンケア", icon: require("@assets/images/icons/ic_tab_1.png")},
     {key: "second", title: "ダイエット", icon: require("@assets/images/icons/ic_tab_2.png")},
     {key: "third", title: "ピル", icon: require("@assets/images/icons/ic_tab_3.png")},
     {key: "fourth", title: "ED", icon: require("@assets/images/icons/ic_tab_4.png")},

@@ -71,7 +71,7 @@ export default function HistorySkinCare({category_medical = 0}) {
   return (
     <>
       <ScrollView
-        contentContainerStyle={{paddingHorizontal: 18, paddingBottom: 60}}
+        contentContainerStyle={{paddingHorizontal: 18}}
         refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
       >
         {dataCalendar.map((item, index) => {
@@ -131,8 +131,8 @@ export default function HistorySkinCare({category_medical = 0}) {
             </TouchableOpacity>
           );
         })}
+        <Pagination setPage={setPage} page={page} totalPage={totalPage} />
       </ScrollView>
-      <Pagination setPage={setPage} page={page} totalPage={totalPage} />
     </>
   );
 }

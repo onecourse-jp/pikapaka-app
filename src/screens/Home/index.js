@@ -1,5 +1,5 @@
 import React, {useState, useRef, useEffect} from "react";
-import {View, Text, Image, Dimensions} from "react-native";
+import {View, Text, Image, Dimensions, TouchableOpacity} from "react-native";
 import styles from "./styles";
 import {useSelector, useDispatch} from "react-redux";
 import {useThemeColors, useThemeFonts} from "react-native-theme-component";
@@ -48,7 +48,7 @@ export default function Home({route}) {
   };
 
   return (
-    <SafeAreaView style={{flex: 1, backgroundColor: colors.backgroundTheme}}>
+    <SafeAreaView style={{flex: 1, backgroundColor: colors.backgroundTheme, position: "relative"}}>
       <Headercomponent
         onlineMedicalCare={onlineMedicalCare}
         flowMedicalCare={flowMedicalCare}
@@ -151,6 +151,21 @@ export default function Home({route}) {
           </View>
           <FooterComponent />
         </ScrollView>
+        <View style={{position: "absolute", bottom: 10, right: 10}}>
+          <TouchableOpacity
+            style={{
+              width: 80,
+              height: 80,
+              borderRadius: 80,
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center",
+              backgroundColor: "rgba(143, 197, 118, 0.7)",
+            }}
+          >
+            <Text style={{fontSize: 12, textAlign: "center", color: colors.white, fontWeight: "bold"}}>診療予約は こちら</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </SafeAreaView>
   );
