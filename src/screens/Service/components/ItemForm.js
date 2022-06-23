@@ -36,8 +36,8 @@ export default function ItemForm({item, valueData = null, changeData = () => {},
                 setShowPopup(true);
               }}
             >
-              {valueData === 1 && <Text>有</Text>}
-              {valueData === 2 && <Text>無</Text>}
+              {valueData === 1 && <Text>あり</Text>}
+              {valueData === 2 && <Text>なし</Text>}
               {valueData === null && <Text>{item.placeholder}</Text>}
             </TouchableOpacity>
             <Image style={{marginRight: 2}} source={require("@assets/images/icons/ic_next_gray.png")} />
@@ -129,7 +129,7 @@ export default function ItemForm({item, valueData = null, changeData = () => {},
                       backgroundColor: value === 1 ? colors.textBlue : colors.white,
                     }}
                   ></View>
-                  <Text style={{fontFamily: fonts.NSregular, fontSize: 19, lineHeight: 20}}>有</Text>
+                  <Text style={{fontFamily: fonts.NSregular, fontSize: 19, lineHeight: 20}}>あり</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={{flexDirection: "row", alignItems: "center", paddingVertical: 12}} onPress={() => setValue(2)}>
                   <View
@@ -143,7 +143,7 @@ export default function ItemForm({item, valueData = null, changeData = () => {},
                       backgroundColor: value === 2 ? colors.textBlue : colors.white,
                     }}
                   ></View>
-                  <Text style={{fontFamily: fonts.NSregular, fontSize: 19, lineHeight: 20}}>無</Text>
+                  <Text style={{fontFamily: fonts.NSregular, fontSize: 19, lineHeight: 20}}>なし</Text>
                 </TouchableOpacity>
               </View>
               <View style={{flexDirection: "row", alignItems: "center", justifyContent: "center", marginTop: 30}}>
