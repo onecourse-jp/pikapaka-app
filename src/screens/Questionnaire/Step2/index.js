@@ -134,7 +134,12 @@ export default function QuestionaireStep2({route}) {
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: colors.backgroundTheme}}>
       <View style={[styles.container]}>
-        <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} style={{flex: 1}}>
+        <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"}
+          keyboardVerticalOffset={Platform.select({
+            ios: 60,
+            android: 500,
+          })}
+          style={{flex: 1}}>
           <ScrollView contentContainerStyle={{}} listMode="MODAL">
             <GuideComponent
               title={"下記の問診にお答えください。連絡先のご記入をお願いします。"}

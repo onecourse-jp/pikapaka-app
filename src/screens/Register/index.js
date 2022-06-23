@@ -78,7 +78,12 @@ export default function Register() {
 
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: colors.backgroundTheme}}>
-      <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} style={{flex: 1}}>
+      <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"}
+          keyboardVerticalOffset={Platform.select({
+            ios: 60,
+            android: 500,
+          })}
+          style={{flex: 1}}>
         <ScrollView contentContainerStyle={{height: "100%"}}>
           <View style={[styles.container]}>
             <View style={{width: "100%", marginTop: 16}}>
