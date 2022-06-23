@@ -96,7 +96,31 @@ export default function ModalWebView({route}) {
       setUrlWebView(route?.params?.url);
     }
   }, []);
+  const debugging = `
+  const consoleLog = (type, log) => window.ReactNativeWebView.postMessage(JSON.stringify({'type': 'Console', 'data': {'type': type, 'log': log}}));
+  console = {
+      log: (log) => consoleLog('log', log),
+      debug: (log) => consoleLog('debug', log),
+      info: (log) => consoleLog('info', log),
+      warn: (log) => consoleLog('warn', log),
+      error: (log) => consoleLog('error', log),
+    };
+`;
 
+  const onMessage = (event) => {
+    let dataPayload;
+    try {
+      dataPayload = JSON.parse(event.nativeEvent.data);
+    } catch (e) {}
+
+    if (dataPayload) {
+      if (dataPayload.type === "Console") {
+        console.info(`[Console] ${JSON.stringify(dataPayload.data)}`);
+      } else {
+        console.log(dataPayload);
+      }
+    }
+  };
   return (
     <SafeAreaView style={{flex: 1, position: "relative"}}>
       <View style={{flex: 1, position: "relative"}}>
@@ -115,8 +139,9 @@ export default function ModalWebView({route}) {
             startInLoadingState={true}
             scrollEnabled={false}
             mixedContentMode="always"
+            // onMessage={onMessage}
             source={{
-              uri: "https://d872-14-248-82-148.ngrok.io/user/call-to-doctor?room=156",
+              uri: "https://0b75-14-248-82-148.ngrok.io/user/call-to-doctor?room=87",
               // uri: urlWebView,
             }}
             onShouldStartLoadWithRequest={(request) => {

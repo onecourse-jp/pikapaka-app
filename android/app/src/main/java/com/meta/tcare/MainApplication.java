@@ -3,6 +3,8 @@ package com.meta.tcare;
 // import com.bugsnag.android.Bugsnag;
 import android.app.Application;
 import android.content.Context;
+import android.webkit.WebView;
+
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
 import com.facebook.react.PackageList;
@@ -60,6 +62,7 @@ public class MainApplication extends Application implements ReactApplication {
   public void onCreate() {
     super.onCreate();
     // Bugsnag.start(this);
+      WebView.setWebContentsDebuggingEnabled(true);
     SoLoader.init(this, /* native exopackage */ false);
   }
 
