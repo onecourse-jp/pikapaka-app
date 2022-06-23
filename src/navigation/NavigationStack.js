@@ -33,11 +33,7 @@ import ConnectDoctor from "../screens/ConnectDoctor";
 import ModaConnectView from "../screens/ConnectDoctor/ModaConnectView";
 
 import ModalWebView from "../components/modals/modalWebView";
-import DateTime from "@screens/EditCalendar/DateTime";
-import ExaminationItem from "@screens/EditCalendar/ExaminationItem";
-import ExaminationContent from "@screens/EditCalendar/ExaminationContent";
-import DeliveryAddress from "@screens/EditCalendar/DeliveryAddress";
-import DeliveryAddressPayment from "@screens/Payment/EditDeliveryAdrress";
+
 import Confirm from "@screens/EditCalendar/Confirm";
 import FAQScreen from "@screens/FAQs";
 import NewsScreen from "@screens/News";
@@ -65,12 +61,6 @@ import {
   SCREEN_WEB_VIEW,
   SCREEN_FAQ,
   SCREEN_NEWS,
-  SCREEN_EDIT_CALENDAR_DATETIME,
-  SCREEN_EDIT_CALENDAR_EXAMINATION_ITEM,
-  SCREEN_EDIT_CALENDAR_EXAMINATION_CONTENT,
-  SCREEN_EDIT_CALENDAR_ADDRESS,
-  SCREEN_EDIT_CALENDAR_CONFIRM,
-  SCREEN_EDIT_DELIVERY_ADDRESS,
   SCREEN_MODAL_LIST_IMAGE_CALL,
   SCREEN_CONNECT_VIEW,
 } from "@screens/screens.constants";
@@ -187,12 +177,6 @@ function App() {
           <Stack.Screen name={SCREEN_INQUIRY} component={Inquiry} options={{headerShown: false}} />
           <Stack.Screen name={SCREEN_CONNECT_DOCTOR} component={ConnectDoctor} options={{title: ""}} />
 
-          <Stack.Screen name={SCREEN_EDIT_CALENDAR_DATETIME} component={DateTime} options={{title: "予約日時変更"}} />
-          <Stack.Screen name={SCREEN_EDIT_CALENDAR_EXAMINATION_ITEM} component={ExaminationItem} options={{title: "診察項目変更"}} />
-          <Stack.Screen name={SCREEN_EDIT_CALENDAR_EXAMINATION_CONTENT} component={ExaminationContent} options={{title: "診察内容変更"}} />
-          <Stack.Screen name={SCREEN_EDIT_CALENDAR_ADDRESS} component={DeliveryAddress} options={{title: "配送先を指定"}} />
-          <Stack.Screen name={SCREEN_EDIT_CALENDAR_CONFIRM} component={Confirm} options={{title: "変更内容確認"}} />
-          <Stack.Screen name={SCREEN_EDIT_DELIVERY_ADDRESS} component={DeliveryAddressPayment} options={{title: "配送先を指定"}} />
           <Stack.Screen
             name={SCREEN_RESET_PASSWORD}
             component={ResetPassword}

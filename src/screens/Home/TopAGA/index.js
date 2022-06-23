@@ -11,6 +11,7 @@ import FlowMedicalCare from "../components/FlowMedicalCare";
 import FAQComponent from "../components/FAQ";
 import FooterComponent from "@components/Layout/Footer";
 import ExternalMedicine from "./ExternalMedicine";
+import ButtonBooking from "../components/ButtonBooking";
 
 export default function TopAGA() {
   const user = useSelector((state) => state.users);
@@ -72,6 +73,7 @@ export default function TopAGA() {
         </View>
         <FooterComponent />
       </ScrollView>
+      <ButtonBooking bgColor={"rgba(143, 197, 118, 0.7)"} />
     </View>
   );
 }

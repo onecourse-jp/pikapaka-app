@@ -11,6 +11,7 @@ import FlowMedicalCare from "../components/FlowMedicalCare";
 import FAQComponent from "../components/FAQ";
 import FooterComponent from "@components/Layout/Footer";
 import OralMedicineDiet from "./OralMedicineDiet";
+import ButtonBooking from "../components/ButtonBooking";
 
 export default function Diet() {
   const user = useSelector((state) => state.users);
@@ -73,6 +74,7 @@ export default function Diet() {
         </View>
         <FooterComponent />
       </ScrollView>
+      <ButtonBooking bgColor={"rgba(43, 185, 185, 0.7)"} />
     </View>
   );
 }

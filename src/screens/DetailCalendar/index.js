@@ -39,7 +39,7 @@ export default function DetailCalender({route}) {
       const {response, data} = await getReservationById(idCalendar);
       if (response?.status === 200) {
         setDataCalendar(data?.data);
-        console.log("response getReservationById", data?.data.id);
+        console.log("response getReservationById", data?.data);
         if (data?.data?.status === 1) {
           setCurrentStep(3);
         } else if (data?.data?.status === 2) {

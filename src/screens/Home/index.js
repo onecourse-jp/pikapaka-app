@@ -17,6 +17,8 @@ import FAQComponent from "./components/FAQ";
 import NewsComponent from "./components/News";
 import AboutClinic from "./components/AboutClinic";
 import FooterComponent from "@components/Layout/Footer";
+import ButtonBooking from "./components/ButtonBooking";
+
 const {height} = Dimensions.get("window");
 
 export default function Home({route}) {
@@ -151,21 +153,7 @@ export default function Home({route}) {
           </View>
           <FooterComponent />
         </ScrollView>
-        <View style={{position: "absolute", bottom: 10, right: 10}}>
-          <TouchableOpacity
-            style={{
-              width: 80,
-              height: 80,
-              borderRadius: 80,
-              flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "center",
-              backgroundColor: "rgba(143, 197, 118, 0.7)",
-            }}
-          >
-            <Text style={{fontSize: 12, textAlign: "center", color: colors.white, fontWeight: "bold"}}>診療予約は こちら</Text>
-          </TouchableOpacity>
-        </View>
+        <ButtonBooking bgColor={"rgba(0, 176, 80, 0.7)"} />
       </View>
     </SafeAreaView>
   );

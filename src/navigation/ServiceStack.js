@@ -2,7 +2,6 @@ import * as React from "react";
 import {createNativeStackNavigator} from "@react-navigation/native-stack";
 import {TouchableOpacity, Platform, Image, View} from "react-native";
 import {
-  SCREEN_SERVICE,
   SCREEN_QUESIONAIRE_STEP1,
   SCREEN_SERVICE_STEP1,
   SCREEN_DETAIL_CALENDAR,
@@ -29,6 +28,11 @@ import {
   SCREEN_EDIT_BIRTHDAY,
   SCREEN_EDIT_EMAIL_ADDRESS,
   SCREEN_EDIT_CALENDAR_CONFIRM,
+  SCREEN_EDIT_CALENDAR_DATETIME,
+  SCREEN_EDIT_CALENDAR_EXAMINATION_ITEM,
+  SCREEN_EDIT_CALENDAR_EXAMINATION_CONTENT,
+  SCREEN_EDIT_DELIVERY_ADDRESS,
+  SCREEN_EDIT_CALENDAR_ADDRESS,
 } from "@screens/screens.constants";
 import QuestionaireStep1 from "@screens/Questionnaire/Step1";
 import ServiceStep2 from "@screens/Service/Step2";
@@ -41,11 +45,8 @@ import QuestionaireStep4 from "../screens/Questionnaire/Step4";
 import ServiceStep1 from "@screens/Service/Step1";
 import DetailCalender from "@screens/DetailCalendar";
 import DetailAfterPayment from "@screens/DetailCalendar/DetailAfterPayment";
-import ServiceScreen from "@screens/Service";
 import EditCalendar from "@screens/EditCalendar";
 import {defaultStackNavigation} from "@config/navigations";
-import Colors from "@config/styles";
-import I18n from "src/i18n";
 import LocalizationContext from "@context/LocalizationContext";
 import PaymentScreen from "@screens/Payment";
 import EditName from "@screens/Profile/EditProfile/EditName";
@@ -60,7 +61,13 @@ import EditMedicalHistory from "@screens/Profile/EditProfile/EditMedicalHistory"
 import EditBirthday from "@screens/Profile/EditProfile/EditBirthday";
 import EditEmailAddress from "@screens/Profile/EditProfile/EditEmailAddress";
 import EditPhoneNumber from "../screens/Profile/EditProfile/EditPhoneNumber";
+import DateTime from "@screens/EditCalendar/DateTime";
+import ExaminationItem from "@screens/EditCalendar/ExaminationItem";
+import ExaminationContent from "@screens/EditCalendar/ExaminationContent";
+import DeliveryAddress from "@screens/EditCalendar/DeliveryAddress";
+import DeliveryAddressPayment from "@screens/Payment/EditDeliveryAdrress";
 import Confirm from "@screens/EditCalendar/Confirm";
+
 const ServiceStack = createNativeStackNavigator();
 function ServiceStackScreen() {
   const {t} = React.useContext(LocalizationContext);
@@ -123,6 +130,16 @@ function ServiceStackScreen() {
         }}
       />
       <ServiceStack.Screen name={SCREEN_EDIT_CALENDAR_CONFIRM} component={Confirm} options={{title: "変更内容確認"}} />
+      <ServiceStack.Screen name={SCREEN_EDIT_CALENDAR_DATETIME} component={DateTime} options={{title: "予約日時変更"}} />
+      <ServiceStack.Screen name={SCREEN_EDIT_CALENDAR_EXAMINATION_ITEM} component={ExaminationItem} options={{title: "診察項目変更"}} />
+      <ServiceStack.Screen
+        name={SCREEN_EDIT_CALENDAR_EXAMINATION_CONTENT}
+        component={ExaminationContent}
+        options={{title: "診察内容変更"}}
+      />
+      <ServiceStack.Screen name={SCREEN_EDIT_CALENDAR_ADDRESS} component={DeliveryAddress} options={{title: "配送先を指定"}} />
+      <ServiceStack.Screen name={SCREEN_EDIT_DELIVERY_ADDRESS} component={DeliveryAddressPayment} options={{title: "配送先を指定"}} />
+      {/* <ServiceStack.Screen name={SCREEN_EDIT_CALENDAR_CONFIRM} component={Confirm} options={{title: "変更内容確認"}} /> */}
       <ServiceStack.Screen name={SCREEN_EDIT_EMAIL_ADDRESS} component={EditEmailAddress} options={{title: "メールアドレス"}} />
       <ServiceStack.Screen name={SCREEN_EDIT_NAME} component={EditName} options={{title: "名前を変更"}} />
       <ServiceStack.Screen name={SCREEN_EDIT_FURIGANA} component={EditFurigana} options={{title: "名前を変更"}} />

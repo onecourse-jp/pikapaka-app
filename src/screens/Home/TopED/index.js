@@ -11,6 +11,7 @@ import FlowMedicalCare from "../components/FlowMedicalCare";
 import FAQComponent from "../components/FAQ";
 import FooterComponent from "@components/Layout/Footer";
 import ExternalMedicine from "./ExternalMedicine";
+import ButtonBooking from "../components/ButtonBooking";
 
 export default function ED() {
   const user = useSelector((state) => state.users);
@@ -73,6 +74,7 @@ export default function ED() {
         </View>
         <FooterComponent />
       </ScrollView>
+      <ButtonBooking bgColor={"rgba(123, 142, 210, 0.7)"} />
     </View>
   );
 }

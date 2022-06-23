@@ -142,6 +142,7 @@ export default function ServiceStep3() {
         key: "medical_history",
         label: "既往歴",
         title: "既往歴",
+        require: false,
         placeholder: "なし",
         label: 3,
         value: userDetails?.medical_history ?? null,

@@ -13,6 +13,7 @@ import {
 } from "@screens/screens.constants";
 import {deleteCalendar} from "@services/editCalendar";
 import moment from "moment";
+import {getReservationById} from "@services/auth";
 import {changeStatusCalendar} from "@actions/calendarAction";
 
 export default function EditCalendar({route}) {
@@ -21,10 +22,10 @@ export default function EditCalendar({route}) {
   const fonts = useThemeFonts();
   const dispatch = useDispatch();
   const navigation = useNavigation();
-  const [dataCalendar, setDataCalendar] = useState(route?.params?.data);
+  const [dataCalendar, setDataCalendar] = useState(null);
   const [notiStatus, setNotiStatus] = useState(false);
   useEffect(() => {
-    setDataCalendar(route?.params?.data);
+    actionGetCalendar(route?.params?.data.id);
   }, [route?.params?.data]);
   useEffect(() => {
     if (route?.params?.type == "SUCCESS") {
@@ -34,6 +35,18 @@ export default function EditCalendar({route}) {
       }, 2000);
     }
   }, [route?.params?.data]);
+
+  const actionGetCalendar = async (idCalendar) => {
+    global.showLoadingView();
+    const {response, data} = await getReservationById(idCalendar);
+    if (response?.status === 200) {
+      setDataCalendar(data?.data);
+      console.log("response getReservationById", data?.data);
+    } else {
+      console.log("response getReservationById", response?.status);
+    }
+    global.hideLoadingView();
+  };
   const handleDateTime = () => {
     navigation.navigate(SCREEN_EDIT_CALENDAR_DATETIME, {data: dataCalendar});
   };
@@ -45,28 +58,6 @@ export default function EditCalendar({route}) {
   };
   const handleDeliveryAddress = () => {
     navigation.navigate(SCREEN_EDIT_CALENDAR_ADDRESS, {data: dataCalendar});
-  };
-  const handleDeleteCalendar = async () => {
-    global.showLoadingView();
-    const {data, response} = await deleteCalendar(dataCalendar.id);
-    if (data.status === 200) {
-      global.hideLoadingView();
-      dispatch(changeStatusCalendar());
-      navigation.navigate(SCREEN_HISTORY);
-      Alert.alert("", "予約のキャンセルが完了しました。", [
-        {
-          text: "OK",
-          style: "cancel",
-        },
-      ]);
-    } else {
-      Alert.alert("Alert Title", "キャンセルできませんでした。もう一度お試しください", [
-        {
-          text: "OK",
-          style: "cancel",
-        },
-      ]);
-    }
   };
 
   const handleDelete = async () => {
@@ -175,7 +166,7 @@ export default function EditCalendar({route}) {
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: colors.backgroundTheme}}>
       <View style={[styles.container]}>
-        <ScrollView contentContainerStyle={{paddingHorizontal: 16}}>
+        <ScrollView contentContainerStyle={{paddingHorizontal: 16, paddingBottom: 30}}>
           {notiStatus && (
             <View
               style={{

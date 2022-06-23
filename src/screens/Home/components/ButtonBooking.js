@@ -4,13 +4,15 @@ import {useSelector, useDispatch} from "react-redux";
 import {useThemeColors, useThemeFonts} from "react-native-theme-component";
 import {useNavigation} from "@react-navigation/native";
 
-export default function AboutClinic() {
-  const navigation = useNavigation()
+export default function ButtonBooking(props) {
+  const {bgColor = "rgba(143, 197, 118, 0.7)"} = props;
+  const navigation = useNavigation();
   const colors = useThemeColors();
 
   return (
     <View style={{position: "absolute", bottom: 10, right: 10}}>
       <TouchableOpacity
+        onPress={() => navigation.navigate("SERVICE")}
         style={{
           width: 80,
           height: 80,
@@ -18,7 +20,7 @@ export default function AboutClinic() {
           flexDirection: "row",
           alignItems: "center",
           justifyContent: "center",
-          backgroundColor: "rgba(143, 197, 118, 0.7)",
+          backgroundColor: bgColor,
         }}
       >
         <Text style={{fontSize: 12, textAlign: "center", color: colors.white, fontWeight: "bold"}}>診療予約は こちら</Text>
