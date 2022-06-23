@@ -10,6 +10,7 @@ import FAQComponent from "../components/FAQ";
 import FooterComponent from "@components/Layout/Footer";
 import LowDosePill from "./LowDosePill";
 import AfterPill from "./AfterPill";
+import ButtonBooking from "../components/ButtonBooking";
 
 export default function Pill() {
   const user = useSelector((state) => state.users);
@@ -114,6 +115,7 @@ export default function Pill() {
           <View style={{height: 20}}></View>
         <FooterComponent />
       </ScrollView>
+      <ButtonBooking bgColor={"rgba(219, 207, 95, 0.7)"} />
     </View>
   );
 }

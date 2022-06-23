@@ -11,6 +11,7 @@ import FlowMedicalCare from "../components/FlowMedicalCare";
 import FAQComponent from "../components/FAQ";
 import FooterComponent from "@components/Layout/Footer";
 import OralMedicineSkinCare from "./OralMedicineSkinCare";
+import ButtonBooking from "../components/ButtonBooking";
 import ExternalMedicine from "./ExternalMedicine";
 
 const {height} = Dimensions.get("window");
@@ -131,6 +132,7 @@ export default function SkinCare() {
 
         <FooterComponent />
       </ScrollView>
+      <ButtonBooking bgColor={"rgba(209, 152, 204, 0.7)"} />
     </View>
   );
 }

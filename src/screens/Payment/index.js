@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {StyleSheet, Text, View, ScrollView, SafeAreaView, TouchableOpacity, RefreshControl, Image, Alert} from "react-native";
+import {StyleSheet, Text, View, ScrollView, SafeAreaView, TouchableOpacity, RefreshControl, Image, KeyboardAvoidingView} from "react-native";
 import {useThemeColors, useThemeFonts, Button} from "react-native-theme-component";
 import {useNavigation} from "@react-navigation/native";
 import {useDispatch, useSelector} from "react-redux";
@@ -213,176 +213,180 @@ export default function Payment({route}) {
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: colors.backgroundTheme}}>
       <View style={[styles.container]}>
-        <ScrollView refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />} contentContainerStyle={{}}>
-          <GuideComponent
-            title={"お疲れさまでした。診察は終了しました。"}
-            content="本日の金額は下記の通りです。お支払いの手続きをお願いいたします。"
-          />
-          <StepsComponent currentStep={screenStep} isStepAll={true} />
-          <BillPayment billData={billData} />
-          <View>
-            <Text
-              style={{
-                fontFamily: fonts.NSbold,
-                paddingHorizontal: 16,
-                marginBottom: 12,
-                fontSize: 15,
-                color: colors.colorTextBlack,
-                lineHeight: 23,
-                marginTop: 23,
-              }}
-            >
-              配送先
-            </Text>
-            <View style={{paddingHorizontal: 16, borderRadius: 4}}>
-              <View style={{paddingHorizontal: 16, backgroundColor: colors.white}}>
-                <View
-                  style={{
-                    flexDirection: "row",
-                    borderBottomWidth: 1,
-                    borderBottomColor: colors.borderGrayE,
-                    paddingVertical: 15,
-                  }}
-                >
-                  <Text
-                    style={{
-                      fontFamily: fonts.Hiragino,
-                      fontWeight: "bold",
-                      width: "30%",
-                      fontSize: 12,
-                      color: colors.colorTextBlack,
-                      lineHeight: 16,
-                    }}
-                  >
-                    郵便番号
-                  </Text>
-                  <Text style={{fontFamily: fonts.Hiragino, width: "70%", fontSize: 12, color: colors.colorTextBlack, lineHeight: 16}}>
-                    {billData?.user?.postal_code}
-                  </Text>
-                </View>
-                <View
-                  style={{
-                    flexDirection: "row",
-                    paddingVertical: 15,
-                  }}
-                >
-                  <Text
-                    style={{
-                      fontFamily: fonts.Hiragino,
-                      fontWeight: "bold",
-                      width: "30%",
-                      fontSize: 12,
-                      color: colors.colorTextBlack,
-                      lineHeight: 16,
-                    }}
-                  >
-                    住所
-                  </Text>
-                  <Text style={{fontFamily: fonts.Hiragino, width: "70%", fontSize: 12, color: colors.colorTextBlack, lineHeight: 16}}>
-                    {billData?.user?.address}
-                  </Text>
-                </View>
-                <View style={{flexDirection: "row", alignItems: "center", justifyContent: "center", marginBottom: 16}}>
-                  <TouchableOpacity onPress={() => navigation.navigate(SCREEN_EDIT_ADDRESS)} style={{width: "40%"}}>
-                    <Text
-                      style={{fontSize: 12, textAlign: "right", fontFamily: fonts.Hiragino, color: colors.accentOrange, lineHeight: 21}}
-                    >
-                      登録住所変更
-                    </Text>
-                  </TouchableOpacity>
-                  <View style={{height: "100%", width: 1, marginHorizontal: 16, backgroundColor: colors.borderGrayE}}></View>
-                  <TouchableOpacity
-                    onPress={() => navigation.navigate(SCREEN_EDIT_DELIVERY_ADDRESS, {data: billData.bill.reservation, action: onRefresh})}
-                    style={{width: "40%"}}
-                  >
-                    <Text style={{fontSize: 12, fontFamily: fonts.Hiragino, color: colors.accentOrange, lineHeight: 21}}>
-                      登録住所以外に配送
-                    </Text>
-                  </TouchableOpacity>
-                </View>
-              </View>
-            </View>
-          </View>
-          <View>
-            <View style={{paddingTop: 12, paddingBottom: 12, backgroundColor: colors.backgroundTheme}}>
-              <View style={[styles.box]}>
-                <Text style={{fontFamily: fonts.NSbold, fontSize: 16, color: colors.colorTextBlack, lineHeight: 23}}>お客様情報</Text>
-              </View>
-            </View>
-
+        <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} style={{flex: 1}}>
+          <ScrollView refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />} contentContainerStyle={{}}>
+            <GuideComponent
+              title={"お疲れさまでした。診察は終了しました。"}
+              content="本日の金額は下記の通りです。お支払いの手続きをお願いいたします。"
+            />
+            <StepsComponent currentStep={screenStep} isStepAll={true} />
+            <BillPayment billData={billData} />
             <View>
-              <Text style={{fontFamily: fonts.NSbold, color: colors.colorTextBlack, padding: 16, fontSize: 16}}>お客様情報</Text>
-              {PaymentForm.map((item, index) => {
-                if (item.key !== "exp") {
-                  return (
-                    <React.Fragment key={`PaymentForm-${index}`}>
-                      <Controller
-                        control={control}
-                        rules={item?.maxlength ? {required: true, maxLength: item?.maxlength} : {required: true}}
-                        defaultValue={item?.value}
-                        name={item.key}
-                        render={({field: {onChange, onBlur, value}}) => {
-                          return <ItemQuestionForm item={item} valueData={value} changeData={onChange} />;
-                        }}
-                      />
-                      {errors[item.key] && item?.maxlength && (
-                        <Text style={styles.textError}>入力ボックスは{item?.maxlength}文字の長さである必要があります</Text>
-                      )}
-                      {errors[item.key] && (
-                        <Text style={styles.textError}>
-                          {global.t(item.label)}
-                          {global.t("is_require")}
-                        </Text>
-                      )}
-                    </React.Fragment>
-                  );
-                } else {
-                  return (
-                    <React.Fragment key={`PaymentForm-${index}`}>
-                      <View
-                        style={{
-                          flexDirection: "row",
-                          alignItems: "center",
-                          justifyContent: "space-between",
-                          backgroundColor: colors.white,
-                          paddingHorizontal: 16,
-                        }}
+              <Text
+                style={{
+                  fontFamily: fonts.NSbold,
+                  paddingHorizontal: 16,
+                  marginBottom: 12,
+                  fontSize: 15,
+                  color: colors.colorTextBlack,
+                  lineHeight: 23,
+                  marginTop: 23,
+                }}
+              >
+                配送先
+              </Text>
+              <View style={{paddingHorizontal: 16, borderRadius: 4}}>
+                <View style={{paddingHorizontal: 16, backgroundColor: colors.white}}>
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      borderBottomWidth: 1,
+                      borderBottomColor: colors.borderGrayE,
+                      paddingVertical: 15,
+                    }}
+                  >
+                    <Text
+                      style={{
+                        fontFamily: fonts.Hiragino,
+                        fontWeight: "bold",
+                        width: "30%",
+                        fontSize: 12,
+                        color: colors.colorTextBlack,
+                        lineHeight: 16,
+                      }}
+                    >
+                      郵便番号
+                    </Text>
+                    <Text style={{fontFamily: fonts.Hiragino, width: "70%", fontSize: 12, color: colors.colorTextBlack, lineHeight: 16}}>
+                      {billData?.user?.postal_code}
+                    </Text>
+                  </View>
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      paddingVertical: 15,
+                    }}
+                  >
+                    <Text
+                      style={{
+                        fontFamily: fonts.Hiragino,
+                        fontWeight: "bold",
+                        width: "30%",
+                        fontSize: 12,
+                        color: colors.colorTextBlack,
+                        lineHeight: 16,
+                      }}
+                    >
+                      住所
+                    </Text>
+                    <Text style={{fontFamily: fonts.Hiragino, width: "70%", fontSize: 12, color: colors.colorTextBlack, lineHeight: 16}}>
+                      {billData?.user?.address}
+                    </Text>
+                  </View>
+                  <View style={{flexDirection: "row", alignItems: "center", justifyContent: "center", marginBottom: 16}}>
+                    <TouchableOpacity onPress={() => navigation.navigate(SCREEN_EDIT_ADDRESS)} style={{width: "40%"}}>
+                      <Text
+                        style={{fontSize: 12, textAlign: "right", fontFamily: fonts.Hiragino, color: colors.accentOrange, lineHeight: 21}}
                       >
-                        <Text
-                          syle={{
-                            color: colors.textBlack,
-                            fontSize: 15,
-                            lineHeight: 21,
+                        登録住所変更
+                      </Text>
+                    </TouchableOpacity>
+                    <View style={{height: "100%", width: 1, marginHorizontal: 16, backgroundColor: colors.borderGrayE}}></View>
+                    <TouchableOpacity
+                      onPress={() =>
+                        navigation.navigate(SCREEN_EDIT_DELIVERY_ADDRESS, {data: billData.bill.reservation, action: onRefresh})
+                      }
+                      style={{width: "40%"}}
+                    >
+                      <Text style={{fontSize: 12, fontFamily: fonts.Hiragino, color: colors.accentOrange, lineHeight: 21}}>
+                        登録住所以外に配送
+                      </Text>
+                    </TouchableOpacity>
+                  </View>
+                </View>
+              </View>
+            </View>
+            <View>
+              <View style={{paddingTop: 12, paddingBottom: 12, backgroundColor: colors.backgroundTheme}}>
+                <View style={[styles.box]}>
+                  <Text style={{fontFamily: fonts.NSbold, fontSize: 16, color: colors.colorTextBlack, lineHeight: 23}}>お客様情報</Text>
+                </View>
+              </View>
+
+              <View>
+                <Text style={{fontFamily: fonts.NSbold, color: colors.colorTextBlack, padding: 16, fontSize: 16}}>お客様情報</Text>
+                {PaymentForm.map((item, index) => {
+                  if (item.key !== "exp") {
+                    return (
+                      <React.Fragment key={`PaymentForm-${index}`}>
+                        <Controller
+                          control={control}
+                          rules={item?.maxlength ? {required: true, maxLength: item?.maxlength} : {required: true}}
+                          defaultValue={item?.value}
+                          name={item.key}
+                          render={({field: {onChange, onBlur, value}}) => {
+                            return <ItemQuestionForm item={item} valueData={value} changeData={onChange} />;
+                          }}
+                        />
+                        {errors[item.key] && item?.maxlength && (
+                          <Text style={styles.textError}>入力ボックスは{item?.maxlength}文字の長さである必要があります</Text>
+                        )}
+                        {errors[item.key] && (
+                          <Text style={styles.textError}>
+                            {global.t(item.label)}
+                            {global.t("is_require")}
+                          </Text>
+                        )}
+                      </React.Fragment>
+                    );
+                  } else {
+                    return (
+                      <React.Fragment key={`PaymentForm-${index}`}>
+                        <View
+                          style={{
+                            flexDirection: "row",
+                            alignItems: "center",
+                            justifyContent: "space-between",
+                            backgroundColor: colors.white,
+                            paddingHorizontal: 16,
                           }}
                         >
-                          {item.label}
-                        </Text>
-                        <View style={{width: "60%"}}>
-                          <CardExpInput
-                            getDataBirthday={(data) => {
-                              console.log("hahahah", data);
-                              setDataExp(data);
+                          <Text
+                            syle={{
+                              color: colors.textBlack,
+                              fontSize: 15,
+                              lineHeight: 21,
                             }}
-                            getErrorInput={(data) => {
-                              console.log("getErrorInput", data);
-                            }}
-                            onChangeInput={() => {
-                              console.log("onChangeInput");
-                            }}
-                          />
+                          >
+                            {item.label}
+                          </Text>
+                          <View style={{width: "60%"}}>
+                            <CardExpInput
+                              getDataBirthday={(data) => {
+                                console.log("hahahah", data);
+                                setDataExp(data);
+                              }}
+                              getErrorInput={(data) => {
+                                console.log("getErrorInput", data);
+                              }}
+                              onChangeInput={() => {
+                                console.log("onChangeInput");
+                              }}
+                            />
+                          </View>
                         </View>
-                      </View>
-                    </React.Fragment>
-                  );
-                }
-              })}
+                      </React.Fragment>
+                    );
+                  }
+                })}
+              </View>
             </View>
-          </View>
-          {errorApi?.length > 0 && <Text style={styles.textError}>{errorApi}</Text>}
-          <View style={{marginVertical: 30, paddingHorizontal: 16, width: "100%"}}>
-            <Button variant="primary" label={global.t("action_payment")} onPress={handleSubmit(onSubmit)} />
-          </View>
-        </ScrollView>
+            {errorApi?.length > 0 && <Text style={styles.textError}>{errorApi}</Text>}
+            <View style={{marginVertical: 30, paddingHorizontal: 16, width: "100%"}}>
+              <Button variant="primary" label={global.t("action_payment")} onPress={handleSubmit(onSubmit)} />
+            </View>
+          </ScrollView>
+        </KeyboardAvoidingView>
       </View>
     </SafeAreaView>
   );

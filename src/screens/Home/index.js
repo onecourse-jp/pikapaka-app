@@ -1,5 +1,5 @@
 import React, {useState, useRef, useEffect} from "react";
-import {View, Text, Image, Dimensions} from "react-native";
+import {View, Text, Image, Dimensions, TouchableOpacity} from "react-native";
 import styles from "./styles";
 import {useSelector, useDispatch} from "react-redux";
 import {useThemeColors, useThemeFonts} from "react-native-theme-component";
@@ -17,6 +17,8 @@ import FAQComponent from "./components/FAQ";
 import NewsComponent from "./components/News";
 import AboutClinic from "./components/AboutClinic";
 import FooterComponent from "@components/Layout/Footer";
+import ButtonBooking from "./components/ButtonBooking";
+
 const {height} = Dimensions.get("window");
 
 export default function Home({route}) {
@@ -48,7 +50,7 @@ export default function Home({route}) {
   };
 
   return (
-    <SafeAreaView style={{flex: 1, backgroundColor: colors.backgroundTheme}}>
+    <SafeAreaView style={{flex: 1, backgroundColor: colors.backgroundTheme, position: "relative"}}>
       <Headercomponent
         onlineMedicalCare={onlineMedicalCare}
         flowMedicalCare={flowMedicalCare}
@@ -151,6 +153,7 @@ export default function Home({route}) {
           </View>
           <FooterComponent />
         </ScrollView>
+        <ButtonBooking bgColor={"rgba(0, 176, 80, 0.7)"} />
       </View>
     </SafeAreaView>
   );

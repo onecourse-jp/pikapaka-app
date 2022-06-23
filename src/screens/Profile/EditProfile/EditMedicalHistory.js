@@ -53,7 +53,7 @@ export default function EditMedicalHistory({route}) {
         console.log("data when update", data);
       } else {
         global.hideLoadingView();
-        Alert.alert("","個人情報の編集ができません。もう一度お願いします。", [
+        Alert.alert("", "個人情報の編集ができません。もう一度お願いします。", [
           {
             text: "OK",
             onPress: () => {},
@@ -63,7 +63,7 @@ export default function EditMedicalHistory({route}) {
     } catch (error) {
       console.log("error", error);
       global.hideLoadingView();
-      Alert.alert("","個人情報の編集ができません。もう一度お願いします。", [
+      Alert.alert("", "個人情報の編集ができません。もう一度お願いします。", [
         {
           text: "OK",
           onPress: () => {},
@@ -118,8 +118,10 @@ export default function EditMedicalHistory({route}) {
               );
             }
           })}
+          <View style={{paddingHorizontal: 16}}>
+            <ButtonOrange disabled={disableSubmit} title="変更する" onPress={handleSubmit(onSubmit)} />
+          </View>
         </View>
-        <ButtonOrange disabled={disableSubmit} title="変更する" onPress={handleSubmit(onSubmit)} />
       </ScrollView>
     </SafeAreaView>
   );

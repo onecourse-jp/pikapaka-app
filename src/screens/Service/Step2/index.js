@@ -197,8 +197,9 @@ export default function ServiceStep2() {
             style={[]}
             dayComponent={({date, state}) => {
               if (date.month == monthPicked && date.year == yearPicked) {
+                const isDateInCalendar = checkDateInData(date.dateString);
                 return (
-                  <TouchableOpacity disabled={!getStatusDay(date.dateString)} onPress={() => setDate(date, state)}>
+                  <TouchableOpacity disabled={isDateInCalendar === 0 || isDateInCalendar === false} onPress={() => setDate(date, state)}>
                     <View
                       style={{
                         width: 51,
@@ -206,7 +207,12 @@ export default function ServiceStep2() {
                         flexDirection: "column",
                         alignItems: "center",
                         justifyContent: "center",
-                        backgroundColor: datePicked === date.dateString ? colors.headerComponent : colors.white,
+                        backgroundColor:
+                          datePicked === date.dateString
+                            ? colors.headerComponent
+                            : isDateInCalendar === 0 || isDateInCalendar === false
+                            ? colors.borderGrayE
+                            : colors.white,
                       }}
                     >
                       <Text

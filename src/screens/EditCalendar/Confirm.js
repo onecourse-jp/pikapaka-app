@@ -44,16 +44,14 @@ export default function ExaminationItem({route}) {
     } else if (route?.params?.type == "NEW") {
       dataSubmit = {
         detail_category_medical_of_customer: dataCalendar.detail_category_medical_of_customer,
-        data: dataCalendar?.answer.map((item) => {
+        data: dataCalendar?.data.map((item) => {
           return {question_id: item.question_id, content_answer: item.content_answer};
         }),
       };
     } else if (route?.params?.type == "CHANGE_ITEM") {
       dataSubmit = {
         detail_category_medical_of_customer: dataCalendar.detail_category_medical_of_customer,
-        data: dataCalendar?.answer.map((item) => {
-          return {question_id: item.question_id, content_answer: item.content_answer};
-        }),
+        data: dataCalendar?.data,
         content_to_doctor: dataCalendar?.content_to_doctor,
         calendar: {
           date: moment(dataCalendar?.date).format("YYYY-MM-DD"),
@@ -146,39 +144,29 @@ export default function ExaminationItem({route}) {
           <ComponentComfirm title="ご相談内容" content={dataCalendar?.content_to_doctor} />
           <View>
             <Text style={{fontFamily: fonts.NSbold, fontSize: 16, marginTop: 16}}>問診</Text>
-            {route?.params?.data?.answer.map((item, index) => {
-              return (
-                <View key={`answer-${index}`} style={{flexDirection: "row", justifyContent: "space-between"}}>
-                  <Text
-                    style={{
-                      fontSize: 15,
-                      lineHeight: 22,
-                      color: colors.gray3,
-                      fontFamily: fonts.SFbold,
-                      fontWeight: "700",
-                      marginBottom: 10,
-                    }}
-                  >
-                    {item?.question?.title}
-                  </Text>
-                  <View style={{alignItems: "flex-end"}}>
-                    {item?.question?.label != 3 ? (
-                      <Text style={{fontSize: 15, lineHeight: 22, color: colors.gray1, fontFamily: fonts.SFregular, marginBottom: 12}}>
-                        {item?.content_answer}
+            {route?.params?.data?.newDataAnswer.map((item, index) => {
+              if (item?.content_answer)
+                return (
+                  <View key={`answer-${index}`} style={{flexDirection: "row", justifyContent: "space-between"}}>
+                    <Text
+                      style={{
+                        fontSize: 15,
+                        lineHeight: 22,
+                        color: colors.colorTextBlack,
+                        fontWeight: "700",
+                        marginBottom: 10,
+                        width: "60%",
+                      }}
+                    >
+                      {item?.title}
+                    </Text>
+                    <View style={{width: "40%", paddingLeft: 10}}>
+                      <Text style={{fontSize: 15, lineHeight: 22, color: colors.colorTextBlack, marginBottom: 12}}>
+                        {item?.labelAnswer}
                       </Text>
-                    ) : (
-                      item?.content_answer.map((answer, index) => (
-                        <Text
-                          key={`ans-${index}`}
-                          style={{fontSize: 15, lineHeight: 22, color: colors.gray1, fontFamily: fonts.SFregular, marginBottom: 12}}
-                        >
-                          {answer}
-                        </Text>
-                      ))
-                    )}
+                    </View>
                   </View>
-                </View>
-              );
+                );
             })}
           </View>
           <View style={{marginTop: 24}}>
