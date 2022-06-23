@@ -226,7 +226,9 @@ export default function EditCalendar({route}) {
                       lineHeight: 14,
                     }}
                   >
-                    {dataCalendar?.content_to_doctor || "内容がありません。"}
+                    {dataCalendar?.content_to_doctor && dataCalendar?.content_to_doctor != "0"
+                      ? dataCalendar?.content_to_doctor
+                      : "内容がありません。"}
                   </Text>
                 </View>
               </View>
@@ -266,7 +268,7 @@ export default function EditCalendar({route}) {
                       lineHeight: 14,
                     }}
                   >
-                    {"はい"}
+                    {dataCalendar?.old_reservation_id === "false" ? "はい" : "いいえ"}
                   </Text>
                 </View>
               </View>

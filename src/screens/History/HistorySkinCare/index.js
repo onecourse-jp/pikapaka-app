@@ -76,7 +76,6 @@ export default function HistorySkinCare({category_medical = 0}) {
       >
         <View style={{flex: 1}}>
           {dataCalendar.map((item, index) => {
-            console.log("dataCalendar item", item.image);
             return (
               <TouchableOpacity
                 key={`dataCalendar-${index}`}

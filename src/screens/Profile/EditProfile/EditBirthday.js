@@ -49,7 +49,7 @@ export default function EditBirthday({route}) {
   useEffect(() => {
     if (route?.params?.data?.birthday) {
       setCurrentBirthday(Number(moment(route?.params?.data?.birthday).format("YYYYMMDD")));
-      console.log(Number(moment(route?.params?.data?.birthday).format("YYYYMMDD")));
+      console.log("setCurrentBirthday", Number(moment(route?.params?.data?.birthday).format("YYYYMMDD")));
     }
   }, [route]);
   const onSubmit = async (dataSubmit) => {
@@ -73,7 +73,7 @@ export default function EditBirthday({route}) {
           console.log("data when update", data);
         } else {
           global.hideLoadingView();
-          Alert.alert("","個人情報の編集ができません。もう一度お願いします。", [
+          Alert.alert("", "個人情報の編集ができません。もう一度お願いします。", [
             {
               text: "OK",
               onPress: () => {},
@@ -83,7 +83,7 @@ export default function EditBirthday({route}) {
       } catch (error) {
         console.log("error", error);
         global.hideLoadingView();
-        Alert.alert("","個人情報の編集ができません。もう一度お願いします。", [
+        Alert.alert("", "個人情報の編集ができません。もう一度お願いします。", [
           {
             text: "OK",
             onPress: () => {},
@@ -146,7 +146,7 @@ export default function EditBirthday({route}) {
           onChangeInput={onChangeInputMax}
           minYear={false}
           maxYear={false}
-          currentTime={currentBirthday ? currentBirthday.toString() : null}
+          currentTime={currentBirthday ? currentBirthday.toString() : ""}
           getErrorInput={getErrorInputMax}
           getDataBirthday={(val) => getDayInput(val)}
         />
