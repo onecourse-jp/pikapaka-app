@@ -17,6 +17,7 @@ export default function ButtonBooking(props) {
           width: 80,
           height: 80,
           borderRadius: 80,
+          paddingHorizontal: 10,
           flexDirection: "row",
           alignItems: "center",
           justifyContent: "center",

@@ -56,13 +56,13 @@ export default function ServiceStep4() {
     {key: "p3", label: "電話番号", value: dataConfirm?.phone_number || "000-000-0000"},
   ];
   const DATALISTPERSON2 = [
-    {key: "allergies", label: "アレルギーの有無", value: dataConfirm.allergies || "選択", option: true},
+    // {key: "allergies", label: "アレルギーの有無", value: dataConfirm.allergies || "選択", option: true},
     {
       key: "content_allergies",
       label: "アレルギーの内容",
       value: renderContentAllergies(dataConfirm.content_allergies) || "アレルギー内容を入力",
     },
-    {key: "take_medicines", label: "服薬中の薬の有無", value: dataConfirm.take_medicines || "選択", option: true},
+    // {key: "take_medicines", label: "服薬中の薬の有無", value: dataConfirm.take_medicines || "選択", option: true},
     {key: "content_medicines", label: "服用中薬の内容", value: renderContentAllergies(dataConfirm.content_medicines) || "薬の内容をを入力"},
     {key: "pregnancy", label: "妊娠有無", value: dataConfirm.pregnancy || "選択", option: true},
     {key: "smoking", label: "喫煙有無", value: dataConfirm.smoking || "選択", option: true},

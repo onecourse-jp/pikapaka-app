@@ -116,7 +116,7 @@ export default function ({route}) {
   }, [navigation]);
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: colors.backgroundTheme, position: "relative"}}>
-      <ImageBackground source={require("@assets/images/connect_doctor_bg.png")} resizeMode="cover" style={{flex: 1, position: "relative"}}>
+      <View style={{flex: 1, position: "relative"}}>
         {localStream && (
           <View
             style={{
@@ -158,7 +158,7 @@ export default function ({route}) {
             <ButtonConnect onPress={handleAction} style={{}} status={statusDoctor} />
           </View>
         </View>
-      </ImageBackground>
+      </View>
     </SafeAreaView>
   );
 }

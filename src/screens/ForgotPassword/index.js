@@ -73,7 +73,6 @@ export default function ForgotPassword() {
                       }}
                       onBlur={onBlur}
                       value={value}
-                      maxLength={30}
                     />
                   </View>
                 );

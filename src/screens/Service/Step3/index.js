@@ -261,12 +261,14 @@ export default function ServiceStep3() {
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: colors.backgroundTheme}}>
       <View style={[styles.container]}>
-        <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"}
+        <KeyboardAvoidingView
+          behavior={Platform.OS === "ios" ? "padding" : "height"}
           keyboardVerticalOffset={Platform.select({
             ios: 60,
-            android: 500,
+            android: 60,
           })}
-          style={{flex: 1}}>
+          style={{flex: 1}}
+        >
           <ScrollView
             contentContainerStyle={{flexGrow: 1}}
             refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
@@ -384,7 +386,7 @@ export default function ServiceStep3() {
 
               <Controller
                 control={control}
-                defaultValue={false}
+                defaultValue={""}
                 name={"contentConsultation"}
                 render={({field: {onChange, onBlur, value}}) => {
                   return (

@@ -97,8 +97,9 @@ export default function History() {
                 backgroundColor: index === i ? listColor[index] : colors.colorHome02,
               }}
             >
-              <View style={{height: 20}}>{route.icon && <Image source={route.icon} />}</View>
+              <View style={{height: route.icon ? 20 : 10}}>{route.icon && <Image source={route.icon} />}</View>
               <Text style={{color: colors.white, fontSize: 11, lineHeight: 12, fontWeight: "700", marginTop: 5}}>{route.title}</Text>
+              {route.icon === null && <View style={{height: 10}}>{route.icon && <Image source={route.icon} />}</View>}
             </TouchableOpacity>
           );
         })}

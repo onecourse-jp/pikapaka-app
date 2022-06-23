@@ -1,5 +1,5 @@
 import React, {useEffect, useState, useRef} from "react";
-import {View, Text, TouchableOpacity, FlatList, RefreshControl} from "react-native";
+import {View, Text, TouchableOpacity, Image, RefreshControl} from "react-native";
 import {useSelector, useDispatch} from "react-redux";
 import {useThemeColors, useThemeFonts} from "react-native-theme-component";
 import {useNavigation} from "@react-navigation/native";
@@ -85,7 +85,7 @@ export default function HistorySkinCare({category_medical = 0}) {
                   goDetailScreenWithStatus(item);
                 }}
               >
-                <View>
+                <View style={{flex: 1}}>
                   <View
                     style={{
                       borderWidth: 1,
@@ -110,7 +110,15 @@ export default function HistorySkinCare({category_medical = 0}) {
                   </View>
 
                   <Text
-                    style={{fontFamily: fonts.SFmedium, fontSize: 16, color: colors.gray1, lineHeight: 20, marginTop: 7, textAlign: "left"}}
+                    style={{
+                      fontFamily: fonts.SFmedium,
+                      width: "90%",
+                      fontSize: 16,
+                      color: colors.gray1,
+                      lineHeight: 20,
+                      marginTop: 7,
+                      textAlign: "left",
+                    }}
                   >
                     {`${moment(item?.date).format("YYYY年MM月DD日")}（${moment(item?.date).format("dddd")}）${item?.time_start}~${
                       item?.time_end
@@ -129,6 +137,16 @@ export default function HistorySkinCare({category_medical = 0}) {
                     {global.t(`categoryTitle.${item?.detail_category_medical_of_customer}`)}
                   </Text>
                 </View>
+                {item.image && item.image.length > 0 && (
+                  <View style={{paddingLeft: 16}}>
+                    <Image
+                      style={{width: 80, height: 80, backgroundColor: "#C4C4C4", marginTop: 8}}
+                      source={{
+                        uri: item.image[0].image,
+                      }}
+                    />
+                  </View>
+                )}
               </TouchableOpacity>
             );
           })}
