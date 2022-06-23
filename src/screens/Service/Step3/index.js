@@ -101,9 +101,9 @@ export default function ServiceStep3() {
       // },
       {
         key: "content_medicines",
-        title: "服用中薬の内容",
+        title: "服用中の薬の内容",
         require: false,
-        placeholder: "薬の内容をを入力",
+        placeholder: "薬の内容を入力",
         value: userDetails?.take_medicines
           ? userDetails?.take_medicines == 1
             ? renderContentAllergies(userDetails?.content_medicines)

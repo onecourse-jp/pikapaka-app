@@ -15,8 +15,8 @@ export default function ItemQuestionForm({item, valueData = null, changeData = (
   const fonts = useThemeFonts();
   const [showPopup, setShowPopup] = useState(false);
   const [dataRender, setDataRender] = useState([
-    {label: "有", value: 1},
-    {label: "無", value: 2},
+    {label: "あり", value: 1},
+    {label: "なし", value: 2},
   ]);
   const [valueRowItem, setValueRowItem] = useState(null);
   const [listCheckbox, setListCheckbox] = useState([]);
@@ -31,8 +31,8 @@ export default function ItemQuestionForm({item, valueData = null, changeData = (
           }
         });
       } else {
-        setValueRowItem(item.value === 1 ? "有" : "無");
-        setListCheckbox(item.value === 1 ? [{label: "有", value: 1}] : [{label: "無", value: 2}]);
+        setValueRowItem(item.value === 1 ? "あり" : "なし");
+        setListCheckbox(item.value === 1 ? [{label: "あり", value: 1}] : [{label: "なし", value: 2}]);
       }
     }
     if (item?.label == 3 && item?.value) {
