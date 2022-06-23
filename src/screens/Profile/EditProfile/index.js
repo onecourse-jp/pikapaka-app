@@ -148,7 +148,7 @@ export default function EditProfile() {
         <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"}
           keyboardVerticalOffset={Platform.select({
             ios: 60,
-            android: 500,
+            android: 60,
           })}
           style={{flex: 1}}>
           <ScrollView contentContainerStyle={{}} listMode="MODAL">

@@ -152,7 +152,7 @@ export default function DeliveryAddress({route}) {
           </View>
         </ScrollView>
         <View style={{marginTop: 60, paddingHorizontal: 16}}>
-          <Button label="変更内容を確認へ進む" onPress={handleSubmit(onSubmit)} />
+          <Button label="変更内容を確認へ進む" onPress={() => navigation.goBack()} />
         </View>
       </View>
     </SafeAreaView>

@@ -16,6 +16,7 @@ export default function ExaminationItem({route}) {
   const fonts = useThemeFonts();
   const navigation = useNavigation();
   const [dataCalendar, setDataCalendar] = useState(route?.params?.data);
+  console.log("dataCalendardataCalendar", dataCalendar);
   const dataExaminationItem = global.t(`categoryTitle.${route?.params?.data?.calendar?.category_medical}`);
   console.log("type edit", route?.params?.data?.answer);
   useEffect(() => {
@@ -144,30 +145,55 @@ export default function ExaminationItem({route}) {
           <ComponentComfirm title="ご相談内容" content={dataCalendar?.content_to_doctor} />
           <View>
             <Text style={{fontFamily: fonts.NSbold, fontSize: 16, marginTop: 16}}>問診</Text>
-            {route?.params?.data?.newDataAnswer.map((item, index) => {
-              if (item?.content_answer)
-                return (
-                  <View key={`answer-${index}`} style={{flexDirection: "row", justifyContent: "space-between"}}>
-                    <Text
-                      style={{
-                        fontSize: 15,
-                        lineHeight: 22,
-                        color: colors.colorTextBlack,
-                        fontWeight: "700",
-                        marginBottom: 10,
-                        width: "60%",
-                      }}
-                    >
-                      {item?.title}
-                    </Text>
-                    <View style={{width: "40%", paddingLeft: 10}}>
-                      <Text style={{fontSize: 15, lineHeight: 22, color: colors.colorTextBlack, marginBottom: 12}}>
-                        {item?.labelAnswer}
-                      </Text>
-                    </View>
-                  </View>
-                );
-            })}
+            {route?.params?.data?.newDataAnswer
+              ? route?.params?.data?.newDataAnswer?.map((item, index) => {
+                  if (item?.content_answer)
+                    return (
+                      <View key={`answer-${index}`} style={{flexDirection: "row", justifyContent: "space-between"}}>
+                        <Text
+                          style={{
+                            fontSize: 15,
+                            lineHeight: 22,
+                            color: colors.colorTextBlack,
+                            fontWeight: "700",
+                            marginBottom: 10,
+                            width: "60%",
+                          }}
+                        >
+                          {item?.title}
+                        </Text>
+                        <View style={{width: "40%", paddingLeft: 10}}>
+                          <Text style={{fontSize: 15, lineHeight: 22, color: colors.colorTextBlack, marginBottom: 12}}>
+                            {item?.labelAnswer}
+                          </Text>
+                        </View>
+                      </View>
+                    );
+                })
+              : route?.params?.data?.answer?.map((item, index) => {
+                  if (item?.content_answer)
+                    return (
+                      <View key={`answer-${index}`} style={{flexDirection: "row", justifyContent: "space-between"}}>
+                        <Text
+                          style={{
+                            fontSize: 15,
+                            lineHeight: 22,
+                            color: colors.colorTextBlack,
+                            fontWeight: "700",
+                            marginBottom: 10,
+                            width: "60%",
+                          }}
+                        >
+                          {item?.title}
+                        </Text>
+                        <View style={{width: "40%", paddingLeft: 10}}>
+                          <Text style={{fontSize: 15, lineHeight: 22, color: colors.colorTextBlack, marginBottom: 12}}>
+                            {item?.labelAnswer}
+                          </Text>
+                        </View>
+                      </View>
+                    );
+                })}
           </View>
           <View style={{marginTop: 24}}>
             <Text style={{fontFamily: fonts.NSbold, fontSize: 16, color: colors.textBlack, lineHeight: 23, marginBottom: 11}}>

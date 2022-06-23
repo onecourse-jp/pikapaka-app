@@ -6,7 +6,7 @@ import {useNavigation} from "@react-navigation/native";
 import {useDispatch, useSelector} from "react-redux";
 import {SCREEN_QUESIONAIRE_STEP2, SCREEN_EDIT_CALENDAR_CONFIRM} from "@screens/screens.constants";
 import {getReservationById} from "@services/auth";
-import {getQuestionFormCalendar} from "@services/profile";
+import {getQuestionFormCalendar, getDetailOwnQuestion} from "@services/profile";
 import moment from "moment";
 import ItemQuestionForm from "@components/Form/ItemQuestionForm";
 
@@ -67,6 +67,8 @@ export default function ExaminationContent({route}) {
   };
   const getAnswerForm = async () => {
     global.showLoadingView();
+    // let oldQuestionId = []
+    // if(route?.params?.data?.answer){}
     const {response, data} = await getQuestionFormCalendar(route?.params?.data?.detail_category_medical_of_customer);
     if (response?.status === 200) {
       setDataQuestion(data.data.data);
@@ -87,7 +89,7 @@ export default function ExaminationContent({route}) {
           behavior={Platform.OS === "ios" ? "padding" : "height"}
           keyboardVerticalOffset={Platform.select({
             ios: 60,
-            android: 500,
+            android: 60,
           })}
           style={{flex: 1}}
         >
