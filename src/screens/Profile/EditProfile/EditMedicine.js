@@ -93,7 +93,12 @@ export default function EditMedicine({route}) {
   };
   return (
     <SafeAreaView style={[styles.container, {backgroundColor: colors.backgroundTheme}]}>
-      <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} style={{flex: 1}}>
+      <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"}
+          keyboardVerticalOffset={Platform.select({
+            ios: 60,
+            android: 500,
+          })}
+          style={{flex: 1}}>
         <ScrollView contentContainerStyle={{paddingBottom: 20}}>
           <View style={{paddingTop: 12, paddingBottom: 12, backgroundColor: colors.backgroundTheme}}>
             <View>

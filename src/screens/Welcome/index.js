@@ -80,7 +80,12 @@ export default function WelcomeScreen({route}) {
   };
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: colors.backgroundTheme}}>
-      <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} style={{flex: 1}}>
+      <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"}
+          keyboardVerticalOffset={Platform.select({
+            ios: 60,
+            android: 500,
+          })}
+          style={{flex: 1}}>
         <ScrollView contentContainerStyle={{paddingBottom: 20}}>
           <View style={[styles.container]}>
             <View>

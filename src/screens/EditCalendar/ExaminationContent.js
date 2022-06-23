@@ -29,7 +29,6 @@ export default function ExaminationContent({route}) {
   useEffect(() => {
     setDataCalendar(route?.params?.data);
     console.log("dataCalendar", dataCalendar);
-   
   }, []);
   const onSubmit = async (dataSubmit) => {
     console.log("dataSubmit", dataSubmit);
@@ -84,7 +83,14 @@ export default function ExaminationContent({route}) {
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: colors.backgroundTheme}}>
       <View style={[styles.container]}>
-        <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} style={{flex: 1}}>
+        <KeyboardAvoidingView
+          behavior={Platform.OS === "ios" ? "padding" : "height"}
+          keyboardVerticalOffset={Platform.select({
+            ios: 60,
+            android: 500,
+          })}
+          style={{flex: 1}}
+        >
           <ScrollView contentContainerStyle={{}}>
             <View>
               <Text
