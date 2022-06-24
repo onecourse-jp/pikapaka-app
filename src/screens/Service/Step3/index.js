@@ -60,17 +60,8 @@ export default function ServiceStep3() {
 
   useEffect(() => {
     setUser(userDetails);
+    console.log("userDetails?.allergies", userDetails?.allergies);
     setDataPerson2([
-      // {
-      //   key: "allergies",
-      //   title: "アレルギーの有無",
-      //   placeholder: "選択",
-      //   value: userDetails?.allergies ?? null,
-      //   label: 4,
-      //   action: () => {
-      //     navigation.navigate(SCREEN_EDIT_ALLERGY, {data: user});
-      //   },
-      // },
       {
         key: "content_allergies",
         require: false,
@@ -85,20 +76,6 @@ export default function ServiceStep3() {
           navigation.navigate(SCREEN_EDIT_ALLERGY, {data: user});
         },
       },
-      // {
-      //   key: "take_medicines",
-      //   title: "服薬中の薬の有無",
-      //   placeholder: "選択",
-      //   value: userDetails?.take_medicines
-      //     ? userDetails?.take_medicines == 1
-      //       ? renderContentAllergies(userDetails?.content_medicines)
-      //       : "無"
-      //     : null,
-      //   label: 4,
-      //   action: () => {
-      //     navigation.navigate(SCREEN_EDIT_MEDICINE, {data: user});
-      //   },
-      // },
       {
         key: "content_medicines",
         title: "服用中の薬の内容",
@@ -358,6 +335,9 @@ export default function ServiceStep3() {
             <View>
               <Text style={{fontFamily: fonts.NSbold, color: colors.colorTextBlack, padding: 16, fontSize: 16}}>基本情報</Text>
               {dataPerson2.map((item, index) => {
+                if (item.key == "content_medicines") {
+                  console.log("content_allergiesvalue", item.value);
+                }
                 return (
                   <React.Fragment key={`DATALISTPERSON2-${index}`}>
                     <Controller

@@ -117,7 +117,7 @@ export default function ModalWebView({route}) {
             javaScriptEnabledAndroid
             useWebkit
             startInLoadingState={true}
-            scrollEnabled={false}
+            scrollEnabled={route?.params?.isCallVideo ? false : true}
             mixedContentMode="always"
             source={{
               // uri: "https://d872-14-248-82-148.ngrok.io/user/call-to-doctor?room=156",

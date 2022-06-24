@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import {StyleSheet, Text, View, ScrollView, SafeAreaView, TouchableOpacity, Alert, Image} from "react-native";
 import {useThemeColors, useThemeFonts, Button} from "react-native-theme-component";
 import {useNavigation} from "@react-navigation/native";
+import {navigationRef} from "src/navigation/NavigationService";
 import {useDispatch, useSelector} from "react-redux";
 // import { useToast } from "react-native-toast-notifications";
 import {
@@ -63,6 +64,8 @@ export default function EditCalendar({route}) {
     if (data.status === 200) {
       global.hideLoadingView();
       dispatch(changeStatusCalendar());
+      navigation.goBack();
+      navigation.navigate("HistoryStack");
       toast.show("変更が完了しました", {
         type: "success",
         placement: "top",
@@ -77,6 +80,20 @@ export default function EditCalendar({route}) {
         },
       ]);
     }
+  };
+  const confirmDelete = () => {
+    Alert.alert("", "性別の編集が完了しました。", [
+      {
+        text: "いいえ",
+        onPress: () => {},
+      },
+      {
+        text: "はい",
+        onPress: () => {
+          handleDelete();
+        },
+      },
+    ]);
   };
 
   return (
@@ -327,7 +344,7 @@ export default function EditCalendar({route}) {
                 今回のみ配送先を登録住所以外で指定したい方は『登録住所以外を指定する』ボタンから住所を指定して下さい。引っ越しなどで住所が変わられた方はマイページから変更を行って下さい。{" "}
               </Text>
             </View>
-            <TouchableOpacity onPress={handleDelete}>
+            <TouchableOpacity onPress={confirmDelete}>
               <View style={{flexDirection: "row", justifyContent: "center"}}>
                 <Text
                   style={{

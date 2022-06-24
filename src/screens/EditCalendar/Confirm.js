@@ -16,9 +16,8 @@ export default function ExaminationItem({route}) {
   const fonts = useThemeFonts();
   const navigation = useNavigation();
   const [dataCalendar, setDataCalendar] = useState(route?.params?.data);
-  console.log("dataCalendardataCalendar", dataCalendar);
   const dataExaminationItem = global.t(`categoryTitle.${route?.params?.data?.calendar?.category_medical}`);
-  console.log("type edit", route?.params?.data?.answer);
+  console.log("type edit", route?.params?.type);
   useEffect(() => {
     setDataCalendar(route?.params?.data);
   }, []);
@@ -45,14 +44,13 @@ export default function ExaminationItem({route}) {
     } else if (route?.params?.type == "NEW") {
       dataSubmit = {
         detail_category_medical_of_customer: dataCalendar.detail_category_medical_of_customer,
-        data: dataCalendar?.data.map((item) => {
-          return {question_id: item.question_id, content_answer: item.content_answer};
-        }),
+        data: dataCalendar?.newDataAnswer,
+        content_to_doctor: dataCalendar?.content_to_doctor,
       };
     } else if (route?.params?.type == "CHANGE_ITEM") {
       dataSubmit = {
         detail_category_medical_of_customer: dataCalendar.detail_category_medical_of_customer,
-        data: dataCalendar?.data,
+        data: dataCalendar?.newDataAnswer,
         content_to_doctor: dataCalendar?.content_to_doctor,
         calendar: {
           date: moment(dataCalendar?.date).format("YYYY-MM-DD"),

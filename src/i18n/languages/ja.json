@@ -22,6 +22,7 @@
   },
   "Yourcardnumberisincorrect": "カード番号が間違っています。",
   "Yourcard'sexpirationyearisinvalid": "  カードの有効期限は無効です。",
+  "Yourcardssecuritycodeisinvalid": "カードのセキュリティコードが無効です",
   "LoginScreenTitle": "ログイン・新規登録",
   "LoginWithGoogleTitle": "Googleでログイン・登録",
   "LOGIN_FAIL": "メールアドレス・パスワードが間違えています",

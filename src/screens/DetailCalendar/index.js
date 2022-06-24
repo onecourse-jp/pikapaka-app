@@ -65,7 +65,6 @@ export default function DetailCalender({route}) {
   }, []);
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: colors.backgroundTheme}}>
-
       <View style={[styles.container]}>
         <ScrollView refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />} contentContainerStyle={{}}>
           <GuideComponent
@@ -124,7 +123,7 @@ export default function DetailCalender({route}) {
                 <Text style={{fontFamily: fonts.Hiragino, fontSize: 14, color: colors.gray1, lineHeight: 17, marginTop: 7}}>
                   {`${moment(dataCalendar?.date).format("YYYY年MM月DD日")}（${moment(dataCalendar?.date).format("dddd")}）${
                     dataCalendar?.time_start
-                  }~${dataCalendar?.time_end}`}
+                  }`}
                 </Text>
               </View>
             </View>
