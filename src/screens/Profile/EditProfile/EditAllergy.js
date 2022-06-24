@@ -27,7 +27,6 @@ export default function EditAllergy({route}) {
   const dispatch = useDispatch();
   const defaultValue = route?.params?.data?.allergies ? (route?.params?.data?.allergies === 1 ? true : false) : null;
   const [isAllergyStatus, setIsAllergyStatus] = useState(defaultValue);
-
   const content_allergies = route?.params?.data?.content_allergies ? route?.params?.data?.content_allergies : null;
   const {
     control,
@@ -58,50 +57,50 @@ export default function EditAllergy({route}) {
     };
     console.log("dataSubmit", newDataSubmit);
 
-    if (Object.keys(dataSubmit).length > 0) {
-      try {
-        const {data, response} = await updateProfileWithToken(newDataSubmit);
-        if (response.status == 200) {
-          dispatch(updateUserProfile(data.data));
-          global.hideLoadingView();
-          Alert.alert("", "アレルギーを更新しました。", [
-            {
-              text: "はい",
-              onPress: () => {
-                navigation.goBack();
-              },
-            },
-          ]);
-          console.log("data when update", data);
-        } else {
-          global.hideLoadingView();
-          Alert.alert("","個人情報の編集ができません。もう一度お願いします。", [
-            {
-              text: "OK",
-              onPress: () => {},
-            },
-          ]);
-        }
-      } catch (error) {
-        console.log("error", error);
+    try {
+      const {data, response} = await updateProfileWithToken(newDataSubmit);
+      if (response.status == 200) {
+        dispatch(updateUserProfile(data.data));
         global.hideLoadingView();
-        Alert.alert("","個人情報の編集ができません。もう一度お願いします。", [
+        Alert.alert("", "アレルギーを更新しました。", [
+          {
+            text: "はい",
+            onPress: () => {
+              navigation.goBack();
+            },
+          },
+        ]);
+        console.log("data when update", data);
+      } else {
+        global.hideLoadingView();
+        Alert.alert("", "個人情報の編集ができません。もう一度お願いします。", [
           {
             text: "OK",
             onPress: () => {},
           },
         ]);
       }
+    } catch (error) {
+      console.log("error", error);
+      global.hideLoadingView();
+      Alert.alert("", "個人情報の編集ができません。もう一度お願いします。", [
+        {
+          text: "OK",
+          onPress: () => {},
+        },
+      ]);
     }
   };
   return (
     <SafeAreaView style={[styles.container, {backgroundColor: colors.backgroundTheme}]}>
-      <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"}
-          keyboardVerticalOffset={Platform.select({
-            ios: 60,
-            android: 60,
-          })}
-          style={{flex: 1}}>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        keyboardVerticalOffset={Platform.select({
+          ios: 60,
+          android: 60,
+        })}
+        style={{flex: 1}}
+      >
         <ScrollView contentContainerStyle={{paddingBottom: 20}}>
           <View style={{paddingTop: 12, paddingBottom: 12, backgroundColor: colors.backgroundTheme}}>
             <View>
@@ -133,7 +132,7 @@ export default function EditAllergy({route}) {
             }}
           >
             <Text>あり</Text>
-            {isAllergyStatus && <Image source={require("@assets/images/v_green.png")} />}
+            {isAllergyStatus === true && <Image source={require("@assets/images/v_green.png")} />}
           </TouchableOpacity>
           <TouchableOpacity
             style={{
@@ -149,7 +148,7 @@ export default function EditAllergy({route}) {
             }}
           >
             <Text>なし</Text>
-            {!isAllergyStatus && <Image source={require("@assets/images/v_green.png")} />}
+            {isAllergyStatus === false && <Image source={require("@assets/images/v_green.png")} />}
           </TouchableOpacity>
           {isAllergyStatus && (
             <>

@@ -116,6 +116,7 @@ export default function Payment({route}) {
         if (data?.message && typeof data?.message == "string") {
           let errorMessage = data?.message.split(" ").join("");
           errorMessage = errorMessage.split(".").join("");
+          errorMessage = errorMessage.split("'").join("");
           if (errorMessage.includes("test")) {
             setErrorApi("お支払いが正常に完了しませんでした。カード情報をご確認ください。");
           } else {
@@ -312,12 +313,6 @@ export default function Payment({route}) {
               </View>
             </View>
             <View>
-              <View style={{paddingTop: 12, paddingBottom: 12, backgroundColor: colors.backgroundTheme}}>
-                <View style={[styles.box]}>
-                  <Text style={{fontFamily: fonts.NSbold, fontSize: 16, color: colors.colorTextBlack, lineHeight: 23}}>お客様情報</Text>
-                </View>
-              </View>
-
               <View>
                 <Text style={{fontFamily: fonts.NSbold, color: colors.colorTextBlack, padding: 16, fontSize: 16}}>お客様情報</Text>
                 {PaymentForm.map((item, index) => {

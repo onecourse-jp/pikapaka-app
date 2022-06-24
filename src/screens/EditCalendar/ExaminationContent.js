@@ -6,7 +6,8 @@ import {useNavigation} from "@react-navigation/native";
 import {useDispatch, useSelector} from "react-redux";
 import {SCREEN_QUESIONAIRE_STEP2, SCREEN_EDIT_CALENDAR_CONFIRM} from "@screens/screens.constants";
 import {getReservationById} from "@services/auth";
-import {getQuestionFormCalendar, getDetailOwnQuestion} from "@services/profile";
+import {getQuestionFormCalendar} from "@services/profile";
+import {getDetailOwnQuestion} from "@services/editCalendar";
 import moment from "moment";
 import ItemQuestionForm from "@components/Form/ItemQuestionForm";
 
@@ -17,8 +18,7 @@ export default function ExaminationContent({route}) {
   const navigation = useNavigation();
   const [dataCalendar, setDataCalendar] = useState(route?.params?.data);
   const [dataQuestion, setDataQuestion] = useState([]);
-  const [updateStatus, setUpdateStatus] = useState("UPDATE");
-  const [answerData, setAnswerData] = useState([]);
+  const [isFirstAnswer, setIsFirstAnswer] = useState(true);
   const {
     control,
     handleSubmit,
@@ -31,7 +31,6 @@ export default function ExaminationContent({route}) {
     console.log("dataCalendar", dataCalendar);
   }, []);
   const onSubmit = async (dataSubmit) => {
-    console.log("dataSubmit", dataSubmit);
     let newDataAnswer = [];
     dataSubmit.data.map((item, index) => {
       let labelAnswer = "";
@@ -46,36 +45,67 @@ export default function ExaminationContent({route}) {
           labelAnswer = item.content_answer;
         }
       }
-      newDataAnswer.push({
-        answer_id: item.answer_id,
-        content_answer: item.content_answer,
-        title: dataQuestion[index].title,
-        answer_id: item.answer_id,
-        labelAnswer: labelAnswer,
-      });
+      if (isFirstAnswer) {
+        newDataAnswer.push({
+          question_id: item.question_id,
+          content_answer: item.content_answer,
+          title: dataQuestion[index].title,
+          labelAnswer: labelAnswer,
+        });
+      } else {
+        newDataAnswer.push({
+          answer_id: item.answer_id,
+          content_answer: item.content_answer,
+          title: dataQuestion[index].title,
+          labelAnswer: labelAnswer,
+        });
+      }
     });
     let newDataCalendar = {
       ...dataCalendar,
       content_to_doctor: dataSubmit.content_to_doctor,
       newDataAnswer: newDataAnswer,
     };
-    if (route?.params?.type == "CHANGE_ITEM") {
-      navigation.navigate(SCREEN_EDIT_CALENDAR_CONFIRM, {data: newDataCalendar, dataSubmit: dataSubmit, type: "CHANGE_ITEM"});
+    console.log("newDataCalendar", newDataCalendar);
+    if (isFirstAnswer) {
+      navigation.navigate(SCREEN_EDIT_CALENDAR_CONFIRM, {data: newDataCalendar, dataSubmit: dataSubmit, type: "NEW"});
     } else {
-      navigation.navigate(SCREEN_EDIT_CALENDAR_CONFIRM, {data: newDataCalendar, dataSubmit: dataSubmit, type: updateStatus});
+      navigation.navigate(SCREEN_EDIT_CALENDAR_CONFIRM, {data: newDataCalendar, dataSubmit: dataSubmit, type: "CHANGE_ITEM"});
     }
   };
   const getAnswerForm = async () => {
     global.showLoadingView();
-    // let oldQuestionId = []
-    // if(route?.params?.data?.answer){}
-    const {response, data} = await getQuestionFormCalendar(route?.params?.data?.detail_category_medical_of_customer);
-    if (response?.status === 200) {
-      setDataQuestion(data.data.data);
+    let oldQuestionId = [];
+    if (route?.params?.data?.answer?.length > 0) {
+      console.log("route?.params?.data?.answer", route?.params?.data?.answer);
+      route?.params?.data?.answer?.map((item, index) => {
+        oldQuestionId.push(item.question_id);
+      });
+      const {response, data} = await getDetailOwnQuestion({list_question: oldQuestionId});
+      if (response?.status === 200) {
+        let listDataQuestion = [...data.data];
+        data.data.map((item, index) => {
+          listDataQuestion[index].value = route?.params?.data?.answer[index].content_answer;
+          listDataQuestion[index].answer_id = route?.params?.data?.answer[index].id;
+        });
+        setIsFirstAnswer(false);
+        console.log("listDataQuestion", listDataQuestion);
+        setDataQuestion(listDataQuestion);
+        global.hideLoadingView();
+      } else {
+        global.hideLoadingView();
+        console.log("error", response);
+      }
     } else {
-      console.log("error", response);
+      const {response, data} = await getQuestionFormCalendar(route?.params?.data?.detail_category_medical_of_customer);
+      if (response?.status === 200) {
+        global.hideLoadingView();
+        setDataQuestion(data.data.data);
+      } else {
+        console.log("error", response);
+        global.hideLoadingView();
+      }
     }
-    global.hideLoadingView();
   };
 
   useEffect(() => {
@@ -134,26 +164,44 @@ export default function ExaminationContent({route}) {
             </View>
             <View>
               <Text style={{fontFamily: fonts.NSbold, fontSize: 16, paddingHorizontal: 16, marginBottom: 16, marginTop: 16}}>問診</Text>
-              {dataQuestion.map((item, index) => {
-                item.status = 0;
-                return (
-                  <React.Fragment key={`dataQuestion-${index}`}>
-                    <Controller
-                      control={control}
-                      rules={{required: item.status === 1 ? true : false}}
-                      defaultValue={{
-                        content_answer: null,
-                        answer_id: item.id,
-                      }}
-                      name={`data.${index}`}
-                      render={({field: {onChange, onBlur, value}}) => {
-                        return <ItemQuestionForm item={item} valueData={value} changeData={onChange} type={"questionAdmin"} />;
-                      }}
-                    />
-                    {errors?.data && errors?.data[index] && <Text style={styles.textError}>{global.t("is_require")}</Text>}
-                  </React.Fragment>
-                );
-              })}
+              {dataQuestion.length > 0 &&
+                dataQuestion.map((item, index) => {
+                  if (!isFirstAnswer) {
+                    item.status = 0;
+                  }
+                  return (
+                    <React.Fragment key={`dataQuestion-${index}`}>
+                      <Controller
+                        control={control}
+                        rules={{required: item.status === 1 ? true : false}}
+                        defaultValue={
+                          isFirstAnswer
+                            ? {
+                                question_id: item.id,
+                                content_answer: null,
+                              }
+                            : {
+                                content_answer: item?.value,
+                                answer_id: item.answer_id,
+                              }
+                        }
+                        name={`data.${index}`}
+                        render={({field: {onChange, onBlur, value}}) => {
+                          return (
+                            <ItemQuestionForm
+                              item={item}
+                              isFirstAnswer={isFirstAnswer}
+                              valueData={value}
+                              changeData={onChange}
+                              type={"questionAdmin"}
+                            />
+                          );
+                        }}
+                      />
+                      {errors?.data && errors?.data[index] && <Text style={styles.textError}>{global.t("is_require")}</Text>}
+                    </React.Fragment>
+                  );
+                })}
             </View>
             <View style={{marginTop: 60, paddingHorizontal: 16}}>
               <Button label="変更内容を確認へ進む" onPress={handleSubmit(onSubmit)} />

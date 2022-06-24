@@ -10,7 +10,20 @@ import onlCheckbox from "@assets/images/icons/onlCheckbox.png";
 import offCheckbox from "@assets/images/icons/offCheckbox.png";
 const {width, height} = Dimensions.get("window");
 
-export default function ItemQuestionForm({item, valueData = null, changeData = () => {}, mutiple = false, type = "default"}) {
+export default function ItemQuestionForm({
+  item,
+  isFirstAnswer = true,
+  valueData = null,
+  changeData = () => {},
+  mutiple = false,
+  type = "default",
+}) {
+  if (item.key === "content_medicines") {
+    console.log("content_medicines", item.value, valueData);
+  }
+  if (item.key === "content_allergies") {
+    console.log("content_allergies", item.value, valueData);
+  }
   const colors = useThemeColors();
   const fonts = useThemeFonts();
   const [showPopup, setShowPopup] = useState(false);
@@ -31,8 +44,14 @@ export default function ItemQuestionForm({item, valueData = null, changeData = (
           }
         });
       } else {
-        setValueRowItem(item.value === 1 ? "あり" : "なし");
-        setListCheckbox(item.value === 1 ? [{label: "あり", value: 1}] : [{label: "なし", value: 2}]);
+        if (type === "questionAdmin") {
+          const valueQuestionAdmin = item.value[0];
+          setValueRowItem(valueQuestionAdmin);
+          setListCheckbox(valueQuestionAdmin === "はい" ? [{label: "はい", value: 1}] : [{label: "いいえ", value: 2}]);
+        } else {
+          setValueRowItem(item.value === 1 ? "あり" : "なし");
+          setListCheckbox(item.value === 1 ? [{label: "あり", value: 1}] : [{label: "なし", value: 2}]);
+        }
       }
     }
     if (item?.label == 3 && item?.value) {
@@ -47,7 +66,7 @@ export default function ItemQuestionForm({item, valueData = null, changeData = (
         });
       } else {
         item?.value?.map((el) => {
-          newValue.push(item?.data[el]?.label);
+          newValue.push(item?.data[el]?.label || el);
           newListCheckBox.push({label: item?.data[el]?.label, value: item?.data[el]?.value});
         });
       }
@@ -134,7 +153,12 @@ export default function ItemQuestionForm({item, valueData = null, changeData = (
     setValueRowItem(newLabel);
     let dataChange;
     if (type === "questionAdmin") {
-      dataChange = {question_id: item.id, content_answer: newValue};
+      if (isFirstAnswer) {
+        dataChange = {question_id: item.id, content_answer: newValue};
+      } else {
+        dataChange = {answer_id: item.answer_id, content_answer: newValue};
+      }
+      console.log("questionAdminquestionAdmin isFirstAnswer", dataChange);
       changeData(dataChange);
     } else {
       if (item.label === 4) {
@@ -177,7 +201,6 @@ export default function ItemQuestionForm({item, valueData = null, changeData = (
       <TouchableOpacity
         onPress={() => {
           if (item?.action) {
-            console.log("content_medicines", item?.value, valueData);
             item?.action();
           } else if (item.label === 4 || item.label === 3) {
             setShowPopup(true);
@@ -257,7 +280,7 @@ export default function ItemQuestionForm({item, valueData = null, changeData = (
               keyboardType={
                 item.key === "phone_number" || item?.typePad === "number" || item.key === "postal_code" ? "number-pad" : "default"
               }
-              value={valueData ? (typeof valueData === "string" ? valueData : renderContentAllergies(valueData)) : null}
+              value={valueData ? (typeof valueData === "string" ? valueData : item.value) : null}
               placeholder={item?.placeholder || "入力してください"}
               secureTextEntry={item.key === "newPassword" || item.key === "confirmPassword" ? true : false}
               // placeholder={item.placeholder}
