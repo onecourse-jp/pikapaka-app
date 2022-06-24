@@ -92,7 +92,7 @@ export default function LoginScreen({route}) {
           }}
           name="email"
         />
-        {errors.email && <Text style={styles.textError}>エラーメール</Text>}
+        {errors.email && <Text style={styles.textError}>メールアドレスが間違っています。</Text>}
 
         <Controller
           control={control}
