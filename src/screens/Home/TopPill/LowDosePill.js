@@ -43,7 +43,7 @@ export default function LowDosePill() {
         title={global.t("what_is_a_low_dose_pill")}
         textFormat={[
           "ピル（経口避妊薬）は、女性の卵巣でつくられる「卵胞ホルモン」と「黄体ホルモン」の女性ホルモンが含まれています。これら女性ホルモンの作用を利用して、妊娠を防ぐ薬です。",
-          "また、女性を悩ます生理を快適したりに生理予定日をコントロールしたり、症状を軽くしたりできるという、ピルには働く女性にとってたくさんのメリットがあります。",
+          "また、女性を悩ます生理の予定日をコントロールしたり、症状を軽くしたりできるという、ピルには働く女性にとってたくさんのメリットがあります。",
           "Tケアクリニックでは、国内で承認されたもののみを扱っており、安全性を保っております。",
         ]}
         styleColor={colors.colorPill}
@@ -52,11 +52,9 @@ export default function LowDosePill() {
       <View style={{height: 10}}></View>
       <RecommendOnlineMedicalCare
         textFormat={[
-          "避妊",
+          "避妊(正しく内服をしなければ効果が薄れます。)　",
           "月経困難症、月経不順、月経前症候群",
           "にきび",
-          "子宮内膜症、子宮体癌",
-          "卵巣癌の予防",
         ]}
         title={global.t("effect")}
         description={[global.t('low_dose_pill_have_positive_variety')]}
@@ -70,6 +68,9 @@ export default function LowDosePill() {
           "頭痛、めまい",
           "体重増加",
           "不正出血",
+          "血栓症",
+          "乳房の張りなどの不快感",
+          "むくみ",
         ]}
         title={global.t("side_effect")}
         description={[global.t('symptom_such_as_nausea_and_abnormal')]}
