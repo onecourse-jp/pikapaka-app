@@ -44,6 +44,7 @@ export default function TopAGA() {
             description={[
               "AGA治療薬の副作用を強く感じられる人は稀ですが、以下のようなものがあります。",
               "勃起不全、リビドー減退、精液量減少、肝機能障害",
+              "また、前立腺がんの発見が遅れる場合があります。",
             ]}
             circleColor={colors.colorAGA07}
             title="副作用"
