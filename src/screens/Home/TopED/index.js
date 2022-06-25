@@ -55,6 +55,8 @@ export default function ED() {
               "グレープフルーツなどの柑橘類で服用することは避けてください",
               "お酒は飲み過ぎに注意し、適量にしてください",
               "降圧剤を服用されている方は医師とご相談ください",
+              "血圧のお薬を服用している方",
+              "1日1回の服用",
             ]}
             title={global.t("Precautions_for_taking")}
             styleColor={colors.colorED}
