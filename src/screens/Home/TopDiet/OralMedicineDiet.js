@@ -50,13 +50,13 @@ export default function OralMedicineDiet() {
     {
       image: require("@assets/images/medicine_diet_3.png"),
       name: "アカルボース（糖吸収抑制）",
-      description: "インスリンの分泌をコントロールし、糖分の吸収を抑制します。",
+      description: "各種糖質の消化吸収を遅延させ、食後の急激な血糖値上昇を抑制します。通常、糖尿病の食後過血糖の改善に用いられます。",
     },
     {
       image: require("@assets/images/medicine_diet_4.png"),
       name: "エゼチミブ（脂質吸収抑制）",
       description:
-        "エゼチミブは食事性及び胆汁性コレステロールの吸収を阻害し、食事に含まれる脂肪分を吸収さません。\nカロリーオーバーの予防薬として、食後1時間以内に1錠の服用。",
+        "エゼチミブは食事性及び胆汁性コレステロールの吸収を阻害し、食事に含まれる脂肪分を吸収しにくくさせます。\nカロリーオーバーの予防薬として、食後1時間以内に1錠の服用。\n※1日1回の食後経口投与。",
     },
   ];
 
