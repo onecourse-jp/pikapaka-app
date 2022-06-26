@@ -28,7 +28,7 @@
   "LOGIN_FAIL": "メールアドレス・パスワードが間違えています",
   "ERROR_WHEN_INPUT_EMAIL_OR_PASSWORD": "このメールアドレスは既に登録されています",
   "Log_in_with_your_email_address": "メールアドレスでログイン",
-  "ERROR_WHEN_INPUT_EMAIL_OR_PASSWORD_FORGOT_PASSWORD": "このメールアドレス・パスワードは登録されていません",
+  "ERROR_WHEN_INPUT_EMAIL_OR_PASSWORD_FORGOT_PASSWORD": "このメールアドレスは登録されていません",
   "Click_here_if_you_have_forgotten_your_password": "パスワードをお忘れの方はこちら",
   "ERROR_TOKEN": "パスワードをお忘れの方はこちら",
   "password": "パスワード",
