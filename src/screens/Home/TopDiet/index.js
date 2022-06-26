@@ -31,7 +31,7 @@ export default function Diet() {
           <OnlineMedicalCare
             title={global.t("what_is_medical_diet")}
             textFormat={[
-              "メディカルダイエットは、食欲抑制、カロリーダウンを助けるお薬を服用することで無理な我慢や辛い思いはしないで減量できます。",
+              "メディカルダイエットは、食欲抑制、カロリーダウンを助けるお薬を服用することで無理な我慢や辛い思いはしないで、効果的な減量を目指します。",
               "Tケアクリニックのオンライン診療では、医師がしっかりとあなたのダイエットの悩みに向き合い、あなたに合った処方を提案します。",
             ]}
             styleColor={colors.bgDietText}
