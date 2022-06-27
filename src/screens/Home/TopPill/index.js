@@ -32,7 +32,7 @@ export default function Pill() {
               flexDirection: "row",
               justifyContent: "space-between",
               alignItems: "flex-end",
-              padding: 0
+              padding: 0,
             }}
           >
             <TouchableOpacity
@@ -112,10 +112,13 @@ export default function Pill() {
             ]}
           />
         </View>
-          <View style={{height: 20}}></View>
+        <View style={{height: 20}}></View>
         <FooterComponent />
       </ScrollView>
-      <ButtonBooking bgColor={"rgba(219, 207, 95, 0.7)"} />
+      <ButtonBooking
+        bgColor={"rgba(219, 207, 95, 0.7)"}
+        dataBooking={{label: "ピル", value: '{"label":"選択中の科目","value":"ピル","key":"pill","data":"6"}'}}
+      />
     </View>
   );
 }

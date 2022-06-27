@@ -74,7 +74,10 @@ export default function TopAGA() {
         </View>
         <FooterComponent />
       </ScrollView>
-      <ButtonBooking bgColor={"rgba(143, 197, 118, 0.7)"} />
+      <ButtonBooking
+        bgColor={"rgba(143, 197, 118, 0.7)"}
+        dataBooking={{label: "AGA", value: '{"label":"選択中の科目","value":"AGA","key":"aga","data":"9"}'}}
+      />
     </View>
   );
 }

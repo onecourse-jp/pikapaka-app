@@ -74,7 +74,10 @@ export default function Diet() {
         </View>
         <FooterComponent />
       </ScrollView>
-      <ButtonBooking bgColor={"rgba(43, 185, 185, 0.7)"} />
+      <ButtonBooking
+        bgColor={"rgba(43, 185, 185, 0.7)"}
+        dataBooking={{label: "ダイエット", value: '{"label":"選択中の科目","value":"ダイエット","key":"diet","data":"5"}'}}
+      />
     </View>
   );
 }

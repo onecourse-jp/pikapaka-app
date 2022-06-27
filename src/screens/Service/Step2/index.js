@@ -139,9 +139,13 @@ export default function ServiceStep2() {
     const isDateInCalendar = checkDateInData(item);
     if (isDateInCalendar !== false && statusDay) {
       if (isDateInCalendar === 0) {
-        return <Text style={{fontSize: 18, lineHeight: 24, color: colors.gray3}}>✕</Text>;
+        return <Text style={{fontSize: 14, lineHeight: 20, fontFamily: fonts.NSregular, color: colors.gray3}}>✕</Text>;
       } else {
-        return <Text style={{fontSize: 20, lineHeight: 24, color: active ? colors.white : colors.textBlack}}>○</Text>;
+        return (
+          <Text style={{fontSize: 14, lineHeight: 20, fontFamily: fonts.NSregular, color: active ? colors.white : colors.textBlack}}>
+            ○
+          </Text>
+        );
       }
     }
     return <></>;

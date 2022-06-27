@@ -88,8 +88,8 @@ export default function ExaminationContent({route}) {
           listDataQuestion[index].value = route?.params?.data?.answer[index].content_answer;
           listDataQuestion[index].answer_id = route?.params?.data?.answer[index].id;
         });
-        setIsFirstAnswer(false);
         console.log("listDataQuestion", listDataQuestion);
+        setIsFirstAnswer(false);
         setDataQuestion(listDataQuestion);
         global.hideLoadingView();
       } else {

@@ -132,7 +132,10 @@ export default function SkinCare() {
 
         <FooterComponent />
       </ScrollView>
-      <ButtonBooking bgColor={"rgba(209, 152, 204, 0.7)"} />
+      <ButtonBooking
+        bgColor={"rgba(209, 152, 204, 0.7)"}
+        dataBooking={{label: "スキンケア", value: '{"label":"選択中の科目","value":"スキンケア","key":"skinCare","data":"1"}'}}
+      />
     </View>
   );
 }
