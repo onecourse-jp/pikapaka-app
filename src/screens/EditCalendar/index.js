@@ -3,6 +3,7 @@ import {StyleSheet, Text, View, ScrollView, SafeAreaView, TouchableOpacity, Aler
 import {useThemeColors, useThemeFonts, Button} from "react-native-theme-component";
 import {useNavigation} from "@react-navigation/native";
 import {navigationRef} from "src/navigation/NavigationService";
+import {CommonActions} from "@react-navigation/native";
 import {useDispatch, useSelector} from "react-redux";
 // import { useToast } from "react-native-toast-notifications";
 import {
@@ -64,7 +65,11 @@ export default function EditCalendar({route}) {
     if (data.status === 200) {
       global.hideLoadingView();
       dispatch(changeStatusCalendar());
-      navigation.goBack();
+      const resetAction = CommonActions.reset({
+        index: 0,
+        routes: [{name: "HomeStack"}],
+      });
+      navigation.dispatch(resetAction);
       navigation.navigate("HistoryStack");
       toast.show("変更が完了しました", {
         type: "success",

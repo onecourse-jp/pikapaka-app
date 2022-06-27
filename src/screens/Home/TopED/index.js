@@ -76,7 +76,10 @@ export default function ED() {
         </View>
         <FooterComponent />
       </ScrollView>
-      <ButtonBooking bgColor={"rgba(123, 142, 210, 0.7)"} />
+      <ButtonBooking
+        bgColor={"rgba(123, 142, 210, 0.7)"}
+        dataBooking={{label: "ED", value: '{"label":"選択中の科目","value":"ED","key":"ed","data":"8"}'}}
+      />
     </View>
   );
 }

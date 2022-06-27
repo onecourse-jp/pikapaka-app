@@ -18,12 +18,6 @@ export default function ItemQuestionForm({
   mutiple = false,
   type = "default",
 }) {
-  if (item.key === "content_medicines") {
-    console.log("content_medicines", item.value, valueData);
-  }
-  if (item.key === "content_allergies") {
-    console.log("content_allergies", item.value, valueData);
-  }
   const colors = useThemeColors();
   const fonts = useThemeFonts();
   const [showPopup, setShowPopup] = useState(false);
@@ -36,7 +30,6 @@ export default function ItemQuestionForm({
   const refInput = useRef(null);
   const renderValueDefault = () => {
     if (item?.label == 4 && item?.value) {
-      console.log("item?.data", item?.data, item?.content);
       if (item?.data) {
         item.data.map((el, index) => {
           if (el.value == item.value) {
@@ -47,7 +40,6 @@ export default function ItemQuestionForm({
       } else {
         if (type === "questionAdmin") {
           const valueQuestionAdmin = item.value[0];
-          console.log("valueQuestionAdmin", valueQuestionAdmin);
           setValueRowItem(valueQuestionAdmin);
           setListCheckbox([{label: valueQuestionAdmin, value: valueQuestionAdmin}]);
         } else {
@@ -57,7 +49,6 @@ export default function ItemQuestionForm({
       }
     }
     if (item?.label == 3 && item?.value) {
-      console.log("item?.value", item?.value, item?.content);
       let newValue = [];
       let newListCheckBox = [];
       if (typeof item?.value == "string" || typeof item?.value == "number") {
@@ -101,7 +92,6 @@ export default function ItemQuestionForm({
           {label: "無", value: 2},
         ];
       }
-      console.log("newDataRender", newDataRender);
       setDataRender(newDataRender);
       global.hideLoadingView();
     } catch (error) {
@@ -120,7 +110,6 @@ export default function ItemQuestionForm({
   };
 
   const onMultipleSelection = (selections, item) => {
-    console.log("onMultipleSelection", selections, item);
     if (item.value === 0) {
       if (listCheckbox.length === 1) {
         setListCheckbox([]);
@@ -260,7 +249,7 @@ export default function ItemQuestionForm({
                 {(valueRowItem === null || valueRowItem === undefined || valueRowItem.length == 0) && (
                   <Text style={{textAlign: "left"}}>{item?.placeholder || "選択"}</Text>
                 )}
-                {typeof valueRowItem == "string" ? (
+                {typeof valueRowItem == "string" || typeof valueRowItem == "number" ? (
                   <Text>{valueRowItem}</Text>
                 ) : (
                   valueRowItem?.length > 0 &&
@@ -290,14 +279,28 @@ export default function ItemQuestionForm({
               keyboardType={
                 item.key === "phone_number" || item?.typePad === "number" || item.key === "postal_code" ? "number-pad" : "default"
               }
-              value={valueData ? (typeof valueData === "string" ? valueData : item.value) : null}
+              value={
+                valueData
+                  ? typeof valueData === "string" || typeof valueData == "number"
+                    ? valueData
+                    : type === "questionAdmin"
+                    ? valueData?.content_answer
+                    : item.value
+                  : null
+              }
               placeholder={item?.placeholder || "入力してください"}
               secureTextEntry={item.key === "newPassword" || item.key === "confirmPassword" ? true : false}
               // placeholder={item.placeholder}
               placeholderTextColor={colors.textPlaceholder}
               onChangeText={(text) => {
                 if (type == "questionAdmin") {
-                  changeData({question_id: item.id, content_answer: text});
+                  let dataChange = {};
+                  if (isFirstAnswer) {
+                    dataChange = {question_id: item.id, content_answer: text};
+                  } else {
+                    dataChange = {answer_id: item.answer_id, content_answer: text};
+                  }
+                  changeData(dataChange);
                 } else {
                   changeData(text);
                 }

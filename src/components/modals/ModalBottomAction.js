@@ -14,15 +14,17 @@ const DATA = [
   // },
   // {label: "スキンケア (保湿)", value: '{"label":"選択中の科目","value":"スキンケア (保湿)","key":"skinCare","data":"4"}'},
   {label: "ダイエット", value: '{"label":"選択中の科目","value":"ダイエット","key":"diet","data":"5"}'},
-  {label: "ピル（ピル）", value: '{"label":"選択中の科目","value":"ピル (ピル）","key":"pill","data":"6"}'},
-  {label: "ピル （アフターピル）", value: '{"label":"選択中の科目","value":"ピル（アフターピル）","key":"pill","data":"7"}'},
+  {label: "ピル", value: '{"label":"選択中の科目","value":"ピル","key":"pill","data":"6"}'},
+  // {label: "ピル（アフターピル）", value: '{"label":"選択中の科目","value":"ピル（アフターピル）","key":"pill","data":"7"}'},
   {label: "ED", value: '{"label":"選択中の科目","value":"ED","key":"ed","data":"8"}'},
   {label: "AGA", value: '{"label":"選択中の科目","value":"AGA","key":"aga","data":"9"}'},
 ];
 
 export default function ModalBottomAction({navigation, route}) {
   const {callback} = route.params;
-  const [valueChoose, setValueChoose] = useState(null);
+  console.log("route.params ModalBottomAction", route.params);
+  let defaultvalue = route.params?.value;
+  const [valueChoose, setValueChoose] = useState(defaultvalue || null);
   const colors = useThemeColors();
   console.log("callback", callback);
   const {t} = useContext(LocalizationContext);

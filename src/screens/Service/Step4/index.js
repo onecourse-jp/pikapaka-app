@@ -187,6 +187,11 @@ export default function ServiceStep4() {
                           </Text>
                         );
                       })}
+                      {item.value.length === 0 && (
+                        <Text key={`med-item`} style={{color: colors.textBlack, fontSize: 14, textAlign: "left", lineHeight: 18}}>
+                          いいえ
+                        </Text>
+                      )}
                     </View>
                   )}
                   {item.option && !item.data && (
@@ -276,7 +281,7 @@ export default function ServiceStep4() {
             }}
           >
             <Text style={{fontFamily: fonts.NSregular, fontSize: 14, lineHeight: 15, color: colors.gray1}}>
-              { dataConfirm?.old_reservation_id  === false ? "はい" : "いいえ"}
+              {dataConfirm?.old_reservation_id === false ? "はい" : "いいえ"}
             </Text>
           </View>
 
