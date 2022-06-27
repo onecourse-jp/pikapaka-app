@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Group 182.png",
+      "filename" : "ic_logo_top.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Group 182@2x.png",
+      "filename" : "ic_logo_top@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Group 182@3x.png",
+      "filename" : "ic_logo_top@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
