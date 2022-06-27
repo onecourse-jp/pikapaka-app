@@ -92,7 +92,7 @@ export default function EditGender({route}) {
           }}
         >
           <Text>女性</Text>
-          {!isGenderStatus && <Image source={require("@assets/images/v_green.png")} />}
+          {isGenderStatus === false && <Image source={require("@assets/images/v_green.png")} />}
         </TouchableOpacity>
       </View>
       <View style={{paddingHorizontal: 16}}>

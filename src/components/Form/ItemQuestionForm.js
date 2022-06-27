@@ -36,6 +36,7 @@ export default function ItemQuestionForm({
   const refInput = useRef(null);
   const renderValueDefault = () => {
     if (item?.label == 4 && item?.value) {
+      console.log("item?.data", item?.data, item?.content);
       if (item?.data) {
         item.data.map((el, index) => {
           if (el.value == item.value) {
@@ -46,8 +47,9 @@ export default function ItemQuestionForm({
       } else {
         if (type === "questionAdmin") {
           const valueQuestionAdmin = item.value[0];
+          console.log("valueQuestionAdmin", valueQuestionAdmin);
           setValueRowItem(valueQuestionAdmin);
-          setListCheckbox(valueQuestionAdmin === "はい" ? [{label: "はい", value: 1}] : [{label: "いいえ", value: 2}]);
+          setListCheckbox([{label: valueQuestionAdmin, value: valueQuestionAdmin}]);
         } else {
           setValueRowItem(item.value === 1 ? "あり" : "なし");
           setListCheckbox(item.value === 1 ? [{label: "あり", value: 1}] : [{label: "なし", value: 2}]);
@@ -55,6 +57,7 @@ export default function ItemQuestionForm({
       }
     }
     if (item?.label == 3 && item?.value) {
+      console.log("item?.value", item?.value, item?.content);
       let newValue = [];
       let newListCheckBox = [];
       if (typeof item?.value == "string" || typeof item?.value == "number") {
@@ -66,8 +69,13 @@ export default function ItemQuestionForm({
         });
       } else {
         item?.value?.map((el) => {
-          newValue.push(item?.data[el]?.label || el);
-          newListCheckBox.push({label: item?.data[el]?.label, value: item?.data[el]?.value});
+          if (item?.data) {
+            newValue.push(item?.data[el]?.label || el);
+            newListCheckBox.push({label: item?.data[el]?.label || el, value: item?.data[el]?.value || el});
+          } else if (item?.content) {
+            newValue.push(item?.content[el]?.label || el);
+            newListCheckBox.push({label: item?.content[el]?.label || el, value: item?.content[el]?.value || el});
+          }
         });
       }
       setValueRowItem(newValue);
@@ -93,6 +101,7 @@ export default function ItemQuestionForm({
           {label: "無", value: 2},
         ];
       }
+      console.log("newDataRender", newDataRender);
       setDataRender(newDataRender);
       global.hideLoadingView();
     } catch (error) {
@@ -111,6 +120,7 @@ export default function ItemQuestionForm({
   };
 
   const onMultipleSelection = (selections, item) => {
+    console.log("onMultipleSelection", selections, item);
     if (item.value === 0) {
       if (listCheckbox.length === 1) {
         setListCheckbox([]);
