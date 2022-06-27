@@ -57,7 +57,7 @@ export default function SkinCare() {
                 marginBottom: 10,
               }}
             >
-              <Text style={{fontSize: 16, fontWeight: "700", lineHeight: 24, color: colors.white}}>塗ってケア（外用薬）</Text>
+              <Text style={{fontSize: 16, fontWeight: "700", lineHeight: 24, color: colors.white}}>飲んでケア（内服薬）</Text>
               <Image style={{width: 8, height: 4}} source={require("@assets/images/arrow_skincare.png")} />
             </TouchableOpacity>
             <TouchableOpacity
@@ -84,14 +84,14 @@ export default function SkinCare() {
             title={global.t("what_is_skin_care")}
             textFormat={[
               "メディカルスキンケアとは、医療用医薬品による肌治療。皮膚科医学に基づいた低価格のスキンケアです。",
-              "Tケアクリニックのオンライン診療では、医師がしっかりとあなたのお肌の悩みに向き合い、内服薬や外用薬などを組み合わせ、カスタマイズされた処方を提案します。",
+              "Tケアクリニックのオンライン診療では、医師がしっかりとあなたのお肌の悩みに向き合い、内服薬や外用薬などを組み合わせ、あなたに合わせた処方を提案します。",
             ]}
             styleColor={colors.buttonSkincare}
             lineColor={colors.colorSkincare05}
           />
           <View style={{height: 10}}></View>
           <RecommendOnlineMedicalCare
-            textFormat={["そばかす、肝斑、色素新着が気になる", "ニキビが気になる", "とにかく白くなりたい", "シミ予防をしたい"]}
+            textFormat={["そばかす、肝斑、色素沈着が気になる", "ニキビを予防できる", "肌の内側から白くなりたい", "シミ予防をしたい"]}
             styleColor={colors.buttonSkincare}
             circleColor={colors.colorSkincare07}
           />

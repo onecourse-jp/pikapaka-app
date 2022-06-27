@@ -17,19 +17,19 @@ export default function OralMedicineSkinCare() {
     {
       image: require("@assets/images/medicine_skincare_1.png"),
       name: "トラネキサム（250）",
-      description: "肝斑の原因と言われる活性型プラスミンを抑制。\n美白効果、メラニン色素の生成を抑制。 \n抗炎症作用。",
+      description: "トラネキサム酸は、美白効果が期待できる人工的に生成されたアミノ酸の一種です。炎症やアレルギーを引き起こす「プラスミン」の働きを阻害することで、美白や肌荒れの改善、止血などの効能が期待できます。",
     },
     {
       image: require("@assets/images/medicine_skincare_2.png"),
       name: "シナール",
       description:
-        "メラニン色素の形成を抑制し、既成メラニン色素の還元を促進。 \n結合織の主成分であるコラーゲンの生成と保持。 \n成分はビタミンC。",
+        "シナールは、ビタミン C（アスコルビン酸）とパントテン酸を配合した複合ビタミン剤です。通常、病気、妊娠中または授乳中など、ビタミン Cやパントテン酸が不足している場合の補給に用いられます。また、メラニン色素の形成を抑え、皮膚の色素沈着（シミなど）の改善にも用いられます。",
     },
     {
       image: require("@assets/images/medicine_skincare_3.png"),
       name: "ハイチオール",
       description:
-        "シミの原因となる過剰なメラニンの生成を抑制し、肌に沈着してしまった黒色メラニンを無色化します。\n皮膚の新陳代謝を促進することで、健康的な肌を保つことができます。",
+        "ハイチオールはL‐システインを有効成分とする、シミやそばかすの減少、改善などの効果を期待できる薬です。メラニンを「減らす」「排出する」を同時に行うため、効果的にシミやそばかすの改善が可能です。",
     },
     {
       image: require("@assets/images/medicine_skincare_4.png"),
@@ -126,7 +126,7 @@ export default function OralMedicineSkinCare() {
         bgListColor={colors.colorSkincare02}
         planDescription={[
           "ホームケア内服薬。",
-          "素肌のトラブル（しみ、そばかす、たるみ、しわ、くすみなど）の治療。医療用医薬品による高い効果が期待できます。",
+          "素肌のトラブル（しみ、そばかす、しわ、くすみなど）の治療。医療用医薬品による高い効果が期待できます。",
         ]}
         listMedicine={listMedicine}
       />
