@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {useForm, Controller} from "react-hook-form";
-import {StyleSheet, Text, View, ScrollView, SafeAreaView, TouchableOpacity} from "react-native";
+import {StyleSheet, Text, View, ScrollView, SafeAreaView, TouchableOpacity, Dimensions} from "react-native";
 import {useThemeColors, useThemeFonts, Button} from "react-native-theme-component";
 import {useNavigation} from "@react-navigation/native";
 import {useDispatch, useSelector} from "react-redux";
@@ -10,6 +10,8 @@ import moment from "moment";
 import ItemQuestionForm from "@components/Form/ItemQuestionForm";
 import GuideComponent from "@components/GuideComponent";
 import {updateCalendar} from "@services/editCalendar";
+
+const {width} = Dimensions.get("window");
 
 export default function ExaminationItem({route}) {
   const colors = useThemeColors();
@@ -75,7 +77,7 @@ export default function ExaminationItem({route}) {
     if (response.status == 200) {
       global.hideLoadingView();
       console.log("data when update", data);
-      let toastId = global.toast.show("aaaaaa", {
+      let toastId = global.toast.show("toastId", {
         placement: "top",
         duration: 4000,
         animationType: "slide-in",
@@ -99,7 +101,7 @@ export default function ExaminationItem({route}) {
               }}
             >
               <View>
-                <Text style={{padding: 16, fontWeight: "bold"}}>{`予約のキャンセルが完了しました。`}</Text>
+                <Text style={{padding: 16, fontWeight: "bold"}}>{`変更が完了しました`}</Text>
                 {/* <Text style={{paddingBottom: 12, paddingHorizontal: 16}} numberOfLines={2}>
                   <Text style={{paddingBottom: 12, paddingHorizontal: 16}}>{remoteMessage.notification.body}</Text>
                 </Text> */}
@@ -110,6 +112,40 @@ export default function ExaminationItem({route}) {
       });
       navigation.navigate(SCREEN_EDIT_CALENDAR, {data: dataCalendar});
     } else {
+      let toastId = global.toast.show("toastId", {
+        placement: "top",
+        duration: 4000,
+        animationType: "slide-in",
+        animationDuration: 100,
+        offsetTop: 0,
+        offset: 0, // offset for both top and bottom toasts
+        swipeEnabled: true,
+        renderToast: (toastOptions) => {
+          return (
+            <TouchableOpacity
+              style={{
+                alignSelf: "stretch",
+                marginTop: 0,
+                marginHorizontal: 6,
+                borderRadius: 10,
+                backgroundColor: "#F15F5F",
+                width: width - 60,
+              }}
+              onPress={() => {
+                global.toast.hide(toastId);
+                navigation.navigate(SCREEN_EDIT_CALENDAR, {data: dataCalendar});
+              }}
+            >
+              <View>
+                <Text style={{padding: 16, fontWeight: "bold", color: "white"}}>{`変更は失敗します`}</Text>
+                {/* <Text style={{paddingBottom: 12, paddingHorizontal: 16}} numberOfLines={2}>
+                  <Text style={{paddingBottom: 12, paddingHorizontal: 16}}>{remoteMessage.notification.body}</Text>
+                </Text> */}
+              </View>
+            </TouchableOpacity>
+          );
+        },
+      });
       global.hideLoadingView();
       console.log("response--------", response);
     }
