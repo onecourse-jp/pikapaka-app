@@ -81,6 +81,7 @@ export default function ExaminationContent({route}) {
       route?.params?.data?.answer?.map((item, index) => {
         oldQuestionId.push(item.question_id);
       });
+      console.log("oldQuestionId", oldQuestionId);
       const {response, data} = await getDetailOwnQuestion({list_question: oldQuestionId});
       if (response?.status === 200) {
         let listDataQuestion = [...data.data];

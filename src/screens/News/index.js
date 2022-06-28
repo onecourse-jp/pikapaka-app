@@ -10,6 +10,7 @@ import TabHeaderComponent from "@components/Layout/TabHeader";
 import {getListContent} from "@services/search";
 import FooterComponent from "@components/Layout/Footer";
 import NewsInMonth from "./components/NewsInMonth";
+import ButtonBooking from "../Home/components/ButtonBooking";
 import moment from "moment";
 
 export default function NewsScreen() {
@@ -81,7 +82,7 @@ export default function NewsScreen() {
     }, 1000);
   }, []);
   return (
-    <SafeAreaView style={{flex: 1, backgroundColor: colors.backgroundTheme}}>
+    <SafeAreaView style={{flex: 1, position: "relative", backgroundColor: colors.backgroundTheme}}>
       <Headercomponent />
       <TabHeaderComponent />
       <ScrollView
@@ -126,6 +127,7 @@ export default function NewsScreen() {
         </View>
         <FooterComponent />
       </ScrollView>
+      <ButtonBooking bgColor={"rgba(0, 176, 80, 0.7)"} />
     </SafeAreaView>
   );
 }

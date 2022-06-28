@@ -9,6 +9,7 @@ import styles from "../styles";
 import Headercomponent from "@components/Layout/Header";
 import TabHeaderComponent from "@components/Layout/TabHeader";
 import FooterComponent from "@components/Layout/Footer";
+import ButtonBooking from "../../Home/components/ButtonBooking";
 
 export default function () {
   const colors = useThemeColors();
@@ -73,6 +74,7 @@ export default function () {
           </View>
           <FooterComponent />
         </ScrollView>
+        <ButtonBooking bgColor={"rgba(0, 176, 80, 0.7)"} />
       </View>
     </SafeAreaView>
   );

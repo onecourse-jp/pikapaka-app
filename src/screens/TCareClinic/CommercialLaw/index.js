@@ -1,17 +1,22 @@
 import React, {useEffect, useState} from "react";
-import {StyleSheet, Text, View, TouchableOpacity, ScrollView, Image, TextInput} from "react-native";
+import {StyleSheet, Text, View, TouchableOpacity, ScrollView, Image, Linking} from "react-native";
 import {useThemeColors, useThemeFonts, Button} from "react-native-theme-component";
 import {useNavigation} from "@react-navigation/native";
 import {SafeAreaView} from "react-native-safe-area-context";
+import email from "react-native-email";
 import {useDispatch, useSelector} from "react-redux";
 import styles from "../styles";
 import Headercomponent from "@components/Layout/Header";
 import TabHeaderComponent from "@components/Layout/TabHeader";
 import FooterComponent from "@components/Layout/Footer";
+import ButtonBooking from "../../Home/components/ButtonBooking";
 
 export default function () {
   const colors = useThemeColors();
   const fonts = useThemeFonts();
+  const contactToEmail = () => {
+    Linking.openURL("mailto:support_healthcare@pikapaka.co.jp");
+  };
   const DATA = [
     {name: "社名", content: "株式会社ピカパカ", reqireForm: false},
     {name: "所在地", content: "〒105-0011\n東京都港区芝公園3-1-8 芝公園アネックス4F", reqireForm: false},
@@ -22,12 +27,13 @@ export default function () {
     {name: "FAX", content: "03-3431-6811", reqireForm: false},
     {
       name: "インターネットでのお問い合わせ先",
-      text: "お問い合わせフォームはこちら",
+      text: "お問い合わせはこちら",
       reqireForm: true,
       action: () => {
-        global.showWebView({
-          url: "https://docs.google.com/forms/d/e/1FAIpQLSdLQiPQIbCkjvr2HwBHD3ktb0WQHwFmdatHcCGzCnnlGhA4CQ/viewform",
-        });
+        // global.showWebView({
+        //   url: "https://docs.google.com/forms/d/e/1FAIpQLSdLQiPQIbCkjvr2HwBHD3ktb0WQHwFmdatHcCGzCnnlGhA4CQ/viewform",
+        // });
+        contactToEmail();
       },
     },
     {
@@ -125,6 +131,7 @@ export default function () {
           </View>
           <FooterComponent />
         </ScrollView>
+        <ButtonBooking bgColor={"rgba(0, 176, 80, 0.7)"} />
       </View>
     </SafeAreaView>
   );
