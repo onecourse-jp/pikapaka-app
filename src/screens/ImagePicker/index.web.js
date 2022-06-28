@@ -1,5 +1,5 @@
 import React from "react";
-import {hasFaceInImage} from "../../utils/faceDetection";
+// import {hasFaceInImage} from "../../utils/faceDetection";
 export default function ImagePickerScreen({options, callback}) {
   const useFaceDetection = options?.useFaceDetection ?? false;
   // TODO: check for image and call hasFaceInImage(imageUrl) if useFaceDetection is true
@@ -30,25 +30,6 @@ export default function ImagePickerScreen({options, callback}) {
           canvas.width = myImage.width; // Assigns image's width to canvas
           canvas.height = myImage.height; // Assigns image's height to canvas
           context.drawImage(myImage, 0, 0); // Draws the image on canvas
-          if (useFaceDetection) {
-            const hasFace = await hasFaceInImage(canvas);
-            console.log(hasFace);
-            if (!hasFace) {
-              global.showConfirmModal({
-                title: global.t("face_not_presented_in_image"),
-                type: "error",
-                btnOkText: "OK",
-                onOkCallback: (navigation) => {
-                  global.hideLoadingView();
-                  navigation.goBack();
-                },
-                // onCancelCallback: () => {},
-                timeout: 1000,
-                buttonVisible: true,
-              });
-              return;
-            }
-          }
           let result = target.files[0];
           const displayUrl = URL.createObjectURL(result);
           result.displayUrl = displayUrl;
