@@ -19,7 +19,7 @@ export default function ExaminationItem({route}) {
   const navigation = useNavigation();
   const [dataCalendar, setDataCalendar] = useState(route?.params?.data);
   const dataExaminationItem = global.t(`categoryTitle.${route?.params?.data?.calendar?.category_medical}`);
-  console.log("type edit", route?.params?.type);
+  console.log("type edit", route?.params.data.answer);
   useEffect(() => {
     setDataCalendar(route?.params?.data);
   }, []);
@@ -218,11 +218,11 @@ export default function ExaminationItem({route}) {
                             width: "60%",
                           }}
                         >
-                          {item?.title}
+                          {item?.question?.title}
                         </Text>
                         <View style={{width: "40%", paddingLeft: 10}}>
                           <Text style={{fontSize: 15, lineHeight: 22, color: colors.colorTextBlack, marginBottom: 12}}>
-                            {item?.labelAnswer}
+                            {item?.content_answer}
                           </Text>
                         </View>
                       </View>

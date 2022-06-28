@@ -9,6 +9,7 @@ import Headercomponent from "@components/Layout/Header";
 import TabHeaderComponent from "@components/Layout/TabHeader";
 import {SCREEN_TOP, SCREEN_NEWS, SCREEN_FAQ} from "@screens/screens.constants";
 import FooterComponent from "@components/Layout/Footer";
+import ButtonBooking from "../Home/components/ButtonBooking";
 
 export default function ({navigation}) {
   const colors = useThemeColors();
@@ -122,6 +123,7 @@ export default function ({navigation}) {
           </View>
           <FooterComponent />
         </ScrollView>
+        <ButtonBooking bgColor={"rgba(0, 176, 80, 0.7)"} />
       </View>
     </SafeAreaView>
   );

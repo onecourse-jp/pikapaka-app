@@ -1,7 +1,7 @@
 import {StyleSheet} from "react-native";
 
 const styles = StyleSheet.create({
-  container: {flex: 1, flexDirection: "column"},
+  container: {flex: 1, flexDirection: "column", position: "relative"},
   introView: {flexDirection: "column", alignItems: "center"},
   introCoinMarket: {padding: 20},
   textTitle: {color: "white", fontSize: 19, fontWeight: "bold"},

@@ -24,10 +24,11 @@ export default function EditCalendar({route}) {
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const [dataCalendar, setDataCalendar] = useState(null);
+  const user = useSelector((state) => state.users);
   const [notiStatus, setNotiStatus] = useState(false);
   useEffect(() => {
     actionGetCalendar(route?.params?.data.id);
-  }, [route?.params?.data]);
+  }, [route?.params?.data, user]);
   useEffect(() => {
     if (route?.params?.type == "SUCCESS") {
       setNotiStatus(true);

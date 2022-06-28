@@ -12,6 +12,7 @@ export default function DetailAfterPayment({route}) {
   const colors = useThemeColors();
   const fonts = useThemeFonts();
   const idCalendar = route?.params?.id;
+  console.log("idCalendar", idCalendar);
   const fromScreen = route?.params?.fromScreen;
   const [refreshing, setRefreshing] = useState(false);
   const [isPopup, setIsPopup] = useState(false);
@@ -244,6 +245,10 @@ export default function DetailAfterPayment({route}) {
               {dataCalendar?.image?.map((item, index) => {
                 return _renderItem(item, index);
               })}
+              {!dataCalendar?.image ||
+                (dataCalendar?.image?.length === 0 && (
+                  <Text style={{fontWeight: "500", fontSize: 12, lineHeight: 16}}>データーがありません</Text>
+                ))}
             </View>
           </View>
         </ScrollView>
