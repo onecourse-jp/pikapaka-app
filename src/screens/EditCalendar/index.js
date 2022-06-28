@@ -88,7 +88,7 @@ export default function EditCalendar({route}) {
     }
   };
   const confirmDelete = () => {
-    Alert.alert("", "性別の編集が完了しました。", [
+    Alert.alert("", "この予約をキャンセルしますか？", [
       {
         text: "いいえ",
         onPress: () => {},
