@@ -31,17 +31,11 @@
 		A47D5A8A28113E0F00878A4B /* SF-Pro-Display-Bold.OTF in Resources */ = {isa = PBXBuildFile; fileRef = A47D5A7428113E0E00878A4B /* SF-Pro-Display-Bold.OTF */; };
 		A47D5A8B28113E0F00878A4B /* Futura-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A47D5A7528113E0E00878A4B /* Futura-Medium.ttf */; };
 		A47D5A8C28113E0F00878A4B /* Futura.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A47D5A7628113E0F00878A4B /* Futura.ttf */; };
-		A47D5A8D28113E0F00878A4B /* PingFang-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A47D5A7728113E0F00878A4B /* PingFang-Bold.ttf */; };
 		A47D5A8E28113E0F00878A4B /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A47D5A7828113E0F00878A4B /* Roboto-Bold.ttf */; };
 		A47D5A8F28113E0F00878A4B /* SF-Pro-Display-Regular.OTF in Resources */ = {isa = PBXBuildFile; fileRef = A47D5A7928113E0F00878A4B /* SF-Pro-Display-Regular.OTF */; };
-		A47D5A9028113E0F00878A4B /* PingFang-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A47D5A7A28113E0F00878A4B /* PingFang-Light.ttf */; };
 		A47D5A9128113E0F00878A4B /* Futura-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A47D5A7E28113E0F00878A4B /* Futura-Bold.ttf */; };
-		A47D5A9228113E0F00878A4B /* PingFang-Heavy.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A47D5A7F28113E0F00878A4B /* PingFang-Heavy.ttf */; };
-		A47D5A9328113E0F00878A4B /* PingFang-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A47D5A8028113E0F00878A4B /* PingFang-Regular.ttf */; };
 		A47D5A9428113E0F00878A4B /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A47D5A8128113E0F00878A4B /* Roboto-Medium.ttf */; };
 		A47D5A9528113E0F00878A4B /* SF-Pro-Display-Medium.OTF in Resources */ = {isa = PBXBuildFile; fileRef = A47D5A8228113E0F00878A4B /* SF-Pro-Display-Medium.OTF */; };
-		A47D5A9628113E0F00878A4B /* PingFang-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A47D5A8328113E0F00878A4B /* PingFang-ExtraLight.ttf */; };
-		A47D5A9728113E0F00878A4B /* PingFang-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A47D5A8628113E0F00878A4B /* PingFang-Medium.ttf */; };
 		A47D5A9828113E0F00878A4B /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A47D5A8728113E0F00878A4B /* Roboto-Regular.ttf */; };
 		A4EC8D752813F12C004FAB0A /* SF-Pro-Display-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = A4EC8D722813F12C004FAB0A /* SF-Pro-Display-Bold.otf */; };
 		A4EC8D762813F12C004FAB0A /* SF-Pro-Display-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = A4EC8D732813F12C004FAB0A /* SF-Pro-Display-Medium.otf */; };
@@ -116,22 +110,15 @@
 		A47D5A7428113E0E00878A4B /* SF-Pro-Display-Bold.OTF */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SF-Pro-Display-Bold.OTF"; path = "../assets/fonts/SF-Pro-Display-Bold.OTF"; sourceTree = "<group>"; };
 		A47D5A7528113E0E00878A4B /* Futura-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Futura-Medium.ttf"; path = "../assets/fonts/Futura-Medium.ttf"; sourceTree = "<group>"; };
 		A47D5A7628113E0F00878A4B /* Futura.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Futura.ttf; path = ../assets/fonts/Futura.ttf; sourceTree = "<group>"; };
-		A47D5A7728113E0F00878A4B /* PingFang-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "PingFang-Bold.ttf"; path = "../assets/fonts/PingFang-Bold.ttf"; sourceTree = "<group>"; };
 		A47D5A7828113E0F00878A4B /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-Bold.ttf"; path = "../assets/fonts/Roboto-Bold.ttf"; sourceTree = "<group>"; };
 		A47D5A7928113E0F00878A4B /* SF-Pro-Display-Regular.OTF */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SF-Pro-Display-Regular.OTF"; path = "../assets/fonts/SF-Pro-Display-Regular.OTF"; sourceTree = "<group>"; };
-		A47D5A7A28113E0F00878A4B /* PingFang-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "PingFang-Light.ttf"; path = "../assets/fonts/PingFang-Light.ttf"; sourceTree = "<group>"; };
 		A47D5A7B28113E0F00878A4B /* NotoSansJP-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "NotoSansJP-Regular.otf"; path = "../assets/fonts/NotoSansJP-Regular.otf"; sourceTree = "<group>"; };
-		A47D5A7C28113E0F00878A4B /* NotoSansJP-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "NotoSansJP-Thin.otf"; path = "../assets/fonts/NotoSansJP-Thin.otf"; sourceTree = "<group>"; };
 		A47D5A7D28113E0F00878A4B /* NotoSansJP-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "NotoSansJP-Bold.otf"; path = "../assets/fonts/NotoSansJP-Bold.otf"; sourceTree = "<group>"; };
 		A47D5A7E28113E0F00878A4B /* Futura-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Futura-Bold.ttf"; path = "../assets/fonts/Futura-Bold.ttf"; sourceTree = "<group>"; };
-		A47D5A7F28113E0F00878A4B /* PingFang-Heavy.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "PingFang-Heavy.ttf"; path = "../assets/fonts/PingFang-Heavy.ttf"; sourceTree = "<group>"; };
-		A47D5A8028113E0F00878A4B /* PingFang-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "PingFang-Regular.ttf"; path = "../assets/fonts/PingFang-Regular.ttf"; sourceTree = "<group>"; };
 		A47D5A8128113E0F00878A4B /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-Medium.ttf"; path = "../assets/fonts/Roboto-Medium.ttf"; sourceTree = "<group>"; };
 		A47D5A8228113E0F00878A4B /* SF-Pro-Display-Medium.OTF */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SF-Pro-Display-Medium.OTF"; path = "../assets/fonts/SF-Pro-Display-Medium.OTF"; sourceTree = "<group>"; };
-		A47D5A8328113E0F00878A4B /* PingFang-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "PingFang-ExtraLight.ttf"; path = "../assets/fonts/PingFang-ExtraLight.ttf"; sourceTree = "<group>"; };
 		A47D5A8428113E0F00878A4B /* NotoSansJP-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "NotoSansJP-Light.otf"; path = "../assets/fonts/NotoSansJP-Light.otf"; sourceTree = "<group>"; };
 		A47D5A8528113E0F00878A4B /* NotoSansJP-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "NotoSansJP-Black.otf"; path = "../assets/fonts/NotoSansJP-Black.otf"; sourceTree = "<group>"; };
-		A47D5A8628113E0F00878A4B /* PingFang-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "PingFang-Medium.ttf"; path = "../assets/fonts/PingFang-Medium.ttf"; sourceTree = "<group>"; };
 		A47D5A8728113E0F00878A4B /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-Regular.ttf"; path = "../assets/fonts/Roboto-Regular.ttf"; sourceTree = "<group>"; };
 		A47D5A8828113E0F00878A4B /* NotoSansJP-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "NotoSansJP-Medium.otf"; path = "../assets/fonts/NotoSansJP-Medium.otf"; sourceTree = "<group>"; };
 		A4EC8D722813F12C004FAB0A /* SF-Pro-Display-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SF-Pro-Display-Bold.otf"; path = "../assets/fonts/SF-Pro-Display-Bold.otf"; sourceTree = "<group>"; };
@@ -324,13 +311,6 @@
 				A47D5A8428113E0F00878A4B /* NotoSansJP-Light.otf */,
 				A47D5A8828113E0F00878A4B /* NotoSansJP-Medium.otf */,
 				A47D5A7B28113E0F00878A4B /* NotoSansJP-Regular.otf */,
-				A47D5A7C28113E0F00878A4B /* NotoSansJP-Thin.otf */,
-				A47D5A7728113E0F00878A4B /* PingFang-Bold.ttf */,
-				A47D5A8328113E0F00878A4B /* PingFang-ExtraLight.ttf */,
-				A47D5A7F28113E0F00878A4B /* PingFang-Heavy.ttf */,
-				A47D5A7A28113E0F00878A4B /* PingFang-Light.ttf */,
-				A47D5A8628113E0F00878A4B /* PingFang-Medium.ttf */,
-				A47D5A8028113E0F00878A4B /* PingFang-Regular.ttf */,
 				A47D5A7828113E0F00878A4B /* Roboto-Bold.ttf */,
 				A47D5A8128113E0F00878A4B /* Roboto-Medium.ttf */,
 				A47D5A8728113E0F00878A4B /* Roboto-Regular.ttf */,
@@ -540,21 +520,15 @@
 				A47D5A8928113E0F00878A4B /* Hiragino Kaku Gothic Pro W3.otf in Resources */,
 				A47D5A8A28113E0F00878A4B /* SF-Pro-Display-Bold.OTF in Resources */,
 				A47D5A8C28113E0F00878A4B /* Futura.ttf in Resources */,
-				A47D5A8D28113E0F00878A4B /* PingFang-Bold.ttf in Resources */,
 				A47D5A8E28113E0F00878A4B /* Roboto-Bold.ttf in Resources */,
 				A47D5A8F28113E0F00878A4B /* SF-Pro-Display-Regular.OTF in Resources */,
-				A47D5A9028113E0F00878A4B /* PingFang-Light.ttf in Resources */,
 				8997B3154670462A8B43F7A8 /* NotoSansJP-Regular.otf in Resources */,
 				6D28628601E940C68698166B /* NotoSansJP-Bold.otf in Resources */,
 				A47D5A9128113E0F00878A4B /* Futura-Bold.ttf in Resources */,
-				A47D5A9228113E0F00878A4B /* PingFang-Heavy.ttf in Resources */,
-				A47D5A9328113E0F00878A4B /* PingFang-Regular.ttf in Resources */,
 				A47D5A9428113E0F00878A4B /* Roboto-Medium.ttf in Resources */,
 				A47D5A9528113E0F00878A4B /* SF-Pro-Display-Medium.OTF in Resources */,
-				A47D5A9628113E0F00878A4B /* PingFang-ExtraLight.ttf in Resources */,
 				8E2D94FE2D2E4B4BB47A908D /* NotoSansJP-Light.otf in Resources */,
 				F3128B5869714513B00523D7 /* NotoSansJP-Black.otf in Resources */,
-				A47D5A9728113E0F00878A4B /* PingFang-Medium.ttf in Resources */,
 				A47D5A9828113E0F00878A4B /* Roboto-Regular.ttf in Resources */,
 				7ABD2EE709FF4B98BBCF0417 /* NotoSansJP-Medium.otf in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
@@ -1028,7 +1002,7 @@
 				CODE_SIGN_ENTITLEMENTS = TCare/TCare.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = 5BN2M9996C;
 				ENABLE_BITCODE = NO;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
@@ -1172,7 +1146,7 @@
 				CODE_SIGN_ENTITLEMENTS = TCare/TCare.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = 5BN2M9996C;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = TCare/Info.plist;
@@ -1357,7 +1331,7 @@
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "arm64 ";
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -1419,7 +1393,7 @@
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "arm64 ";
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;

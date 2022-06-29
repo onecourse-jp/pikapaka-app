@@ -1,10 +1,7 @@
-import React, {useEffect, useState} from "react";
-import {View, Text, Image, TouchableOpacity} from "react-native";
+import React, {useState} from "react";
+import {View, Text, Image, TouchableOpacity, ScrollView} from "react-native";
 import styles from "../styles";
-import {useSelector, useDispatch} from "react-redux";
-import {useThemeColors, useThemeFonts} from "react-native-theme-component";
-import {useNavigation} from "@react-navigation/native";
-import {ScrollView} from "react-native-gesture-handler";
+import {useThemeColors} from "react-native-theme-component";
 import FlowMedicalCare from "../components/FlowMedicalCare";
 import FAQComponent from "../components/FAQ";
 import FooterComponent from "@components/Layout/Footer";
@@ -13,14 +10,11 @@ import AfterPill from "./AfterPill";
 import ButtonBooking from "../components/ButtonBooking";
 
 export default function Pill() {
-  const user = useSelector((state) => state.users);
-  const navigation = useNavigation();
-  const fonts = useThemeFonts();
   const [tab, setTab] = useState(true);
   const colors = useThemeColors();
 
   return (
-    <View style={[styles.container]}>
+    <>
       <ScrollView contentContainerStyle={{backgroundColor: colors.colorPill03}}>
         <View style={{width: "100%", backgroundColor: colors.white}}>
           <Image style={{width: "100%"}} source={require("@assets/images/banner_top_pill.png")} />
@@ -119,6 +113,6 @@ export default function Pill() {
         bgColor={"rgba(219, 207, 95, 0.7)"}
         dataBooking={{label: "ピル", value: '{"label":"選択中の科目","value":"ピル","key":"pill","data":"6"}'}}
       />
-    </View>
+    </>
   );
 }
