@@ -1,10 +1,7 @@
-import React, {useEffect, useRef, useState} from "react";
-import {View, Text, Image, TouchableOpacity, Dimensions} from "react-native";
+import React, {useRef, useState} from "react";
+import {View, Text, Image, TouchableOpacity, Dimensions, ScrollView} from "react-native";
 import styles from "../styles";
-import {useSelector, useDispatch} from "react-redux";
-import {useThemeColors, useThemeFonts} from "react-native-theme-component";
-import {useNavigation} from "@react-navigation/native";
-import {ScrollView} from "react-native-gesture-handler";
+import {useThemeColors} from "react-native-theme-component";
 import OnlineMedicalCare from "../components/OnlineMedicalCare";
 import RecommendOnlineMedicalCare from "../components/RecommendOnlineMedicalCare";
 import FlowMedicalCare from "../components/FlowMedicalCare";
@@ -17,9 +14,6 @@ import ExternalMedicine from "./ExternalMedicine";
 const {height} = Dimensions.get("window");
 
 export default function SkinCare() {
-  const user = useSelector((state) => state.users);
-  const navigation = useNavigation();
-  const fonts = useThemeFonts();
   const skinCareView = useRef(null);
   const colors = useThemeColors();
   const [refDrinkAndCare, setrefDrinkAndCare] = useState(null);
@@ -33,7 +27,7 @@ export default function SkinCare() {
   };
 
   return (
-    <View style={[styles.container]}>
+    <View style={{backgroundColor: "gray", height: height}}>
       <ScrollView ref={skinCareView} contentContainerStyle={{backgroundColor: colors.bgSkincare}}>
         <View style={{width: "100%", backgroundColor: colors.white}}>
           <Image style={{width: "100%"}} source={require("@assets/images/image_header_top_skincare.png")} />

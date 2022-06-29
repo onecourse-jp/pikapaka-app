@@ -1,10 +1,9 @@
 import React, {useEffect, useState} from "react";
-import {View, Text, Image, TouchableOpacity, ScrollView, RefreshControl} from "react-native";
+import {View, Text, SafeAreaView, ScrollView, RefreshControl} from "react-native";
 import {useSelector, useDispatch} from "react-redux";
 import {useThemeColors, useThemeFonts} from "react-native-theme-component";
 import DropDownPicker from "react-native-dropdown-picker";
 import {useNavigation} from "@react-navigation/native";
-import {SafeAreaView} from "react-native-safe-area-context";
 import Headercomponent from "@components/Layout/Header";
 import TabHeaderComponent from "@components/Layout/TabHeader";
 import {getListContent} from "@services/search";

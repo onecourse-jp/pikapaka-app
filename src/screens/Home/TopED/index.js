@@ -1,10 +1,7 @@
-import React, {useEffect} from "react";
-import {View, Text, Image, TouchableOpacity} from "react-native";
+import React from "react";
+import {View, Image, ScrollView} from "react-native";
 import styles from "../styles";
-import {useSelector, useDispatch} from "react-redux";
-import {useThemeColors, useThemeFonts} from "react-native-theme-component";
-import {useNavigation} from "@react-navigation/native";
-import {ScrollView} from "react-native-gesture-handler";
+import {useThemeColors} from "react-native-theme-component";
 import OnlineMedicalCare from "../components/OnlineMedicalCare";
 import RecommendOnlineMedicalCare from "../components/RecommendOnlineMedicalCare";
 import FlowMedicalCare from "../components/FlowMedicalCare";
@@ -14,14 +11,10 @@ import ExternalMedicine from "./ExternalMedicine";
 import ButtonBooking from "../components/ButtonBooking";
 
 export default function ED() {
-  const user = useSelector((state) => state.users);
-  const navigation = useNavigation();
-  const fonts = useThemeFonts();
-
   const colors = useThemeColors();
 
   return (
-    <View style={[styles.container]}>
+    <>
       <ScrollView contentContainerStyle={{backgroundColor: colors.bgEd}}>
         <View style={{width: "100%", backgroundColor: colors.white}}>
           <Image style={{width: "100%"}} source={require("@assets/images/image_header_top_ed.png")} />
@@ -80,6 +73,6 @@ export default function ED() {
         bgColor={"rgba(123, 142, 210, 0.7)"}
         dataBooking={{label: "ED", value: '{"label":"選択中の科目","value":"ED","key":"ed","data":"8"}'}}
       />
-    </View>
+    </>
   );
 }

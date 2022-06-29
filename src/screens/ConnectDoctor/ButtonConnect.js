@@ -1,9 +1,6 @@
-import React, {useEffect, useState} from "react";
-import {StyleSheet, Text, View, TouchableOpacity, ScrollView, Image, TextInput, ImageBackground} from "react-native";
+import React from "react";
+import {Text, View, TouchableOpacity} from "react-native";
 import {useThemeColors, useThemeFonts, Button} from "react-native-theme-component";
-import {useNavigation} from "@react-navigation/native";
-import {SafeAreaView} from "react-native-safe-area-context";
-import {useDispatch, useSelector} from "react-redux";
 
 export default function ({status = false, onPress = () => {}}) {
   const colors = useThemeColors();

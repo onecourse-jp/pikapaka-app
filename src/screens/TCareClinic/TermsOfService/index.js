@@ -1,9 +1,6 @@
-import React, {useEffect, useState} from "react";
-import {StyleSheet, Text, View, TouchableOpacity, ScrollView, Image, TextInput} from "react-native";
-import {useThemeColors, useThemeFonts, Button} from "react-native-theme-component";
-import {useNavigation} from "@react-navigation/native";
-import {SafeAreaView} from "react-native-safe-area-context";
-import {useDispatch, useSelector} from "react-redux";
+import React from "react";
+import {SafeAreaView, Text, View, ScrollView} from "react-native";
+import {useThemeColors, useThemeFonts} from "react-native-theme-component";
 import styles from "../styles";
 import Headercomponent from "@components/Layout/Header";
 import TabHeaderComponent from "@components/Layout/TabHeader";
@@ -12,7 +9,6 @@ import ButtonBooking from "../../Home/components/ButtonBooking";
 
 export default function () {
   const colors = useThemeColors();
-  const fonts = useThemeFonts();
   const container = [
     {
       title: "はじめに",
