@@ -335,9 +335,6 @@ export default function ServiceStep3() {
             <View>
               <Text style={{fontFamily: fonts.NSbold, color: colors.colorTextBlack, padding: 16, fontSize: 16}}>基本情報</Text>
               {dataPerson2.map((item, index) => {
-                if (item.key == "content_medicines") {
-                  console.log("content_allergiesvalue", item.value);
-                }
                 return (
                   <React.Fragment key={`DATALISTPERSON2-${index}`}>
                     <Controller

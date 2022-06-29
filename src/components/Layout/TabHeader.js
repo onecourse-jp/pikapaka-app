@@ -26,6 +26,7 @@ export default function TabHeaderComponent({tab = null}) {
     {
       currentIndex: 2,
       label: "ダイエット",
+      disable: true,
       imageUrl: require("@assets/images/icons/ic_tab_2.png"),
       action: () => {
         navigation.navigate(SCREEN_TOP, {currentIndex: 2});
@@ -50,6 +51,7 @@ export default function TabHeaderComponent({tab = null}) {
     {
       currentIndex: 5,
       label: "AGA",
+      disable: true,
       imageUrl: require("@assets/images/icons/ic_tab_5.png"),
       action: () => {
         navigation.navigate(SCREEN_TOP, {currentIndex: 5});
@@ -64,6 +66,7 @@ export default function TabHeaderComponent({tab = null}) {
           <TouchableOpacity
             onPress={item.action}
             key={`step-${index}`}
+            disabled={item?.disable}
             style={{
               flexDirection: "column",
               width: "20%",
@@ -71,7 +74,7 @@ export default function TabHeaderComponent({tab = null}) {
               borderRightWidth: index + 1 < DataStep.length ? 1 : 0,
               borderRightColor: colors.white,
               paddingVertical: 7,
-              backgroundColor: tab == index + 1 ? listColor[index] : colors.colorHome02,
+              backgroundColor: item?.disable ? colors.gray7 : tab == index + 1 ? listColor[index] : colors.colorHome02,
             }}
           >
             <View>

@@ -40,10 +40,8 @@ export default function ExternalMedicine() {
       "レビトラ（後発品）",
       "シアリス（先発品）",
       "シアリス（先発品）",
-      "シアリス（後発品）",
-      "シアリス（後発品）",
     ],
-    col_left2: ["", "50㎎", "50㎎", "50㎎", "10㎎", "20㎎", "10㎎", "20㎎", "10㎎", "20㎎"],
+    col_left2: ["", "50㎎", "50㎎", "50㎎", "10㎎", "20㎎", "10㎎", "20㎎"],
     dataContent: [
       ["1,938円", "17,580円", "33,380円", "47,500円"],
       ["1,322円", "12,080円", "22,970円", "32,650円"],
@@ -52,13 +50,13 @@ export default function ExternalMedicine() {
       ["1,740円", "15,820円", "30,076円", "42,748円"],
       ["1,938円", "17,580円", "33,380円", "47,500円"],
       ["1,938円", "17,580円", "33,380円", "47,500円"],
-      ["1,410円", "12,850円", "24,422円", "34,729円"],
-      ["1,520円", "13,840円", "26,314円", "37,402円"],
     ],
   };
   return (
     <View style={{backgroundColor: colors.white, borderRadius: 18, padding: 20, flexDirection: "column"}}>
-      <Text style={{fontSize: 24, fontWeight: "700", color: colors.buttonED, marginBottom: 15, textAlign: "center"}}>{global.t("Therapeutic_drug")}</Text>
+      <Text style={{fontSize: 24, fontWeight: "700", color: colors.buttonED, marginBottom: 15, textAlign: "center"}}>
+        {global.t("Therapeutic_drug")}
+      </Text>
       <View style={{flexDirection: "row", justifyContent: "center"}}>
         <View style={{height: 2, width: 20, marginBottom: 4, backgroundColor: colors.buttonED}}></View>
       </View>
@@ -183,7 +181,7 @@ export default function ExternalMedicine() {
           </TableWrapper>
         </Table>
       </ScrollView>
-      <Table borderStyle={{borderWidth: 1, borderColor: colors.buttonED}}>
+      {/* <Table borderStyle={{borderWidth: 1, borderColor: colors.buttonED}}>
         <TableWrapper style={{}}>
           <TableWrapper style={{flex: 3}}>
             <Row
@@ -205,7 +203,7 @@ export default function ExternalMedicine() {
             />
           </TableWrapper>
         </TableWrapper>
-      </Table>
+      </Table> */}
       <Text style={{color: colors.textHiragino, fontFamily: fonts.Hiragino, fontSize: 13, marginTop: 10}}>
         {global.t("All_listed_prices_include_tax")}
       </Text>

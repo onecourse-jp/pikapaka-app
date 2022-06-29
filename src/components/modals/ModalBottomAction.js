@@ -13,11 +13,11 @@ const DATA = [
   //   value: '{"label":"選択中の科目","value":"スキンケア (アンチエイジング)","key":"skinCare","data":"3"}',
   // },
   // {label: "スキンケア (保湿)", value: '{"label":"選択中の科目","value":"スキンケア (保湿)","key":"skinCare","data":"4"}'},
-  {label: "ダイエット", value: '{"label":"選択中の科目","value":"ダイエット","key":"diet","data":"5"}'},
+  // {label: "ダイエット", value: '{"label":"選択中の科目","value":"ダイエット","key":"diet","data":"5"}', disable: true},
   {label: "ピル", value: '{"label":"選択中の科目","value":"ピル","key":"pill","data":"6"}'},
   // {label: "ピル（アフターピル）", value: '{"label":"選択中の科目","value":"ピル（アフターピル）","key":"pill","data":"7"}'},
   {label: "ED", value: '{"label":"選択中の科目","value":"ED","key":"ed","data":"8"}'},
-  {label: "AGA", value: '{"label":"選択中の科目","value":"AGA","key":"aga","data":"9"}'},
+  // {label: "AGA", value: '{"label":"選択中の科目","value":"AGA","key":"aga","data":"9"}', disable: true},
 ];
 
 export default function ModalBottomAction({navigation, route}) {
@@ -32,10 +32,10 @@ export default function ModalBottomAction({navigation, route}) {
   const _renderItem = (item, index) => {
     const valueItem = JSON.parse(item.value);
     return (
-      <TouchableOpacity key={`_renderItem-${index}`} onPress={() => setValueChoose(valueItem)}>
+      <TouchableOpacity disabled={item?.disable} key={`_renderItem-${index}`} onPress={() => setValueChoose(valueItem)}>
         <Text
           style={{
-            color: valueChoose?.data == valueItem?.data ? colors.colorTextBlack : colors.colorTextBlack,
+            color: route?.disable ? colors.gray7 : valueChoose?.data == valueItem?.data ? colors.colorTextBlack : colors.colorTextBlack,
             textAlign: "center",
             fontSize: 16,
             lineHeight: 34,
