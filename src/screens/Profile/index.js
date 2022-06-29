@@ -122,7 +122,7 @@ export default function Profile({navigation}) {
       placeholder: "パスワードを入力",
       content: "パスワードを変更",
       hideIcon: true,
-      hideItem: true,
+      hideItem: profile?.provider ? true : false,
       action: () => {
         navigation.navigate(SCREEN_CHANGE_PASSWORD);
       },
@@ -178,7 +178,11 @@ export default function Profile({navigation}) {
       key: "take_medicines",
       label: "服薬中の薬の有無",
       placeholder: "服薬中の薬を入力",
-      content: profile?.take_medicines ? (profile?.take_medicines == 1 ? renderContentAllergies(profile?.content_medicines) : "なし") : null,
+      content: profile?.take_medicines
+        ? profile?.take_medicines == 1
+          ? renderContentAllergies(profile?.content_medicines)
+          : "なし"
+        : null,
       hideIcon: false,
       hideItem: false,
       action: () => {

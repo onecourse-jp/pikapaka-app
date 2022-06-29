@@ -22,12 +22,14 @@ export default function LowDosePill() {
     {
       image: require("@assets/images/medicine_pill_2.png"),
       name: "ラベルフィーユ（28）",
-      description: "トリキュラーのジェネリック。第２世代：レボノルゲストレルと呼ばれる黄体ホルモンを使用しており、不正出血が起こりにくく安定した周期を作りやすい。",
+      description:
+        "トリキュラーのジェネリック。第２世代：レボノルゲストレルと呼ばれる黄体ホルモンを使用しており、不正出血が起こりにくく安定した周期を作りやすい。",
     },
     {
       image: require("@assets/images/medicine_pill_3.png"),
       name: "ファボワール（28）",
-      description: "マーベロンのジェネリック。第３世代：男性ホルモン（アンドロゲン）作用抑制効果が高いので、大人にきびの治療、多毛症の改善に期待が持てます。",
+      description:
+        "マーベロンのジェネリック。第３世代：男性ホルモン（アンドロゲン）作用抑制効果が高いので、大人にきびの治療、多毛症の改善に期待が持てます。",
     },
   ];
   const table2 = {
@@ -55,35 +57,35 @@ export default function LowDosePill() {
           "避妊(正しく内服をしなければ効果が薄れます。)　",
           "月経困難症、月経不順、月経前症候群",
           "にきび",
+          "※感染症は防げません",
         ]}
         title={global.t("effect")}
-        description={[global.t('low_dose_pill_have_positive_variety')]}
+        description={[global.t("low_dose_pill_have_positive_variety")]}
         styleColor={colors.colorPill}
         circleColor={colors.colorPill07}
       />
       <View style={{height: 10}}></View>
       <RecommendOnlineMedicalCare
-        textFormat={[
-          "吐き気、嘔吐",
-          "頭痛、めまい",
-          "体重増加",
-          "不正出血",
-          "血栓症",
-          "乳房の張りなどの不快感",
-          "むくみ",
-        ]}
+        textFormat={["吐き気、嘔吐", "頭痛、めまい", "体重増加", "不正出血", "血栓症", "乳房の張りなどの不快感", "むくみ"]}
         title={global.t("side_effect")}
-        description={[global.t('symptom_such_as_nausea_and_abnormal')]}
+        description={[global.t("symptom_such_as_nausea_and_abnormal")]}
         styleColor={colors.colorPill}
         circleColor={colors.colorPill07}
       />
       <View style={{height: 10}}></View>
       <View style={{backgroundColor: colors.white, borderRadius: 18, padding: 20, flexDirection: "column"}}>
-        <Text style={{fontSize: 24, fontWeight: "700", color: colors.colorPill, marginBottom: 15, textAlign: "center"}}>{global.t("low_dose_pill")}</Text>
+        <Text style={{fontSize: 24, fontWeight: "700", color: colors.colorPill, marginBottom: 15, textAlign: "center"}}>
+          {global.t("low_dose_pill")}
+        </Text>
         <View style={{flexDirection: "row", justifyContent: "center"}}>
           <View style={{height: 2, width: 20, marginBottom: 4, backgroundColor: colors.colorPill}}></View>
         </View>
-        <TypeAndEffectOfInternalMedicine styleColor={colors.colorPill} bgListColor={colors.colorPill02} listMedicine={listMedicine} title1="低用量ピルの種類"/>
+        <TypeAndEffectOfInternalMedicine
+          styleColor={colors.colorPill}
+          bgListColor={colors.colorPill02}
+          listMedicine={listMedicine}
+          title1="低用量ピルの種類"
+        />
         <View style={{backgroundColor: colors.colorPill, borderRadius: 4, height: 36, marginTop: 20}}>
           <Text
             style={{
@@ -99,7 +101,9 @@ export default function LowDosePill() {
           </Text>
         </View>
         <View style={{marginTop: 8}}>
-            <Text style={{fontSize: 14,lineHeight: 21 ,fontFamily: fonts.Hiragino, color: colors.textHiragino}}>{global.t("in_the_first_circle_1_table")}</Text>
+          <Text style={{fontSize: 14, lineHeight: 21, fontFamily: fonts.Hiragino, color: colors.textHiragino}}>
+            {global.t("in_the_first_circle_1_table")}
+          </Text>
         </View>
         <View style={{backgroundColor: colors.colorPill, borderRadius: 4, height: 36, marginTop: 20, marginBottom: 10}}>
           <Text
@@ -142,21 +146,21 @@ export default function LowDosePill() {
             </TableWrapper>
           </Table>
         </View>
-        
-        <Text style={{marginTop: 8, fontFamily: fonts.Hiragino, color: colors.textHiragino, fontSize: 13, lineHeight: 20 }}>
+
+        <Text style={{marginTop: 8, fontFamily: fonts.Hiragino, color: colors.textHiragino, fontSize: 13, lineHeight: 20}}>
           {global.t("all_listed_prices_include_tax")}
         </Text>
         <View
-        style={{
-          marginTop: 20,
-          height: 90,
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-       <ButtonLinkService type={2} />
-      </View>
+          style={{
+            marginTop: 20,
+            height: 90,
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <ButtonLinkService type={2} />
+        </View>
       </View>
     </View>
   );

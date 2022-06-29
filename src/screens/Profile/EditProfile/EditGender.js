@@ -13,7 +13,6 @@ export default function EditGender({route}) {
   const navigation = useNavigation();
   const [disableSubmit, setDisableSubmit] = useState(false);
   const dispatch = useDispatch();
-  console.log("route", route?.params?.data);
   const defaultValue = route?.params?.data?.gender ? (route?.params?.data?.gender === 1 ? true : false) : null;
   const [isGenderStatus, setIsGenderStatus] = useState(defaultValue);
 

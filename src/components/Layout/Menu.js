@@ -53,6 +53,7 @@ export default function MenuComponent(props) {
     },
     {
       label: "ダイエット",
+      disable: true,
       action: () => {
         setShowMenu(false);
         navigation.navigate(SCREEN_TOP, {currentIndex: 2});
@@ -74,6 +75,7 @@ export default function MenuComponent(props) {
     },
     {
       label: "AGA",
+      disable: true,
       action: () => {
         setShowMenu(false);
         navigation.navigate(SCREEN_TOP, {currentIndex: 5});
@@ -173,11 +175,11 @@ export default function MenuComponent(props) {
           }}
         >
           <View style={{width: "100%", height: height - 100}}>
-          <View style={{flexDirection: "row", justifyContent: "flex-end", paddingRight:20, paddingTop:10}}>
-                <TouchableOpacity onPress={() => setShowMenu(false)} style={{paddingVertical: 15, paddingHorizontal: 5}}>
-                  <Image source={require("@assets/images/icons/ic_close_menu.png")} />
-                </TouchableOpacity>
-              </View>
+            <View style={{flexDirection: "row", justifyContent: "flex-end", paddingRight: 20, paddingTop: 10}}>
+              <TouchableOpacity onPress={() => setShowMenu(false)} style={{paddingVertical: 15, paddingHorizontal: 5}}>
+                <Image source={require("@assets/images/icons/ic_close_menu.png")} />
+              </TouchableOpacity>
+            </View>
             <ScrollView contentContainerStyle={{paddingHorizontal: 45, paddingTop: 5, paddingBottom: 40}}>
               {/* <View style={{flexDirection: "row", justifyContent: "flex-end", marginBottom: 10}}>
                 <TouchableOpacity onPress={() => setShowMenu(false)} style={{paddingVertical: 15, paddingHorizontal: 5}}>
@@ -219,6 +221,7 @@ export default function MenuComponent(props) {
                 {ListItemMenu.map((item, index) => {
                   return (
                     <TouchableOpacity
+                      disabled={item?.disable}
                       key={`menu-${index}`}
                       onPress={item.action}
                       style={{
@@ -229,7 +232,10 @@ export default function MenuComponent(props) {
                         paddingVertical: 10,
                       }}
                     >
-                      <Text style={{fontSize: 18, fontWeight: "700", lineHeight: 30, color: colors.white}}>{item.label}</Text>
+                      <Text style={{fontSize: 18, fontWeight: "700", lineHeight: 30, color: item?.disable ? colors.gray3 : colors.white}}>
+                        {item.label}
+                        {item?.disable ? "（準備中）" : ""}
+                      </Text>
                     </TouchableOpacity>
                   );
                 })}

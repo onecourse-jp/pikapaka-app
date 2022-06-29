@@ -27,7 +27,7 @@ export default function SkinCare() {
   };
 
   return (
-    <View style={{backgroundColor: "gray", height: height}}>
+    <View style={{flex: 1}}>
       <ScrollView ref={skinCareView} contentContainerStyle={{backgroundColor: colors.bgSkincare}}>
         <View style={{width: "100%", backgroundColor: colors.white}}>
           <Image style={{width: "100%"}} source={require("@assets/images/image_header_top_skincare.png")} />
