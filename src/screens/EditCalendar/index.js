@@ -72,7 +72,7 @@ export default function EditCalendar({route}) {
       });
       navigation.dispatch(resetAction);
       navigation.navigate("HistoryStack");
-      toast.show("変更が完了しました", {
+      toast.show("キャンセルが完了しました。", {
         type: "success",
         placement: "top",
         duration: 3000,
@@ -88,7 +88,7 @@ export default function EditCalendar({route}) {
     }
   };
   const confirmDelete = () => {
-    Alert.alert("", "性別の編集が完了しました。", [
+    Alert.alert("", "この予約はキャンセルしますか？。", [
       {
         text: "いいえ",
         onPress: () => {},
