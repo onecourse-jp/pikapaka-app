@@ -21,7 +21,12 @@ export default function NewsScreen() {
   const [refreshing, setRefreshing] = React.useState(false);
   const [dataNews, setDataNews] = useState({});
   const dispatch = useDispatch();
-  const DATA = [{label: "2022年", value: '{"label":"選択中の科目","value":"2022年","key":"skinCare","data":"1"}'}];
+  const DATA = [
+    {label: "2022年", value: 2022},
+    {label: "2022年", value: 2022},
+    {label: "2022年", value: 2022},
+    {label: "2022年", value: 2022},
+  ];
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(null);
   const [items, setItems] = useState(DATA);
@@ -108,23 +113,26 @@ export default function NewsScreen() {
             Object.keys(dataNews).map((item, index) => {
               return <NewsInMonth key={`NewsInMonth-${index}`} month={item} data={dataNews[item]} />;
             })}
-          <DropDownPicker
-            style={{
-              borderWidth: 2,
-              borderRadius: 4,
-              borderColor: colors.textHiragino,
-              fontSize: 16,
-            }}
-            placeholder="2022年"
-            open={open}
-            value={value}
-            items={items}
-            setOpen={setOpen}
-            setValue={setValue}
-            setItems={setItems}
-            multiple={false}
-          />
+          <View style={{minHeight: open ? (items.length + 1) * 40 : 40}}>
+            <DropDownPicker
+              style={{
+                borderWidth: 2,
+                borderRadius: 4,
+                borderColor: colors.textHiragino,
+                fontSize: 16,
+              }}
+              placeholder="2022年"
+              open={open}
+              value={value}
+              items={items}
+              setOpen={setOpen}
+              setValue={setValue}
+              setItems={setItems}
+              multiple={false}
+            />
+          </View>
         </View>
+        <View style={{height: 20}}></View>
         <FooterComponent />
       </ScrollView>
       <ButtonBooking bgColor={"rgba(0, 176, 80, 0.7)"} />
