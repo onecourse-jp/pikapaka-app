@@ -12,7 +12,8 @@ import {getReservationById} from "@services/auth";
 export default function DetailCalender({route}) {
   const colors = useThemeColors();
   const fonts = useThemeFonts();
-  const idCalendar = route?.params?.id;
+  console.log("route", route);
+  const idCalendar = route?.params?.id || Number(route?.params?.reversationId);
   const fromScreen = route?.params?.fromScreen;
   const [refreshing, setRefreshing] = React.useState(false);
   const [screenStep, setCurrentStep] = useState(2);

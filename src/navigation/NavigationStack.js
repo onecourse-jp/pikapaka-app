@@ -63,6 +63,7 @@ import {
   SCREEN_NEWS,
   SCREEN_MODAL_LIST_IMAGE_CALL,
   SCREEN_CONNECT_VIEW,
+  SCREEN_DETAIL_CALENDAR,
 } from "@screens/screens.constants";
 import {navigationRef} from "./NavigationService";
 
@@ -75,60 +76,30 @@ function App() {
   const linking = {
     prefixes: Config.LINKING_PREFIXES.split("|"),
     config: {
-      // navigator (NavigationStack.js)
-      // screens: {
-      //   [SCREEN_MAIN]: {
-      //     // MainStack.js
-      //     screens: {
-      //       Tabbar: {
-      //         // BottomTabbarNavigator.js
-      //         screens: {
-      //           Search: {
-      //             // SearchStack.js
-      //             screens: { SearchIndex: 'search' },
-      //           },
-      //           [SCREEN_LIKE]: 'like', // thích từ đối phương
-      //           [SCREEN_CHAT]: {
-      //             path: 'chat/:user?',
-      //             parse: {
-      //               user: (user) =>
-      //                 user
-      //                   ? {
-      //                       id: parseInt(user),
-      //                     }
-      //                   : undefined,
-      //             },
-      //           }, // 2 tabs in screen (1: matches, 2: talking/calling) // TODO: pass parameter
-      //           [SCREEN_PROFILE]: {
-      //             path: 'profile',
-      //             screens: {
-      //               [SCREEN_NOTIFICATION]: {
-      //                 path: 'notification',
-      //                 exact: true,
-      //               },
-      //               // [SCREEN_PROFILE_EDIT]: 'edit',
-      //             },
-      //           },
-      //           // SCREEN_CHAT_STACK: {
-      //           //   //(~'Chat') ChatStack.js
-      //           //   screens: {
-      //           //     SCREEN_CHAT:'' // Chat tab of the navigator
-      //           //   },
-      //           //   // Chat
-      //           // },
-      //         },
-      //       },
-      //       // [SCREEN_CHATTING]: {
-      //       //   path: 'chat/:user',
-      //       // },
-      //     },
-      //   },
-      //   [SCREEN_VERIFY]: 'memberships',
-      //   ['PaymentSuccess']: 'payment/success',
-      //   ['PaymentFailer']: 'payment/canceled',
-      //   [SCREEN_PROFILE_EDIT]: 'profile/edit',
-      //   NotFound: '*',
-      // },
+      screens: {
+        Tabbar: {
+          // BottomTabbarNavigator.js
+          screens: {
+            SERVICE: {
+              // SearchStack.js
+              screens: {
+                [SCREEN_DETAIL_CALENDAR]: {
+                  path: "reversation/:reversationId?",
+                  parse: {
+                    user: (reversationId) =>
+                      reversationId
+                        ? {
+                            id: parseInt(reversationId),
+                          }
+                        : undefined,
+                  },
+                },
+              },
+            },
+          },
+        },
+        NotFound: "*",
+      },
     },
   };
 

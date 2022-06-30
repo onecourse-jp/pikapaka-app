@@ -110,6 +110,7 @@ function ServiceStackScreen() {
           },
           shadowOpacity: 0, // remove shadow on iOS
           elevation: 0, // remove shadow on Android
+          headerLeft: () => null,
         }}
       />
       <ServiceStack.Screen
@@ -127,6 +128,7 @@ function ServiceStackScreen() {
           },
           shadowOpacity: 0, // remove shadow on iOS
           elevation: 0, // remove shadow on Android
+          headerLeft: () => <></>,
         }}
       />
       <ServiceStack.Screen name={SCREEN_EDIT_CALENDAR_CONFIRM} component={Confirm} options={{title: "変更内容確認"}} />
@@ -204,6 +206,7 @@ function ServiceStackScreen() {
         component={QuestionaireStep1}
         options={{
           title: "診療窓口",
+          headerLeft: () => <></>,
         }}
       />
       <ServiceStack.Screen
@@ -239,6 +242,7 @@ function ServiceStackScreen() {
         component={ServiceStep5}
         options={{
           title: "予約完了",
+          headerLeft: () => <></>,
         }}
       />
 
@@ -261,6 +265,7 @@ function ServiceStackScreen() {
         component={QuestionaireStep4}
         options={{
           title: "問診票登録完了",
+          headerLeft: () => <></>,
         }}
       />
       <ServiceStack.Screen name={SCREEN_PAYMENT} component={PaymentScreen} options={{title: "お会計"}} />

@@ -53,16 +53,12 @@ export default function LowDosePill() {
       />
       <View style={{height: 10}}></View>
       <RecommendOnlineMedicalCare
-        textFormat={[
-          "避妊(正しく内服をしなければ効果が薄れます。)　",
-          "月経困難症、月経不順、月経前症候群",
-          "にきび",
-          "※感染症は防げません",
-        ]}
+        textFormat={["避妊(正しく内服をしなければ効果が薄れます。)　", "月経困難症、月経不順、月経前症候群", "にきび"]}
         title={global.t("effect")}
         description={[global.t("low_dose_pill_have_positive_variety")]}
         styleColor={colors.colorPill}
         circleColor={colors.colorPill07}
+        note="※感染症は防げません"
       />
       <View style={{height: 10}}></View>
       <RecommendOnlineMedicalCare
