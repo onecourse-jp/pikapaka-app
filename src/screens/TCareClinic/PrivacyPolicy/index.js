@@ -274,16 +274,14 @@ export default function () {
             <>
               <TouchableOpacity
                 onPress={() => {
-                  global.showWebView({
-                    url: "https://docs.google.com/forms/d/e/1FAIpQLSdLQiPQIbCkjvr2HwBHD3ktb0WQHwFmdatHcCGzCnnlGhA4CQ/viewform",
-                  });
+                  Linking.openURL("mailto:support_healthcare@pikapaka.co.jp");
                 }}
                 style={{marginBottom: 30, paddingVertical: 10}}
               >
                 <Text
                   style={{
                     color: colors.headerComponent,
-                    fontWeight: "600",
+                    fontWeight: "700",
                     fontSize: 14,
                     lineHeight: 14,
                     textDecorationLine: "underline",

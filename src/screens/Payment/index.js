@@ -17,7 +17,7 @@ import StepsComponent from "@components/StepsComponent";
 import GuideComponent from "@components/GuideComponent";
 import {getReservationById} from "@services/auth";
 import {createStripeCheckoutSession, paymentStripe} from "@services/payments";
-import {SCREEN_DETAIL_CALENDAR_AFTER_PAYMENT, SCREEN_EDIT_DELIVERY_ADDRESS} from "@screens/screens.constants";
+import {SCREEN_DETAIL_CALENDAR_AFTER_PAYMENT, SCREEN_EDIT_DELIVERY_ADDRESS, SCREEN_HISTORY} from "@screens/screens.constants";
 import {useForm, Controller} from "react-hook-form";
 import ItemQuestionForm from "../../components/Form/ItemQuestionForm";
 import {getBillPayment} from "@services/payments";
@@ -32,7 +32,6 @@ export default function Payment({route}) {
   const dispatch = useDispatch();
   const idCalendar = route?.params?.id;
   const [refreshing, setRefreshing] = useState(false);
-  const [showDetailMedicine, setShowDetailMedicine] = useState(false);
   const [errorApi, setErrorApi] = useState("");
   const [billData, setBillData] = useState(null);
   const [dataExp, setDataExp] = useState(null);
@@ -52,7 +51,6 @@ export default function Payment({route}) {
 
   useEffect(() => {
     const subscription = watch((value, {name, type}) => setErrorApi(""));
-    // console.log()
     return () => subscription.unsubscribe();
   }, [watch]);
 
@@ -60,37 +58,22 @@ export default function Payment({route}) {
     paymentMobile(dataSubmit);
   };
   const paymentMobile = async (dataSubmit) => {
+    global.showLoadingView();
     const paramsData = {
       cart_number: dataSubmit.cart_number,
       exp_month: dataExp.exp_month,
       exp_year: dataExp.exp_year,
       cvc: dataSubmit.cvc,
-      // cart_number: 4242424242424242,
-      // exp_month: 12,
-      // exp_year: 30,
-      // cvc: 333,
       reservation_form_id: idCalendar,
       amount: billData.bill?.total,
       cart_name: dataSubmit.cart_name,
     };
-    console.log("paramsData", paramsData);
-    global.showLoadingView();
-    global.showLoadingView();
     try {
       const {response, data} = await paymentStripe(paramsData);
       console.log(" paramsData", paramsData);
       if (response && response.status == 200) {
-        console.log("data paymentStripe", data);
         dispatch(changeStatusCalendar());
         global.hideLoadingView();
-        // Alert.alert("", "お支払いが完了しました。", [
-        //   {
-        //     text: "OK",
-        //     onPress: () => {
-        //       navigation.goBack();
-        //     },
-        //   },
-        // ]);
         let toastId = global.toast.show("aaaaaa", {
           placement: "top",
           duration: 3500,
@@ -111,22 +94,19 @@ export default function Payment({route}) {
                 }}
                 onPress={() => {
                   global.toast.hide(toastId);
-                  navigation.navigate(SCREEN_DETAIL_CALENDAR_AFTER_PAYMENT, {id: idCalendar});
+                  navigation.replace(SCREEN_HISTORY);
                 }}
               >
                 <View>
                   <Text style={{padding: 16, fontWeight: "bold"}}>{`お支払いが完了しました。`}</Text>
-                  {/* <Text style={{paddingBottom: 12, paddingHorizontal: 16}} numberOfLines={2}>
-                    <Text style={{paddingBottom: 12, paddingHorizontal: 16}}>{remoteMessage.notification.body}</Text>
-                  </Text> */}
                 </View>
               </TouchableOpacity>
             );
           },
         });
         setTimeout(() => {
-          navigation.navigate(SCREEN_DETAIL_CALENDAR_AFTER_PAYMENT, {id: idCalendar});
-        }, 4000);
+          navigation.navigate(SCREEN_HISTORY, {id: idCalendar});
+        }, 3000);
       } else {
         global.hideLoadingView();
         if (data?.message && typeof data?.message == "string") {

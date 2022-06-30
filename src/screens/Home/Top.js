@@ -14,6 +14,8 @@ export default function Top({navigation, route}) {
   let {currentIndex} = route.params;
   if (Platform.OS === "ios") {
     currentIndex = route.params?.currentIndex === 1 ? 4 : 0;
+  } else {
+    currentIndex = currentIndex - 1;
   }
   const colors = useThemeColors();
   const [index, setIndex] = React.useState(currentIndex);
