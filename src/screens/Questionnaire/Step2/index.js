@@ -134,12 +134,14 @@ export default function QuestionaireStep2({route}) {
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: colors.backgroundTheme}}>
       <View style={[styles.container]}>
-        <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"}
+        <KeyboardAvoidingView
+          behavior={Platform.OS === "ios" ? "padding" : "height"}
           keyboardVerticalOffset={Platform.select({
             ios: 60,
             android: 60,
           })}
-          style={{flex: 1}}>
+          style={{flex: 1}}
+        >
           <ScrollView contentContainerStyle={{}} listMode="MODAL">
             <GuideComponent
               title={"下記の問診にお答えください。連絡先のご記入をお願いします。"}
@@ -209,7 +211,30 @@ export default function QuestionaireStep2({route}) {
                       defaultValue={item.value}
                       name={item.key}
                       render={({field: {onChange, onBlur, value}}) => {
-                        return <ItemQuestionForm item={item} valueData={value} changeData={onChange} />;
+                        if (item.key === "postal_code" || item.key === "address") {
+                          return (
+                            <View style={{flexDirection: "row", alignItems: "center", backgroundColor: "white", borderBottomWidth:  item.key === "postal_code" ?  1 : 0, borderBottomColor:colors.borderGrayE}}>
+                              <View style={{width: "40%"}}>
+                                <Text style={{paddingLeft: 16}}>{item.title}</Text>
+                              </View>
+                              <TextInput
+                                style={{
+                                  color: colors.textBlack,
+                                  backgroundColor: colors.white,
+                                  paddingHorizontal: 4,
+                                  textAlignVertical: "center",
+                                }}
+                                placeholder={item.placeholder}
+                                placeholderTextColor={colors.textPlaceholder}
+                                onChangeText={onChange}
+                                value={value}
+                              />
+                            </View>
+                          );
+                        } else {
+                          return <ItemQuestionForm item={item} valueData={value} changeData={onChange} />;
+                        }
+                        
                       }}
                     />
                     {errors[item.key] && item.key === "email" && <Text style={styles.textError}>{item.key} error</Text>}

@@ -9,6 +9,7 @@ import {
   SCREEN_EDIT_CALENDAR_CONFIRM,
   SCREEN_EDIT_POSTAL_CODE,
   SCREEN_EDIT_ADDRESS,
+  SCREEN_EDIT_CALENDAR
 } from "@screens/screens.constants";
 import {getReservationById} from "@services/auth";
 import moment from "moment";
@@ -68,6 +69,7 @@ export default function DeliveryAddress({route}) {
           // dispatch(updateUserProfile(data.data));
           global.hideLoadingView();
           console.log("data when update", data);
+          navigation.navigate(SCREEN_EDIT_CALENDAR, {data: {...dataCalendar, shipping_address: newDataCalendar.address, shipping_postal_code: newDataCalendar.postal_code}});
         } else {
           global.hideLoadingView();
           console.log("response--------", response);
@@ -156,7 +158,7 @@ export default function DeliveryAddress({route}) {
                               paddingHorizontal: 16,
                               textAlignVertical: "top",
                             }}
-                            placeholder={"ここにご相談内容を記入して下さい。"}
+                            placeholder={item.placeholder}
                             placeholderTextColor={colors.textPlaceholder}
                             onChangeText={onChange}
                             value={value}

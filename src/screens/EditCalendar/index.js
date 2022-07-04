@@ -333,9 +333,9 @@ export default function EditCalendar({route}) {
                     }}
                   >
                     {/* sửa lại lấy thông tin address và postal code từ một reservation */}
-                    {dataCalendar?.user?.postal_code}
+                    {dataCalendar?.shipping_postal_code ?? dataCalendar?.user?.postal_code}
                     {"\n"}
-                    {dataCalendar?.user?.address}
+                    {dataCalendar?.shipping_address ??dataCalendar?.user?.address}
                   </Text>
                 </View>
                 <TouchableOpacity onPress={handleDeliveryAddress} style={{flexDirection: "row", alignItems: "center"}}>
