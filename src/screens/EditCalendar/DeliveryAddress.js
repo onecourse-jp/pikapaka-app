@@ -38,7 +38,6 @@ export default function DeliveryAddress({route}) {
     console.log("dataCalendar", dataCalendar);
     // call api update shipping address and postal code in reservation
     // go back
-    return;
     global.showLoadingView();
     global.showLoadingView();
     let dataAddressSubmit = {};
@@ -55,25 +54,24 @@ export default function DeliveryAddress({route}) {
     }
 
     dataAddressSubmit.id = dataCalendar.id;
-    dataAddressSubmit.detail_category_medical_of_customer = dataCalendar?.detail_category_medical_of_customer;
+    // dataAddressSubmit.detail_category_medical_of_customer = dataCalendar?.detail_category_medical_of_customer;
     if (Object.keys(dataAddressSubmit).length > 0) {
       try {
         let newDataCalendar = {
-          ...dataCalendar,
           address: dataAddressSubmit.address,
           postal_code: dataAddressSubmit.postal_code,
         };
-        navigation.navigate(SCREEN_EDIT_CALENDAR_CONFIRM, {data: newDataCalendar});
-        // const {data, response} = await updateShippingAddress(dataAddressSubmit);
-        // console.log("data---", data)
-        // if (response.status == 200) {
-        //   dispatch(updateUserProfile(data.data));
-        //   global.hideLoadingView();
-        //   console.log("data when update", data);
-        // } else {
-        //   global.hideLoadingView();
-        //   console.log("response--------", response);
-        // }
+        // navigation.navigate(SCREEN_EDIT_CALENDAR_CONFIRM, {data: newDataCalendar});
+        const {data, response} = await updateShippingAddress({id: dataAddressSubmit.id, newDataCalendar});
+        console.log("data---", data)
+        if (response.status == 200) {
+          // dispatch(updateUserProfile(data.data));
+          global.hideLoadingView();
+          console.log("data when update", data);
+        } else {
+          global.hideLoadingView();
+          console.log("response--------", response);
+        }
       } catch (error) {
         console.log("error", error);
         global.hideLoadingView();
@@ -88,7 +86,7 @@ export default function DeliveryAddress({route}) {
         key: "postal_code",
         title: "郵便番号",
         placeholder: "郵便番号を入力",
-        value: userDetails?.postal_code ?? null,
+        value: dataCalendar.shipping_postal_code ?? userDetails?.postal_code ?? null,
         // action: () => {
         //   navigation.navigate(SCREEN_EDIT_POSTAL_CODE, {data: userDetails, label: "郵便番号"});
         // },
@@ -97,7 +95,7 @@ export default function DeliveryAddress({route}) {
         key: "address",
         title: "住所",
         placeholder: "住所を入力",
-        value: userDetails?.address ?? null,
+        value: dataCalendar.shipping_address ?? userDetails?.address ?? null,
         // action: () => {
         //   navigation.navigate(SCREEN_EDIT_ADDRESS, {data: userDetails, label: "住所"});
         // },
