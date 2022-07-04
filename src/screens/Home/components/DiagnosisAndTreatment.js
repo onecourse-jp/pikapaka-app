@@ -22,6 +22,7 @@ export default function DiagnosisAndTreatment() {
         navigation.navigate(SCREEN_TOP, {currentIndex: 2});
       },
       label: "ダイエット",
+      disable: true,
       imageUrl: require("@assets/images/treatment_cate2.png"),
     },
     {
@@ -43,6 +44,7 @@ export default function DiagnosisAndTreatment() {
         navigation.navigate(SCREEN_TOP, {currentIndex: 5});
       },
       label: "AGA",
+      disable: true,
       imageUrl: require("@assets/images/treatment_cate5.png"),
     },
   ];
@@ -54,7 +56,7 @@ export default function DiagnosisAndTreatment() {
       <View style={{maxWidth: 256, flexDirection: "row", flexWrap: "wrap", justifyContent: "space-between"}}>
         {DATA.map((item, index) => {
           return (
-            <TouchableOpacity onPress={item.action} style={{marginBottom: 15, width: 120}} key={`item.key-${index}`}>
+            <TouchableOpacity onPress={item.action} style={{marginBottom: 15, width: 120}} key={`item.key-${index}`} disabled={item?.disable}>
               <Image source={item.imageUrl} />
             </TouchableOpacity>
           );

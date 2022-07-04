@@ -71,6 +71,7 @@ export default function TabHeaderComponent({tab = null}) {
               flexDirection: "column",
               width: "20%",
               alignItems: "center",
+              height: "100%",
               borderRightWidth: index + 1 < DataStep.length ? 1 : 0,
               borderRightColor: colors.white,
               paddingVertical: 7,
@@ -81,6 +82,7 @@ export default function TabHeaderComponent({tab = null}) {
               <Image source={item.imageUrl} />
             </View>
             <Text style={{color: colors.white, fontSize: 12, fontWeight: "700", marginTop: 5}}>{item.label}</Text>
+            {item?.disable && <Text style={{color:"white", fontSize: 10}}>(準備中)</Text>}
           </TouchableOpacity>
         );
       })}
