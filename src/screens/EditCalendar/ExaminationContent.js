@@ -31,6 +31,7 @@ export default function ExaminationContent({route}) {
     console.log("dataCalendar", dataCalendar);
   }, []);
   const onSubmit = async (dataSubmit) => {
+    console.log("data", dataSubmit)
     let newDataAnswer = [];
     dataSubmit.data.map((item, index) => {
       let labelAnswer = "";

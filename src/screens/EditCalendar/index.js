@@ -332,6 +332,7 @@ export default function EditCalendar({route}) {
                       lineHeight: 14,
                     }}
                   >
+                    {/* sửa lại lấy thông tin address và postal code từ một reservation */}
                     {dataCalendar?.user?.postal_code}
                     {"\n"}
                     {dataCalendar?.user?.address}
