@@ -9,12 +9,12 @@
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleGetInfoString</key>
-	<string></string>
+	<string/>
 	<key>CFBundleIconFile</key>
-	<string></string>
+	<string/>
 	<key>CFBundleIconFiles</key>
 	<array>
-		<string></string>
+		<string/>
 	</array>
 	<key>CFBundleIcons</key>
 	<dict/>
@@ -110,7 +110,7 @@
 	<key>FacebookDisplayName</key>
 	<string>ピカパカヘルスケア</string>
 	<key>LSApplicationCategoryType</key>
-	<string></string>
+	<string/>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>fbapi</string>
@@ -154,11 +154,11 @@
 	<key>NSCameraUsageDescription</key>
 	<string>ピカパカヘルスケア</string>
 	<key>NSHumanReadableCopyright</key>
-	<string></string>
+	<string/>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>location</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string></string>
+	<string/>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>location</string>
 	<key>NSMicrophoneUsageDescription</key>
@@ -196,12 +196,6 @@
 		<string>Futura-Medium.ttf</string>
 		<string>Futura-Bold.ttf</string>
 		<string>Hiragino Kaku Gothic Pro W3.otf</string>
-		<string>PingFang-Bold.ttf</string>
-		<string>PingFang-ExtraLight.ttf</string>
-		<string>PingFang-Heavy.ttf</string>
-		<string>PingFang-Light.ttf</string>
-		<string>PingFang-Medium.ttf</string>
-		<string>PingFang-Regular.ttf</string>
 		<string>Roboto-Bold.ttf</string>
 		<string>Roboto-Medium.ttf</string>
 		<string>Roboto-Regular.ttf</string>

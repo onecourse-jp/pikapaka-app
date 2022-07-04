@@ -81,6 +81,7 @@ export default function ExaminationContent({route}) {
       route?.params?.data?.answer?.map((item, index) => {
         oldQuestionId.push(item.question_id);
       });
+      console.log("oldQuestionId", oldQuestionId);
       const {response, data} = await getDetailOwnQuestion({list_question: oldQuestionId});
       if (response?.status === 200) {
         let listDataQuestion = [...data.data];
@@ -88,8 +89,8 @@ export default function ExaminationContent({route}) {
           listDataQuestion[index].value = route?.params?.data?.answer[index].content_answer;
           listDataQuestion[index].answer_id = route?.params?.data?.answer[index].id;
         });
-        setIsFirstAnswer(false);
         console.log("listDataQuestion", listDataQuestion);
+        setIsFirstAnswer(false);
         setDataQuestion(listDataQuestion);
         global.hideLoadingView();
       } else {

@@ -1,11 +1,7 @@
 import React, {useState, useRef, useEffect} from "react";
-import {View, Text, Image, Dimensions, TouchableOpacity} from "react-native";
+import {View, Image, Dimensions, SafeAreaView, ScrollView} from "react-native";
 import styles from "./styles";
-import {useSelector, useDispatch} from "react-redux";
-import {useThemeColors, useThemeFonts} from "react-native-theme-component";
-import {useNavigation} from "@react-navigation/native";
-import {SafeAreaView} from "react-native-safe-area-context";
-import {ScrollView} from "react-native-gesture-handler";
+import {useThemeColors} from "react-native-theme-component";
 import Headercomponent from "@components/Layout/Header";
 import TabHeaderComponent from "@components/Layout/TabHeader";
 import DiagnosisAndTreatment from "./components/DiagnosisAndTreatment";
@@ -22,9 +18,7 @@ import ButtonBooking from "./components/ButtonBooking";
 const {height} = Dimensions.get("window");
 
 export default function Home({route}) {
-  const user = useSelector((state) => state.users?.userDetails);
   const HomeRef = useRef(null);
-  const navigation = useNavigation();
   const colors = useThemeColors();
   const keyScroll = route?.params?.keyScroll;
   const [onlineMedicalCare, setOnlineMedicalCare] = useState(null);
@@ -50,7 +44,7 @@ export default function Home({route}) {
   };
 
   return (
-    <SafeAreaView style={{flex: 1, backgroundColor: colors.backgroundTheme, position: "relative"}}>
+    <SafeAreaView style={{flex: 1}}>
       <Headercomponent
         onlineMedicalCare={onlineMedicalCare}
         flowMedicalCare={flowMedicalCare}

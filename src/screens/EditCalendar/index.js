@@ -3,6 +3,7 @@ import {StyleSheet, Text, View, ScrollView, SafeAreaView, TouchableOpacity, Aler
 import {useThemeColors, useThemeFonts, Button} from "react-native-theme-component";
 import {useNavigation} from "@react-navigation/native";
 import {navigationRef} from "src/navigation/NavigationService";
+import {CommonActions} from "@react-navigation/native";
 import {useDispatch, useSelector} from "react-redux";
 // import { useToast } from "react-native-toast-notifications";
 import {
@@ -23,10 +24,11 @@ export default function EditCalendar({route}) {
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const [dataCalendar, setDataCalendar] = useState(null);
+  const user = useSelector((state) => state.users);
   const [notiStatus, setNotiStatus] = useState(false);
   useEffect(() => {
     actionGetCalendar(route?.params?.data.id);
-  }, [route?.params?.data]);
+  }, [route?.params?.data, user]);
   useEffect(() => {
     if (route?.params?.type == "SUCCESS") {
       setNotiStatus(true);
@@ -64,9 +66,13 @@ export default function EditCalendar({route}) {
     if (data.status === 200) {
       global.hideLoadingView();
       dispatch(changeStatusCalendar());
-      navigation.goBack();
+      const resetAction = CommonActions.reset({
+        index: 0,
+        routes: [{name: "HomeStack"}],
+      });
+      navigation.dispatch(resetAction);
       navigation.navigate("HistoryStack");
-      toast.show("変更が完了しました", {
+      toast.show("キャンセルが完了しました。", {
         type: "success",
         placement: "top",
         duration: 3000,
@@ -82,7 +88,7 @@ export default function EditCalendar({route}) {
     }
   };
   const confirmDelete = () => {
-    Alert.alert("", "性別の編集が完了しました。", [
+    Alert.alert("", "この予約をキャンセルしますか？", [
       {
         text: "いいえ",
         onPress: () => {},

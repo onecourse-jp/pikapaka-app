@@ -13,7 +13,6 @@ export default function EditPostalCode({route}) {
   const navigation = useNavigation();
   const [disableSubmit, setDisableSubmit] = useState(false);
   const dispatch = useDispatch();
-  console.log("route", route?.params?.data);
   const {
     control,
     handleSubmit,

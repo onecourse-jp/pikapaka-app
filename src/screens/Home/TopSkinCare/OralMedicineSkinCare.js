@@ -41,12 +41,12 @@ export default function OralMedicineSkinCare() {
       name: "トコフェロール（200）",
       description: "強い抗酸化作用で細胞の酸化を防ぎ、肌の老化を遅らせる。 \n皮膚の新陳代謝を高める。\n血行促進作用。\n成分はビタミンE。",
     },
-    {
-      image: require("@assets/images/medicine_skincare_6.png"),
-      name: "エパデール（900）",
-      description:
-        "血液サラサラ（抗血栓）作用、ＬＤＬ降下・ＨＤＬ増加作用、抗がん作用、生活習慣病の予防改善。\n血管年齢を下げる。動脈硬化予防。魚の油。市販薬などのEPAと同成分、医療用で配合量が多い。",
-    },
+    // {
+    //   image: require("@assets/images/medicine_skincare_6.png"),
+    //   name: "エパデール（900）",
+    //   description:
+    //     "血液サラサラ（抗血栓）作用、ＬＤＬ降下・ＨＤＬ増加作用、抗がん作用、生活習慣病の予防改善。\n血管年齢を下げる。動脈硬化予防。魚の油。市販薬などのEPAと同成分、医療用で配合量が多い。",
+    // },
     {
       image: require("@assets/images/medicine_skincare_7.png"),
       name: "イコサペント酸エチル900（エパデールのジェネリック）",

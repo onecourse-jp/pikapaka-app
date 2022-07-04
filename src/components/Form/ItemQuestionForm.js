@@ -18,12 +18,6 @@ export default function ItemQuestionForm({
   mutiple = false,
   type = "default",
 }) {
-  if (item.key === "content_medicines") {
-    console.log("content_medicines", item.value, valueData);
-  }
-  if (item.key === "content_allergies") {
-    console.log("content_allergies", item.value, valueData);
-  }
   const colors = useThemeColors();
   const fonts = useThemeFonts();
   const [showPopup, setShowPopup] = useState(false);
@@ -47,7 +41,7 @@ export default function ItemQuestionForm({
         if (type === "questionAdmin") {
           const valueQuestionAdmin = item.value[0];
           setValueRowItem(valueQuestionAdmin);
-          setListCheckbox(valueQuestionAdmin === "はい" ? [{label: "はい", value: 1}] : [{label: "いいえ", value: 2}]);
+          setListCheckbox([{label: valueQuestionAdmin, value: valueQuestionAdmin}]);
         } else {
           setValueRowItem(item.value === 1 ? "あり" : "なし");
           setListCheckbox(item.value === 1 ? [{label: "あり", value: 1}] : [{label: "なし", value: 2}]);
@@ -66,8 +60,13 @@ export default function ItemQuestionForm({
         });
       } else {
         item?.value?.map((el) => {
-          newValue.push(item?.data[el]?.label || el);
-          newListCheckBox.push({label: item?.data[el]?.label, value: item?.data[el]?.value});
+          if (item?.data) {
+            newValue.push(item?.data[el]?.label || el);
+            newListCheckBox.push({label: item?.data[el]?.label || el, value: item?.data[el]?.value || el});
+          } else if (item?.content) {
+            newValue.push(item?.content[el]?.label || el);
+            newListCheckBox.push({label: item?.content[el]?.label || el, value: item?.content[el]?.value || el});
+          }
         });
       }
       setValueRowItem(newValue);
@@ -250,7 +249,7 @@ export default function ItemQuestionForm({
                 {(valueRowItem === null || valueRowItem === undefined || valueRowItem.length == 0) && (
                   <Text style={{textAlign: "left"}}>{item?.placeholder || "選択"}</Text>
                 )}
-                {typeof valueRowItem == "string" ? (
+                {typeof valueRowItem == "string" || typeof valueRowItem == "number" ? (
                   <Text>{valueRowItem}</Text>
                 ) : (
                   valueRowItem?.length > 0 &&
@@ -280,14 +279,28 @@ export default function ItemQuestionForm({
               keyboardType={
                 item.key === "phone_number" || item?.typePad === "number" || item.key === "postal_code" ? "number-pad" : "default"
               }
-              value={valueData ? (typeof valueData === "string" ? valueData : item.value) : null}
+              value={
+                valueData
+                  ? typeof valueData === "string" || typeof valueData == "number"
+                    ? valueData
+                    : type === "questionAdmin"
+                    ? valueData?.content_answer
+                    : item.value
+                  : null
+              }
               placeholder={item?.placeholder || "入力してください"}
               secureTextEntry={item.key === "newPassword" || item.key === "confirmPassword" ? true : false}
               // placeholder={item.placeholder}
               placeholderTextColor={colors.textPlaceholder}
               onChangeText={(text) => {
                 if (type == "questionAdmin") {
-                  changeData({question_id: item.id, content_answer: text});
+                  let dataChange = {};
+                  if (isFirstAnswer) {
+                    dataChange = {question_id: item.id, content_answer: text};
+                  } else {
+                    dataChange = {answer_id: item.answer_id, content_answer: text};
+                  }
+                  changeData(dataChange);
                 } else {
                   changeData(text);
                 }

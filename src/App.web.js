@@ -2,93 +2,92 @@
  * React Native App
  * Everthing starts from the entrypoint
  */
-import React, { useEffect, useCallback, useContext } from 'react';
-import { ActivityIndicator, BackHandler, Platform, Text } from 'react-native';
-import { Provider, useSelector } from 'react-redux';
-import { PersistGate } from 'redux-persist/es/integration/react';
-import {
-  DefaultTheme,
-  Provider as PaperProvider,
-  configureFonts,
-} from 'react-native-paper';
-import AsyncStorage from '@react-native-community/async-storage';
+import React, {useEffect, useCallback, useContext} from "react";
+import {ActivityIndicator, BackHandler, Platform, Text} from "react-native";
+import {Provider, useSelector} from "react-redux";
+import {PersistGate} from "redux-persist/es/integration/react";
+import {DefaultTheme, Provider as PaperProvider, configureFonts} from "react-native-paper";
+import AsyncStorage from "@react-native-community/async-storage";
 
-import Navigator from './navigation';
-import I18n from 'src/i18n/index';
-import LocalizationContext from '@context/LocalizationContext';
-import configureStore from './store/configureStore';
-const { persistor, store } = configureStore();
+import Navigator from "./navigation";
+import I18n from "src/i18n/index";
+import LocalizationContext from "@context/LocalizationContext";
+import configureStore from "./store/configureStore";
+const {persistor, store} = configureStore();
 global.store = store;
-import { LogBox } from 'react-native';
+import {LogBox} from "react-native";
 // console.disableYellowBox = true;
 LogBox.ignoreAllLogs(true);
-LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
-import 'src/config';
+LogBox.ignoreLogs(["Warning: ..."]); // Ignore log notification by message
+import "src/config";
 // import messaging from '@react-native-firebase/messaging';
 // import {
 //   InAppNotificationProvider,
 //   withInAppNotification,
 // } from 'react-native-in-app-notification';
 
-import Config from 'react-native-config';
-import { handleNotification, notificationToDestination } from './notificationHandler';
+import Config from "react-native-config";
+import {handleNotification, notificationToDestination} from "./notificationHandler";
 // import { useToast } from 'react-native-toast-notifications';
-import Toast from 'react-native-toast-notifications';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import Toast from "react-native-toast-notifications";
+import {TouchableOpacity} from "react-native-gesture-handler";
+
+import {ThemeProvider} from "react-native-theme-component";
+import {yourThemeData} from "./customTheme";
 
 const fontConfig = {
   web: {
     regular: {
-      fontFamily: 'NotoSansJP-Regular',
-      fontWeight: 'normal',
+      fontFamily: "NotoSansJP-Regular",
+      fontWeight: "normal",
     },
     medium: {
-      fontFamily: 'NotoSansJP-Medium',
-      fontWeight: 'normal',
+      fontFamily: "NotoSansJP-Medium",
+      fontWeight: "normal",
     },
     light: {
-      fontFamily: 'NotoSansJP-Light',
-      fontWeight: 'normal',
+      fontFamily: "NotoSansJP-Light",
+      fontWeight: "normal",
     },
     thin: {
-      fontFamily: 'NotoSansJP-Thin',
-      fontWeight: 'normal',
+      fontFamily: "NotoSansJP-Thin",
+      fontWeight: "normal",
     },
   },
   ios: {
     regular: {
-      fontFamily: 'NotoSansJP-Regular',
-      fontWeight: 'normal',
+      fontFamily: "NotoSansJP-Regular",
+      fontWeight: "normal",
     },
     medium: {
-      fontFamily: 'NotoSansJP-Medium',
-      fontWeight: 'normal',
+      fontFamily: "NotoSansJP-Medium",
+      fontWeight: "normal",
     },
     light: {
-      fontFamily: 'NotoSansJP-Light',
-      fontWeight: 'normal',
+      fontFamily: "NotoSansJP-Light",
+      fontWeight: "normal",
     },
     thin: {
-      fontFamily: 'NotoSansJP-Thin',
-      fontWeight: 'normal',
+      fontFamily: "NotoSansJP-Thin",
+      fontWeight: "normal",
     },
   },
   android: {
     regular: {
-      fontFamily: 'NotoSansJP-Regular',
-      fontWeight: 'normal',
+      fontFamily: "NotoSansJP-Regular",
+      fontWeight: "normal",
     },
     medium: {
-      fontFamily: 'NotoSansJP-Medium',
-      fontWeight: 'normal',
+      fontFamily: "NotoSansJP-Medium",
+      fontWeight: "normal",
     },
     light: {
-      fontFamily: 'NotoSansJP-Light',
-      fontWeight: 'normal',
+      fontFamily: "NotoSansJP-Light",
+      fontWeight: "normal",
     },
     thin: {
-      fontFamily: 'NotoSansJP-Thin',
-      fontWeight: 'normal',
+      fontFamily: "NotoSansJP-Thin",
+      fontWeight: "normal",
     },
   },
 };
@@ -99,7 +98,7 @@ const theme = {
   padding: 16,
   colors: {
     ...DefaultTheme.colors,
-    background: '#fff',
+    background: "#fff",
     // primary: '#3498db',
     // accent: '#f1c40f',
   },
@@ -120,7 +119,7 @@ const theme = {
 // });
 
 function Entrypoint() {
-  const [locale, setLocale] = React.useState('ja');
+  const [locale, setLocale] = React.useState("ja");
   // useEffect(() => {
   //   BackHandler.addEventListener('hardwareBackPress', handleBackButton);
   //   return () => {
@@ -131,7 +130,7 @@ function Entrypoint() {
     return true;
   });
   useEffect(async () => {
-    const value = await AsyncStorage.getItem('@language');
+    const value = await AsyncStorage.getItem("@language");
     if (value !== null) {
       setLocale(value);
     }
@@ -139,7 +138,7 @@ function Entrypoint() {
   // const toast = useToast();
   const localizationContext = React.useMemo(
     () => ({
-      t: (scope, options) => I18n.t(scope, { locale, ...options }),
+      t: (scope, options) => I18n.t(scope, {locale, ...options}),
       locale,
       setLocale,
     }),
@@ -147,16 +146,21 @@ function Entrypoint() {
   );
 
   return (
-    <Provider store={store}>
-      <PersistGate loading={<ActivityIndicator />} persistor={persistor}>
-        <PaperProvider theme={theme}>
+    <ThemeProvider theme={yourThemeData}>
+      <Provider store={store}>
+        <PersistGate loading={<ActivityIndicator />} persistor={persistor}>
           <LocalizationContext.Provider value={localizationContext}>
             <Navigator />
-            <Toast ref={(ref) => (global['toast'] = ref)} />
+            <Toast
+              ref={(ref) => (global["toast"] = ref)}
+              successColor="rgba(82, 196, 26, 1)"
+              offset={80}
+              textStyle={{width: "100%", textAlign: "center"}}
+            />
           </LocalizationContext.Provider>
-        </PaperProvider>
-      </PersistGate>
-    </Provider>
+        </PersistGate>
+      </Provider>
+    </ThemeProvider>
   );
 }
 export default Entrypoint;

@@ -1,15 +1,15 @@
 import React, {useEffect, useState} from "react";
-import {View, Text, Image, TouchableOpacity, ScrollView, RefreshControl} from "react-native";
-import {useSelector, useDispatch} from "react-redux";
+import {View, Text, SafeAreaView, ScrollView, RefreshControl} from "react-native";
+import {useSelector} from "react-redux";
 import {useThemeColors, useThemeFonts} from "react-native-theme-component";
 import {useNavigation} from "@react-navigation/native";
-import {SafeAreaView} from "react-native-safe-area-context";
 import Headercomponent from "@components/Layout/Header";
 import TabHeaderComponent from "@components/Layout/TabHeader";
 import {getListFaq} from "@services/search";
 import BlockFaqService from "./components/BlockFaqService";
 import BlockFaq from "./components/BlockFaq";
 import FooterComponent from "@components/Layout/Footer";
+import ButtonBooking from "../Home/components/ButtonBooking";
 
 const wait = (timeout) => {
   return new Promise((resolve) => setTimeout(resolve, timeout));
@@ -87,7 +87,7 @@ export default function FAQScreen() {
   }, []);
 
   return (
-    <SafeAreaView style={{flex: 1, backgroundColor: colors.backgroundTheme}}>
+    <SafeAreaView style={{flex: 1, position: "relative", backgroundColor: colors.backgroundTheme}}>
       <Headercomponent />
       <TabHeaderComponent />
       <ScrollView refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}>
@@ -119,6 +119,7 @@ export default function FAQScreen() {
         <View style={{height: 80}}></View>
         <FooterComponent />
       </ScrollView>
+      <ButtonBooking bgColor={"rgba(0, 176, 80, 0.7)"} />
     </SafeAreaView>
   );
 }

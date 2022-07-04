@@ -1,13 +1,9 @@
-import React, {useEffect} from "react";
-import {View, Text, Image, TouchableOpacity, ScrollView, useWindowDimensions} from "react-native";
-import {useSelector, useDispatch} from "react-redux";
+import React from "react";
+import {View, Text, useWindowDimensions} from "react-native";
+import {useSelector} from "react-redux";
 import {useThemeColors, useThemeFonts} from "react-native-theme-component";
 import RenderHtml from "react-native-render-html";
 import {useNavigation} from "@react-navigation/native";
-import {SafeAreaView} from "react-native-safe-area-context";
-import Headercomponent from "@components/Layout/Header";
-import TabHeaderComponent from "@components/Layout/TabHeader";
-import {getListContent} from "@services/search";
 import moment from "moment";
 
 export default function NewsInMonth({data = [], month = 1}) {

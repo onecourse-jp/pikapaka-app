@@ -1,14 +1,11 @@
-import React, {useEffect, useState, useRef} from "react";
-import {View, Text, TouchableOpacity, Image, RefreshControl} from "react-native";
-import {useSelector, useDispatch} from "react-redux";
+import React, {useEffect, useState} from "react";
+import {View, Text, TouchableOpacity, Image, RefreshControl, ScrollView} from "react-native";
+import {useSelector} from "react-redux";
 import {useThemeColors, useThemeFonts} from "react-native-theme-component";
 import {useNavigation} from "@react-navigation/native";
 import moment from "moment";
-import {ScrollView} from "react-native-gesture-handler";
 import {getReservation} from "@services/auth";
-import {navigationRef} from "src/navigation/NavigationService";
 import Pagination from "../../../components/Layout/Pagination";
-import {SCREEN_QUESIONAIRE_STEP1, SCREEN_SERVICE_STEP1} from "@screens/screens.constants";
 import {SCREEN_DETAIL_CALENDAR, SCREEN_DETAIL_CALENDAR_AFTER_PAYMENT, SCREEN_PAYMENT} from "../../screens.constants";
 
 export default function HistorySkinCare({category_medical = 0}) {

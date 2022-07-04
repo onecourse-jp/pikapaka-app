@@ -1,5 +1,15 @@
 import React, {useEffect, useState} from "react";
-import {StyleSheet, Text, View, ScrollView, SafeAreaView, TouchableOpacity, RefreshControl, Image, KeyboardAvoidingView} from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  ScrollView,
+  SafeAreaView,
+  TouchableOpacity,
+  RefreshControl,
+  Image,
+  KeyboardAvoidingView,
+} from "react-native";
 import {useThemeColors, useThemeFonts, Button} from "react-native-theme-component";
 import {useNavigation} from "@react-navigation/native";
 import {useDispatch, useSelector} from "react-redux";
@@ -7,7 +17,7 @@ import StepsComponent from "@components/StepsComponent";
 import GuideComponent from "@components/GuideComponent";
 import {getReservationById} from "@services/auth";
 import {createStripeCheckoutSession, paymentStripe} from "@services/payments";
-import {SCREEN_EDIT_PROFILE, SCREEN_EDIT_DELIVERY_ADDRESS} from "@screens/screens.constants";
+import {SCREEN_DETAIL_CALENDAR_AFTER_PAYMENT, SCREEN_EDIT_DELIVERY_ADDRESS, SCREEN_HISTORY} from "@screens/screens.constants";
 import {useForm, Controller} from "react-hook-form";
 import ItemQuestionForm from "../../components/Form/ItemQuestionForm";
 import {getBillPayment} from "@services/payments";
@@ -22,7 +32,6 @@ export default function Payment({route}) {
   const dispatch = useDispatch();
   const idCalendar = route?.params?.id;
   const [refreshing, setRefreshing] = useState(false);
-  const [showDetailMedicine, setShowDetailMedicine] = useState(false);
   const [errorApi, setErrorApi] = useState("");
   const [billData, setBillData] = useState(null);
   const [dataExp, setDataExp] = useState(null);
@@ -35,49 +44,39 @@ export default function Payment({route}) {
     control,
     handleSubmit,
     formState: {errors},
-    reset,
+    watch,
   } = useForm({
     required: true,
   });
+
+  useEffect(() => {
+    const subscription = watch((value, {name, type}) => setErrorApi(""));
+    return () => subscription.unsubscribe();
+  }, [watch]);
 
   const onSubmit = async (dataSubmit) => {
     paymentMobile(dataSubmit);
   };
   const paymentMobile = async (dataSubmit) => {
+    global.showLoadingView();
     const paramsData = {
       cart_number: dataSubmit.cart_number,
       exp_month: dataExp.exp_month,
       exp_year: dataExp.exp_year,
       cvc: dataSubmit.cvc,
-      // cart_number: 4242424242424242,
-      // exp_month: 12,
-      // exp_year: 30,
-      // cvc: 333,
       reservation_form_id: idCalendar,
       amount: billData.bill?.total,
       cart_name: dataSubmit.cart_name,
     };
-    console.log("paramsData", paramsData);
-    global.showLoadingView();
-    global.showLoadingView();
     try {
       const {response, data} = await paymentStripe(paramsData);
       console.log(" paramsData", paramsData);
       if (response && response.status == 200) {
-        console.log("data paymentStripe", data);
         dispatch(changeStatusCalendar());
         global.hideLoadingView();
-        // Alert.alert("", "お支払いが完了しました。", [
-        //   {
-        //     text: "OK",
-        //     onPress: () => {
-        //       navigation.goBack();
-        //     },
-        //   },
-        // ]);
         let toastId = global.toast.show("aaaaaa", {
           placement: "top",
-          duration: 3000,
+          duration: 3500,
           animationType: "slide-in",
           animationDuration: 100,
           offsetTop: 0,
@@ -95,22 +94,19 @@ export default function Payment({route}) {
                 }}
                 onPress={() => {
                   global.toast.hide(toastId);
-                  navigation.navigate(SCREEN_EDIT_CALENDAR, {data: dataCalendar});
+                  navigation.replace(SCREEN_HISTORY);
                 }}
               >
                 <View>
                   <Text style={{padding: 16, fontWeight: "bold"}}>{`お支払いが完了しました。`}</Text>
-                  {/* <Text style={{paddingBottom: 12, paddingHorizontal: 16}} numberOfLines={2}>
-                    <Text style={{paddingBottom: 12, paddingHorizontal: 16}}>{remoteMessage.notification.body}</Text>
-                  </Text> */}
                 </View>
               </TouchableOpacity>
             );
           },
         });
         setTimeout(() => {
-          navigation.goBack();
-        }, 4000);
+          navigation.navigate(SCREEN_HISTORY, {id: idCalendar});
+        }, 3000);
       } else {
         global.hideLoadingView();
         if (data?.message && typeof data?.message == "string") {
@@ -214,12 +210,14 @@ export default function Payment({route}) {
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: colors.backgroundTheme}}>
       <View style={[styles.container]}>
-        <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"}
+        <KeyboardAvoidingView
+          behavior={Platform.OS === "ios" ? "padding" : "height"}
           keyboardVerticalOffset={Platform.select({
             ios: 60,
             android: 60,
           })}
-          style={{flex: 1}}>
+          style={{flex: 1}}
+        >
           <ScrollView refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />} contentContainerStyle={{}}>
             <GuideComponent
               title={"お疲れさまでした。診察は終了しました。"}

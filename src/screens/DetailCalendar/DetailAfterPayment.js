@@ -4,7 +4,7 @@ import {useThemeColors, useThemeFonts, Button} from "react-native-theme-componen
 import {useNavigation} from "@react-navigation/native";
 import ModalPortal from "react-native-modal";
 import moment from "moment";
-import {SCREEN_QUESIONAIRE_STEP2, SCREEN_EDIT_CALENDAR, SCREEN_CONNECT_DOCTOR, SCREEN_PAYMENT} from "@screens/screens.constants";
+import {SCREEN_HISTORY} from "@screens/screens.constants";
 import {getReservationById} from "@services/auth";
 let {width, height} = Dimensions.get("window");
 
@@ -12,6 +12,7 @@ export default function DetailAfterPayment({route}) {
   const colors = useThemeColors();
   const fonts = useThemeFonts();
   const idCalendar = route?.params?.id;
+  console.log("idCalendar", idCalendar);
   const fromScreen = route?.params?.fromScreen;
   const [refreshing, setRefreshing] = useState(false);
   const [isPopup, setIsPopup] = useState(false);
@@ -27,10 +28,11 @@ export default function DetailAfterPayment({route}) {
       if (response?.status === 200) {
         console.log("data getReservationById", data?.data);
         setDataCalendar(data?.data);
+        global.hideLoadingView();
       } else {
         console.log("response getReservationById", response?.status);
+        global.hideLoadingView();
       }
-      global.hideLoadingView();
     }
   };
   useEffect(async () => {
@@ -62,6 +64,27 @@ export default function DetailAfterPayment({route}) {
       </TouchableOpacity>
     );
   };
+
+  React.useLayoutEffect(() => {
+    navigation.setOptions({
+      headerLeft: () => (
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate("HistoryStack");
+            navigation.replace(SCREEN_HISTORY);
+          }}
+          style={{
+            justifyContent: "center",
+            alignItems: "center",
+            paddingVertical: 15,
+            paddingRight: 20,
+          }}
+        >
+          <Image source={require("@assets/images/icons/ic_back.png")} resizeMode="cover" />
+        </TouchableOpacity>
+      ),
+    });
+  }, [navigation]);
 
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: colors.backgroundTheme}}>
@@ -244,6 +267,10 @@ export default function DetailAfterPayment({route}) {
               {dataCalendar?.image?.map((item, index) => {
                 return _renderItem(item, index);
               })}
+              {!dataCalendar?.image ||
+                (dataCalendar?.image?.length === 0 && (
+                  <Text style={{fontWeight: "500", fontSize: 12, paddingVertical: 16, lineHeight: 16}}>データーがありません</Text>
+                ))}
             </View>
           </View>
         </ScrollView>

@@ -13,7 +13,6 @@ export default function EditGender({route}) {
   const navigation = useNavigation();
   const [disableSubmit, setDisableSubmit] = useState(false);
   const dispatch = useDispatch();
-  console.log("route", route?.params?.data);
   const defaultValue = route?.params?.data?.gender ? (route?.params?.data?.gender === 1 ? true : false) : null;
   const [isGenderStatus, setIsGenderStatus] = useState(defaultValue);
 
@@ -92,7 +91,7 @@ export default function EditGender({route}) {
           }}
         >
           <Text>女性</Text>
-          {!isGenderStatus && <Image source={require("@assets/images/v_green.png")} />}
+          {isGenderStatus === false && <Image source={require("@assets/images/v_green.png")} />}
         </TouchableOpacity>
       </View>
       <View style={{paddingHorizontal: 16}}>

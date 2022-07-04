@@ -15,7 +15,11 @@ export default function EditMedicalHistory({route}) {
   const navigation = useNavigation();
   const [disableSubmit, setDisableSubmit] = useState(false);
   const dispatch = useDispatch();
-  const [listValue, setListValue] = useState(route?.params?.value || []);
+  let defaultValue = route?.params?.value || [];
+  if (route?.params?.value && typeof route?.params?.value === "string") {
+    defaultValue = JSON.parse(route?.params?.value);
+  }
+  const [listValue, setListValue] = useState(defaultValue);
   const {
     control,
     handleSubmit,
