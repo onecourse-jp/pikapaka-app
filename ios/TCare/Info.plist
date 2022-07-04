@@ -85,6 +85,14 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
+				<string>pikapaka</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
 				<string>com.googleusercontent.apps.417005058487-95a3foq0tsllrun6hccaj5ngbvoe74bn</string>
 			</array>
 		</dict>
