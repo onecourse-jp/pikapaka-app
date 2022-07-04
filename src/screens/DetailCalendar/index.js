@@ -12,7 +12,8 @@ import {getReservationById} from "@services/auth";
 export default function DetailCalender({route}) {
   const colors = useThemeColors();
   const fonts = useThemeFonts();
-  const idCalendar = route?.params?.id;
+  console.log("route", route);
+  const idCalendar = route?.params?.id || Number(route?.params?.reversationId);
   const fromScreen = route?.params?.fromScreen;
   const [refreshing, setRefreshing] = React.useState(false);
   const [screenStep, setCurrentStep] = useState(2);
@@ -39,7 +40,7 @@ export default function DetailCalender({route}) {
       const {response, data} = await getReservationById(idCalendar);
       if (response?.status === 200) {
         setDataCalendar(data?.data);
-        console.log("response getReservationById", data?.data.id);
+        console.log("response getReservationById", data?.data);
         if (data?.data?.status === 1) {
           setCurrentStep(3);
         } else if (data?.data?.status === 2) {
@@ -65,7 +66,6 @@ export default function DetailCalender({route}) {
   }, []);
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: colors.backgroundTheme}}>
-
       <View style={[styles.container]}>
         <ScrollView refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />} contentContainerStyle={{}}>
           <GuideComponent
@@ -124,7 +124,7 @@ export default function DetailCalender({route}) {
                 <Text style={{fontFamily: fonts.Hiragino, fontSize: 14, color: colors.gray1, lineHeight: 17, marginTop: 7}}>
                   {`${moment(dataCalendar?.date).format("YYYY年MM月DD日")}（${moment(dataCalendar?.date).format("dddd")}）${
                     dataCalendar?.time_start
-                  }~${dataCalendar?.time_end}`}
+                  }`}
                 </Text>
               </View>
             </View>

@@ -10,13 +10,20 @@ import onlCheckbox from "@assets/images/icons/onlCheckbox.png";
 import offCheckbox from "@assets/images/icons/offCheckbox.png";
 const {width, height} = Dimensions.get("window");
 
-export default function ItemQuestionForm({item, valueData = null, changeData = () => {}, mutiple = false, type = "default"}) {
+export default function ItemQuestionForm({
+  item,
+  isFirstAnswer = true,
+  valueData = null,
+  changeData = () => {},
+  mutiple = false,
+  type = "default",
+}) {
   const colors = useThemeColors();
   const fonts = useThemeFonts();
   const [showPopup, setShowPopup] = useState(false);
   const [dataRender, setDataRender] = useState([
-    {label: "有", value: 1},
-    {label: "無", value: 2},
+    {label: "あり", value: 1},
+    {label: "なし", value: 2},
   ]);
   const [valueRowItem, setValueRowItem] = useState(null);
   const [listCheckbox, setListCheckbox] = useState([]);
@@ -31,8 +38,14 @@ export default function ItemQuestionForm({item, valueData = null, changeData = (
           }
         });
       } else {
-        setValueRowItem(item.value === 1 ? "有" : "無");
-        setListCheckbox(item.value === 1 ? [{label: "有", value: 1}] : [{label: "無", value: 2}]);
+        if (type === "questionAdmin") {
+          const valueQuestionAdmin = item.value[0];
+          setValueRowItem(valueQuestionAdmin);
+          setListCheckbox([{label: valueQuestionAdmin, value: valueQuestionAdmin}]);
+        } else {
+          setValueRowItem(item.value === 1 ? "あり" : "なし");
+          setListCheckbox(item.value === 1 ? [{label: "あり", value: 1}] : [{label: "なし", value: 2}]);
+        }
       }
     }
     if (item?.label == 3 && item?.value) {
@@ -47,8 +60,13 @@ export default function ItemQuestionForm({item, valueData = null, changeData = (
         });
       } else {
         item?.value?.map((el) => {
-          newValue.push(item?.data[el]?.label);
-          newListCheckBox.push({label: item?.data[el]?.label, value: item?.data[el]?.value});
+          if (item?.data) {
+            newValue.push(item?.data[el]?.label || el);
+            newListCheckBox.push({label: item?.data[el]?.label || el, value: item?.data[el]?.value || el});
+          } else if (item?.content) {
+            newValue.push(item?.content[el]?.label || el);
+            newListCheckBox.push({label: item?.content[el]?.label || el, value: item?.content[el]?.value || el});
+          }
         });
       }
       setValueRowItem(newValue);
@@ -134,7 +152,12 @@ export default function ItemQuestionForm({item, valueData = null, changeData = (
     setValueRowItem(newLabel);
     let dataChange;
     if (type === "questionAdmin") {
-      dataChange = {question_id: item.id, content_answer: newValue};
+      if (isFirstAnswer) {
+        dataChange = {question_id: item.id, content_answer: newValue};
+      } else {
+        dataChange = {answer_id: item.answer_id, content_answer: newValue};
+      }
+      console.log("questionAdminquestionAdmin isFirstAnswer", dataChange);
       changeData(dataChange);
     } else {
       if (item.label === 4) {
@@ -177,7 +200,6 @@ export default function ItemQuestionForm({item, valueData = null, changeData = (
       <TouchableOpacity
         onPress={() => {
           if (item?.action) {
-            console.log("content_medicines", item?.value, valueData);
             item?.action();
           } else if (item.label === 4 || item.label === 3) {
             setShowPopup(true);
@@ -227,7 +249,7 @@ export default function ItemQuestionForm({item, valueData = null, changeData = (
                 {(valueRowItem === null || valueRowItem === undefined || valueRowItem.length == 0) && (
                   <Text style={{textAlign: "left"}}>{item?.placeholder || "選択"}</Text>
                 )}
-                {typeof valueRowItem == "string" ? (
+                {typeof valueRowItem == "string" || typeof valueRowItem == "number" ? (
                   <Text>{valueRowItem}</Text>
                 ) : (
                   valueRowItem?.length > 0 &&
@@ -257,14 +279,28 @@ export default function ItemQuestionForm({item, valueData = null, changeData = (
               keyboardType={
                 item.key === "phone_number" || item?.typePad === "number" || item.key === "postal_code" ? "number-pad" : "default"
               }
-              value={valueData ? (typeof valueData === "string" ? valueData : renderContentAllergies(valueData)) : null}
+              value={
+                valueData
+                  ? typeof valueData === "string" || typeof valueData == "number"
+                    ? valueData
+                    : type === "questionAdmin"
+                    ? valueData?.content_answer
+                    : item.value
+                  : null
+              }
               placeholder={item?.placeholder || "入力してください"}
               secureTextEntry={item.key === "newPassword" || item.key === "confirmPassword" ? true : false}
               // placeholder={item.placeholder}
               placeholderTextColor={colors.textPlaceholder}
               onChangeText={(text) => {
                 if (type == "questionAdmin") {
-                  changeData({question_id: item.id, content_answer: text});
+                  let dataChange = {};
+                  if (isFirstAnswer) {
+                    dataChange = {question_id: item.id, content_answer: text};
+                  } else {
+                    dataChange = {answer_id: item.answer_id, content_answer: text};
+                  }
+                  changeData(dataChange);
                 } else {
                   changeData(text);
                 }

@@ -14,7 +14,7 @@ import {SCREEN_DETAIL_CALENDAR} from "../../screens.constants";
 
 let {width, height} = Dimensions.get("window");
 
-export default function ServiceStep1() {
+export default function ServiceStep1({route}) {
   const user = useSelector((state) => state.users?.userDetails);
   const colors = useThemeColors();
   const dispatch = useDispatch();
@@ -26,6 +26,15 @@ export default function ServiceStep1() {
   const [valueChoose, setValueChoose] = useState(null);
   const [needFinish, setNeedFinish] = useState(false);
   const [isPopup, setIsPopup] = useState(false);
+
+  useEffect(() => {
+    let defaultvalue = route.params?.data;
+    console.log("defaultvalue", defaultvalue);
+    if (defaultvalue) {
+      defaultvalue = JSON.parse(defaultvalue.value);
+    }
+    setValue(defaultvalue ? defaultvalue : null);
+  }, [route]);
 
   const getData = async () => {
     if (user) {
@@ -111,50 +120,13 @@ export default function ServiceStep1() {
 
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: colors.backgroundTheme}}>
-      {/* <ModalPortal
-        isVisible={isPopup}
-        animationInTiming={500}
-        animationOutTiming={500}
-        backdropTransitionInTiming={500}
-        backdropTransitionOutTiming={500}
-        // swipeDirection="down"
-        // scrollHorizontal={true}
-        style={{justifyContent: "flex-end", flex: 1, margin: 0}}
-      >
-        <View
-          style={{
-            height: height / 3,
-            backgroundColor: "white",
-            borderTopLeftRadius: 8,
-            borderTopRightRadius: 8,
-            paddingVertical: 25,
-          }}
-        >
-          <View
-            style={{
-              width: "100%",
-              flexDirection: "row",
-              justifyContent: "space-between",
-            }}
-          >
-            <TouchableOpacity style={{width: "100%", paddingRight: 28}} onPress={confirmValue}>
-              <Text style={{fontSize: 18, textAlign: "right", color: colors.textBlue}}>完了</Text>
-            </TouchableOpacity>
-          </View>
-          <ScrollView>
-            {DATA.map((item, index) => {
-              return _renderItem(item, index);
-            })}
-          </ScrollView>
-        </View>
-      </ModalPortal> */}
       <View style={[styles.container]}>
         <GuideComponent title="オンライン診療をご希望ですか？" content="まずは診療科目とメニューをお選びください。" />
         <StepsComponent />
         <View style={{flexDirection: "column", flex: 1}}>
           <TouchableOpacity
             onPress={() =>
-              global.showModalBottom({value: value}, (valueCallBack) => {
+              global.showModalBottom({value: value, defaultValue: route.params?.data}, (valueCallBack) => {
                 setValue(valueCallBack);
               })
             }

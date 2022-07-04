@@ -28,6 +28,13 @@ export async function deleteCalendar(id) {
   });
 }
 
+export async function getDetailOwnQuestion(params) {
+  return request(`/auth/question-for-edit`, {
+    method: "POST",
+    data: params,
+  });
+}
+
 export async function updateCalendar({params, paramId}) {
   return request(`/auth/edit-reservation/${paramId}`, {
     method: "PUT",

@@ -92,7 +92,7 @@ export default function LoginScreen({route}) {
           }}
           name="email"
         />
-        {errors.email && <Text style={styles.textError}>エラーメール</Text>}
+        {errors.email && <Text style={styles.textError}>メールアドレスが間違っています。</Text>}
 
         <Controller
           control={control}
@@ -148,7 +148,7 @@ export default function LoginScreen({route}) {
 }
 const styles = StyleSheet.create({
   wrapButton: {paddingHorizontal: 10, marginBottom: 20},
-  textError: {color: "red", marginTop: 5},
+  textError: {color: "red", marginTop: 5, paddingHorizontal: 16},
   wrapInput: {
     flexDirection: "row",
     justifyContent: "space-between",

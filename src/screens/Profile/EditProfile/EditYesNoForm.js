@@ -13,7 +13,6 @@ export default function EditYesNoForm({route}) {
   const fonts = useThemeFonts();
   const navigation = useNavigation();
   const dispatch = useDispatch();
-  console.log("route", route?.params?.data);
   const defaultValue = route?.params?.data?.value ? (route?.params?.data?.value === 1 ? true : false) : null;
   const [status, setStatus] = useState(defaultValue);
   const {

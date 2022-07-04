@@ -1,15 +1,15 @@
 import React, {useEffect, useState} from "react";
-import {View, Text, Image, TouchableOpacity, ScrollView, RefreshControl} from "react-native";
+import {View, Text, SafeAreaView, ScrollView, RefreshControl} from "react-native";
 import {useSelector, useDispatch} from "react-redux";
 import {useThemeColors, useThemeFonts} from "react-native-theme-component";
 import DropDownPicker from "react-native-dropdown-picker";
 import {useNavigation} from "@react-navigation/native";
-import {SafeAreaView} from "react-native-safe-area-context";
 import Headercomponent from "@components/Layout/Header";
 import TabHeaderComponent from "@components/Layout/TabHeader";
 import {getListContent} from "@services/search";
 import FooterComponent from "@components/Layout/Footer";
 import NewsInMonth from "./components/NewsInMonth";
+import ButtonBooking from "../Home/components/ButtonBooking";
 import moment from "moment";
 
 export default function NewsScreen() {
@@ -20,7 +20,12 @@ export default function NewsScreen() {
   const [refreshing, setRefreshing] = React.useState(false);
   const [dataNews, setDataNews] = useState({});
   const dispatch = useDispatch();
-  const DATA = [{label: "2022年", value: '{"label":"選択中の科目","value":"2022年","key":"skinCare","data":"1"}'}];
+  const DATA = [
+    {label: "2022年", value: 2022},
+    {label: "2022年", value: 2022},
+    {label: "2022年", value: 2022},
+    {label: "2022年", value: 2022},
+  ];
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(null);
   const [items, setItems] = useState(DATA);
@@ -81,7 +86,7 @@ export default function NewsScreen() {
     }, 1000);
   }, []);
   return (
-    <SafeAreaView style={{flex: 1, backgroundColor: colors.backgroundTheme}}>
+    <SafeAreaView style={{flex: 1, position: "relative", backgroundColor: colors.backgroundTheme}}>
       <Headercomponent />
       <TabHeaderComponent />
       <ScrollView
@@ -107,25 +112,29 @@ export default function NewsScreen() {
             Object.keys(dataNews).map((item, index) => {
               return <NewsInMonth key={`NewsInMonth-${index}`} month={item} data={dataNews[item]} />;
             })}
-          <DropDownPicker
-            style={{
-              borderWidth: 2,
-              borderRadius: 4,
-              borderColor: colors.textHiragino,
-              fontSize: 16,
-            }}
-            placeholder="2022年"
-            open={open}
-            value={value}
-            items={items}
-            setOpen={setOpen}
-            setValue={setValue}
-            setItems={setItems}
-            multiple={false}
-          />
+          <View style={{minHeight: open ? (items.length + 1) * 40 : 40}}>
+            <DropDownPicker
+              style={{
+                borderWidth: 2,
+                borderRadius: 4,
+                borderColor: colors.textHiragino,
+                fontSize: 16,
+              }}
+              placeholder="2022年"
+              open={open}
+              value={value}
+              items={items}
+              setOpen={setOpen}
+              setValue={setValue}
+              setItems={setItems}
+              multiple={false}
+            />
+          </View>
         </View>
+        <View style={{height: 20}}></View>
         <FooterComponent />
       </ScrollView>
+      <ButtonBooking bgColor={"rgba(0, 176, 80, 0.7)"} />
     </SafeAreaView>
   );
 }

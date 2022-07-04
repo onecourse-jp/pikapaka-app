@@ -60,17 +60,8 @@ export default function ServiceStep3() {
 
   useEffect(() => {
     setUser(userDetails);
+    console.log("userDetails?.allergies", userDetails?.allergies);
     setDataPerson2([
-      // {
-      //   key: "allergies",
-      //   title: "アレルギーの有無",
-      //   placeholder: "選択",
-      //   value: userDetails?.allergies ?? null,
-      //   label: 4,
-      //   action: () => {
-      //     navigation.navigate(SCREEN_EDIT_ALLERGY, {data: user});
-      //   },
-      // },
       {
         key: "content_allergies",
         require: false,
@@ -85,25 +76,11 @@ export default function ServiceStep3() {
           navigation.navigate(SCREEN_EDIT_ALLERGY, {data: user});
         },
       },
-      // {
-      //   key: "take_medicines",
-      //   title: "服薬中の薬の有無",
-      //   placeholder: "選択",
-      //   value: userDetails?.take_medicines
-      //     ? userDetails?.take_medicines == 1
-      //       ? renderContentAllergies(userDetails?.content_medicines)
-      //       : "無"
-      //     : null,
-      //   label: 4,
-      //   action: () => {
-      //     navigation.navigate(SCREEN_EDIT_MEDICINE, {data: user});
-      //   },
-      // },
       {
         key: "content_medicines",
-        title: "服用中薬の内容",
+        title: "服用中の薬の内容",
         require: false,
-        placeholder: "薬の内容をを入力",
+        placeholder: "薬の内容を入力",
         value: userDetails?.take_medicines
           ? userDetails?.take_medicines == 1
             ? renderContentAllergies(userDetails?.content_medicines)
@@ -142,6 +119,7 @@ export default function ServiceStep3() {
         key: "medical_history",
         label: "既往歴",
         title: "既往歴",
+        require: false,
         placeholder: "なし",
         label: 3,
         value: userDetails?.medical_history ?? null,
@@ -260,7 +238,14 @@ export default function ServiceStep3() {
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: colors.backgroundTheme}}>
       <View style={[styles.container]}>
-        <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} style={{flex: 1}}>
+        <KeyboardAvoidingView
+          behavior={Platform.OS === "ios" ? "padding" : "height"}
+          keyboardVerticalOffset={Platform.select({
+            ios: 60,
+            android: 60,
+          })}
+          style={{flex: 1}}
+        >
           <ScrollView
             contentContainerStyle={{flexGrow: 1}}
             refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
@@ -378,7 +363,7 @@ export default function ServiceStep3() {
 
               <Controller
                 control={control}
-                defaultValue={false}
+                defaultValue={""}
                 name={"contentConsultation"}
                 render={({field: {onChange, onBlur, value}}) => {
                   return (

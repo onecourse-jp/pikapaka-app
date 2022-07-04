@@ -56,17 +56,17 @@ export default function ServiceStep4() {
     {key: "p3", label: "電話番号", value: dataConfirm?.phone_number || "000-000-0000"},
   ];
   const DATALISTPERSON2 = [
-    {key: "allergies", label: "アレルギーの有無", value: dataConfirm.allergies || "選択", option: true},
+    // {key: "allergies", label: "アレルギーの有無", value: dataConfirm.allergies || "選択", option: true},
     {
       key: "content_allergies",
       label: "アレルギーの内容",
       value: renderContentAllergies(dataConfirm.content_allergies) || "アレルギー内容を入力",
     },
-    {key: "take_medicines", label: "服薬中の薬の有無", value: dataConfirm.take_medicines || "選択", option: true},
-    {key: "content_medicines", label: "服用中薬の内容", value: renderContentAllergies(dataConfirm.content_medicines) || "薬の内容をを入力"},
+    // {key: "take_medicines", label: "服薬中の薬の有無", value: dataConfirm.take_medicines || "選択", option: true},
+    {key: "content_medicines", label: "服用中の薬の内容", value: renderContentAllergies(dataConfirm.content_medicines) || "薬の内容を入力"},
     {key: "pregnancy", label: "妊娠有無", value: dataConfirm.pregnancy || "選択", option: true},
     {key: "smoking", label: "喫煙有無", value: dataConfirm.smoking || "選択", option: true},
-    {key: "medical_history", label: "既往歴", value: dataConfirm.medical_history || "選択", data: dataMedicalHistory, option: true},
+    {key: "medical_history", label: "既往歴", value: dataConfirm.medical_history || "なし", data: dataMedicalHistory, option: true},
   ];
 
   return (
@@ -187,6 +187,11 @@ export default function ServiceStep4() {
                           </Text>
                         );
                       })}
+                      {item.value.length === 0 && (
+                        <Text key={`med-item`} style={{color: colors.textBlack, fontSize: 14, textAlign: "left", lineHeight: 18}}>
+                          いいえ
+                        </Text>
+                      )}
                     </View>
                   )}
                   {item.option && !item.data && (
@@ -200,7 +205,7 @@ export default function ServiceStep4() {
                         lineHeight: 18,
                       }}
                     >
-                      {item.value === 1 ? "有" : "無"}
+                      {item.value === 1 ? "あり" : "なし"}
                     </Text>
                   )}
                   {!item.option && (
@@ -276,7 +281,7 @@ export default function ServiceStep4() {
             }}
           >
             <Text style={{fontFamily: fonts.NSregular, fontSize: 14, lineHeight: 15, color: colors.gray1}}>
-              { dataConfirm?.old_reservation_id  === false ? "はい" : "いいえ"}
+              {dataConfirm?.old_reservation_id === false ? "はい" : "いいえ"}
             </Text>
           </View>
 

@@ -139,9 +139,13 @@ export default function ServiceStep2() {
     const isDateInCalendar = checkDateInData(item);
     if (isDateInCalendar !== false && statusDay) {
       if (isDateInCalendar === 0) {
-        return <Text style={{fontSize: 18, lineHeight: 24, color: colors.gray3}}>✕</Text>;
+        return <Text style={{fontSize: 14, lineHeight: 20, fontFamily: fonts.NSregular, color: colors.gray3}}>✕</Text>;
       } else {
-        return <Text style={{fontSize: 20, lineHeight: 24, color: active ? colors.white : colors.textBlack}}>○</Text>;
+        return (
+          <Text style={{fontSize: 14, lineHeight: 20, fontFamily: fonts.NSregular, color: active ? colors.white : colors.textBlack}}>
+            ○
+          </Text>
+        );
       }
     }
     return <></>;
@@ -197,8 +201,9 @@ export default function ServiceStep2() {
             style={[]}
             dayComponent={({date, state}) => {
               if (date.month == monthPicked && date.year == yearPicked) {
+                const isDateInCalendar = checkDateInData(date.dateString);
                 return (
-                  <TouchableOpacity disabled={!getStatusDay(date.dateString)} onPress={() => setDate(date, state)}>
+                  <TouchableOpacity disabled={isDateInCalendar === 0 || isDateInCalendar === false} onPress={() => setDate(date, state)}>
                     <View
                       style={{
                         width: 51,
@@ -206,7 +211,12 @@ export default function ServiceStep2() {
                         flexDirection: "column",
                         alignItems: "center",
                         justifyContent: "center",
-                        backgroundColor: datePicked === date.dateString ? colors.headerComponent : colors.white,
+                        backgroundColor:
+                          datePicked === date.dateString
+                            ? colors.headerComponent
+                            : isDateInCalendar === 0 || isDateInCalendar === false
+                            ? colors.borderGrayE
+                            : colors.white,
                       }}
                     >
                       <Text

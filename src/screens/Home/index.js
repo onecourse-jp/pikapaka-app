@@ -1,11 +1,7 @@
 import React, {useState, useRef, useEffect} from "react";
-import {View, Text, Image, Dimensions} from "react-native";
+import {View, Image, Dimensions, SafeAreaView, ScrollView} from "react-native";
 import styles from "./styles";
-import {useSelector, useDispatch} from "react-redux";
-import {useThemeColors, useThemeFonts} from "react-native-theme-component";
-import {useNavigation} from "@react-navigation/native";
-import {SafeAreaView} from "react-native-safe-area-context";
-import {ScrollView} from "react-native-gesture-handler";
+import {useThemeColors} from "react-native-theme-component";
 import Headercomponent from "@components/Layout/Header";
 import TabHeaderComponent from "@components/Layout/TabHeader";
 import DiagnosisAndTreatment from "./components/DiagnosisAndTreatment";
@@ -17,12 +13,12 @@ import FAQComponent from "./components/FAQ";
 import NewsComponent from "./components/News";
 import AboutClinic from "./components/AboutClinic";
 import FooterComponent from "@components/Layout/Footer";
+import ButtonBooking from "./components/ButtonBooking";
+
 const {height} = Dimensions.get("window");
 
 export default function Home({route}) {
-  const user = useSelector((state) => state.users?.userDetails);
   const HomeRef = useRef(null);
-  const navigation = useNavigation();
   const colors = useThemeColors();
   const keyScroll = route?.params?.keyScroll;
   const [onlineMedicalCare, setOnlineMedicalCare] = useState(null);
@@ -48,7 +44,7 @@ export default function Home({route}) {
   };
 
   return (
-    <SafeAreaView style={{flex: 1, backgroundColor: colors.backgroundTheme}}>
+    <SafeAreaView style={{flex: 1}}>
       <Headercomponent
         onlineMedicalCare={onlineMedicalCare}
         flowMedicalCare={flowMedicalCare}
@@ -151,6 +147,7 @@ export default function Home({route}) {
           </View>
           <FooterComponent />
         </ScrollView>
+        <ButtonBooking bgColor={"rgba(0, 176, 80, 0.7)"} />
       </View>
     </SafeAreaView>
   );

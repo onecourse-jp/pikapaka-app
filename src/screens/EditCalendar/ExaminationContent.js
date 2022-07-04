@@ -1,12 +1,13 @@
 import React, {useEffect, useState} from "react";
 import {useForm, Controller} from "react-hook-form";
-import {StyleSheet, Text, View, ScrollView, SafeAreaView, TouchableOpacity, TextInput, Alert} from "react-native";
+import {StyleSheet, Text, View, ScrollView, SafeAreaView, TouchableOpacity, KeyboardAvoidingView, TextInput, Alert} from "react-native";
 import {useThemeColors, useThemeFonts, Button} from "react-native-theme-component";
 import {useNavigation} from "@react-navigation/native";
 import {useDispatch, useSelector} from "react-redux";
 import {SCREEN_QUESIONAIRE_STEP2, SCREEN_EDIT_CALENDAR_CONFIRM} from "@screens/screens.constants";
 import {getReservationById} from "@services/auth";
 import {getQuestionFormCalendar} from "@services/profile";
+import {getDetailOwnQuestion} from "@services/editCalendar";
 import moment from "moment";
 import ItemQuestionForm from "@components/Form/ItemQuestionForm";
 
@@ -17,9 +18,7 @@ export default function ExaminationContent({route}) {
   const navigation = useNavigation();
   const [dataCalendar, setDataCalendar] = useState(route?.params?.data);
   const [dataQuestion, setDataQuestion] = useState([]);
-  const [updateStatus, setUpdateStatus] = useState("UPDATE");
-  const [answerData, setAnswerData] = useState([]);
-
+  const [isFirstAnswer, setIsFirstAnswer] = useState(true);
   const {
     control,
     handleSubmit,
@@ -30,119 +29,84 @@ export default function ExaminationContent({route}) {
   useEffect(() => {
     setDataCalendar(route?.params?.data);
     console.log("dataCalendar", dataCalendar);
-    if (route?.params?.type === "CHANGE_ITEM") {
-      Alert.alert("", "新しい質問があります。", [
-        {
-          text: "OK",
-          style: "cancel",
-        },
-      ]);
-      return;
-    }
   }, []);
   const onSubmit = async (dataSubmit) => {
-    console.log("dataSubmit", dataSubmit);
+    let newDataAnswer = [];
+    dataSubmit.data.map((item, index) => {
+      let labelAnswer = "";
+      if (dataQuestion[index].label === 3 || dataQuestion[index].label === 4) {
+        if (item.content_answer) {
+          item.content_answer?.map((el, ind) => {
+            labelAnswer += `${el}\n`;
+          });
+        }
+      } else {
+        if (item.content_answer) {
+          labelAnswer = item.content_answer;
+        }
+      }
+      if (isFirstAnswer) {
+        newDataAnswer.push({
+          question_id: item.question_id,
+          content_answer: item.content_answer,
+          title: dataQuestion[index].title,
+          labelAnswer: labelAnswer,
+        });
+      } else {
+        newDataAnswer.push({
+          answer_id: item.answer_id,
+          content_answer: item.content_answer,
+          title: dataQuestion[index].title,
+          labelAnswer: labelAnswer,
+        });
+      }
+    });
     let newDataCalendar = {
       ...dataCalendar,
       content_to_doctor: dataSubmit.content_to_doctor,
-      answer: answerData.map((item, index) => {
-        let dataContentAnswer = dataSubmit[item.id];
-        if (item?.question.label == 3) {
-          dataContentAnswer = dataContentAnswer?.map((ans, index) => {
-            return dataContentAnswer.includes(0) ? item.question.content[ans] : item.question.content[ans - 1];
-          });
-        }
-        if (item?.question.label == 4) {
-          dataContentAnswer = [item?.question?.content[dataContentAnswer - 1]];
-        }
-        return {
-          ...item,
-          content_answer: dataContentAnswer,
-        };
-      }),
+      newDataAnswer: newDataAnswer,
     };
     console.log("newDataCalendar", newDataCalendar);
-    if (route?.params?.type == "CHANGE_ITEM") {
-      navigation.navigate(SCREEN_EDIT_CALENDAR_CONFIRM, {data: newDataCalendar, dataSubmit: dataSubmit, type: "CHANGE_ITEM"});
+    if (isFirstAnswer) {
+      navigation.navigate(SCREEN_EDIT_CALENDAR_CONFIRM, {data: newDataCalendar, dataSubmit: dataSubmit, type: "NEW"});
     } else {
-      navigation.navigate(SCREEN_EDIT_CALENDAR_CONFIRM, {data: newDataCalendar, dataSubmit: dataSubmit, type: updateStatus});
+      navigation.navigate(SCREEN_EDIT_CALENDAR_CONFIRM, {data: newDataCalendar, dataSubmit: dataSubmit, type: "CHANGE_ITEM"});
     }
   };
   const getAnswerForm = async () => {
     global.showLoadingView();
-    const {response, data} = await getQuestionFormCalendar(route?.params?.data?.detail_category_medical_of_customer);
-    if (response?.status === 200) {
-      console.log("getAnswerForm", data.data.data);
+    let oldQuestionId = [];
+    if (route?.params?.data?.answer?.length > 0) {
       console.log("route?.params?.data?.answer", route?.params?.data?.answer);
-      let answerUser;
-      // route?.params?.data?.answer.length > 0 ? (answerUser = route?.params?.data?.answer) : (answerUser = data.data.data);
-      if (route?.params?.data?.answer.length == 0 || route?.params?.data?.answer[0].content_answer === null) {
-        console.log("hrerreere");
-        setUpdateStatus("NEW");
-        answerUser = data.data.data.map((item, index) => {
-          return {
-            content_answer: null,
-            id: item.id,
-            question: item,
-            question_id: item.id,
-          };
-        });
-      } else {
-        setUpdateStatus("UPDATE");
-        answerUser = route?.params?.data?.answer;
-      }
-      setAnswerData(answerUser);
-
-      let newAnswerUser = answerUser.map((item, index) => {
-        let arrAnswer = [];
-        {
-          item?.question?.content != null &&
-            item?.content_answer != null &&
-            item?.content_answer?.map((content, index) => {
-              let i = item.question.content.findIndex((qs) => {
-                return qs === content;
-              });
-              item?.question?.label == 4 ? arrAnswer.push(i + 1) : arrAnswer.push(i);
-            });
-        }
-
-        console.log("arrAnswer", arrAnswer);
-
-        {
-          item?.question?.content != null &&
-            item?.question?.content.map((answer, index) => {
-              return {
-                label: answer,
-                value: index + 1,
-              };
-            });
-        }
-        return {
-          ...item.question,
-          value: item.question?.label == 3 ? arrAnswer : item.question?.label == 4 ? arrAnswer[0] : item?.content_answer,
-          data:
-            item?.question?.content != null &&
-            item?.question?.content.map((answer, index) => {
-              if (item?.question?.label == 4) {
-                return {
-                  label: answer,
-                  value: index + 1,
-                };
-              } else {
-                return {
-                  label: answer,
-                  value: index + 1,
-                };
-              }
-            }),
-          key: `${item.id}`,
-        };
+      route?.params?.data?.answer?.map((item, index) => {
+        oldQuestionId.push(item.question_id);
       });
-      setDataQuestion(newAnswerUser);
+      console.log("oldQuestionId", oldQuestionId);
+      const {response, data} = await getDetailOwnQuestion({list_question: oldQuestionId});
+      if (response?.status === 200) {
+        let listDataQuestion = [...data.data];
+        data.data.map((item, index) => {
+          listDataQuestion[index].value = route?.params?.data?.answer[index].content_answer;
+          listDataQuestion[index].answer_id = route?.params?.data?.answer[index].id;
+        });
+        console.log("listDataQuestion", listDataQuestion);
+        setIsFirstAnswer(false);
+        setDataQuestion(listDataQuestion);
+        global.hideLoadingView();
+      } else {
+        global.hideLoadingView();
+        console.log("error", response);
+      }
     } else {
-      console.log("error", response);
+      const {response, data} = await getQuestionFormCalendar(route?.params?.data?.detail_category_medical_of_customer);
+      if (response?.status === 200) {
+        global.hideLoadingView();
+        setDataQuestion(data.data.data);
+      } else {
+        console.log("error", response);
+        global.hideLoadingView();
+      }
     }
-    global.hideLoadingView();
   };
 
   useEffect(() => {
@@ -152,69 +116,99 @@ export default function ExaminationContent({route}) {
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: colors.backgroundTheme}}>
       <View style={[styles.container]}>
-        <ScrollView contentContainerStyle={{}}>
-          <View>
-            <Text
-              style={{
-                fontFamily: fonts.NSbold,
-                paddingHorizontal: 16,
-                marginBottom: 16,
-                fontSize: 16,
-                color: colors.textBlack,
-                lineHeight: 23,
-              }}
-            >
-              ご相談内容
-            </Text>
+        <KeyboardAvoidingView
+          behavior={Platform.OS === "ios" ? "padding" : "height"}
+          keyboardVerticalOffset={Platform.select({
+            ios: 60,
+            android: 60,
+          })}
+          style={{flex: 1}}
+        >
+          <ScrollView contentContainerStyle={{}}>
             <View>
-              <Controller
-                control={control}
-                rules={{required: false}}
-                name={`content_to_doctor`}
-                defaultValue={route?.params?.data?.content_to_doctor}
-                render={({field: {onChange, onBlur, value}}) => {
-                  return (
-                    <TextInput
-                      style={{
-                        color: colors.textBlack,
-                        backgroundColor: colors.white,
-                        paddingHorizontal: 16,
-                        textAlignVertical: "top",
-                      }}
-                      placeholder={"ここにご相談内容を記入して下さい。"}
-                      placeholderTextColor={colors.textPlaceholder}
-                      onChangeText={onChange}
-                      value={value}
-                    />
-                  );
+              <Text
+                style={{
+                  fontFamily: fonts.NSbold,
+                  paddingHorizontal: 16,
+                  marginBottom: 16,
+                  fontSize: 16,
+                  color: colors.textBlack,
+                  lineHeight: 23,
                 }}
-              />
+              >
+                ご相談内容
+              </Text>
+              <View>
+                <Controller
+                  control={control}
+                  rules={{required: false}}
+                  name={`content_to_doctor`}
+                  defaultValue={route?.params?.data?.content_to_doctor}
+                  render={({field: {onChange, onBlur, value}}) => {
+                    return (
+                      <TextInput
+                        style={{
+                          color: colors.textBlack,
+                          backgroundColor: colors.white,
+                          paddingHorizontal: 16,
+                          textAlignVertical: "top",
+                        }}
+                        placeholder={"ここにご相談内容を記入して下さい。"}
+                        placeholderTextColor={colors.textPlaceholder}
+                        onChangeText={onChange}
+                        value={value}
+                      />
+                    );
+                  }}
+                />
+              </View>
             </View>
-          </View>
-          <View>
-            <Text style={{fontFamily: fonts.NSbold, fontSize: 16, paddingHorizontal: 16, marginBottom: 16, marginTop: 16}}>問診</Text>
-            {dataQuestion.length > 0 &&
-              dataQuestion.map((item, index) => {
-                return (
-                  <React.Fragment key={`MEDICAL_HISTORY-${index}`}>
-                    <Controller
-                      control={control}
-                      rules={{required: item.status === 1 ? true : false}}
-                      name={item?.key}
-                      defaultValue={item?.value}
-                      render={({field: {onChange, onBlur, value}}) => {
-                        return <ItemQuestionForm item={item} valueData={value} changeData={onChange} type={"questionAdmin"} />;
-                      }}
-                    />
-                    {errors[item?.key] && <Text style={styles.textError}>{global.t("is_require")}</Text>}
-                  </React.Fragment>
-                );
-              })}
-          </View>
-          <View style={{marginTop: 60, paddingHorizontal: 16}}>
-            <Button label="変更内容を確認へ進む" onPress={handleSubmit(onSubmit)} />
-          </View>
-        </ScrollView>
+            <View>
+              <Text style={{fontFamily: fonts.NSbold, fontSize: 16, paddingHorizontal: 16, marginBottom: 16, marginTop: 16}}>問診</Text>
+              {dataQuestion.length > 0 &&
+                dataQuestion.map((item, index) => {
+                  if (!isFirstAnswer) {
+                    item.status = 0;
+                  }
+                  return (
+                    <React.Fragment key={`dataQuestion-${index}`}>
+                      <Controller
+                        control={control}
+                        rules={{required: item.status === 1 ? true : false}}
+                        defaultValue={
+                          isFirstAnswer
+                            ? {
+                                question_id: item.id,
+                                content_answer: null,
+                              }
+                            : {
+                                content_answer: item?.value,
+                                answer_id: item.answer_id,
+                              }
+                        }
+                        name={`data.${index}`}
+                        render={({field: {onChange, onBlur, value}}) => {
+                          return (
+                            <ItemQuestionForm
+                              item={item}
+                              isFirstAnswer={isFirstAnswer}
+                              valueData={value}
+                              changeData={onChange}
+                              type={"questionAdmin"}
+                            />
+                          );
+                        }}
+                      />
+                      {errors?.data && errors?.data[index] && <Text style={styles.textError}>{global.t("is_require")}</Text>}
+                    </React.Fragment>
+                  );
+                })}
+            </View>
+            <View style={{marginTop: 60, paddingHorizontal: 16}}>
+              <Button label="変更内容を確認へ進む" onPress={handleSubmit(onSubmit)} />
+            </View>
+          </ScrollView>
+        </KeyboardAvoidingView>
       </View>
     </SafeAreaView>
   );

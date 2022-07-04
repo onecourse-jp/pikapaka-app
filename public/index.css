@@ -15,44 +15,43 @@ body {
 
 @font-face {
   src: url(fonts/Ionicons.ttf);
-  font-family: 'Ionicons';
+  font-family: "Ionicons";
 }
 
 @font-face {
   src: url(fonts/EvilIcons.ttf);
-  font-family: 'EvilIcons';
+  font-family: "EvilIcons";
 }
 
 @font-face {
   src: url(fonts/MaterialIcons.ttf);
-  font-family: 'MaterialIcons';
+  font-family: "MaterialIcons";
 }
 
 @font-face {
   src: url(fonts/Feather.ttf);
-  font-family: 'Feather';
+  font-family: "Feather";
 }
 
 @font-face {
   src: url(fonts//NotoSansJP-Regular.otf);
-  font-family: 'NotoSansJP-Regular';
+  font-family: "NotoSansJP-Regular";
 }
 
 @font-face {
   src: url(fonts/NotoSansJP-Medium.otf);
-  font-family: 'NotoSansJP-Medium';
+  font-family: "NotoSansJP-Medium";
 }
 
 @font-face {
   src: url(fonts/NotoSansJP-Light.otf);
-  font-family: 'NotoSansJP-Light';
+  font-family: "NotoSansJP-Light";
 }
 
 @font-face {
   src: url(fonts/NotoSansJP-Thin.otf);
-  font-family: 'NotoSansJP-Thin';
+  font-family: "NotoSansJP-Thin";
 }
 body {
-  max-width: 600px;
   margin: 0 auto;
 }

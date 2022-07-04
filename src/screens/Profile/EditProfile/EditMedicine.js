@@ -25,7 +25,8 @@ export default function EditMedicine({route}) {
   const navigation = useNavigation();
   const [disableSubmit, setDisableSubmit] = useState(false);
   const dispatch = useDispatch();
-  const [isMedicineStatus, setIsMedicineStatus] = useState(route?.params?.data?.take_medicines === 1 ? true : false);
+  const defaultValue = route?.params?.data?.take_medicines ? (route?.params?.data?.take_medicines === 1 ? true : false) : null;
+  const [isMedicineStatus, setIsMedicineStatus] = useState(defaultValue);
   const content_medicines = route?.params?.data?.content_medicines ? route?.params?.data?.content_medicines : null;
   const {
     control,
@@ -56,31 +57,20 @@ export default function EditMedicine({route}) {
     };
     console.log("dataSubmit", newDataSubmit);
 
-    if (Object.keys(dataSubmit).length > 0) {
-      try {
-        const {data, response} = await updateProfileWithToken(newDataSubmit);
-        if (response.status == 200) {
-          dispatch(updateUserProfile(data.data));
-          global.hideLoadingView();
-          Alert.alert("", "薬の内容を更新しました。", [
-            {
-              text: "はい",
-              onPress: () => {
-                navigation.goBack();
-              },
+    try {
+      const {data, response} = await updateProfileWithToken(newDataSubmit);
+      if (response.status == 200) {
+        dispatch(updateUserProfile(data.data));
+        global.hideLoadingView();
+        Alert.alert("", "薬の内容を更新しました。", [
+          {
+            text: "はい",
+            onPress: () => {
+              navigation.goBack();
             },
-          ]);
-        } else {
-          global.hideLoadingView();
-          Alert.alert("", "個人情報の編集ができません。もう一度お願いします。", [
-            {
-              text: "OK",
-              onPress: () => {},
-            },
-          ]);
-        }
-      } catch (error) {
-        console.log("error", error);
+          },
+        ]);
+      } else {
         global.hideLoadingView();
         Alert.alert("", "個人情報の編集ができません。もう一度お願いします。", [
           {
@@ -89,11 +79,27 @@ export default function EditMedicine({route}) {
           },
         ]);
       }
+    } catch (error) {
+      console.log("error", error);
+      global.hideLoadingView();
+      Alert.alert("", "個人情報の編集ができません。もう一度お願いします。", [
+        {
+          text: "OK",
+          onPress: () => {},
+        },
+      ]);
     }
   };
   return (
     <SafeAreaView style={[styles.container, {backgroundColor: colors.backgroundTheme}]}>
-      <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} style={{flex: 1}}>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        keyboardVerticalOffset={Platform.select({
+          ios: 60,
+          android: 60,
+        })}
+        style={{flex: 1}}
+      >
         <ScrollView contentContainerStyle={{paddingBottom: 20}}>
           <View style={{paddingTop: 12, paddingBottom: 12, backgroundColor: colors.backgroundTheme}}>
             <View>
@@ -141,7 +147,7 @@ export default function EditMedicine({route}) {
             }}
           >
             <Text>なし</Text>
-            {!isMedicineStatus && <Image source={require("@assets/images/v_green.png")} />}
+            {isMedicineStatus === false && <Image source={require("@assets/images/v_green.png")} />}
           </TouchableOpacity>
           {isMedicineStatus && (
             <>

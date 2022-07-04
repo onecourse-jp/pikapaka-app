@@ -1,9 +1,6 @@
-import React, {useEffect, useState} from "react";
-import {StyleSheet, Text, View, TouchableOpacity, ScrollView, Image, TextInput} from "react-native";
-import {useThemeColors, useThemeFonts, Button} from "react-native-theme-component";
-import {useNavigation} from "@react-navigation/native";
-import {SafeAreaView} from "react-native-safe-area-context";
-import {useDispatch, useSelector} from "react-redux";
+import React from "react";
+import {Text, View, TouchableOpacity} from "react-native";
+import {useThemeColors, useThemeFonts} from "react-native-theme-component";
 
 export default function ButtonProfile({title = "情報を編集する", onPress = () => {}, hasBorder = false, color = "red"}) {
   const colors = useThemeColors();

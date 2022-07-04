@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {View, Text, Image, TouchableOpacity, SafeAreaView} from "react-native";
+import {View, Text, Image, TouchableOpacity, SafeAreaView, Platform} from "react-native";
 import styles from "./styles";
 import {useThemeColors, useThemeFonts} from "react-native-theme-component";
 import {TabView, TabBar, Icon} from "react-native-tab-view";
@@ -11,15 +11,20 @@ import TopED from "./TopED";
 import TopAGA from "./TopAGA";
 
 export default function Top({navigation, route}) {
-  const {currentIndex} = route.params;
+  let {currentIndex} = route.params;
+  if (Platform.OS === "ios") {
+    currentIndex = route.params?.currentIndex === 1 ? 4 : 0;
+  } else {
+    currentIndex = currentIndex - 1;
+  }
   const colors = useThemeColors();
-  const [index, setIndex] = React.useState(currentIndex - 1);
+  const [index, setIndex] = React.useState(currentIndex);
   const [routes] = React.useState([
-    {key: "first", title: "スキンケア"},
-    {key: "second", title: "ダイエット", icon: require("@assets/images/icons/ic_tab_2.png")},
+    {key: "first", title: "スキンケア", icon: require("@assets/images/icons/ic_tab_1.png")},
+    {key: "second", title: "ダイエット", icon: require("@assets/images/icons/ic_tab_2.png"), disable: true},
     {key: "third", title: "ピル", icon: require("@assets/images/icons/ic_tab_3.png")},
     {key: "fourth", title: "ED", icon: require("@assets/images/icons/ic_tab_4.png")},
-    {key: "fifth", title: "AGA", icon: require("@assets/images/icons/ic_tab_5.png")},
+    {key: "fifth", title: "AGA", icon: require("@assets/images/icons/ic_tab_5.png"), disable: true},
   ]);
 
   const listColor = [colors.buttonSkincare, colors.textDiet, colors.colorPill, colors.colorED07, colors.colorAGA07];
@@ -56,6 +61,7 @@ export default function Top({navigation, route}) {
           return (
             <TouchableOpacity
               onPress={() => setIndex(i)}
+              disabled={route?.disable}
               key={`step-${i}`}
               style={{
                 flexDirection: "column",
@@ -64,7 +70,7 @@ export default function Top({navigation, route}) {
                 borderRightWidth: i + 1 < props.navigationState.routes.length ? 1 : 0,
                 borderRightColor: colors.white,
                 paddingVertical: 7,
-                backgroundColor: index === i ? listColor[index] : colors.colorHome02,
+                backgroundColor: route?.disable ? colors.gray7 : index === i ? listColor[index] : colors.colorHome02,
               }}
             >
               <View>
@@ -78,7 +84,11 @@ export default function Top({navigation, route}) {
     );
   };
   useEffect(() => {
-    setIndex(route.params.currentIndex - 1);
+    if (route.params.currentIndex && Platform.OS === "ios") {
+      setTimeout(() => {
+        setIndex(route.params.currentIndex - 1);
+      }, 500);
+    }
   }, [route]);
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: colors.backgroundTheme}}>

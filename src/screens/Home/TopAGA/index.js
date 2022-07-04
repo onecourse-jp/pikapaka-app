@@ -1,26 +1,20 @@
-import React, {useEffect} from "react";
-import {View, Text, Image, TouchableOpacity} from "react-native";
+import React from "react";
+import {View, Image, ScrollView} from "react-native";
 import styles from "../styles";
-import {useSelector, useDispatch} from "react-redux";
-import {useThemeColors, useThemeFonts} from "react-native-theme-component";
-import {useNavigation} from "@react-navigation/native";
-import {ScrollView} from "react-native-gesture-handler";
+import {useThemeColors} from "react-native-theme-component";
 import OnlineMedicalCare from "../components/OnlineMedicalCare";
 import RecommendOnlineMedicalCare from "../components/RecommendOnlineMedicalCare";
 import FlowMedicalCare from "../components/FlowMedicalCare";
 import FAQComponent from "../components/FAQ";
 import FooterComponent from "@components/Layout/Footer";
 import ExternalMedicine from "./ExternalMedicine";
+import ButtonBooking from "../components/ButtonBooking";
 
 export default function TopAGA() {
-  const user = useSelector((state) => state.users);
-  const navigation = useNavigation();
-  const fonts = useThemeFonts();
-
   const colors = useThemeColors();
 
   return (
-    <View style={[styles.container]}>
+    <>
       <ScrollView contentContainerStyle={{backgroundColor: colors.colorAGA03}}>
         <View style={{width: "100%", backgroundColor: colors.white}}>
           <Image style={{width: "100%"}} source={require("@assets/images/banner_aga_screen.png")} />
@@ -43,6 +37,7 @@ export default function TopAGA() {
             description={[
               "AGA治療薬の副作用を強く感じられる人は稀ですが、以下のようなものがあります。",
               "勃起不全、リビドー減退、精液量減少、肝機能障害",
+              "また、前立腺がんの発見が遅れる場合があります。",
             ]}
             circleColor={colors.colorAGA07}
             title="副作用"
@@ -72,6 +67,10 @@ export default function TopAGA() {
         </View>
         <FooterComponent />
       </ScrollView>
-    </View>
+      <ButtonBooking
+        bgColor={"rgba(143, 197, 118, 0.7)"}
+        dataBooking={{label: "AGA", value: '{"label":"選択中の科目","value":"AGA","key":"aga","data":"9"}'}}
+      />
+    </>
   );
 }

@@ -1,14 +1,12 @@
-import React, {useEffect, useState} from "react";
-import {StyleSheet, Text, View, TouchableOpacity, ScrollView, Image} from "react-native";
-import {useThemeColors, useThemeFonts, Button} from "react-native-theme-component";
-import {useNavigation} from "@react-navigation/native";
-import {SafeAreaView} from "react-native-safe-area-context";
-import {useDispatch, useSelector} from "react-redux";
+import React from "react";
+import {SafeAreaView, Text, View, TouchableOpacity, ScrollView, Image} from "react-native";
+import {useThemeColors, useThemeFonts} from "react-native-theme-component";
 import styles from "./styles";
 import Headercomponent from "@components/Layout/Header";
 import TabHeaderComponent from "@components/Layout/TabHeader";
-import {SCREEN_TOP, SCREEN_NEWS, SCREEN_FAQ} from "@screens/screens.constants";
+import {SCREEN_FAQ} from "@screens/screens.constants";
 import FooterComponent from "@components/Layout/Footer";
+import ButtonBooking from "../Home/components/ButtonBooking";
 
 export default function ({navigation}) {
   const colors = useThemeColors();
@@ -122,6 +120,7 @@ export default function ({navigation}) {
           </View>
           <FooterComponent />
         </ScrollView>
+        <ButtonBooking bgColor={"rgba(0, 176, 80, 0.7)"} />
       </View>
     </SafeAreaView>
   );

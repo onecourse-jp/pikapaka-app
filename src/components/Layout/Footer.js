@@ -19,7 +19,7 @@ export default function FooterComponent() {
 
   return (
     <>
-      <View style={{flexDirection: "column", justifyContent: "center", alignItems: "center"}}>
+      <View style={{flexDirection: "column", justifyContent: "center", alignItems: "center", marginBottom: 20}}>
         <TouchableOpacity
           onPress={() => {
             navigation.navigate(SCREEN_PRIVACY_POLICY, {currentIndex: 1});
@@ -56,7 +56,7 @@ export default function FooterComponent() {
         </TouchableOpacity>
       </View>
 
-      <View
+      {/* <View
         style={{
           marginTop: 20,
           width: "100%",
@@ -68,7 +68,7 @@ export default function FooterComponent() {
         }}
       >
         <ButtonLinkService />
-      </View>
+      </View> */}
     </>
   );
 }

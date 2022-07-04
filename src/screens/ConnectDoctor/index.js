@@ -46,37 +46,13 @@ export default function ({route}) {
   }, [localStream]);
 
   const handleAction = async () => {
+    messages.emit("closeCall");
     global.showWebView({
       url: `https://t-care-staging.web.app/user/call-to-doctor/?room=${dataCalendar.id}`,
       isCallVideo: dataCalendar.id,
     });
   };
-  const initialize = async () => {
-    if (Platform.OS === "android") {
-      request(PERMISSIONS.ANDROID.RECORD_AUDIO).then((result) => {
-        // …
-      });
-    }
 
-    const isFrontCamera = true;
-    const devices = await mediaDevices.enumerateDevices();
-
-    const facing = isFrontCamera ? "front" : "environment";
-    const videoSourceId = devices.find((device) => device.kind === "videoinput" && device.facing === facing);
-    const constraints = {
-      audio: true,
-      video: true,
-    };
-
-    const newStream = await mediaDevices.getUserMedia(constraints);
-    setLocalStream(newStream);
-    console.log("setLocalStream setLocalStream", newStream);
-    // navigation.navigate(SCREEN_CONNECT_VIEW, {data: route?.params?.data});
-  };
-
-  useEffect(async () => {
-    // initialize();
-  }, []);
   useEffect(async () => {
     if (dataCalendar?.id) {
       console.log("dataCalendar?.id", dataCalendar?.id);
@@ -116,7 +92,7 @@ export default function ({route}) {
   }, [navigation]);
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: colors.backgroundTheme, position: "relative"}}>
-      <ImageBackground source={require("@assets/images/connect_doctor_bg.png")} resizeMode="cover" style={{flex: 1, position: "relative"}}>
+      <View style={{flex: 1, position: "relative"}}>
         {localStream && (
           <View
             style={{
@@ -158,7 +134,7 @@ export default function ({route}) {
             <ButtonConnect onPress={handleAction} style={{}} status={statusDoctor} />
           </View>
         </View>
-      </ImageBackground>
+      </View>
     </SafeAreaView>
   );
 }

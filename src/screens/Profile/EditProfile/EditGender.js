@@ -13,8 +13,8 @@ export default function EditGender({route}) {
   const navigation = useNavigation();
   const [disableSubmit, setDisableSubmit] = useState(false);
   const dispatch = useDispatch();
-  console.log("route", route?.params?.data);
-  const [isGenderStatus, setIsGenderStatus] = useState(route?.params?.data?.gender === 1 ? true : false);
+  const defaultValue = route?.params?.data?.gender ? (route?.params?.data?.gender === 1 ? true : false) : null;
+  const [isGenderStatus, setIsGenderStatus] = useState(defaultValue);
 
   const onSubmit = async () => {
     let gender = isGenderStatus === true ? 1 : 2;
@@ -39,7 +39,7 @@ export default function EditGender({route}) {
           console.log("data when update", data);
         } else {
           global.hideLoadingView();
-          Alert.alert("","個人情報の編集ができません。もう一度お願いします。", [
+          Alert.alert("", "個人情報の編集ができません。もう一度お願いします。", [
             {
               text: "OK",
               onPress: () => {},
@@ -49,7 +49,7 @@ export default function EditGender({route}) {
       } catch (error) {
         console.log("error", error);
         global.hideLoadingView();
-        Alert.alert("","個人情報の編集ができません。もう一度お願いします。", [
+        Alert.alert("", "個人情報の編集ができません。もう一度お願いします。", [
           {
             text: "OK",
             onPress: () => {},
@@ -91,7 +91,7 @@ export default function EditGender({route}) {
           }}
         >
           <Text>女性</Text>
-          {!isGenderStatus && <Image source={require("@assets/images/v_green.png")} />}
+          {isGenderStatus === false && <Image source={require("@assets/images/v_green.png")} />}
         </TouchableOpacity>
       </View>
       <View style={{paddingHorizontal: 16}}>

@@ -53,15 +53,7 @@ export default function EditCalendar({route}) {
     const dataDateSet = {
       dateString: moment(dataCalendar?.date).format("YYYY-MM-DD"),
     };
-    if (route?.params?.type === "CHANGE_ITEM") {
-      Alert.alert("", "新しい時間を選んでください。", [
-        {
-          text: "OK",
-          style: "cancel",
-        },
-      ]);
-      return;
-    }
+    
     const dataHourSet = {
       constant_time: {
         created_at: dataCalendar?.calendar?.created_at,
@@ -216,8 +208,9 @@ export default function EditCalendar({route}) {
             // current={'2022-06-01'}
             dayComponent={({date, state}) => {
               if (date.month == monthPicked && date.year == yearPicked) {
+                const isDateInCalendar = checkDateInData(date.dateString);
                 return (
-                  <TouchableOpacity disabled={!getStatusDay(date.dateString)} onPress={() => setDate(date, state)}>
+                  <TouchableOpacity disabled={isDateInCalendar === 0 || isDateInCalendar === false} onPress={() => setDate(date, state)}>
                     <View
                       style={{
                         width: 51,
@@ -225,7 +218,12 @@ export default function EditCalendar({route}) {
                         flexDirection: "column",
                         alignItems: "center",
                         justifyContent: "center",
-                        backgroundColor: datePicked === date.dateString ? colors.headerComponent : colors.white,
+                        backgroundColor:
+                          datePicked === date.dateString
+                            ? colors.headerComponent
+                            : isDateInCalendar === 0 || isDateInCalendar === false
+                            ? colors.borderGrayE
+                            : colors.white,
                       }}
                     >
                       <Text

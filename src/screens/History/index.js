@@ -97,8 +97,9 @@ export default function History() {
                 backgroundColor: index === i ? listColor[index] : colors.colorHome02,
               }}
             >
-              <View style={{height: 20}}>{route.icon && <Image source={route.icon} />}</View>
+              <View style={{height: route.icon ? 20 : 10}}>{route.icon && <Image source={route.icon} />}</View>
               <Text style={{color: colors.white, fontSize: 11, lineHeight: 12, fontWeight: "700", marginTop: 5}}>{route.title}</Text>
+              {route.icon === null && <View style={{height: 10}}>{route.icon && <Image source={route.icon} />}</View>}
             </TouchableOpacity>
           );
         })}
@@ -114,39 +115,6 @@ export default function History() {
           renderScene={renderScene}
           onIndexChange={setIndex}
           style={{flex: 1}}
-          // renderTabBar={(props) => {
-          //   return (
-          //     <TabBar
-          //       {...props}
-          //       ref={refTab}
-          //       style={[
-          //         {
-          //           backgroundColor: colors.white,
-          //           paddingHorizontal: widthTab !== 0 ? (layout.width - widthTab) / 2 : 0,
-          //           marginHorizontal: 0,
-          //           marginBottom: 20,
-
-          //         },
-          //       ]}
-          //       labelStyle={{
-          //         color: "black",
-          //         fontSize: 14,
-          //         lineHeight: 22,
-          //         width: "auto",
-          //       }}
-          //       indicatorStyle={{
-          //         backgroundColor: colors.textBlue,
-          //       }}
-          //       indicatorContainerStyle={{left: widthTab !== 0 ? (layout.width - widthTab) / 2 : 16}}
-          //       tabStyle={{elevation: 0, paddingHorizontal: 0, width: "auto"}}
-          //       renderLabel={({route, focused, color}) => (
-          //         <Text style={{color: colors.textBlack, width: "auto", letterSpacing: 0, margin: 8}} numberOfLines={1}>
-          //           {route.title}
-          //         </Text>
-          //       )}
-          //     />
-          //   );
-          // }}
           renderTabBar={renderTabBar}
         />
       </View>
