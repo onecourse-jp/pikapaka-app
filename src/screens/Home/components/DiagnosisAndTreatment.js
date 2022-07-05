@@ -23,7 +23,8 @@ export default function DiagnosisAndTreatment() {
       },
       label: "ダイエット",
       disable: true,
-      imageUrl: require("@assets/images/treatment_cate2.png"),
+      // imageUrl: require("@assets/images/treatment_cate2.png"),
+      imageUrl: require("@assets/images/diet_top_disable_treatment.png"),
     },
     {
       action: () => {
@@ -45,7 +46,8 @@ export default function DiagnosisAndTreatment() {
       },
       label: "AGA",
       disable: true,
-      imageUrl: require("@assets/images/treatment_cate5.png"),
+      // imageUrl: require("@assets/images/treatment_cate5.png"),
+      imageUrl: require("@assets/images/aga_top_disable_treatment.png"),
     },
   ];
 
