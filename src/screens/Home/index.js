@@ -56,7 +56,7 @@ export default function Home({route}) {
       <View style={[styles.container]}>
         <ScrollView ref={HomeRef} contentContainerStyle={{backgroundColor: colors.colorHome02}}>
           <View style={{width: "100%", backgroundColor: colors.white}}>
-            <Image style={{width: "100%"}} source={require("@assets/images/image_header_top.png")} />
+            <Image style={{width: "100%"}} source={require("@assets/images/image_header_top_v2.png")} />
           </View>
           <View style={{flex: 1, paddingHorizontal: 20, paddingTop: 40, paddingBottom: 20}}>
             <DiagnosisAndTreatment />

@@ -57,7 +57,7 @@ export default function Top({navigation, route}) {
   const renderTabBar = (props) => {
     const inputRange = props.navigationState.routes.map((x, i) => i);
     return (
-      <View style={{flexDirection: "row", justifyContent: "space-between", alignItems: "center", backgroundColor: colors.colorHome04}}>
+      <View style={{flexDirection: "row", justifyContent: "space-between", alignItems: "center", backgroundColor: colors.colorHome04, maxHeight: 66}}>
         {props.navigationState.routes.map((route, i) => {
           const backgroundColor = props.position.interpolate({
             inputRange,
@@ -73,7 +73,7 @@ export default function Top({navigation, route}) {
                 width: "20%",
                 height: "100%",
                 alignItems: "center",
-                // justifyContent: "center",
+                justifyContent: "center",
                 borderRightWidth: i + 1 < props.navigationState.routes.length ? 1 : 0,
                 borderRightColor: colors.white,
                 paddingVertical: 7,

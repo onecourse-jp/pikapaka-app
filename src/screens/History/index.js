@@ -25,10 +25,10 @@ export default function History() {
   const [routes] = React.useState([
     {key: "first", title: "全て", icon: null},
     {key: "second", title: "スキンケア", icon: require("@assets/images/icons/ic_tab_1.png")},
-    {key: "third", title: "ダイエット", icon: require("@assets/images/icons/ic_tab_2.png")},
+    {key: "third", title: "ダイエット", icon: require("@assets/images/icons/ic_tab_2.png"), disable: true},
     {key: "fourth", title: "ピル", icon: require("@assets/images/icons/ic_tab_3.png")},
     {key: "fifth", title: "ED", icon: require("@assets/images/icons/ic_tab_4.png")},
-    {key: "sixth", title: "AGA", icon: require("@assets/images/icons/ic_tab_5.png")},
+    {key: "sixth", title: "AGA", icon: require("@assets/images/icons/ic_tab_5.png"), disable: true},
   ]);
   const renderScene = ({route, jumpTo}) => {
     switch (route.key) {
@@ -74,6 +74,7 @@ export default function History() {
           justifyContent: "space-between",
           alignItems: "center",
           backgroundColor: colors.colorHome04,
+          maxHeight: 66,
         }}
       >
         {props.navigationState.routes.map((route, i) => {
@@ -85,20 +86,22 @@ export default function History() {
             <TouchableOpacity
               onPress={() => setIndex(i)}
               key={`step-${i}`}
+              disabled={route.disable}
               style={{
                 flexDirection: "column",
                 width: width / 6,
-                // height: "100%",
+                height: "100%",
                 justifyContent: "center",
                 alignItems: "center",
                 borderRightWidth: i + 1 < props.navigationState.routes.length ? 1 : 0,
                 borderRightColor: colors.white,
                 paddingVertical: 7,
-                backgroundColor: index === i ? listColor[index] : colors.colorHome02,
+                backgroundColor: index === i ? listColor[index] : route.disable ? colors.gray7 : colors.colorHome02,
               }}
             >
               <View style={{height: route.icon ? 20 : 10}}>{route.icon && <Image source={route.icon} />}</View>
               <Text style={{color: colors.white, fontSize: 11, lineHeight: 12, fontWeight: "700", marginTop: 5}}>{route.title}</Text>
+              {route?.disable && <Text style={{color:"white", fontSize: 10}}>(準備中)</Text>}
               {route.icon === null && <View style={{height: 10}}>{route.icon && <Image source={route.icon} />}</View>}
             </TouchableOpacity>
           );
@@ -116,6 +119,7 @@ export default function History() {
           onIndexChange={setIndex}
           style={{flex: 1}}
           renderTabBar={renderTabBar}
+          swipeEnabled={false}
         />
       </View>
     </SafeAreaView>

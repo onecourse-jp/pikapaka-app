@@ -24,8 +24,8 @@ export default function ButtonBooking(props) {
       <TouchableOpacity
         onPress={goToBooking}
         style={{
-          width: 80,
-          height: 80,
+          width: 90,
+          height: 90,
           borderRadius: 80,
           paddingHorizontal: 10,
           flexDirection: "row",
@@ -34,7 +34,7 @@ export default function ButtonBooking(props) {
           backgroundColor: bgColor,
         }}
       >
-        <Text style={{fontSize: 12, textAlign: "center", color: colors.white, fontWeight: "bold"}}>診療予約は こちら</Text>
+        <Text style={{fontSize: 18, textAlign: "center", color: colors.white, fontWeight: "bold"}}>予約はこちら</Text>
       </TouchableOpacity>
     </View>
   );
