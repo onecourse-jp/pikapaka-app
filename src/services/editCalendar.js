@@ -8,7 +8,7 @@ export async function updateShippingAddress(params) {
     headers: {
       "Content-Type": "application/json",
     },
-    data: JSON.stringify(params),
+    data: JSON.stringify(params.newDataCalendar),
   });
 }
 

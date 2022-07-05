@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {useForm, Controller} from "react-hook-form";
-import {StyleSheet, Text, View, ScrollView, SafeAreaView, TouchableOpacity} from "react-native";
+import {StyleSheet, Text, View, ScrollView, SafeAreaView, TouchableOpacity, TextInput} from "react-native";
 import {useThemeColors, useThemeFonts, Button} from "react-native-theme-component";
 import {useNavigation} from "@react-navigation/native";
 import {useDispatch, useSelector} from "react-redux";
@@ -9,6 +9,7 @@ import {
   SCREEN_EDIT_CALENDAR_CONFIRM,
   SCREEN_EDIT_POSTAL_CODE,
   SCREEN_EDIT_ADDRESS,
+  SCREEN_EDIT_CALENDAR
 } from "@screens/screens.constants";
 import {getReservationById} from "@services/auth";
 import moment from "moment";
@@ -35,6 +36,9 @@ export default function DeliveryAddress({route}) {
 
   const onSubmit = async (dataSubmit) => {
     console.log("dataSubmit", dataSubmit);
+    console.log("dataCalendar", dataCalendar);
+    // call api update shipping address and postal code in reservation
+    // go back
     global.showLoadingView();
     global.showLoadingView();
     let dataAddressSubmit = {};
@@ -51,25 +55,25 @@ export default function DeliveryAddress({route}) {
     }
 
     dataAddressSubmit.id = dataCalendar.id;
-    dataAddressSubmit.detail_category_medical_of_customer = dataCalendar?.detail_category_medical_of_customer;
+    // dataAddressSubmit.detail_category_medical_of_customer = dataCalendar?.detail_category_medical_of_customer;
     if (Object.keys(dataAddressSubmit).length > 0) {
       try {
         let newDataCalendar = {
-          ...dataCalendar,
           address: dataAddressSubmit.address,
           postal_code: dataAddressSubmit.postal_code,
         };
-        navigation.navigate(SCREEN_EDIT_CALENDAR_CONFIRM, {data: newDataCalendar});
-        // const {data, response} = await updateShippingAddress(dataAddressSubmit);
-        // console.log("data---", data)
-        // if (response.status == 200) {
-        //   dispatch(updateUserProfile(data.data));
-        //   global.hideLoadingView();
-        //   console.log("data when update", data);
-        // } else {
-        //   global.hideLoadingView();
-        //   console.log("response--------", response);
-        // }
+        // navigation.navigate(SCREEN_EDIT_CALENDAR_CONFIRM, {data: newDataCalendar});
+        const {data, response} = await updateShippingAddress({id: dataAddressSubmit.id, newDataCalendar});
+        console.log("data---", data)
+        if (response.status == 200) {
+          // dispatch(updateUserProfile(data.data));
+          global.hideLoadingView();
+          console.log("data when update", data);
+          navigation.navigate(SCREEN_EDIT_CALENDAR, {data: {...dataCalendar, shipping_address: newDataCalendar.address, shipping_postal_code: newDataCalendar.postal_code}});
+        } else {
+          global.hideLoadingView();
+          console.log("response--------", response);
+        }
       } catch (error) {
         console.log("error", error);
         global.hideLoadingView();
@@ -79,28 +83,27 @@ export default function DeliveryAddress({route}) {
   };
 
   useEffect(() => {
-    reset({...userDetails});
     setDataPerson([
       {
         key: "postal_code",
         title: "郵便番号",
         placeholder: "郵便番号を入力",
-        value: userDetails?.postal_code ?? null,
-        action: () => {
-          navigation.navigate(SCREEN_EDIT_POSTAL_CODE, {data: userDetails, label: "郵便番号"});
-        },
+        value: dataCalendar.shipping_postal_code ?? userDetails?.postal_code ?? null,
+        // action: () => {
+        //   navigation.navigate(SCREEN_EDIT_POSTAL_CODE, {data: userDetails, label: "郵便番号"});
+        // },
       },
       {
         key: "address",
         title: "住所",
         placeholder: "住所を入力",
-        value: userDetails?.address ?? null,
-        action: () => {
-          navigation.navigate(SCREEN_EDIT_ADDRESS, {data: userDetails, label: "住所"});
-        },
+        value: dataCalendar.shipping_address ?? userDetails?.address ?? null,
+        // action: () => {
+        //   navigation.navigate(SCREEN_EDIT_ADDRESS, {data: userDetails, label: "住所"});
+        // },
       },
     ]);
-  }, [userDetails]);
+  }, []);
 
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: colors.backgroundTheme}}>
@@ -135,15 +138,33 @@ export default function DeliveryAddress({route}) {
           </Text>
           <View>
             {dataPerson.map((item, index) => {
+              console.log("item", item)
               return (
                 <React.Fragment key={`ADDRESS-${index}`}>
                   <Controller
                     control={control}
-                    rules={{required: true}}
+                    rules={{required: false}}
                     name={item.key}
                     defaultValue={item?.value}
                     render={({field: {onChange, onBlur, value}}) => {
-                      return <ItemQuestionForm item={item} valueData={value} changeData={onChange} />;
+                      // return <ItemQuestionForm item={item} valueData={value} changeData={onChange} />;
+                      return (
+                        <View style={{flexDirection: "row", alignItems: "center", backgroundColor: "white"}}>
+                          <View style={{width: 100}}><Text style={{textAlign: "center"}}>{item.title}</Text></View>
+                          <TextInput
+                            style={{
+                              color: colors.textBlack,
+                              backgroundColor: colors.white,
+                              paddingHorizontal: 16,
+                              textAlignVertical: "top",
+                            }}
+                            placeholder={item.placeholder}
+                            placeholderTextColor={colors.textPlaceholder}
+                            onChangeText={onChange}
+                            value={value}
+                          />
+                        </View>
+                      );
                     }}
                   />
                 </React.Fragment>
@@ -152,7 +173,10 @@ export default function DeliveryAddress({route}) {
           </View>
         </ScrollView>
         <View style={{marginTop: 60, paddingHorizontal: 16}}>
-          <Button label="変更内容を確認へ進む" onPress={() => navigation.goBack()} />
+          <Button
+            label="変更内容を確認へ進む"
+            onPress={handleSubmit(onSubmit)}
+          />
         </View>
       </View>
     </SafeAreaView>
