@@ -15,11 +15,14 @@ target 'TCare' do
   pod 'Firebase/Crashlytics'
   pod 'Firebase/Analytics'
   pod 'Firebase/Performance'
+  pod 'AppsFlyerFramework'
   pod 'LineSDKSwift', '~> 5.0'
   pod 'Permission-Microphone', :path => "#{permissions_path}/Microphone"
   pod 'RNIap', :path => '../node_modules/react-native-iap'
   pod 'GoogleSignIn', '~> 6.1.0'
   pod 'FBSDKLoginKit'
+  pod 'react-native-appsflyer', :path => '../node_modules/react-native-appsflyer'
+
   target 'TCareTests' do
     inherit! :complete
     # Pods for testing

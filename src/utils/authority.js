@@ -36,7 +36,6 @@ export async function setAuthority(authority) {
     sharedPreferencesName: DEFAULT_PREF,
     keychainService: DEFAULT_KEYCHAINSERVICE,
   });
-  console.log("savingFirstData", savingFirstData);
 }
 export function removeAuthority() {
   return SInfo.deleteItem("@authority", {
@@ -46,7 +45,6 @@ export function removeAuthority() {
 }
 export async function isLogin() {
   const authority = await getAuthority();
-  console.log("authority", authority);
   if (authority && authority?.data?.access_token) return true;
   return false;
 }

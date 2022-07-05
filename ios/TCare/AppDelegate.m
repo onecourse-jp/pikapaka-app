@@ -1,5 +1,5 @@
 #import "AppDelegate.h"
-
+#import <AppsFlyerLib/AppsFlyerLib.h>
 #import <React/RCTBridge.h>
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
@@ -12,20 +12,59 @@
 #ifdef FB_SONARKIT_ENABLED
 #import <SKIOSNetworkPlugin/SKIOSNetworkAdapter.h>
 #endif
-
+#import <UserNotifications/UserNotifications.h>
 #import <AppCenterReactNative.h>
 #import <AppCenterReactNativeAnalytics.h>
 #import <AppCenterReactNativeCrashes.h>
 @implementation AppDelegate
-
+- (void)sendLaunch:(UIApplication *)application {
+    [[AppsFlyerLib shared] start];
+}
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
 //  [Bugsnag start];
-  
+// Override point for customization after application launch.
+    /** APPSFLYER INIT **/
+    [AppsFlyerLib shared].appsFlyerDevKey = @"cPHVT7GQgfRBWGukAgLmPW";
+    [AppsFlyerLib shared].appleAppID = @"1628953261";
+    /* Uncomment the following line to see AppsFlyer debug logs */
+    [AppsFlyerLib shared].isDebug = true;
+    [[NSNotificationCenter defaultCenter] addObserver:self
+     selector:@selector(sendLaunch:)
+     name:UIApplicationDidBecomeActiveNotification
+     object:nil];
+    if (@available(iOS 10, *)) {
+        UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+        center.delegate = self;
+        [center requestAuthorizationWithOptions:(UNAuthorizationOptionSound | UNAuthorizationOptionAlert | UNAuthorizationOptionBadge) completionHandler:^(BOOL granted, NSError * _Nullable error) {
+        }];
+    }
+
+    else {
+        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes: UIUserNotificationTypeAlert | UIUserNotificationTypeSound | UIUserNotificationTypeBadge categories:nil];
+        [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+    }
+    /*
+    * Send af_login event.
+    * Trigger: User successfully logs in
+    */
+    [[AppsFlyerLib shared] logEvent:AFEventLogin withValues: nil];
+
+    /*
+    * Send af_complete_registration event.
+    * Trigger: User completes the signup process
+    */
+    [[AppsFlyerLib shared] logEvent:AFEventCompleteRegistration withValues: @{
+      AFEventParamRegistrationMethod: @"", // Type of signup method
+    }];
+    [[UIApplication sharedApplication] registerForRemoteNotifications];
 #ifdef FB_SONARKIT_ENABLED
 #endif
 //  [RNSplashScreen show];  // here
   
+  
+    // SceneDelegate support
+    
   [FIRApp configure];
   [AppCenterReactNative register];
   [AppCenterReactNativeAnalytics registerWithInitiallyEnabled:true];

@@ -9,6 +9,7 @@ import {
   SCREEN_MODAL_LOADER,
   SCREEN_MODAL_BOTTOM,
   SCREEN_MODAL_LIST_IMAGE_CALL,
+  SCREEN_DETAIL_CALENDAR,
 } from "../screens/screens.constants";
 import {setAuthority} from "./authority";
 import {dataMedicalHistory} from "../data";
@@ -33,6 +34,9 @@ export const goToMain = () => {
 };
 export const goToServiceStep3 = () => {
   RootNavigator.navigate(SCREEN_SERVICE_STEP3);
+};
+export const goToDetailCalendar = (id) => {
+  RootNavigator.navigate(SCREEN_DETAIL_CALENDAR, {id: id});
 };
 export const goToWelcome = () => {
   const resetAction = CommonActions.reset({
@@ -63,6 +67,8 @@ export const processSignIn = async (data) => {
   await AsyncStorage.setItem("@otp", jsonValue);
   if (data.isFromStep2) {
     goToServiceStep3();
+  } else if (data.isAnswerQuestion) {
+    goToDetailCalendar(data.isAnswerQuestion);
   } else {
     goToMain();
   }

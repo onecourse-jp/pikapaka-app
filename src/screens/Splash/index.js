@@ -18,24 +18,17 @@ const allSettled = (promises) => {
 };
 
 function SplashScreen(props) {
-  console.log("SplashScreen SplashScreen");
   const [loading, setLoading] = useState(false);
   const user = useSelector((state) => state?.users?.userDetails);
   const dispatch = useDispatchPromise();
   const getData = async () => {
-    console.log("call getDAta");
     try {
       setLoading(true);
       const _isLogin = await isLogin();
-      console.log("islogin", _isLogin);
-      if (_isLogin) {
-        console.log("islogin");
-      }
       const p = [];
 
       Promise.all(p)
         .then((values) => {
-          console.log("profile", values);
           if (_isLogin) {
             navigationRef.current.resetRoot({
               index: 0,

@@ -38,7 +38,6 @@ function SplashScreen({navigation}) {
   }, [userDetails]);
 
   const getData = async () => {
-    console.log("call getDAta");
     // Bugsnag.notify(new Error('Test error'));
     setLoading(true);
     global.showLoadingView();

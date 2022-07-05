@@ -51,6 +51,7 @@
     "react-google-login": "^5.2.2",
     "react-hook-form": "^7.15.0",
     "react-native": "^0.64.0",
+    "react-native-appsflyer": "^6.6.1",
     "react-native-background-timer": "^2.4.1",
     "react-native-calendars": "^1.1280.0",
     "react-native-camera": "^4.1.1",

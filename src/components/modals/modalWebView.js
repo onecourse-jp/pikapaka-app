@@ -171,8 +171,8 @@ export default function ModalWebView({route}) {
                   webRef.current.injectJavaScript("window.switchCameraOption()");
                 }}
               >
-                <Image style={{width: 50, height: 50}} source={require("@assets/images/icons/ic_switch_camera.png")} />
-                <Text style={{fontSize: 11, lineHeight: 16, color: "white", marginTop: 8}}>カメラ切替</Text>
+                <Image style={{width: 50, height: 0}} source={require("@assets/images/icons/ic_switch_camera.png")} />
+                {/* <Text style={{fontSize: 11, lineHeight: 16, color: "white", marginTop: 8}}>カメラ切替</Text> */}
               </TouchableOpacity>
               <TouchableOpacity style={{flexDirection: "column", alignItems: "center"}} onPress={quitRoomCall}>
                 <Image style={{width: 50, height: 50}} source={require("@assets/images/icons/ic_quit_room_call.png")} />
