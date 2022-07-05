@@ -26,24 +26,29 @@ export default function Top({navigation, route}) {
     {key: "fourth", title: "ED", icon: require("@assets/images/icons/ic_tab_4.png")},
     {key: "fifth", title: "AGA", icon: require("@assets/images/icons/ic_tab_5.png"), disable: true},
   ]);
-
+  const [tabNow, setTabNow] = useState(0)
   const listColor = [colors.buttonSkincare, colors.textDiet, colors.colorPill, colors.colorED07, colors.colorAGA07];
 
   const renderScene = ({route, jumpTo}) => {
     switch (route.key) {
       case "first": {
+        setTabNow(1)
         return <TopSkinCare />;
       }
       case "second": {
+        setTabNow(2)
         return <TopDiet />;
       }
       case "third": {
+        setTabNow(3)
         return <TopPill />;
       }
       case "fourth": {
+        setTabNow(4)
         return <TopED />;
       }
       case "fifth": {
+        // setTabNow(5)
         return <TopAGA />;
       }
     }
@@ -66,7 +71,9 @@ export default function Top({navigation, route}) {
               style={{
                 flexDirection: "column",
                 width: "20%",
+                height: "100%",
                 alignItems: "center",
+                // justifyContent: "center",
                 borderRightWidth: i + 1 < props.navigationState.routes.length ? 1 : 0,
                 borderRightColor: colors.white,
                 paddingVertical: 7,
@@ -77,6 +84,7 @@ export default function Top({navigation, route}) {
                 <Image source={route.icon} />
               </View>
               <Text style={{color: colors.white, fontSize: 12, fontWeight: "700", marginTop: 5}}>{route.title}</Text>
+              {route?.disable && <Text style={{color:"white", fontSize: 10}}>(準備中)</Text>}
             </TouchableOpacity>
           );
         })}
@@ -90,6 +98,7 @@ export default function Top({navigation, route}) {
       }, 500);
     }
   }, [route]);
+
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: colors.backgroundTheme}}>
       <Headercomponent />
@@ -100,6 +109,7 @@ export default function Top({navigation, route}) {
           onIndexChange={setIndex}
           style={{flex: 1}}
           renderTabBar={renderTabBar}
+          swipeEnabled={false}
         />
       </View>
     </SafeAreaView>
