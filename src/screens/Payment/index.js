@@ -9,6 +9,8 @@ import {
   RefreshControl,
   Image,
   KeyboardAvoidingView,
+  ActivityIndicator,
+  Pressable,
 } from "react-native";
 import {useThemeColors, useThemeFonts, Button} from "react-native-theme-component";
 import {useNavigation} from "@react-navigation/native";
@@ -17,7 +19,12 @@ import StepsComponent from "@components/StepsComponent";
 import GuideComponent from "@components/GuideComponent";
 import {getReservationById} from "@services/auth";
 import {createStripeCheckoutSession, paymentStripe} from "@services/payments";
-import {SCREEN_DETAIL_CALENDAR_AFTER_PAYMENT, SCREEN_EDIT_DELIVERY_ADDRESS, SCREEN_HISTORY} from "@screens/screens.constants";
+import {
+  SCREEN_DETAIL_CALENDAR_AFTER_PAYMENT,
+  SCREEN_EDIT_DELIVERY_ADDRESS,
+  SCREEN_HISTORY,
+  SCREEN_SERVICE_STEP1,
+} from "@screens/screens.constants";
 import {useForm, Controller} from "react-hook-form";
 import ItemQuestionForm from "../../components/Form/ItemQuestionForm";
 import {getBillPayment} from "@services/payments";
@@ -25,6 +32,7 @@ import {SCREEN_EDIT_ADDRESS} from "../screens.constants";
 import {changeStatusCalendar} from "@actions/calendarAction";
 import BillPayment from "./BillPayment";
 import CardExpInput from "@components/items/CardExpInput";
+import CustomModal from "../../components/LoadingView";
 
 export default function Payment({route}) {
   const colors = useThemeColors();
@@ -35,7 +43,7 @@ export default function Payment({route}) {
   const [errorApi, setErrorApi] = useState("");
   const [billData, setBillData] = useState(null);
   const [dataExp, setDataExp] = useState(null);
-
+  const [paymentLoading, setPaymentLoading] = useState(false);
   console.log("idCalendar", idCalendar);
 
   const screenStep = 4;
@@ -55,10 +63,11 @@ export default function Payment({route}) {
   }, [watch]);
 
   const onSubmit = async (dataSubmit) => {
-    paymentMobile(dataSubmit);
+    // global.showLoadingView();
+    setPaymentLoading(true)
+    paymentMobile(dataSubmit)
   };
   const paymentMobile = async (dataSubmit) => {
-    global.showLoadingView();
     const paramsData = {
       cart_number: dataSubmit.cart_number,
       exp_month: dataExp.exp_month,
@@ -73,7 +82,7 @@ export default function Payment({route}) {
       console.log(" paramsData", paramsData);
       if (response && response.status == 200) {
         dispatch(changeStatusCalendar());
-        global.hideLoadingView();
+        setPaymentLoading(false)
         let toastId = global.toast.show("aaaaaa", {
           placement: "top",
           duration: 3500,
@@ -105,10 +114,11 @@ export default function Payment({route}) {
           },
         });
         setTimeout(() => {
+          navigation.replace(SCREEN_SERVICE_STEP1);
           navigation.navigate(SCREEN_HISTORY, {id: idCalendar});
         }, 3000);
       } else {
-        global.hideLoadingView();
+        setPaymentLoading(false)
         if (data?.message && typeof data?.message == "string") {
           let errorMessage = data?.message.split(" ").join("");
           errorMessage = errorMessage.split(".").join("");
@@ -123,7 +133,7 @@ export default function Payment({route}) {
         }
       }
     } catch (error) {
-      global.hideLoadingView();
+      setPaymentLoading(false)
       console.log("err paymentStripe", error);
       setErrorApi("Error!");
     }
@@ -386,6 +396,28 @@ export default function Payment({route}) {
           </ScrollView>
         </KeyboardAvoidingView>
       </View>
+      {paymentLoading &&  <View style={{position: "absolute",width: "100%", height: "100%"}}>
+        <View
+          style={{
+            backgroundColor: "transparent",
+            flex: 1,
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <Pressable style={[StyleSheet.absoluteFill, {backgroundColor: "rgba(0, 0, 0, 0.5)"}]} onPress={() => {}} />
+          <View style={styles2.container}>
+            <View
+              style={{
+                ...styles2.activityIndicatorWrapper,
+              }}
+            >
+              <ActivityIndicator animating={true} color={"black"} size={50} />
+            </View>
+          </View>
+        </View>
+      </View>}
+     
     </SafeAreaView>
   );
 }
@@ -395,4 +427,34 @@ const styles = StyleSheet.create({
     flexDirection: "column",
   },
   textError: {color: "red", marginTop: 5, textAlign: "left", paddingHorizontal: 16},
+});
+
+const styles2 = StyleSheet.create({
+  activityIndicatorWrapper: {
+    backgroundColor: "transparent",
+    borderRadius: 10,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  title: {
+    paddingTop: 10,
+  },
+  container: {
+    alignItems: "center",
+    justifyContent: "center",
+    padding: 32,
+    backgroundColor: "transparent",
+    borderRadius: 10,
+  },
+  imageWarn: {
+    margin: 32,
+    alignSelf: "center",
+  },
+  topTitle: {
+    textAlign: "center",
+    fontSize: 16,
+    fontWeight: "bold",
+    color: "black",
+    marginTop: 30,
+  },
 });

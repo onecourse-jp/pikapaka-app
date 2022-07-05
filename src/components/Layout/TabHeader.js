@@ -60,7 +60,7 @@ export default function TabHeaderComponent({tab = null}) {
   ];
   const listColor = [colors.buttonSkincare, colors.textDiet, colors.colorPill, colors.colorED07, colors.colorAGA07];
   return (
-    <View style={{flexDirection: "row", justifyContent: "space-between", alignItems: "center", backgroundColor: colors.colorHome04}}>
+    <View style={{flexDirection: "row", justifyContent: "space-between", alignItems: "center", backgroundColor: colors.colorHome04, maxHeight: 66}}>
       {DataStep.map((item, index) => {
         return (
           <TouchableOpacity
@@ -71,6 +71,7 @@ export default function TabHeaderComponent({tab = null}) {
               flexDirection: "column",
               width: "20%",
               alignItems: "center",
+              justifyContent: "center",
               height: "100%",
               borderRightWidth: index + 1 < DataStep.length ? 1 : 0,
               borderRightColor: colors.white,
@@ -78,11 +79,11 @@ export default function TabHeaderComponent({tab = null}) {
               backgroundColor: item?.disable ? colors.gray7 : tab == index + 1 ? listColor[index] : colors.colorHome02,
             }}
           >
-            <View>
-              <Image source={item.imageUrl} />
-            </View>
-            <Text style={{color: colors.white, fontSize: 12, fontWeight: "700", marginTop: 5}}>{item.label}</Text>
-            {item?.disable && <Text style={{color:"white", fontSize: 10}}>(準備中)</Text>}
+              <View>
+                <Image source={item.imageUrl} />
+              </View>
+              <Text style={{color: colors.white, fontSize: 12, fontWeight: "700", marginTop: 5}}>{item.label}</Text>
+              {item?.disable && <Text style={{color:"white", fontSize: 10}}>(準備中)</Text>}
           </TouchableOpacity>
         );
       })}
