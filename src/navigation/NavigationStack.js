@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import React, {useContext, useEffect} from "react";
 import {NavigationContainer} from "@react-navigation/native";
 import {createNativeStackNavigator} from "@react-navigation/native-stack";
 import {TouchableOpacity, Platform, Image} from "react-native";
@@ -66,6 +66,7 @@ import {
   SCREEN_DETAIL_CALENDAR,
 } from "@screens/screens.constants";
 import {navigationRef} from "./NavigationService";
+import {useNavigation} from "@react-navigation/native";
 
 const Stack = createNativeStackNavigator();
 
@@ -74,6 +75,7 @@ function App() {
   global.t = t;
 
   const linking = {
+    // prefixes: ["pikapaka:/"],
     prefixes: Config.LINKING_PREFIXES.split("|"),
     config: {
       screens: {

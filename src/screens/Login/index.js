@@ -15,6 +15,7 @@ export default function LoginScreen({route}) {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const isFromStep2 = route?.params?.isFromStep2;
+  const isAnswerQuestion = route?.params?.isAnswerQuestion;
   const {
     control,
     handleSubmit,
@@ -38,6 +39,9 @@ export default function LoginScreen({route}) {
       dispatch(updateUserProfile(data?.data?.user));
       if (isFromStep2) {
         data.isFromStep2 = isFromStep2;
+      }
+      if (isAnswerQuestion) {
+        data.isAnswerQuestion = isAnswerQuestion;
       }
       global.processSignIn(data);
       global.hideLoadingView();

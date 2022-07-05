@@ -6,6 +6,7 @@ if (Platform.OS === "ios") {
 } else {
   ({TouchableOpacity} = require("react-native-gesture-handler"));
 }
+import {Linking} from "react-native";
 import Config from "react-native-config";
 import {useNavigation} from "@react-navigation/native";
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
@@ -25,6 +26,7 @@ import MedicalHisotyStack from "./MedicalHistoryStack";
 import bus from "@utils/eventBus";
 import {updateNotificationToken} from "@services/users";
 import {getProfile} from "@services/search";
+import {SCREEN_DETAIL_CALENDAR, SCREEN_LOGIN} from "@screens/screens.constants";
 import {requestTrackingPermission} from "react-native-tracking-transparency";
 const Tab = createBottomTabNavigator();
 
@@ -41,6 +43,22 @@ export default function BottomTabbarNavigator({route}) {
       const trackingStatus = await requestTrackingPermission();
       if (trackingStatus === "authorized" || trackingStatus === "unavailable") {
         // enable tracking features
+      }
+    }
+  }, []);
+  useEffect(async () => {
+    const initialUrl = await Linking.getInitialURL();
+    console.log("getInitialURL", initialUrl);
+    console.log("getInitialURL LINKING_PREFIXES", Config.LINKING_PREFIXES.split("|"));
+    if (initialUrl) {
+      var thenum = initialUrl.replace(/^\D+/g, "");
+      console.log("thenum", thenum);
+      if (user) {
+        navigation.navigate("SERVICE");
+        navigation.navigate(SCREEN_DETAIL_CALENDAR, {id: Number(thenum)});
+      }
+      {
+        navigation.navigate(SCREEN_LOGIN, {isAnswerQuestion: Number(thenum)});
       }
     }
   }, []);

@@ -38,6 +38,7 @@ import {ThemeProvider} from "react-native-theme-component";
 import {yourThemeData} from "./customTheme";
 import {setCustomTouchableOpacity, setCustomTextInput, setCustomText} from "react-native-global-props";
 import moment from "moment";
+import appsFlyer from "react-native-appsflyer";
 
 moment.updateLocale("ja", {
   weekdays: ["日", "月", "火", "水", "木", "金", "土"],
@@ -47,6 +48,52 @@ const {width, height} = Dimensions.get("window");
 
 function Entrypoint() {
   const [locale, setLocale] = React.useState("vn");
+  const eventName = "af_login";
+  const doctorFirstBooking = "doctor_first_booking";
+  const doctorFirstBookingValues = {
+    af_content_id: Math.floor(Math.random() * 11),
+  };
+  const eventValues = {
+    doctor_name: Math.floor(Math.random() * 11),
+    specialty: "ED",
+    price: 3000,
+  };
+  appsFlyer.initSdk(
+    {
+      devKey: "cPHVT7GQgfRBWGukAgLmPW",
+      isDebug: true,
+      appId: "1628953261",
+      onInstallConversionDataListener: true, //Optional
+      onDeepLinkListener: true, //Optional
+      timeToWaitForATTUserAuthorization: 10, //for iOS 14.5
+    },
+    (result) => {
+      console.log(result);
+    },
+    (error) => {
+      console.error(error);
+    },
+  );
+  // appsFlyer.logEvent(
+  //   eventName,
+  //   eventValues,
+  //   (res) => {
+  //     console.log("Success", res, eventName, eventValues);
+  //   },
+  //   (err) => {
+  //     console.error(err);
+  //   },
+  // );
+  // appsFlyer.logEvent(
+  //   doctorFirstBooking,
+  //   doctorFirstBookingValues,
+  //   (res) => {
+  //     console.log("Success", res, doctorFirstBooking, doctorFirstBookingValues);
+  //   },
+  //   (err) => {
+  //     console.error(err);
+  //   },
+  // );
   setCustomTextInput({
     style: {
       backgroundColor: "#222C3A",
@@ -70,7 +117,6 @@ function Entrypoint() {
     if (value !== null) {
       setLocale(value);
     }
-    console.log("hide splash screen");
     SplashScreen.hide();
   }, []);
   // const toast = useToast();
@@ -89,7 +135,12 @@ function Entrypoint() {
         <PersistGate loading={<ActivityIndicator />} persistor={persistor}>
           <LocalizationContext.Provider value={localizationContext}>
             <Navigator />
-            <Toast ref={(ref) => (global["toast"] = ref)} successColor="rgba(82, 196, 26, 1)" offset={80} textStyle={{width:'100%', textAlign:'center'}} />
+            <Toast
+              ref={(ref) => (global["toast"] = ref)}
+              successColor="rgba(82, 196, 26, 1)"
+              offset={80}
+              textStyle={{width: "100%", textAlign: "center"}}
+            />
           </LocalizationContext.Provider>
         </PersistGate>
       </Provider>

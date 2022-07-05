@@ -213,7 +213,15 @@ export default function QuestionaireStep2({route}) {
                       render={({field: {onChange, onBlur, value}}) => {
                         if (item.key === "postal_code" || item.key === "address") {
                           return (
-                            <View style={{flexDirection: "row", alignItems: "center", backgroundColor: "white", borderBottomWidth:  item.key === "postal_code" ?  1 : 0, borderBottomColor:colors.borderGrayE}}>
+                            <View
+                              style={{
+                                flexDirection: "row",
+                                alignItems: "center",
+                                backgroundColor: "white",
+                                borderBottomWidth: item.key === "postal_code" ? 1 : 0,
+                                borderBottomColor: colors.borderGrayE,
+                              }}
+                            >
                               <View style={{width: "40%"}}>
                                 <Text style={{paddingLeft: 16}}>{item.title}</Text>
                               </View>
@@ -227,6 +235,7 @@ export default function QuestionaireStep2({route}) {
                                 placeholder={item.placeholder}
                                 placeholderTextColor={colors.textPlaceholder}
                                 onChangeText={onChange}
+                                keyboardType={item.key === "postal_code" ? "number-pad" : "default"}
                                 value={value}
                               />
                             </View>
@@ -234,7 +243,6 @@ export default function QuestionaireStep2({route}) {
                         } else {
                           return <ItemQuestionForm item={item} valueData={value} changeData={onChange} />;
                         }
-                        
                       }}
                     />
                     {errors[item.key] && item.key === "email" && <Text style={styles.textError}>{item.key} error</Text>}
