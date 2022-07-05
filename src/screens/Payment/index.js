@@ -82,7 +82,7 @@ export default function Payment({route}) {
       console.log(" paramsData", paramsData);
       if (response && response.status == 200) {
         dispatch(changeStatusCalendar());
-        global.hideLoadingView();
+        setPaymentLoading(false)
         let toastId = global.toast.show("aaaaaa", {
           placement: "top",
           duration: 3500,
@@ -114,10 +114,11 @@ export default function Payment({route}) {
           },
         });
         setTimeout(() => {
+          navigation.replace(SCREEN_SERVICE_STEP1);
           navigation.navigate(SCREEN_HISTORY, {id: idCalendar});
         }, 3000);
       } else {
-        global.hideLoadingView();
+        setPaymentLoading(false)
         if (data?.message && typeof data?.message == "string") {
           let errorMessage = data?.message.split(" ").join("");
           errorMessage = errorMessage.split(".").join("");
@@ -132,7 +133,7 @@ export default function Payment({route}) {
         }
       }
     } catch (error) {
-      global.hideLoadingView();
+      setPaymentLoading(false)
       console.log("err paymentStripe", error);
       setErrorApi("Error!");
     }
