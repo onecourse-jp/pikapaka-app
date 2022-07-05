@@ -65,78 +65,7 @@ export default function Payment({route}) {
   const onSubmit = async (dataSubmit) => {
     // global.showLoadingView();
     setPaymentLoading(true)
-    const paramsData = {
-      cart_number: dataSubmit.cart_number,
-      exp_month: dataExp.exp_month,
-      exp_year: dataExp.exp_year,
-      cvc: dataSubmit.cvc,
-      reservation_form_id: idCalendar,
-      amount: billData.bill?.total,
-      cart_name: dataSubmit.cart_name,
-    };
-    try {
-      const {response, data} = await paymentStripe(paramsData);
-      console.log(" paramsData", paramsData);
-      if (response && response.status == 200) {
-        dispatch(changeStatusCalendar());
-        // global.hideLoadingView();
-        setPaymentLoading(false)
-        let toastId = global.toast.show("aaaaaa", {
-          placement: "top",
-          duration: 3500,
-          animationType: "slide-in",
-          animationDuration: 100,
-          offsetTop: 0,
-          offset: 0, // offset for both top and bottom toasts
-          swipeEnabled: true,
-          renderToast: (toastOptions) => {
-            return (
-              <TouchableOpacity
-                style={{
-                  alignSelf: "stretch",
-                  marginTop: 0,
-                  marginHorizontal: 6,
-                  borderRadius: 10,
-                  backgroundColor: "#B7EB8F",
-                }}
-                onPress={() => {
-                  global.toast.hide(toastId);
-                  navigation.replace(SCREEN_HISTORY);
-                }}
-              >
-                <View>
-                  <Text style={{padding: 16, fontWeight: "bold"}}>{`お支払いが完了しました。`}</Text>
-                </View>
-              </TouchableOpacity>
-            );
-          },
-        });
-        setTimeout(() => {
-          navigation.replace(SCREEN_SERVICE_STEP1);
-          navigation.navigate(SCREEN_HISTORY, {id: idCalendar});
-        }, 3000);
-      } else {
-        // global.hideLoadingView();
-        setPaymentLoading(false)
-        if (data?.message && typeof data?.message == "string") {
-          let errorMessage = data?.message.split(" ").join("");
-          errorMessage = errorMessage.split(".").join("");
-          errorMessage = errorMessage.split("'").join("");
-          if (errorMessage.includes("test")) {
-            setErrorApi("お支払いが正常に完了しませんでした。カード情報をご確認ください。");
-          } else {
-            setErrorApi(global.t(errorMessage));
-          }
-        } else {
-          setErrorApi("Error!");
-        }
-      }
-    } catch (error) {
-      // global.hideLoadingView();
-      setPaymentLoading(false)
-      console.log("err paymentStripe", error);
-      setErrorApi("Error!");
-    }
+    paymentMobile(dataSubmit)
   };
   const paymentMobile = async (dataSubmit) => {
     const paramsData = {
