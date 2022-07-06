@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"name": "pikapaka-app",
+			"path": "../.."
+		},
+		{
+			"name": "AppsFlyerLib.framework",
+			"path": "../../../AppsFlyerLib.framework"
+		}
+	],
+	"settings": {}
+}
