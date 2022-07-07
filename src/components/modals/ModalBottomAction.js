@@ -22,7 +22,6 @@ const DATA = [
 
 export default function ModalBottomAction({navigation, route}) {
   const {callback} = route.params;
-  console.log("route.params ModalBottomAction", route.params);
   let defaultvalue = route.params?.value;
   const [valueChoose, setValueChoose] = useState(defaultvalue || null);
   const colors = useThemeColors();
@@ -83,7 +82,6 @@ export default function ModalBottomAction({navigation, route}) {
             style={{width: "100%", paddingRight: 28}}
             onPress={() => {
               if (callback) {
-                console.log("hahahah");
                 callback(valueChoose);
               }
               navigation.goBack();

@@ -12,6 +12,7 @@ import {
   SCREEN_QUESIONAIRE_STEP3,
   SCREEN_QUESIONAIRE_STEP4,
   SCREEN_EDIT_CALENDAR_CONFIRM,
+  SCREEN_EDIT_DELIVERY_ADDRESS,
 } from "../screens/screens.constants";
 import MedicalHistoryScreen from "@screens/History";
 import DetailCalender from "@screens/DetailCalendar";
@@ -21,6 +22,7 @@ import QuestionaireStep2 from "../screens/Questionnaire/Step2";
 import QuestionaireStep3 from "../screens/Questionnaire/Step3";
 import QuestionaireStep4 from "../screens/Questionnaire/Step4";
 import Confirm from "@screens/EditCalendar/Confirm";
+import DeliveryAddressPayment from "@screens/Payment/EditDeliveryAdrress";
 
 const MedicalHistoryStack = createNativeStackNavigator();
 function MedicalHistoryStackScreen() {
@@ -98,6 +100,7 @@ function MedicalHistoryStackScreen() {
           title: "問診票登録完了",
         }}
       />
+      <MedicalHistoryStack.Screen name={SCREEN_EDIT_DELIVERY_ADDRESS} component={DeliveryAddressPayment} options={{title: "配送先を指定"}} />
     </MedicalHistoryStack.Navigator>
     // </ChatProvider>
   );

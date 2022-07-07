@@ -16,7 +16,6 @@ export default function ModaConnectView({route}) {
   const fonts = useThemeFonts();
   const navigation = useNavigation();
   const [statusDoctor, setStatusDoctor] = useState(false);
-  const [localStream, setLocalStream] = useState();
   const dataCalendar = route?.params?.data;
   const titleWait = `${moment(dataCalendar?.date).format("YYYY年MM月DD日")}（${moment(dataCalendar?.date).format("dddd")}）${
     dataCalendar?.time_start
@@ -24,12 +23,6 @@ export default function ModaConnectView({route}) {
   const content =
     "医師の準備ができましたら、接続ボタンの色が変わりますので、接続してください。\nなお、順番に患者様を診察しております。お待ち頂く可能性もございますので、予めご了承ください。";
   const titleDoctorConnect = "お待たせいたしました。医師の準備ができました。医師へ接続してください。";
-  const notifiWaiting1 = "医師に接続中です。\n少々お待ちください。";
-  const notifiWaiting2 = "お待たせいたしまして、\n大変申し訳ございません。\n前の診療が長引いているため、\nもう少々お待ちください。";
-
-  useEffect(async () => {
-    console.log("localStream", localStream);
-  }, [localStream]);
 
   const handleAction = async () => {
     global.showWebView({

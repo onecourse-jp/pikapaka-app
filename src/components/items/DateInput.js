@@ -115,7 +115,6 @@ export default class DateInput extends React.Component {
         }
         if (this.props.minYear) {
           if (finalDateTime > newDayTime) {
-            console.log("hahahahah");
             this.props.getErrorInput(global.t("error_input_entryDate"));
           }
         }
