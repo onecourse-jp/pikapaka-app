@@ -10,7 +10,7 @@ export default function AboutClinic() {
   const colors = useThemeColors();
 
   return (
-    <View style={{backgroundColor: colors.white, borderRadius: 18, padding: 20, flexDirection: "column"}}>
+    <View style={{backgroundColor: colors.white, borderRadius: 18, paddingVertical: 40, paddingHorizontal: 20, flexDirection: "column"}}>
       <Text style={{fontSize: 24, color: colors.colorHome10, marginBottom: 15, textAlign: "center", fontWeight: "700"}}>提携クリニック</Text>
       <View style={{flexDirection: "row", justifyContent: "center"}}>
         <View style={{height: 2, width: 20, marginBottom: 4, backgroundColor: colors.colorHome10}}></View>

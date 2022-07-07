@@ -63,7 +63,7 @@ export default function ExternalMedicine() {
     col_2: ["2,000円", "2,300円", "2,800円", "2,090円", "730円", "2,340円"],
   };
   return (
-    <View style={{backgroundColor: colors.white, borderRadius: 18, padding: 20, flexDirection: "column"}}>
+    <View style={{backgroundColor: colors.white, borderRadius: 18, paddingVertical: 40, paddingHorizontal: 20, flexDirection: "column"}}>
       <Text
         style={{fontSize: width < 380 ? 20 : 24, fontWeight: "700", color: colors.buttonSkincare, marginBottom: 15, textAlign: "center"}}
       >

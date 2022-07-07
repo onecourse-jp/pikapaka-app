@@ -49,7 +49,7 @@ export default function NewsComponent() {
   }, []);
 
   return (
-    <View style={{backgroundColor: colors.white, borderRadius: 18, padding: 20, flexDirection: "column"}}>
+    <View style={{backgroundColor: colors.white, borderRadius: 18, paddingVertical: 40, paddingHorizontal: 20, flexDirection: "column"}}>
       <Text style={{fontSize: 24, color: colors.colorHome10, marginBottom: 15, textAlign: "center", fontWeight: "700"}}>お知らせ</Text>
       <View style={{flexDirection: "row", justifyContent: "center"}}>
         <View style={{height: 2, width: 20, marginBottom: 4, backgroundColor: colors.headerComponent}}></View>
@@ -59,7 +59,7 @@ export default function NewsComponent() {
           <View
             key={`item.text-${index}`}
             style={{
-              borderBottomWidth: index + 1 < QuestionData.length ? 1 : 0,
+              borderBottomWidth: index + 1 < listContents.length ? 1 : 0,
               paddingVertical: 16,
               borderBottomColor: "#DDDEE1",
             }}

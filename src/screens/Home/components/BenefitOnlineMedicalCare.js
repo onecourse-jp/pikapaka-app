@@ -42,7 +42,7 @@ export default function BenefitOnlineMedicalCare() {
     },
   ];
   return (
-    <View style={{backgroundColor: colors.white, borderRadius: 18, padding: 20, flexDirection: "column"}}>
+    <View style={{backgroundColor: colors.white, borderRadius: 18, paddingVertical: 40, paddingHorizontal: 20, flexDirection: "column"}}>
       <Text style={{fontSize: 24, fontWeight: "700", color: colors.colorHome10, marginBottom: 15, textAlign: "center"}}>オンライン診療のメリット</Text>
       <View style={{flexDirection: "row", justifyContent: "center"}}>
         <View style={{height: 2, width: 20, marginBottom: 20, backgroundColor: colors.colorHome10}}></View>
