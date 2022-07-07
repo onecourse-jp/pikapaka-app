@@ -63,6 +63,7 @@ export default function History() {
         clearTimeout(centerView);
       }
     }, 200);
+    setIndex(1)
   }, []);
   const renderTabBar = (props) => {
     const inputRange = props.navigationState.routes.map((x, i) => i);
