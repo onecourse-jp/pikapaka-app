@@ -53,7 +53,7 @@ export default function ExternalMedicine() {
     ],
   };
   return (
-    <View style={{backgroundColor: colors.white, borderRadius: 18, padding: 20, flexDirection: "column"}}>
+    <View style={{backgroundColor: colors.white, borderRadius: 18, paddingVertical: 40, paddingHorizontal: 20, flexDirection: "column"}}>
       <Text style={{fontSize: 24, fontWeight: "700", color: colors.buttonED, marginBottom: 15, textAlign: "center"}}>
         {global.t("Therapeutic_drug")}
       </Text>

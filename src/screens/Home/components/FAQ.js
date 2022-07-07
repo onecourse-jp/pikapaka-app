@@ -52,7 +52,7 @@ export default function FAQComponent({styleColor = "", question = [], Qcolor = "
   }, [screen]);
 
   return (
-    <View style={{backgroundColor: colors.white, borderRadius: 18, padding: 20, flexDirection: "column"}}>
+    <View style={{backgroundColor: colors.white, borderRadius: 18, paddingVertical: 40, paddingHorizontal: 20, flexDirection: "column"}}>
       <Text style={{fontSize: width < 380 ? 20 : 24, color: styleColor, marginBottom: 15, textAlign: "center", fontWeight: "700"}}>
         よくある質問
       </Text>

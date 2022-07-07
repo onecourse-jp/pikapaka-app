@@ -22,9 +22,7 @@ export default function OralMedicineDiet() {
       <Text style={{fontSize: 13, lineHeight: 18, letterSpacing: 1, color: colors.textHiragino}}>
         {global.t("basic_set_aimed_at_dieting")}
       </Text>
-      <Text style={{fontSize: 13, lineHeight: 18, letterSpacing: 1, color: colors.textHiragino05}}>
-        {global.t("set_content")}
-      </Text>
+      <Text style={{fontSize: 13, lineHeight: 18, letterSpacing: 1, color: colors.textHiragino05}}>{global.t("set_content")}</Text>
     </View>
   );
   const tableSinglePlan = {
@@ -61,8 +59,10 @@ export default function OralMedicineDiet() {
   ];
 
   return (
-    <View style={{backgroundColor: colors.white, borderRadius: 18, padding: 20, flexDirection: "column"}}>
-      <Text style={{fontSize: 24, fontWeight: "700", color: colors.textDiet, marginBottom: 15, textAlign: "center"}}>{global.t("oral_medicine")}</Text>
+    <View style={{backgroundColor: colors.white, borderRadius: 18, paddingVertical: 40, paddingHorizontal: 20, flexDirection: "column"}}>
+      <Text style={{fontSize: 24, fontWeight: "700", color: colors.textDiet, marginBottom: 15, textAlign: "center"}}>
+        {global.t("oral_medicine")}
+      </Text>
       <View style={{flexDirection: "row", justifyContent: "center"}}>
         <View style={{height: 2, width: 20, marginBottom: 4, backgroundColor: colors.textDiet}}></View>
       </View>
@@ -76,8 +76,8 @@ export default function OralMedicineDiet() {
               color: colors.white,
               fontFamily: fonts.Hiragino,
               paddingVertical: 6,
-            fontWeight: "bold",
-            paddingLeft: 10,
+              fontWeight: "bold",
+              paddingLeft: 10,
             }}
           >
             {global.t("set_plan")}
@@ -197,7 +197,7 @@ export default function OralMedicineDiet() {
           justifyContent: "center",
         }}
       >
-       <ButtonLinkService type={2} />
+        <ButtonLinkService type={2} />
       </View>
     </View>
   );

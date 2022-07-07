@@ -1,5 +1,5 @@
 import React from "react";
-import {Text, View, TouchableOpacity, ScrollView, SafeAreaView, Linking} from "react-native";
+import {Text, View, Image, TouchableOpacity, ScrollView, SafeAreaView, Linking} from "react-native";
 import {useThemeColors, useThemeFonts} from "react-native-theme-component";
 import styles from "../styles";
 import Headercomponent from "@components/Layout/Header";
@@ -7,7 +7,7 @@ import TabHeaderComponent from "@components/Layout/TabHeader";
 import FooterComponent from "@components/Layout/Footer";
 import ButtonBooking from "../../Home/components/ButtonBooking";
 
-export default function () {
+export default function ({navigation}) {
   const colors = useThemeColors();
   const fonts = useThemeFonts();
   const contactToEmail = () => {
@@ -91,6 +91,19 @@ export default function () {
         <ScrollView contentContainerStyle={{backgroundColor: colors.backgroundTheme}}>
           <View style={{padding: 40, flexDirection: "column"}}>
             <View style={{alignItems: "center", marginBottom: 40}}>
+              <View style={{flexDirection: "row", flex: 1, width: "100%"}}>
+                <TouchableOpacity
+                  onPress={() => navigation.goBack()}
+                  style={{
+                    justifyContent: "center",
+                    alignItems: "center",
+                    paddingVertical: 15,
+                    paddingRight: 20,
+                  }}
+                >
+                  <Image style={{width: 15, height: 24}} source={require("@assets/images/icons/ic_back.png")} resizeMode="cover" />
+                </TouchableOpacity>
+              </View>
               <Text style={{fontWeight: "700", textAlign: "center", fontSize: 32, lineHeight: 48, color: colors.textHiragino}}>
                 {title}
               </Text>
