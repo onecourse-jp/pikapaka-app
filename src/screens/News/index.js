@@ -22,9 +22,6 @@ export default function NewsScreen() {
   const dispatch = useDispatch();
   const DATA = [
     {label: "2022年", value: 2022},
-    {label: "2022年", value: 2022},
-    {label: "2022年", value: 2022},
-    {label: "2022年", value: 2022},
   ];
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(null);
@@ -62,23 +59,7 @@ export default function NewsScreen() {
     getContent();
   }, []);
 
-  const DATANEW = [
-    {
-      title: "オンライン診療の予約を開始しました",
-      content:
-        "Tケアクリニックでは、2022年1月4日(火)から、スキンケア、ダイエット、ピル、ED、AGAのオンライン診療を開始します。本日より先行してご予約を開始しました。ご予約はこちら >",
-      type: "skincare",
-      createdAt: "2022.4.10",
-    },
-    {
-      title: "オンライン診療の予約を開始しました",
-      content:
-        "Tケアクリニックでは、2022年1月4日(火)から、スキンケア、ダイエット、ピル、ED、AGAのオンライン診療を開始します。本日より先行してご予約を開始しました。ご予約はこちら >",
-      type: "skincare",
-      createdAt: "2022.4.1",
-    },
-  ];
-  const onRefresh = React.useCallback(() => {
+   const onRefresh = React.useCallback(() => {
     setRefreshing(true);
     getContent();
     setTimeout(() => {

@@ -64,8 +64,8 @@ export default function Payment({route}) {
 
   const onSubmit = async (dataSubmit) => {
     // global.showLoadingView();
-    setPaymentLoading(true)
-    paymentMobile(dataSubmit)
+    setPaymentLoading(true);
+    paymentMobile(dataSubmit);
   };
   const paymentMobile = async (dataSubmit) => {
     const paramsData = {
@@ -82,7 +82,7 @@ export default function Payment({route}) {
       console.log(" paramsData", paramsData);
       if (response && response.status == 200) {
         dispatch(changeStatusCalendar());
-        setPaymentLoading(false)
+        setPaymentLoading(false);
         let toastId = global.toast.show("aaaaaa", {
           placement: "top",
           duration: 3500,
@@ -118,7 +118,7 @@ export default function Payment({route}) {
           navigation.navigate(SCREEN_HISTORY, {id: idCalendar});
         }, 3000);
       } else {
-        setPaymentLoading(false)
+        setPaymentLoading(false);
         if (data?.message && typeof data?.message == "string") {
           let errorMessage = data?.message.split(" ").join("");
           errorMessage = errorMessage.split(".").join("");
@@ -133,7 +133,7 @@ export default function Payment({route}) {
         }
       }
     } catch (error) {
-      setPaymentLoading(false)
+      setPaymentLoading(false);
       console.log("err paymentStripe", error);
       setErrorApi("Error!");
     }
@@ -272,7 +272,7 @@ export default function Payment({route}) {
                       郵便番号
                     </Text>
                     <Text style={{fontFamily: fonts.Hiragino, width: "70%", fontSize: 12, color: colors.colorTextBlack, lineHeight: 16}}>
-                      {billData?.user?.postal_code}
+                      {billData?.reservation?.shipping_postal_code}
                     </Text>
                   </View>
                   <View
@@ -294,11 +294,20 @@ export default function Payment({route}) {
                       住所
                     </Text>
                     <Text style={{fontFamily: fonts.Hiragino, width: "70%", fontSize: 12, color: colors.colorTextBlack, lineHeight: 16}}>
-                      {billData?.user?.address}
+                      {billData?.reservation?.shipping_address}
                     </Text>
                   </View>
                   <View style={{flexDirection: "row", alignItems: "center", justifyContent: "center", marginBottom: 16}}>
-                    <TouchableOpacity onPress={() => navigation.navigate(SCREEN_EDIT_ADDRESS)} style={{width: "40%"}}>
+                    <TouchableOpacity
+                      onPress={() =>
+                        navigation.navigate(SCREEN_EDIT_DELIVERY_ADDRESS, {
+                          data: billData.bill.reservation,
+                          updateBothProfile: true,
+                          action: onRefresh,
+                        })
+                      }
+                      style={{width: "40%"}}
+                    >
                       <Text
                         style={{fontSize: 12, textAlign: "right", fontFamily: fonts.Hiragino, color: colors.accentOrange, lineHeight: 21}}
                       >
@@ -371,7 +380,6 @@ export default function Payment({route}) {
                           <View style={{width: "60%"}}>
                             <CardExpInput
                               getDataBirthday={(data) => {
-                                console.log("hahahah", data);
                                 setDataExp(data);
                               }}
                               getErrorInput={(data) => {
@@ -396,28 +404,29 @@ export default function Payment({route}) {
           </ScrollView>
         </KeyboardAvoidingView>
       </View>
-      {paymentLoading &&  <View style={{position: "absolute",width: "100%", height: "100%"}}>
-        <View
-          style={{
-            backgroundColor: "transparent",
-            flex: 1,
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <Pressable style={[StyleSheet.absoluteFill, {backgroundColor: "rgba(0, 0, 0, 0.5)"}]} onPress={() => {}} />
-          <View style={styles2.container}>
-            <View
-              style={{
-                ...styles2.activityIndicatorWrapper,
-              }}
-            >
-              <ActivityIndicator animating={true} color={"black"} size={50} />
+      {paymentLoading && (
+        <View style={{position: "absolute", width: "100%", height: "100%"}}>
+          <View
+            style={{
+              backgroundColor: "transparent",
+              flex: 1,
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <Pressable style={[StyleSheet.absoluteFill, {backgroundColor: "rgba(0, 0, 0, 0.5)"}]} onPress={() => {}} />
+            <View style={styles2.container}>
+              <View
+                style={{
+                  ...styles2.activityIndicatorWrapper,
+                }}
+              >
+                <ActivityIndicator animating={true} color={"black"} size={50} />
+              </View>
             </View>
           </View>
         </View>
-      </View>}
-     
+      )}
     </SafeAreaView>
   );
 }

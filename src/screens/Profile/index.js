@@ -3,6 +3,7 @@ import {StyleSheet, Text, View, TouchableOpacity, ScrollView, RefreshControl, Sa
 import {useThemeColors, useThemeFonts, Button} from "react-native-theme-component";
 import {useNavigation} from "@react-navigation/native";
 import {useDispatch, useSelector} from "react-redux";
+import {getReservation} from "@services/auth";
 import {navigationRef} from "../../navigation/NavigationService";
 import {
   SCREEN_EDIT_PROFILE,
@@ -20,6 +21,7 @@ import {
 } from "@screens/screens.constants";
 import {getProfile} from "@services/search";
 import moment from "moment";
+import ButtonOrange from "@components/Button/ButtonOrange";
 import Arrow_right from "../../assets/images/SvgComponents/arrow_right";
 import {SCREEN_EDIT_BIRTHDAY, SCREEN_EDIT_EMAIL_ADDRESS} from "../screens.constants";
 
@@ -28,7 +30,9 @@ export default function Profile({navigation}) {
   const fonts = useThemeFonts();
   const [profile, setProfile] = useState({});
   const user = useSelector((state) => state?.users?.userDetails);
+  const calendar = useSelector((state) => state?.calendar);
   const [refreshing, setRefreshing] = React.useState(false);
+  const [dataCalendar, setDataCalendar] = useState([]);
   const getProfileData = async () => {
     try {
       global.showLoadingView();
@@ -229,9 +233,49 @@ export default function Profile({navigation}) {
     },
   ];
 
+  const getData = async () => {
+    global.showLoadingView();
+    let paramsRevervation = {};
+    paramsRevervation.limit = 3;
+    paramsRevervation.page = 0;
+    const {response, data} = await getReservation(paramsRevervation);
+    if (response?.status === 200) {
+      const listCalendar = data?.data?.data;
+      if (listCalendar?.length > 0) {
+        setDataCalendar(listCalendar);
+        global.hideLoadingView();
+      } else {
+        global.hideLoadingView();
+      }
+    } else {
+      global.hideLoadingView();
+    }
+  };
+  useEffect(() => {
+    getData();
+  }, [calendar]);
+
+  const goDetailScreenWithStatus = (item) => {
+    navigation.navigate("SERVICE");
+    if (item.status == 3 || item.status == 5) {
+      setTimeout(() => {
+        navigation.navigate(SCREEN_PAYMENT, {id: item?.id});
+      }, 200);
+    } else if (item.status === 4 || item.status === 6) {
+      setTimeout(() => {
+        navigation.navigate(SCREEN_DETAIL_CALENDAR_AFTER_PAYMENT, {id: item?.id});
+      }, 200);
+    } else {
+      setTimeout(() => {
+        navigation.navigate(SCREEN_DETAIL_CALENDAR, {id: item?.id});
+      }, 200);
+    }
+  };
+
   const onRefresh = React.useCallback(() => {
     setRefreshing(true);
     getProfileData();
+    getData();
     setTimeout(() => {
       setRefreshing(false);
     }, 1000);
@@ -241,6 +285,130 @@ export default function Profile({navigation}) {
     <SafeAreaView style={{flex: 1, backgroundColor: colors.backgroundTheme}}>
       <View style={[styles.container]}>
         <ScrollView refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}>
+          <View style={{paddingTop: 12, paddingBottom: 12, backgroundColor: colors.backgroundTheme}}>
+            <View style={[styles.box]}>
+              <Text style={{fontFamily: fonts.NSbold, fontSize: 16, color: colors.colorTextBlack, lineHeight: 23}}>診療履歴</Text>
+            </View>
+          </View>
+          <View style={{flex: 1, backgroundColor: colors.white, padding: 16}}>
+            {dataCalendar.map((item, index) => {
+              return (
+                <TouchableOpacity
+                  key={`dataCalendar-${index}`}
+                  style={{flexDirection: "row", marginBottom: 16}}
+                  disabled={item?.status == 7 ? true : false}
+                  onPress={() => {
+                    goDetailScreenWithStatus(item);
+                  }}
+                >
+                  <View
+                    style={{flex: 1, paddingHorizontal: 8, paddingVertical: 12, borderRadius: 4, borderWidth: 1, borderColor: "#D9D9D9"}}
+                  >
+                    <View style={{flexDirection: "row", marginBottom: 10, alignItems: "center"}}>
+                      <View
+                        style={{
+                          borderWidth: 1,
+                          borderColor: global.renderColorStatus({type: "text", status: item?.status}),
+                          backgroundColor: global.renderColorStatus({type: "background", status: item?.status}),
+                          paddingHorizontal: 8,
+                          alignSelf: "flex-start",
+                        }}
+                      >
+                        <Text
+                          style={{
+                            fontFamily: fonts.SFmedium,
+                            fontSize: 12,
+                            color: global.renderColorStatus({type: "text", status: item?.status}),
+                            lineHeight: 20,
+                            textAlign: "left",
+                          }}
+                        >
+                          {global.t(`status_calendar.${item?.status}`)}
+                        </Text>
+                      </View>
+                      <Text
+                        style={{
+                          fontFamily: fonts.SFmedium,
+                          fontSize: 15,
+                          color: colors.textBlack,
+                          lineHeight: 18,
+                          marginLeft: 8,
+                          textAlign: "left",
+                        }}
+                      >
+                        {global.t(`categoryTitle.${item?.detail_category_medical_of_customer}`)}
+                      </Text>
+                    </View>
+                    <Text
+                      style={{
+                        fontFamily: fonts.SFmedium,
+                        width: "90%",
+                        fontSize: 16,
+                        color: colors.gray1,
+                        lineHeight: 20,
+                        marginTop: 7,
+                        textAlign: "left",
+                      }}
+                    >
+                      {`${moment(item?.date).format("YYYY年MM月DD日")}（${moment(item?.date).format("dddd")}）${item?.time_start}~${
+                        item?.time_end
+                      }`}
+                    </Text>
+                  </View>
+                  {item.image && item.image.length > 0 && (
+                    <View style={{paddingLeft: 16}}>
+                      <Image
+                        style={{width: 80, height: 80, backgroundColor: "#C4C4C4", marginTop: 8}}
+                        source={{
+                          uri: item.image[0].image,
+                        }}
+                      />
+                    </View>
+                  )}
+                </TouchableOpacity>
+              );
+            })}
+            {dataCalendar?.length === 0 && <Text>データーがありません</Text>}
+          </View>
+          {dataCalendar.length > 0 && (
+            <View style={{paddingHorizontal: 16, paddingVertical: 24}}>
+              <ButtonOrange title="すべての診療履歴を見る" onPress={() => navigation.navigate("HistoryStack")} />
+            </View>
+          )}
+          <View style={{paddingTop: 12, paddingBottom: 12, backgroundColor: colors.backgroundTheme}}>
+            <View style={[styles.box]}>
+              <Text style={{fontFamily: fonts.NSbold, fontSize: 16, color: colors.colorTextBlack, lineHeight: 23}}>基本情報</Text>
+            </View>
+          </View>
+          <View>
+            {listTextProfile3.map((item, index) => {
+              return (
+                <TouchableOpacity
+                  onPress={item.action}
+                  key={`listTextProfile3-${index}`}
+                  style={{
+                    paddingTop: 12,
+                    paddingBottom: 12,
+                    borderTopWidth: 1,
+                    borderColor: "#EEEEEE",
+                    backgroundColor: colors.white,
+                  }}
+                >
+                  <View style={{flexDirection: "row", justifyContent: "space-between", paddingHorizontal: 16}}>
+                    <Text style={{fontFamily: fonts.NSbold, fontSize: 12, color: colors.colorTextBlack, lineHeight: 14, width: 120}}>
+                      {item.label}
+                    </Text>
+                    <Text
+                      style={{fontFamily: fonts.NSregular, fontSize: 12, color: colors.gray1, lineHeight: 14, flex: 1, textAlign: "left"}}
+                    >
+                      {item.content || item.placeholder}
+                    </Text>
+                    {!item?.hideIcon && <Arrow_right color={colors.grayC} />}
+                  </View>
+                </TouchableOpacity>
+              );
+            })}
+          </View>
           <View>
             <View style={{paddingTop: 12, paddingBottom: 12, backgroundColor: colors.backgroundTheme}}>
               <View style={[styles.box]}>
@@ -328,57 +496,6 @@ export default function Profile({navigation}) {
               );
             })}
           </View>
-          <View style={{paddingTop: 12, paddingBottom: 12, backgroundColor: colors.backgroundTheme}}>
-            <View style={[styles.box]}>
-              <Text style={{fontFamily: fonts.NSbold, fontSize: 16, color: colors.colorTextBlack, lineHeight: 23}}>基本情報</Text>
-            </View>
-          </View>
-          <View>
-            {listTextProfile3.map((item, index) => {
-              return (
-                <TouchableOpacity
-                  onPress={item.action}
-                  key={`listTextProfile3-${index}`}
-                  style={{
-                    paddingTop: 12,
-                    paddingBottom: 12,
-                    borderTopWidth: 1,
-                    borderColor: "#EEEEEE",
-                    backgroundColor: colors.white,
-                  }}
-                >
-                  <View style={{flexDirection: "row", justifyContent: "space-between", paddingHorizontal: 16}}>
-                    <Text style={{fontFamily: fonts.NSbold, fontSize: 12, color: colors.colorTextBlack, lineHeight: 14, width: 120}}>
-                      {item.label}
-                    </Text>
-                    <Text
-                      style={{fontFamily: fonts.NSregular, fontSize: 12, color: colors.gray1, lineHeight: 14, flex: 1, textAlign: "left"}}
-                    >
-                      {item.content || item.placeholder}
-                    </Text>
-                    {!item?.hideIcon && <Arrow_right color={colors.grayC} />}
-                  </View>
-                </TouchableOpacity>
-              );
-            })}
-          </View>
-          {/* <View style={{marginTop: 15, marginBottom: 15, justifyContent: "center", alignItems: "center"}}>
-            <TouchableOpacity
-              onPress={() => navigation.navigate(SCREEN_EDIT_PROFILE)}
-              style={{
-                flexDirection: "row",
-                justifyContent: "center",
-                alignItems: "center",
-                width: 300,
-                height: 32,
-                borderWidth: 1,
-                borderColor: colors.textBlue,
-                margin: 0,
-              }}
-            >
-              <Text style={{color: colors.textBlue, textAlign: "center", lineHeight: 22}}>情報を編集する</Text>
-            </TouchableOpacity>
-          </View> */}
         </ScrollView>
       </View>
     </SafeAreaView>

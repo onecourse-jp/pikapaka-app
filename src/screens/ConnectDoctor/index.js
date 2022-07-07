@@ -48,7 +48,7 @@ export default function ({route}) {
   const handleAction = async () => {
     messages.emit("closeCall");
     global.showWebView({
-      url: `https://t-care-staging.web.app/user/call-to-doctor/?room=${dataCalendar.id}`,
+      url: `https://dev-healthcare-admin.pikapaka.co.jp/user/call-to-doctor/?room=${dataCalendar.id}`,
       isCallVideo: dataCalendar.id,
     });
   };

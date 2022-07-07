@@ -5,20 +5,14 @@ import {Platform} from "react-native";
 export async function updateShippingAddress(params) {
   return request(`/auth/edit-reservation/${params.id}`, {
     method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    data: JSON.stringify(params.newDataCalendar),
+    data: params,
   });
 }
 
 export async function updateDateTime(params) {
   return request(`/auth/edit-reservation/${params.id}`, {
     method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    data: JSON.stringify(params),
+    data: params,
   });
 }
 
@@ -38,9 +32,6 @@ export async function getDetailOwnQuestion(params) {
 export async function updateCalendar({params, paramId}) {
   return request(`/auth/edit-reservation/${paramId}`, {
     method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    data: JSON.stringify(params),
+    data: params,
   });
 }

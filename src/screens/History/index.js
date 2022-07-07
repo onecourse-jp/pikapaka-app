@@ -12,7 +12,7 @@ export default function History() {
   const [widthTab, setWidthTab] = useState(0);
   const layout = useWindowDimensions();
   const refTab = useRef(null);
-  const [index, setIndex] = React.useState(0);
+  const [index, setIndex] = React.useState(1);
   const listColor = [
     colors.headerComponent,
     colors.buttonSkincare,
@@ -53,6 +53,7 @@ export default function History() {
     }
   };
   useEffect(() => {
+    global.showLoadingView();
     let newWidth = 0;
     const centerView = setTimeout(() => {
       if (refTab?.current?.measuredTabWidths) {
@@ -62,8 +63,9 @@ export default function History() {
         setWidthTab(newWidth);
         clearTimeout(centerView);
       }
+      setIndex(0);
     }, 200);
-    setIndex(1)
+    global.hideLoadingView();
   }, []);
   const renderTabBar = (props) => {
     const inputRange = props.navigationState.routes.map((x, i) => i);
@@ -102,7 +104,7 @@ export default function History() {
             >
               <View style={{height: route.icon ? 20 : 10}}>{route.icon && <Image source={route.icon} />}</View>
               <Text style={{color: colors.white, fontSize: 11, lineHeight: 12, fontWeight: "700", marginTop: 5}}>{route.title}</Text>
-              {route?.disable && <Text style={{color:"white", fontSize: 10}}>(準備中)</Text>}
+              {route?.disable && <Text style={{color: "white", fontSize: 10}}>(準備中)</Text>}
               {route.icon === null && <View style={{height: 10}}>{route.icon && <Image source={route.icon} />}</View>}
             </TouchableOpacity>
           );

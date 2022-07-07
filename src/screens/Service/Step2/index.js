@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from "react";
-import {StyleSheet, Text, View, TouchableOpacity, ScrollView, Image, SafeAreaView, Alert} from "react-native";
+import React, {useEffect, useRef, useState} from "react";
+import {StyleSheet, Text, View, TouchableOpacity, Dimensions, ScrollView, Image, SafeAreaView, Alert} from "react-native";
 import {useThemeColors, useThemeFonts, Button} from "react-native-theme-component";
 import {useNavigation} from "@react-navigation/native";
 import {useDispatch, useSelector} from "react-redux";
@@ -12,6 +12,7 @@ import ListTime from "../components/ListTime";
 import {SCREEN_WELCOME, SCREEN_SERVICE_STEP3} from "@screens/screens.constants";
 import {updateCalendar} from "@actions/calendarAction";
 import {getDayCalendar, getHourCalendar} from "@services/users";
+const {height} = Dimensions.get("window");
 
 export default function ServiceStep2() {
   const colors = useThemeColors();
@@ -29,13 +30,19 @@ export default function ServiceStep2() {
   const [value, setValue] = useState(null);
   const [dateFromAdmin, setDateFromAdmin] = useState(null);
   const [listHourFromAdmin, setListHourFromAdmin] = useState([]);
+  const [refHourComponent, setRefHourComponent] = useState(null);
+  const [heightHourComponent, setHeightHourComponent] = useState(null);
   const [hourPicked, setHourPicked] = useState(null);
+  const dateCalendarRef = useRef(null);
 
   useEffect(async () => {
     global.showLoadingView();
     const {response, data} = await getDayCalendar(calendar?.data?.step1.data);
     if (response?.status === 200) {
+      console.log("getDayCalendar data", data.data);
       setDateFromAdmin(data.data);
+    } else {
+      console.log("getDayCalendar err", data);
     }
     global.hideLoadingView();
   }, [calendar]);
@@ -100,6 +107,13 @@ export default function ServiceStep2() {
     getListHourCalendar(date.dateString);
   };
 
+  useEffect(() => {
+    if (listHourFromAdmin.length > 0 && heightHourComponent) {
+      let heightToScroll = heightHourComponent;
+      dateCalendarRef?.current?.scrollTo({y: heightToScroll});
+    }
+  }, [heightHourComponent]);
+
   const getColorOfDay = (value) => {
     const nameDay = moment(value).format("dddd");
     if (value === datePicked) {
@@ -154,7 +168,7 @@ export default function ServiceStep2() {
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: colors.backgroundTheme}}>
       <View style={[styles.container]}>
-        <ScrollView>
+        <ScrollView ref={dateCalendarRef}>
           <GuideComponent title="オンライン診療のご希望日時をお選びください。" />
           <StepsComponent currentStep={2} />
           {Object.keys(calendar.data).map((item, index) => {
@@ -265,7 +279,16 @@ export default function ServiceStep2() {
             }}
           />
           {listHourFromAdmin.length > 0 && (
-            <View style={{marginTop: 20, paddingHorizontal: 16}}>
+            <View
+              onLayout={(event) => {
+                const layout = event.nativeEvent.layout;
+                setHeightHourComponent(layout.y);
+              }}
+              ref={(view) => {
+                setRefHourComponent(view);
+              }}
+              style={{marginTop: 20, paddingHorizontal: 16}}
+            >
               <Text style={{color: colors.primaryColor, fontSize: 14, fontWeight: "bold", marginBottom: 7}}>
                 {moment(datePicked).format("YYYY年MM月DD日")}（{moment(datePicked).format("dddd")}）の予約枠
               </Text>
