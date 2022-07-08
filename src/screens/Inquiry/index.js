@@ -1,5 +1,5 @@
 import React from "react";
-import {SafeAreaView, Text, View, TouchableOpacity, ScrollView, Image} from "react-native";
+import {SafeAreaView, Text, View, TouchableOpacity, ScrollView, Image, Linking} from "react-native";
 import {useThemeColors, useThemeFonts} from "react-native-theme-component";
 import styles from "./styles";
 import Headercomponent from "@components/Layout/Header";
@@ -11,12 +11,11 @@ import ButtonBooking from "../Home/components/ButtonBooking";
 export default function ({navigation}) {
   const colors = useThemeColors();
   const fonts = useThemeFonts();
-  const container = [
-    "ここにテキストが入ります。\nここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。",
-    "ここにテキストが入ります。\nここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。",
-  ];
   const textFAQ = "お客さまから寄せられたよくある質問を掲載しています。\nお問い合わせ前にご確認ください。";
   const inquiryPhone = "0120-927-232（通話料無料）\n受付時間 9:00～19:00（年中無休）";
+  const contactToEmail = () => {
+    Linking.openURL("mailto:support_healthcare@pikapaka.co.jp");
+  };
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: colors.backgroundTheme}}>
       <Headercomponent />
@@ -39,10 +38,7 @@ export default function ({navigation}) {
               >
                 {textFAQ}
               </Text>
-              <TouchableOpacity
-                onPress={() => navigation.navigate(SCREEN_FAQ)}
-                style={{flexDirection: "row", alignItems: "center", justifyContent: "flex-end"}}
-              >
+              <TouchableOpacity onPress={contactToEmail} style={{flexDirection: "row", alignItems: "center", justifyContent: "flex-end"}}>
                 <Text
                   style={{
                     marginRight: 8,

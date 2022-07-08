@@ -30,11 +30,11 @@ import {defaultStackNavigation} from "@config/navigations";
 import Colors from "@config/styles";
 import I18n from "src/i18n";
 import LocalizationContext from "@context/LocalizationContext";
-import TermsOfService from "@screens/TCareClinic/TermsOfService";
 import PrivacyPolicy from "@screens/TCareClinic/PrivacyPolicy";
 import CommercialLaw from "@screens/TCareClinic/CommercialLaw";
 import CompanyInfo from "@screens/TCareClinic/CompanyInfo";
 import Inquiry from "@screens/Inquiry";
+import TermsOfService from "@screens/TCareClinic/TermsOfService";
 
 const HomeStack = createNativeStackNavigator();
 function HomeStackScreen() {
@@ -153,24 +153,6 @@ function HomeStackScreen() {
       <HomeStack.Screen
         name={SCREEN_NEWS}
         component={NewsScreen}
-        options={{
-          title: "",
-          headerTitleAlign: "center",
-          headerShown: false,
-          headerStyle: {
-            backgroundColor: Colors.color.COLOR_BACKGROUND,
-          },
-          headerTintColor: "#9384EF",
-          headerTitleStyle: {
-            fontWeight: "bold",
-          },
-          shadowOpacity: 0, // remove shadow on iOS
-          elevation: 0, // remove shadow on Android
-        }}
-      />
-      <HomeStack.Screen
-        name={SCREEN_FAQ}
-        component={FAQScreen}
         options={{
           title: "",
           headerTitleAlign: "center",

@@ -356,18 +356,18 @@ export default function BottomTabbarNavigator({route}) {
       <Tab.Screen
         name={"HistoryStack"}
         component={MedicalHisotyStack}
-        listeners={{
-          tabPress: (e) => {
-            e.preventDefault();
-            if (user) {
-              navigation.navigate("HistoryStack");
-            } else {
-              global.alertNeedLogin();
-            }
-          },
-        }}
+        // listeners={{
+        //   tabPress: (e) => {
+        //     e.preventDefault();
+        //     if (user) {
+        //       navigation.navigate("HistoryStack");
+        //     } else {
+        //       global.alertNeedLogin();
+        //     }
+        //   },
+        // }}
         options={({route}) => ({
-          title: "診察履歴",
+          title: "お問い合わせ",
           headerShown: false,
           headerTitleAlign: "center",
           tabBarLabelStyle: {
@@ -380,7 +380,7 @@ export default function BottomTabbarNavigator({route}) {
                   <Image source={require("@assets/images/icons/ic_more_tabbar_active_v2.png")} />
                   <Text style={[styles.tabbarText]}>
                     {/* {AppText.bottomTab.history} */}
-                    診察履歴
+                    お問い合わせ
                   </Text>
                 </View>
               </View>
@@ -390,7 +390,7 @@ export default function BottomTabbarNavigator({route}) {
                   <Image source={require("@assets/images/icons/ic_more_tabbar_v2.png")} />
                   <Text style={[styles.tabbarText, styles.tabbarTextDefault]}>
                     {/* {AppText.bottomTab.history} */}
-                    診察履歴
+                    お問い合わせ
                   </Text>
                 </View>
               </View>
