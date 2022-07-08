@@ -22,7 +22,6 @@ import LoadingView from "../components/LoadingView";
 import ModalBottom from "@components/modals/ModalBottomAction";
 import ModalViewListImageOnCall from "@components/modals/ModalViewListImageOnCall";
 
-import TermsOfService from "@screens/TCareClinic/TermsOfService";
 import PrivacyPolicy from "@screens/TCareClinic/PrivacyPolicy";
 import CommercialLaw from "@screens/TCareClinic/CommercialLaw";
 import CompanyInfo from "@screens/TCareClinic/CompanyInfo";
@@ -125,14 +124,6 @@ function App() {
           <Stack.Screen name={SCREEN_LOGIN} component={Login} options={{title: "メールアドレスでログイン"}} />
           <Stack.Screen name={SCREEN_PROFILE} component={ProfileScreen} options={{title: "マイページ"}} />
           <Stack.Screen
-            name={SCREEN_FAQ}
-            component={FAQScreen}
-            options={{
-              title: "",
-              headerShown: false,
-            }}
-          />
-          <Stack.Screen
             name={SCREEN_NEWS}
             component={NewsScreen}
             options={{
@@ -143,7 +134,6 @@ function App() {
 
           <Stack.Screen name={SCREEN_EDIT_PROFILE} component={EditProfile} options={{title: "情報編集"}} />
           <Stack.Screen name={SCREEN_CHANGE_PASSWORD} component={ChangePassword} options={{title: "パスワードを変更"}} />
-          <Stack.Screen name={SCREEN_TERMS_OF_SERVICE} component={TermsOfService} options={{headerShown: false}} />
           <Stack.Screen name={SCREEN_PRIVACY_POLICY} component={PrivacyPolicy} options={{headerShown: false}} />
           <Stack.Screen name={SCREEN_COMMERCIAL_LAW} component={CommercialLaw} options={{headerShown: false}} />
           <Stack.Screen name={SCREEN_COMPANY_INFO} component={CompanyInfo} options={{headerShown: false}} />

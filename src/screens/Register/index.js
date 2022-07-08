@@ -78,12 +78,14 @@ export default function Register() {
 
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: colors.backgroundTheme}}>
-      <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"}
-          keyboardVerticalOffset={Platform.select({
-            ios: 60,
-            android: 60,
-          })}
-          style={{flex: 1}}>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        keyboardVerticalOffset={Platform.select({
+          ios: 60,
+          android: 60,
+        })}
+        style={{flex: 1}}
+      >
         <ScrollView contentContainerStyle={{height: "100%"}}>
           <View style={[styles.container]}>
             <View style={{width: "100%", marginTop: 16}}>
@@ -166,27 +168,43 @@ export default function Register() {
               )}
               {errorApi?.length > 0 && <Text style={styles.textError}>{errorApi}</Text>}
               <View style={{flexDirection: "row", marginTop: 14, flexWrap: "wrap"}}>
-                <Text style={{fontSize: 12,  flexDirection: "row", lineHeight: 24}}>
+                <Text style={{fontSize: 12, flexDirection: "row", alignItems: "center", lineHeight: 24}}>
                   登録またはログインすることで、
                   <TouchableOpacity
+                    style={{padding: 0}}
                     onPress={() => {
                       navigation.navigate(SCREEN_TERMS_OF_SERVICE, {currentIndex: 1});
                     }}
                   >
                     <Text
-                      style={{fontSize: 12, position: "relative", lineHeight: 24,top: 3, color: colors.headerComponent, textDecorationLine: "underline"}}
+                      style={{
+                        fontSize: 12,
+                        position: "relative",
+                        lineHeight: 18,
+                        top: 3,
+                        color: colors.headerComponent,
+                        textDecorationLine: "underline",
+                      }}
                     >
                       利用規約
                     </Text>
                   </TouchableOpacity>
                   と
                   <TouchableOpacity
+                    style={{padding: 0}}
                     onPress={() => {
                       navigation.navigate(SCREEN_PRIVACY_POLICY, {currentIndex: 1});
                     }}
                   >
                     <Text
-                      style={{fontSize: 12, lineHeight: 24,position: "relative", top: 3, color: colors.headerComponent, textDecorationLine: "underline"}}
+                      style={{
+                        fontSize: 12,
+                        lineHeight: 18,
+                        position: "relative",
+                        top: 3,
+                        color: colors.headerComponent,
+                        textDecorationLine: "underline",
+                      }}
                     >
                       プライバシーポリシー
                     </Text>

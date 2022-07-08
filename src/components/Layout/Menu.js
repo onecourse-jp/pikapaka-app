@@ -92,6 +92,7 @@ export default function MenuComponent(props) {
       label: "よくある質問",
       action: () => {
         setShowMenu(false);
+        navigation.navigate("HistoryStack");
         navigation.navigate(SCREEN_FAQ);
       },
     },

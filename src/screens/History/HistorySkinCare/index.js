@@ -117,9 +117,7 @@ export default function HistorySkinCare({category_medical = 0}) {
                       textAlign: "left",
                     }}
                   >
-                    {`${moment(item?.date).format("YYYY年MM月DD日")}（${moment(item?.date).format("dddd")}）${item?.time_start}~${
-                      item?.time_end
-                    }`}
+                    {`${moment(item?.date).format("YYYY年MM月DD日")}（${moment(item?.date).format("dddd")}）${item?.time_start}`}
                   </Text>
                   <Text
                     style={{

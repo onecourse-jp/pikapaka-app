@@ -2,20 +2,15 @@ import * as React from "react";
 import {createNativeStackNavigator} from "@react-navigation/native-stack";
 import {TouchableOpacity, Platform, Image, View} from "react-native";
 import {defaultStackNavigation} from "@config/navigations";
+import Colors from "@config/styles";
 import LocalizationContext from "@context/LocalizationContext";
 import {
-  SCREEN_HISTORY,
-  SCREEN_DETAIL_CALENDAR,
-  SCREEN_PAYMENT,
-  SCREEN_EDIT_CALENDAR,
-  SCREEN_QUESIONAIRE_STEP2,
-  SCREEN_QUESIONAIRE_STEP3,
-  SCREEN_QUESIONAIRE_STEP4,
-  SCREEN_EDIT_CALENDAR_CONFIRM,
-  SCREEN_EDIT_DELIVERY_ADDRESS,
+
+  SCREEN_FAQ,
 } from "../screens/screens.constants";
 import MedicalHistoryScreen from "@screens/History";
 import DetailCalender from "@screens/DetailCalendar";
+import FAQScreen from "@screens/FAQs";
 import PaymentScreen from "@screens/Payment";
 import EditCalendar from "../screens/EditCalendar";
 import QuestionaireStep2 from "../screens/Questionnaire/Step2";
@@ -30,77 +25,16 @@ function MedicalHistoryStackScreen() {
   return (
     // <ChatProvider>
     <MedicalHistoryStack.Navigator screenOptions={defaultStackNavigation.screenOptions}>
+
       <MedicalHistoryStack.Screen
-        name={SCREEN_HISTORY}
-        component={MedicalHistoryScreen}
+        name={SCREEN_FAQ}
+        component={FAQScreen}
         options={{
-          title: "診察履歴",
-          headerTitleAlign: "center",
-          headerStyle: {
-            // backgroundColor: Colors.color.COLOR_BACKGROUND,
-          },
-          headerTintColor: "#000000",
-          headerTitleStyle: {
-            fontWeight: "500",
-          },
-          shadowOpacity: 0, // remove shadow on iOS
-          elevation: 0, // remove shadow on Android
-          headerLeft: (props) => {
-            return null;
-          },
+          title: "",
+          headerShown: false,
         }}
       />
-      {/* <MedicalHistoryStack.Screen
-        name={SCREEN_DETAIL_CALENDAR}
-        component={DetailCalender}
-        options={{
-          title: "オンライン診療",
-          headerTitleAlign: "center",
-          headerStyle: {
-            // backgroundColor: Colors.color.COLOR_BACKGROUND,
-          },
-          headerTintColor: "#000000",
-          headerTitleStyle: {
-            fontWeight: "500",
-          },
-          shadowOpacity: 0, // remove shadow on iOS
-          elevation: 0, // remove shadow on Android
-        }}
-      /> */}
-      <MedicalHistoryStack.Screen name={SCREEN_PAYMENT} component={PaymentScreen} options={{title: "お会計"}} />
-      <MedicalHistoryStack.Screen name={SCREEN_EDIT_CALENDAR_CONFIRM} component={Confirm} options={{title: "変更内容確認"}} />
-      <MedicalHistoryStack.Screen
-        name={SCREEN_EDIT_CALENDAR}
-        component={EditCalendar}
-        options={{
-          title: "予約詳細",
-        }}
-      />
-      <MedicalHistoryStack.Screen
-        name={SCREEN_QUESIONAIRE_STEP2}
-        component={QuestionaireStep2}
-        options={{
-          title: "オンライン診療予約",
-          headerLeft: (props) => {
-            return null;
-          },
-        }}
-      />
-      <MedicalHistoryStack.Screen
-        name={SCREEN_QUESIONAIRE_STEP3}
-        component={QuestionaireStep3}
-        options={{
-          title: "オンライン診療予約",
-        }}
-      />
-      <MedicalHistoryStack.Screen
-        name={SCREEN_QUESIONAIRE_STEP4}
-        component={QuestionaireStep4}
-        options={{
-          title: "問診票登録完了",
-        }}
-      />
-      <MedicalHistoryStack.Screen name={SCREEN_EDIT_DELIVERY_ADDRESS} component={DeliveryAddressPayment} options={{title: "配送先を指定"}} />
+
     </MedicalHistoryStack.Navigator>
     // </ChatProvider>
   );

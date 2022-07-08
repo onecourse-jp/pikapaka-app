@@ -18,6 +18,10 @@ import {
   SCREEN_EDIT_YES_NO_FORM,
   SCREEN_EDIT_MEDICAL_HISTORY,
   SCREEN_EDIT_PHONE_NUMBER,
+  SCREEN_PAYMENT,
+  SCREEN_HISTORY,
+  SCREEN_DETAIL_CALENDAR,
+  SCREEN_DETAIL_CALENDAR_AFTER_PAYMENT,
 } from "@screens/screens.constants";
 import {getProfile} from "@services/search";
 import moment from "moment";
@@ -350,9 +354,7 @@ export default function Profile({navigation}) {
                         textAlign: "left",
                       }}
                     >
-                      {`${moment(item?.date).format("YYYY年MM月DD日")}（${moment(item?.date).format("dddd")}）${item?.time_start}~${
-                        item?.time_end
-                      }`}
+                      {`${moment(item?.date).format("YYYY年MM月DD日")}（${moment(item?.date).format("dddd")}）${item?.time_start}`}
                     </Text>
                   </View>
                   {item.image && item.image.length > 0 && (
@@ -372,7 +374,7 @@ export default function Profile({navigation}) {
           </View>
           {dataCalendar.length > 0 && (
             <View style={{paddingHorizontal: 16, paddingVertical: 24}}>
-              <ButtonOrange title="すべての診療履歴を見る" onPress={() => navigation.navigate("HistoryStack")} />
+              <ButtonOrange title="すべての診療履歴を見る" onPress={() => navigation.navigate(SCREEN_HISTORY)} />
             </View>
           )}
           <View style={{paddingTop: 12, paddingBottom: 12, backgroundColor: colors.backgroundTheme}}>
