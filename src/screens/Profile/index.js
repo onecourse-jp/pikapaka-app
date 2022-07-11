@@ -175,8 +175,8 @@ export default function Profile({navigation}) {
     },
     {
       key: "take_medicines",
-      label: "服薬中の薬の有無",
-      placeholder: "服薬中の薬を入力",
+      label: "服用中の薬の有無",
+      placeholder: "服用中の薬を入力",
       content: profile?.take_medicines
         ? profile?.take_medicines == 1
           ? renderContentAllergies(profile?.content_medicines)
