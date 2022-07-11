@@ -377,20 +377,20 @@ export default function BottomTabbarNavigator({route}) {
             focused ? (
               <View style={[styles.tabbarItem]}>
                 <View style={[styles.widgetText, styles.widgetTextActive]}>
-                  <Image source={require("@assets/images/icons/ic_more_tabbar_active_v2.png")} />
+                  <Image source={require("@assets/images/icons/ic_more_tabbar_active_v3.png")} />
                   <Text style={[styles.tabbarText]}>
                     {/* {AppText.bottomTab.history} */}
-                    お問い合わせ
+                    お問合せ
                   </Text>
                 </View>
               </View>
             ) : (
               <View style={[styles.tabbarItem]}>
                 <View style={[styles.widgetText]}>
-                  <Image source={require("@assets/images/icons/ic_more_tabbar_v2.png")} />
+                  <Image source={require("@assets/images/icons/ic_more_tabbar_v3.png")} />
                   <Text style={[styles.tabbarText, styles.tabbarTextDefault]}>
                     {/* {AppText.bottomTab.history} */}
-                    お問い合わせ
+                    お問合せ
                   </Text>
                 </View>
               </View>

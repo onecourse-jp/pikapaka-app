@@ -162,15 +162,6 @@ export default function Profile({navigation}) {
     },
   ];
   const listTextProfile3 = [
-    // {
-    //   key: "allergies",
-    //   label: "アレルギーの有無",
-    //   placeholder: "選択",
-    //   content: profile?.allergies ? (profile?.allergies == 1 ? "有" : "無") : null,
-    //   action: () => {
-    //     navigation.navigate(SCREEN_EDIT_ALLERGY, {data: profile});
-    //   },
-    // },
     {
       key: "content_allergies",
       label: "アレルギーの有無",
