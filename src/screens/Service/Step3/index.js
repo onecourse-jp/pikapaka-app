@@ -341,6 +341,12 @@ export default function ServiceStep3() {
                       control={control}
                       rules={{
                         required: item?.require === false ? false : true,
+                        validate: (value) => {
+                          if (item?.require === false && value === null) {
+                            return false;
+                          }
+                          return true;
+                        },
                       }}
                       defaultValue={item.value}
                       name={item.key}

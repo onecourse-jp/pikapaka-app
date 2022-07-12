@@ -5,8 +5,9 @@ import {SIGNAL_SERVER_URL} from "../config";
 import {Emitter, messages} from "../lib/emitter";
 import {state} from "../state";
 import {WebRTCPeer} from "./webrtc-peer";
-import socket from "socket.io-client/lib/socket";
+import socket from "socket.io-client";
 
+// See https://github.com/holtwick/briefing-signal
 // import { uuid } from 'zeed';
 
 // Handles multiple connections, one to each peer
@@ -19,7 +20,7 @@ export class WebRTC extends Emitter {
   }
 
   static async checkStatus() {
-    let socket = io("https://dev-signaling.lisod.vn", {
+    let socket = io(SIGNAL_SERVER_URL, {
       // transports: ['websocket'],
     });
 
@@ -41,11 +42,12 @@ export class WebRTC extends Emitter {
     super();
 
     this.room = room;
+    console.log("this.room", this.room);
     this.peerSettings = peerSettings;
 
     // https://socket.io/docs/client-api/
     this.io = io(SIGNAL_SERVER_URL, {
-      // transports: ['websocket'],
+      transports: ["websocket"],
     });
 
     this.io.on("connect", () => {
@@ -100,6 +102,7 @@ export class WebRTC extends Emitter {
     // Receive all other currently available peers
     this.io.on("joined", ({peers, vapidPublicKey}) => {
       const local = this.io.id;
+      console.log("local", this.io.id);
 
       state.vapidPublicKey = vapidPublicKey;
 
@@ -107,6 +110,7 @@ export class WebRTC extends Emitter {
       // If the new participant (us) initiates the connections, the others do
       // not need to get updates about new peers
       this.io.on("signal", ({from, signal}) => {
+        console.log("signal", from);
         // log('received signal', from, to === local, initiator)
         // If we are not already connected, do it now
         let peer = this.peerConnections[from];
