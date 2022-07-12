@@ -40,6 +40,7 @@ export class WebRTC extends Emitter {
     peerSettings = {},
   } = {}) {
     super();
+    console.log('SIGNAL_SERVER_URL',SIGNAL_SERVER_URL)
 
     this.room = room;
     console.log("this.room", this.room);
@@ -55,9 +56,6 @@ export class WebRTC extends Emitter {
       state.socket = socket;
       this.emit("io", {
         online: true,
-      });
-      this.io.on("adminUploadNewPicture", () => {
-        console.log("adminUploadNewPictureadminUploadNewPicture");
       });
       this.emit("connect");
       this.io.emit("join", {room});
@@ -102,7 +100,7 @@ export class WebRTC extends Emitter {
     // Receive all other currently available peers
     this.io.on("joined", ({peers, vapidPublicKey}) => {
       const local = this.io.id;
-      console.log("local", this.io.id);
+      console.log("joined local", peers);
 
       state.vapidPublicKey = vapidPublicKey;
 
@@ -156,6 +154,7 @@ export class WebRTC extends Emitter {
         peer,
       };
     });
+    console.log("updateStatusupdateStatusupdateStatus ", status);
     this.emit("status", {status});
   }
 
@@ -164,6 +163,7 @@ export class WebRTC extends Emitter {
   }
 
   handlePeer({remote, wrtc, local, initiator = false} = {}) {
+    console.log("handlePeer remote");
     let peer = new WebRTCPeer({
       local,
       remote,
@@ -172,7 +172,7 @@ export class WebRTC extends Emitter {
       room: this.room,
       ...this.peerSettings,
     });
-
+    console.log("handlePeer", peer);
     this.peerConnections[remote] = peer;
 
     // We received the local signal (i.e. network location description) that
