@@ -1,21 +1,11 @@
 import React, {useEffect, useState} from "react";
 import {StyleSheet, Text, View, ScrollView, SafeAreaView, TouchableOpacity, RefreshControl, Image} from "react-native";
 import {useThemeColors, useThemeFonts, Button} from "react-native-theme-component";
-import {useNavigation} from "@react-navigation/native";
-import {useDispatch, useSelector} from "react-redux";
-import StepsComponent from "@components/StepsComponent";
-import GuideComponent from "@components/GuideComponent";
-import {getReservationById} from "@services/auth";
-import {createStripeCheckoutSession, paymentStripe} from "@services/payments";
-import {SCREEN_EDIT_PROFILE, SCREEN_EDIT_DELIVERY_ADDRESS} from "@screens/screens.constants";
-import {getBillPayment} from "@services/payments";
-import {SCREEN_EDIT_ADDRESS} from "../screens.constants";
 export default function BillPayment({route, billData = null}) {
   const colors = useThemeColors();
   const fonts = useThemeFonts();
   const [showDetailMedicine, setShowDetailMedicine] = useState(false);
   const idCalendar = route?.params?.id;
-  const [refreshing, setRefreshing] = useState(false);
   console.log("idCalendar", idCalendar);
   return (
     <View>
