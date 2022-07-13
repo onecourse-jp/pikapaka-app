@@ -1,11 +1,19 @@
 {
-    "applinks": {
-        "apps": [],
-        "details": [
-            {
-                "appID": "5634LD444J.com.meta.ja.tcare-app",
-                "paths": [ "/line-auth/*" ]
-            }
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appID": "5634LD444J.com.meta.ja.tcare-app",
+        "paths": [
+          "/line-auth/*"
         ]
-    }
+      },
+      {
+        "appID": "5634LD444J.com.pikapaka.jp",
+        "paths": [
+          "*"
+        ]
+      }
+    ]
+  }
 }
