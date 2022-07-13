@@ -10,6 +10,7 @@ import BlockFaqService from "./components/BlockFaqService";
 import BlockFaq from "./components/BlockFaq";
 import FooterComponent from "@components/Layout/Footer";
 import ButtonBooking from "../Home/components/ButtonBooking";
+import {SCREEN_INQUIRY} from "../screens.constants";
 
 const wait = (timeout) => {
   return new Promise((resolve) => setTimeout(resolve, timeout));
