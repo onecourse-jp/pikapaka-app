@@ -86,10 +86,6 @@ export default function FAQScreen() {
     getAGA();
   }, []);
 
-  const contactToEmail = () => {
-    Linking.openURL("mailto:support_healthcare@pikapaka.co.jp");
-  };
-
   return (
     <SafeAreaView style={{flex: 1, position: "relative", backgroundColor: colors.backgroundTheme}}>
       <Headercomponent />
@@ -121,7 +117,7 @@ export default function FAQScreen() {
         <BlockFaq data={dataED} borderColor={colors.borderFaqType5} bgFaqType={colors.backGroundFaqType5} title={"ED"} />
         <BlockFaq data={dataAGA} borderColor={colors.borderFaqType6} bgFaqType={colors.backGroundFaqType6} title={"AGA"} />
         <View style={{height: 40, marginTop: 30, flexDirection: "row", justifyContent: "center"}}>
-          <TouchableOpacity onPress={contactToEmail}>
+          <TouchableOpacity onPress={() => navigation.navigate(SCREEN_INQUIRY)}>
             <Text
               style={{textDecorationLine: "underline", color: colors.headerComponent, fontWeight: "700"}}
             >{`お問い合わせはこちら`}</Text>

@@ -28,7 +28,7 @@
         <category android:name="android.intent.category.DEFAULT" />
         <category android:name="android.intent.category.BROWSABLE" />
         <data android:scheme="pikapaka"/>
-        <!-- <data android:scheme="https" android:host="m.test-tcare.lisod.vn" /> -->
+        <!-- <data android:scheme="https" android:host="test-pikapaka-web.lisod.vn" /> -->
       </intent-filter>
     </activity>
     <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
