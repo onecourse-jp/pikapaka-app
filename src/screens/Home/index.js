@@ -124,7 +124,7 @@ export default function Home({route}) {
                   "家の近くに悩みを相談できるクリニックがない",
                   "クリニック・薬局などの待ち時間が嫌",
                   "薬をすぐに処方してもらいたい",
-                  "いう方などに 費用を抑えたいが、信頼のあるクリニックがよい",
+                  "費用を抑えたいが、信頼のあるクリニックがよい",
                 ]}
                 styleColor={colors.colorHome10}
                 circleColor={colors.colorHome07}
