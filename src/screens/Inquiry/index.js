@@ -38,7 +38,13 @@ export default function ({navigation}) {
               >
                 {textFAQ}
               </Text>
-              <TouchableOpacity onPress={contactToEmail} style={{flexDirection: "row", alignItems: "center", justifyContent: "flex-end"}}>
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.navigate("HistoryStack");
+                  navigation.navigate(SCREEN_FAQ);
+                }}
+                style={{flexDirection: "row", alignItems: "center", justifyContent: "flex-end"}}
+              >
                 <Text
                   style={{
                     marginRight: 8,
@@ -75,13 +81,7 @@ export default function ({navigation}) {
                 フォームでのお問い合わせ
               </Text>
               <View style={{flexDirection: "column", justifyContent: "center", alignItems: "center"}}>
-                <TouchableOpacity
-                  onPress={() => {
-                    global.showWebView({
-                      url: "https://docs.google.com/forms/d/e/1FAIpQLSdLQiPQIbCkjvr2HwBHD3ktb0WQHwFmdatHcCGzCnnlGhA4CQ/viewform",
-                    });
-                  }}
-                >
+                <TouchableOpacity onPress={contactToEmail}>
                   <View
                     style={{
                       flexDirection: "row",

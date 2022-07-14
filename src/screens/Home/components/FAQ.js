@@ -155,7 +155,8 @@ export default function FAQComponent({styleColor = "", question = [], Qcolor = "
       <View style={{flexDirection: "row", justifyContent: "flex-end"}}>
         <TouchableOpacity
           onPress={() => {
-            navigation.navigate("HistoryStack");navigation.navigate(SCREEN_FAQ);
+            navigation.navigate("HistoryStack");
+            navigation.navigate(SCREEN_FAQ);
           }}
         >
           <FAQ_see_more color={styleColor} />
