@@ -33,6 +33,7 @@ export default function ModalWebView({route}) {
   }, [navigation]);
 
   const quitRoomCall = () => {
+    dispatch(changeStatusCalendar());
     Alert.alert(
       "",
       `退出しますか？`,
