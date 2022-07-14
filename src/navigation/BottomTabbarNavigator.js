@@ -47,20 +47,21 @@ export default function BottomTabbarNavigator({route}) {
     }
   }, []);
   useEffect(async () => {
-    const initialUrl = await Linking.getInitialURL();
-    console.log("getInitialURL", initialUrl);
-    console.log("getInitialURL LINKING_PREFIXES", Config.LINKING_PREFIXES.split("|"));
-    if (initialUrl) {
-      var thenum = initialUrl.replace(/^\D+/g, "");
-      console.log("thenum", thenum);
-      if (user) {
-        navigation.navigate("SERVICE");
-        navigation.navigate(SCREEN_DETAIL_CALENDAR, {id: Number(thenum)});
-      }
-      {
-        navigation.navigate(SCREEN_LOGIN, {isAnswerQuestion: Number(thenum)});
-      }
-    }
+    // global.hideLoadingView();
+    // const initialUrl = await Linking.getInitialURL();
+    // console.log("getInitialURL", initialUrl);
+    // console.log("getInitialURL LINKING_PREFIXES", Config.LINKING_PREFIXES.split("|"));
+    // if (initialUrl) {
+    //   var thenum = initialUrl.replace(/^\D+/g, "");
+    //   console.log("thenum", thenum);
+    //   if (user) {
+    //     navigation.navigate("SERVICE");
+    //     navigation.navigate(SCREEN_DETAIL_CALENDAR, {id: Number(thenum)});
+    //   }
+    //   {
+    //     navigation.navigate(SCREEN_LOGIN, {isAnswerQuestion: Number(thenum)});
+    //   }
+    // }
   }, []);
 
   const requestUserPermission = async () => {
