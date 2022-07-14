@@ -290,15 +290,21 @@ export default function Profile({navigation}) {
               return (
                 <TouchableOpacity
                   key={`dataCalendar-${index}`}
-                  style={{flexDirection: "row", marginBottom: 16}}
+                  style={{
+                    flexDirection: "row",
+                    marginBottom: 16,
+                    paddingHorizontal: 8,
+                    paddingVertical: 12,
+                    borderRadius: 4,
+                    borderWidth: 1,
+                    borderColor: "#D9D9D9",
+                  }}
                   disabled={item?.status == 7 ? true : false}
                   onPress={() => {
                     goDetailScreenWithStatus(item);
                   }}
                 >
-                  <View
-                    style={{flex: 1, paddingHorizontal: 8, paddingVertical: 12, borderRadius: 4, borderWidth: 1, borderColor: "#D9D9D9"}}
-                  >
+                  <View style={{flex: 1}}>
                     <View style={{flexDirection: "row", marginBottom: 10, alignItems: "center"}}>
                       <View
                         style={{
@@ -341,7 +347,7 @@ export default function Profile({navigation}) {
                         fontSize: 16,
                         color: colors.gray1,
                         lineHeight: 20,
-                        marginTop: 7,
+                        marginTop: 4,
                         textAlign: "left",
                       }}
                     >
@@ -351,7 +357,7 @@ export default function Profile({navigation}) {
                   {item.image && item.image.length > 0 && (
                     <View style={{paddingLeft: 16}}>
                       <Image
-                        style={{width: 80, height: 80, backgroundColor: "#C4C4C4", marginTop: 8}}
+                        style={{width: 80, height: 80, backgroundColor: "#C4C4C4"}}
                         source={{
                           uri: item.image[0].image,
                         }}
