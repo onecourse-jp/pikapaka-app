@@ -34,7 +34,7 @@ export default function ButtonBooking(props) {
           backgroundColor: bgColor,
         }}
       >
-        <Text style={{fontSize: 18, textAlign: "center", color: colors.white, fontWeight: "bold"}}>予約はこちら</Text>
+        <Text style={{fontSize: 18, textAlign: "center", color: colors.white, fontWeight: "bold"}}>{`予約は\nこちら`}</Text>
       </TouchableOpacity>
     </View>
   );

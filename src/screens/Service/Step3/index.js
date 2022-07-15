@@ -58,6 +58,36 @@ export default function ServiceStep3() {
     // }, [userDetails]),
   });
 
+  const renderContentAllergies = (content_allergies) => {
+    let result = "";
+    if (content_allergies) {
+      if (typeof content_allergies === "string") {
+        try {
+          const newArray = JSON.parse(content_allergies);
+          newArray.map((item, index) => {
+            if (item != null) {
+              result += `${index > 0 ? " / " : ""}${item}`;
+            }
+          });
+        } catch (error) {
+          console.log("err", error);
+        }
+      } else {
+        try {
+          content_allergies?.map((item, index) => {
+            if (item != null) {
+              result += `${index > 0 ? " / " : ""}${item}`;
+            }
+          });
+        } catch (error) {
+          return null;
+        }
+      }
+    }
+    if (result.length === 0) return "あり";
+    return result;
+  };
+
   useEffect(() => {
     setUser(userDetails);
     console.log("userDetails?.allergies", userDetails?.allergies);
