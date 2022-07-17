@@ -11,7 +11,7 @@ export default function AboutClinic() {
 
   return (
     <View style={{backgroundColor: colors.white, borderRadius: 18, paddingVertical: 40, paddingHorizontal: 20, flexDirection: "column"}}>
-      <Text style={{fontSize: 24, color: colors.colorHome10, marginBottom: 15, textAlign: "center", fontWeight: "700"}}>提携クリニック</Text>
+      <Text style={{fontSize: 24, color: colors.colorHome10, marginBottom: 15, textAlign: "center", fontWeight: "700"}}>医療機関</Text>
       <View style={{flexDirection: "row", justifyContent: "center"}}>
         <View style={{height: 2, width: 20, marginBottom: 4, backgroundColor: colors.colorHome10}}></View>
       </View>
@@ -57,7 +57,7 @@ export default function AboutClinic() {
             textAlign: "left",
           }}
         >
-          {`9:00～18:00\n土日祝祭日も診療可能`}
+          {`9:00～18:00（土日・祝日を除く）`}
         </Text>
         <Text
           style={{
