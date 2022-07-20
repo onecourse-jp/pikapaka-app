@@ -34,7 +34,7 @@ export default function AfterPill() {
     <View>
       <View style={{height: 10}}></View>
       <OnlineMedicalCare
-        title={global.t("what_is_a_low_dose_pill")}
+        title={global.t("what_is_a_after_pill")}
         textFormat={[
           "性行為後72時間以内に女性ホルモン製剤を服用することで着床を防ぎ、高い確率で避妊することができます。",
           "Tケアクリニックでは、国内で承認されたもののみを扱っており、安全性を保っております。",
