@@ -10,7 +10,6 @@ import * as navigationActions from 'src/actions/navigationActions';
 import AsyncStorage from '@react-native-community/async-storage';
 import { setAuthority, getAuthority } from '@utils/authority';
 import Config from 'react-native-config';
-console.log('config', Config);
 export default function* otpSaga(action) {
   try {
     const response = yield call(loginTotp, {

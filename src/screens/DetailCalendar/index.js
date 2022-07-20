@@ -1,19 +1,21 @@
 import React, {useEffect, useState} from "react";
-import {StyleSheet, Text, View, ScrollView, SafeAreaView, TouchableOpacity, RefreshControl} from "react-native";
+import {StyleSheet, Text, View, ScrollView, SafeAreaView, TouchableOpacity, Alert, RefreshControl} from "react-native";
 import {useThemeColors, useThemeFonts, Button} from "react-native-theme-component";
 import {useNavigation} from "@react-navigation/native";
 import {useDispatch, useSelector} from "react-redux";
+import {navigationRef} from "src/navigation/NavigationService";
 import StepsComponent from "@components/StepsComponent";
 import GuideComponent from "@components/GuideComponent";
 import moment from "moment";
 import {SCREEN_QUESIONAIRE_STEP2, SCREEN_EDIT_CALENDAR, SCREEN_CONNECT_DOCTOR, SCREEN_PAYMENT} from "@screens/screens.constants";
 import {getReservationById} from "@services/auth";
+import {SCREEN_LOGIN, SCREEN_WELCOME} from "../screens.constants";
 
 export default function DetailCalender({route}) {
   const colors = useThemeColors();
   const fonts = useThemeFonts();
   console.log("route", route);
-  const idCalendar = route?.params?.id || Number(route?.params?.reversationId);
+  const idCalendar = route?.params?.id || Number(route?.params?.reservationId);
   const fromScreen = route?.params?.fromScreen;
   const [refreshing, setRefreshing] = React.useState(false);
   const [screenStep, setCurrentStep] = useState(2);
@@ -49,6 +51,17 @@ export default function DetailCalender({route}) {
           setCurrentStep(4);
         }
       } else {
+        Alert.alert(
+          "",
+          `データの取得中にエラーが発生しました。もう一度ログインしてください。`,
+          [
+            {
+              text: "はい",
+              onPress: () => {},
+            },
+          ],
+          {cancelable: true},
+        );
         console.log("response getReservationById", response?.status);
       }
       global.hideLoadingView();
@@ -124,7 +137,7 @@ export default function DetailCalender({route}) {
                 <Text style={{fontFamily: fonts.Hiragino, fontSize: 14, color: colors.gray1, lineHeight: 17, marginTop: 7}}>
                   {`${moment(dataCalendar?.date).format("YYYY年MM月DD日")}（${moment(dataCalendar?.date).format("dddd")}）${
                     dataCalendar?.time_start
-                  }`}
+                  }~`}
                 </Text>
               </View>
             </View>

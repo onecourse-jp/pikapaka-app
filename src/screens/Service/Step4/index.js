@@ -60,12 +60,32 @@ export default function ServiceStep4() {
     {
       key: "content_allergies",
       label: "アレルギーの内容",
-      value: renderContentAllergies(dataConfirm.content_allergies) || "アレルギー内容を入力",
+      value: dataConfirm?.allergies
+        ? dataConfirm?.allergies === 1
+          ? renderContentAllergies(dataConfirm.content_allergies)
+          : "なし"
+        : "アレルギー内容を入力",
     },
     // {key: "take_medicines", label: "服薬中の薬の有無", value: dataConfirm.take_medicines || "選択", option: true},
-    {key: "content_medicines", label: "服用中の薬の内容", value: renderContentAllergies(dataConfirm.content_medicines) || "薬の内容を入力"},
+    {
+      key: "content_medicines",
+      label: "服用中の薬の内容",
+      value: dataConfirm?.take_medicines
+        ? dataConfirm?.take_medicines === 1
+          ? renderContentAllergies(dataConfirm.content_medicines)
+          : "なし"
+        : "薬の内容を入力",
+    },
     {key: "pregnancy", label: "妊娠有無", value: dataConfirm.pregnancy || "選択", option: true},
     {key: "smoking", label: "喫煙有無", value: dataConfirm.smoking || "選択", option: true},
+    {key: "illness_during_treatment", label: "治療中の病気の有無", value: dataConfirm.illness_during_treatment || "選択", option: true},
+    {key: "dialysis_treatment", label: "透析治療の有無", value: dataConfirm.dialysis_treatment || "選択", option: true},
+    {
+      key: "blood_tests_and_health",
+      label: "血液検査や健康診断等の異常の有無",
+      value: dataConfirm.blood_tests_and_health || "選択",
+      option: true,
+    },
     {key: "medical_history", label: "既往歴", value: dataConfirm.medical_history || "なし", data: dataMedicalHistory, option: true},
   ];
 
@@ -107,7 +127,7 @@ export default function ServiceStep4() {
           >
             <Text style={{fontFamily: fonts.NSregular, fontSize: 14, lineHeight: 15, color: colors.gray1}}>{`${moment(
               dataConfirm?.date,
-            ).format("YYYY年MM月DD日")}（${moment(dataConfirm?.date).format("dddd")}）${dataConfirm?.time_start}`}</Text>
+            ).format("YYYY年MM月DD日")}（${moment(dataConfirm?.date).format("dddd")}）${dataConfirm?.time_start}~`}</Text>
           </View>
           <View>
             <Text
@@ -175,7 +195,7 @@ export default function ServiceStep4() {
                     paddingHorizontal: 16,
                   }}
                 >
-                  <Text style={{color: colors.colorTextBlack, fontWeight: "bold", fontSize: 14}}>{item.label}</Text>
+                  <Text style={{color: colors.colorTextBlack, fontWeight: "bold", fontSize: 14, width: "40%"}}>{item.label}</Text>
                   {item.option && item.data && Array.isArray(item.value) && (
                     <View style={{width: "60%", paddingHorizontal: 16}}>
                       {item.value.map((el, ind) => {

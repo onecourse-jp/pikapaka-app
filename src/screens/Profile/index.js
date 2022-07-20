@@ -55,7 +55,12 @@ export default function Profile({navigation}) {
     return [];
   };
   useEffect(() => {
-    getProfileData();
+    if (user) {
+      console.log("userrrrr", user);
+      getProfileData();
+    } else {
+      global.alertNeedLogin();
+    }
   }, [user]);
 
   const listTextProfile = [
@@ -211,6 +216,52 @@ export default function Profile({navigation}) {
       },
     },
     {
+      key: "illness_during_treatment",
+      label: "治療中の病気の有無",
+      placeholder: "選択",
+      value: profile?.illness_during_treatment ?? null,
+      hideIcon: false,
+      hideItem: false,
+      action: () => {
+        navigation.navigate(SCREEN_EDIT_YES_NO_FORM, {
+          data: user,
+          key: "illness_during_treatment",
+          value: profile?.smoking,
+          label: "喫煙有無",
+        });
+      },
+    },
+    {
+      key: "dialysis_treatment",
+      label: "透析治療の有無",
+      placeholder: "選択",
+      value: profile?.dialysis_treatment ?? null,
+      hideIcon: false,
+      hideItem: false,
+      action: () => {
+        navigation.navigate(SCREEN_EDIT_YES_NO_FORM, {
+          data: user,
+          key: "dialysis_treatment",
+          value: profile?.smoking,
+          label: "喫煙有無",
+        });
+      },
+    },
+    {
+      key: "blood_tests_and_health",
+      label: "血液検査や健康診断等の異常の有無",
+      placeholder: "選択",
+      value: profile?.blood_tests_and_health ?? null,
+      action: () => {
+        navigation.navigate(SCREEN_EDIT_YES_NO_FORM, {
+          data: user,
+          key: "blood_tests_and_health",
+          value: profile?.smoking,
+          label: "喫煙有無",
+        });
+      },
+    },
+    {
       key: "medical_history",
       label: "既往歴",
       placeholder: "なし",
@@ -351,7 +402,7 @@ export default function Profile({navigation}) {
                         textAlign: "left",
                       }}
                     >
-                      {`${moment(item?.date).format("YYYY年MM月DD日")}（${moment(item?.date).format("dddd")}）${item?.time_start}`}
+                      {`${moment(item?.date).format("YYYY年MM月DD日")}（${moment(item?.date).format("dddd")}）${item?.time_start}~`}
                     </Text>
                   </View>
                   {item.image && item.image.length > 0 && (
@@ -394,7 +445,16 @@ export default function Profile({navigation}) {
                   }}
                 >
                   <View style={{flexDirection: "row", justifyContent: "space-between", paddingHorizontal: 16}}>
-                    <Text style={{fontFamily: fonts.NSbold, fontSize: 12, color: colors.colorTextBlack, lineHeight: 14, width: 120}}>
+                    <Text
+                      style={{
+                        fontFamily: fonts.NSbold,
+                        fontSize: 12,
+                        color: colors.colorTextBlack,
+                        lineHeight: 14,
+                        width: 120,
+                        paddingRight: 6,
+                      }}
+                    >
                       {item.label}
                     </Text>
                     <Text

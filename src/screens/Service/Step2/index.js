@@ -76,9 +76,7 @@ export default function ServiceStep2() {
       key: "step2",
       label: `選択中の日付`,
       data: `{"date": "${formatDatePicker}", "time": ${jsonStringValue}}`,
-      value: `${formatDatePicker}（${moment(datePicked).format("dddd")}）${hourPicked?.constant_time?.time_start}~${
-        hourPicked?.constant_time?.time_end
-      }`,
+      value: `${formatDatePicker}（${moment(datePicked).format("dddd")}）${hourPicked?.constant_time?.time_start}~`,
     };
     dispatch(updateCalendar({data: {step2: valueSubmit}, currentStep: 3}));
     if (_isLogin) {

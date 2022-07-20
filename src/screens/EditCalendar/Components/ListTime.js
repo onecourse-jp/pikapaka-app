@@ -37,7 +37,7 @@ export default function ListTime({data = null, hourPicked}) {
           }}
         />
         <Text style={{fontSize: 14, color: data?.slot > 0 ? colors.gray3 : colors.gray4, marginLeft: 14}}>
-          {data?.constant_time?.time_start}
+          {data?.constant_time?.time_start}~
         </Text>
       </View>
       <View

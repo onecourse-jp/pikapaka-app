@@ -85,15 +85,23 @@ function App() {
               // SearchStack.js
               screens: {
                 [SCREEN_DETAIL_CALENDAR]: {
-                  path: "reversation/:reversationId?",
+                  path: "reservation/:reservationId?",
                   parse: {
-                    user: (reversationId) =>
-                      reversationId
+                    user: (reservationId) =>
+                      reservationId
                         ? {
-                            id: parseInt(reversationId),
+                            id: parseInt(reservationId),
                           }
                         : undefined,
                   },
+                },
+              },
+            },
+            ProfileStack: {
+              // SearchStack.js
+              screens: {
+                [SCREEN_PROFILE]: {
+                  path: "mypage",
                 },
               },
             },
