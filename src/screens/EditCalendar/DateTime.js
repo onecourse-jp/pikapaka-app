@@ -200,7 +200,7 @@ export default function EditCalendar({route}) {
             <Text>現在の予約日時</Text>
             <Text>{`${moment(dataCalendar?.date).format("YYYY年MM月DD日")}（${moment(dataCalendar?.date).format("dddd")}）${
               dataCalendar?.time_start
-            }~${dataCalendar?.time_end}`}</Text>
+            }`}</Text>
           </View>
           <Calendar
             style={[]}

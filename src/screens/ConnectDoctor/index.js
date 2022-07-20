@@ -34,7 +34,7 @@ export default function ({route}) {
   const dataCalendar = route?.params?.data;
   const titleWait = `${moment(dataCalendar?.date).format("YYYY年MM月DD日")}（${moment(dataCalendar?.date).format("dddd")}）${
     dataCalendar?.time_start
-  }~${dataCalendar?.time_end}`;
+  }`;
   const content =
     "医師の準備ができましたら、接続ボタンの色が変わりますので、接続してください。\nなお、順番に患者様を診察しております。お待ち頂く可能性もございますので、予めご了承ください。";
   const titleDoctorConnect = "お待たせいたしました。医師の準備ができました。医師へ接続してください。";

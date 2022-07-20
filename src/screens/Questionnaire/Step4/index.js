@@ -76,7 +76,7 @@ export default function QuestionaireStep4({route}) {
               <Text style={{fontFamily: fonts.Hiragino, fontSize: 14, color: colors.gray1, lineHeight: 17, marginTop: 7}}>
                 {`${moment(calendarData?.date).format("YYYY年MM月DD日")}（${moment(calendarData?.date).format("dddd")}）${
                   calendarData?.time_start
-                }~${calendarData?.time_end}`}
+                }`}
               </Text>
             </View>
           </View>

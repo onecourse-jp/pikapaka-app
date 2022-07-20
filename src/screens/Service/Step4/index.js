@@ -107,9 +107,7 @@ export default function ServiceStep4() {
           >
             <Text style={{fontFamily: fonts.NSregular, fontSize: 14, lineHeight: 15, color: colors.gray1}}>{`${moment(
               dataConfirm?.date,
-            ).format("YYYY年MM月DD日")}（${moment(dataConfirm?.date).format("dddd")}）${dataConfirm?.time_start}~${
-              dataConfirm?.time_end
-            }`}</Text>
+            ).format("YYYY年MM月DD日")}（${moment(dataConfirm?.date).format("dddd")}）${dataConfirm?.time_start}`}</Text>
           </View>
           <View>
             <Text

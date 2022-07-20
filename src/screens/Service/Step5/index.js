@@ -81,7 +81,7 @@ export default function ServiceStep5({route}) {
               <Text style={{fontFamily: fonts.Hiragino, fontSize: 14, color: colors.gray1, lineHeight: 17, marginTop: 7}}>
                 {`${moment(dataConfirm?.date).format("YYYY年MM月DD日")}（${moment(dataConfirm?.date).format("dddd")}）${
                   dataConfirm?.time_start
-                }~${dataConfirm?.time_end}`}
+                }`}
               </Text>
             </View>
           </View>

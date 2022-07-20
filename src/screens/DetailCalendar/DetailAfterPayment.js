@@ -160,7 +160,7 @@ export default function DetailAfterPayment({route}) {
                   paddingVertical: 16,
                 }}
               >
-                {`${moment(dataCalendar?.date).format("YYYY年MM月DD日")} ${dataCalendar?.time_start}~${dataCalendar?.time_end}`}
+                {`${moment(dataCalendar?.date).format("YYYY年MM月DD日")} ${dataCalendar?.time_start}`}
               </Text>
             </View>
             <View
