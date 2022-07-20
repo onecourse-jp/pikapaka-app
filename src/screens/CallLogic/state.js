@@ -61,7 +61,6 @@ let room = 1111;
 const embedDemo = room === "embed-demo";
 if (embedDemo) room = null;
 
-console.log("Room =", room, "Embed Demo =", embedDemo);
 
 // STATE
 

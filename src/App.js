@@ -17,7 +17,7 @@ const {persistor, store} = configureStore();
 global.store = store;
 import SplashScreen from "react-native-splash-screen";
 import {LogBox} from "react-native";
-console.disableYellowBox = true;
+// console.disableYellowBox = true;
 LogBox.ignoreAllLogs(true);
 LogBox.ignoreLogs(["Warning: ..."]); // Ignore log notification by message
 import "src/config";

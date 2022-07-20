@@ -157,7 +157,7 @@ export default function EditCalendar({route}) {
                     }}
                   >{`${moment(dataCalendar?.date).format("YYYY年MM月DD日")} (${moment(dataCalendar?.date).format("dddd")}) ${
                     dataCalendar?.time_start
-                  }~${dataCalendar?.time_end}`}</Text>
+                  }~`}</Text>
                 </View>
                 <TouchableOpacity onPress={handleDateTime} style={{flexDirection: "row", alignItems: "center"}}>
                   <Text style={{fontFamily: fonts.NSregular, color: colors.headerComponent, fontSize: 12}}>変更</Text>

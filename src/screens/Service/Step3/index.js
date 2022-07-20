@@ -146,6 +146,36 @@ export default function ServiceStep3() {
         },
       },
       {
+        key: "illness_during_treatment",
+        title: "治療中の病気の有無",
+        placeholder: "選択",
+        value: userDetails?.illness_during_treatment ?? null,
+        label: 4,
+        action: () => {
+          navigation.navigate(SCREEN_EDIT_YES_NO_FORM, {data: userDetails, key: "illness_during_treatment", value: userDetails?.illness_during_treatment, label: "喫煙有無"});
+        },
+      },
+      {
+        key: "dialysis_treatment",
+        title: "透析治療の有無",
+        placeholder: "選択",
+        value: userDetails?.dialysis_treatment ?? null,
+        label: 4,
+        action: () => {
+          navigation.navigate(SCREEN_EDIT_YES_NO_FORM, {data: userDetails, key: "dialysis_treatment", value: userDetails?.dialysis_treatment, label: "喫煙有無"});
+        },
+      },
+      {
+        key: "blood_tests_and_health",
+        title: "血液検査や健康診断等の異常の有無",
+        placeholder: "選択",
+        value: userDetails?.blood_tests_and_health ?? null,
+        label: 4,
+        action: () => {
+          navigation.navigate(SCREEN_EDIT_YES_NO_FORM, {data: userDetails, key: "blood_tests_and_health", value: userDetails?.blood_tests_and_health, label: "喫煙有無"});
+        },
+      },
+      {
         key: "medical_history",
         label: "既往歴",
         title: "既往歴",
@@ -216,6 +246,9 @@ export default function ServiceStep3() {
       smoking: dataSubmit.smoking,
       medical_history: typeof dataSubmit.medical_history == "string" ? JSON.parse(dataSubmit.medical_history) : dataSubmit.medical_history,
       content_to_doctor: dataSubmit.contentConsultation,
+      illness_during_treatment: dataSubmit.illness_during_treatment,
+      dialysis_treatment: dataSubmit.dialysis_treatment,
+      blood_tests_and_health: dataSubmit.blood_tests_and_health,
     };
     if (oldReservationId && dataSubmit.radioStatus) dataReservation.old_reservation_id = oldReservationId;
     if (!oldReservationId && dataSubmit.radioStatus) dataReservation.old_reservation_id = null;
@@ -226,7 +259,6 @@ export default function ServiceStep3() {
         currentStep: 4,
       }),
     );
-    console.log("dataReservationdataReservationdataReservation", dataReservation);
     navigation.navigate(SCREEN_SERVICE_STEP4);
   };
 

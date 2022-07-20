@@ -120,9 +120,7 @@ export default function Service() {
                   <Text
                     style={{fontFamily: fonts.SFmedium, fontSize: 16, color: colors.gray1, lineHeight: 20, marginTop: 7, textAlign: "left"}}
                   >
-                    {`${moment(item?.date).format("YYYY年MM月DD日")}（${moment(item?.date).format("dddd")}）${item?.time_start}~${
-                      item?.time_end
-                    }`}
+                    {`${moment(item?.date).format("YYYY年MM月DD日")}（${moment(item?.date).format("dddd")}）${item?.time_start}~`}
                   </Text>
                 </View>
               </TouchableOpacity>

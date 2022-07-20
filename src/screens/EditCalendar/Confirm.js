@@ -174,7 +174,7 @@ export default function ExaminationItem({route}) {
             title="日時"
             content={`${moment(dataCalendar?.date).format("YYYY年MM月DD日")} (${moment(dataCalendar?.date).format("dddd")}) ${
               dataCalendar?.time_start
-            }~${dataCalendar?.time_end}`}
+            }~`}
           />
           <ComponentComfirm title="ご相談内容" content={dataCalendar?.content_to_doctor} />
           <View>

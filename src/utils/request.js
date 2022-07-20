@@ -23,7 +23,6 @@ const codeMessage = {
   504: "The gateway has timed out. ",
 };
 // config axios- fix CORS
-console.log("Config", Config.API_URL);
 const instance = axios.create({
   // baseURL: Config.API_URL,
   baseURL: "https://dev-healthcare-backend.pikapaka.co.jp/api",
