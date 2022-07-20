@@ -34,7 +34,7 @@ export default function OralMedicineSkinCare() {
     {
       image: require("@assets/images/medicine_skincare_4.png"),
       name: "ユベラ（200）",
-      description: "強い抗酸化作用で細胞の酸化を防ぎ、肌の老化を遅らせる。\n皮膚の新陳代謝を高める。\n血行促進作用。 \n成分はビタミンE。",
+      description: "血管を拡げて血液の流れを改善したり、血液中のコレステロールなどを低下させます。",
     },
     {
       image: require("@assets/images/medicine_skincare_5.png"),
@@ -51,12 +51,12 @@ export default function OralMedicineSkinCare() {
       image: require("@assets/images/medicine_skincare_7.png"),
       name: "イコサペント酸エチル900（エパデールのジェネリック）",
       description:
-        "血液サラサラ（抗血栓）作用、ＬＤＬ降下・ＨＤＬ増加作用、抗がん作用、生活習慣病の予防改善。\n血管年齢を下げる。動脈硬化予防。魚の油。市販薬などのEPAと同成分、医療用で配合量が多い。",
+        "血小板の凝集を抑制することにより、血液を固まりにくくして血液の流れを改善します。血管の弾力性も保ちます。\nまた、血液中のコレステロールやトリグリセリドを低下させます。",
     },
     {
       image: require("@assets/images/medicine_skincare_8.png"),
       name: "ノイロビタン",
-      description: "ビタミンB1、B2、B6、B12の配合剤で、不足しているこれらビタミンを補いバランスを整えます。",
+      description: "ノイロビタンは、複数のビタミンを配合した複合ビタミン剤です。\n薬に含まれているビタミンB2は肌荒れやニキビ、湿疹の改善に効果が期待できる成分です。\nビタミンB6はアミノ酸や脂質の代謝に関与して肌の健康状態を維持する働きがあるとされています。",
     },
   ];
 
