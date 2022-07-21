@@ -1002,7 +1002,7 @@
 				CODE_SIGN_ENTITLEMENTS = TCare/TCare.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 26;
+				CURRENT_PROJECT_VERSION = 28;
 				DEVELOPMENT_TEAM = 5BN2M9996C;
 				ENABLE_BITCODE = NO;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
@@ -1146,7 +1146,7 @@
 				CODE_SIGN_ENTITLEMENTS = TCare/TCare.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 26;
+				CURRENT_PROJECT_VERSION = 28;
 				DEVELOPMENT_TEAM = 5BN2M9996C;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = TCare/Info.plist;
