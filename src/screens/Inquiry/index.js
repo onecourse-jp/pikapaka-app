@@ -12,7 +12,7 @@ export default function ({navigation}) {
   const colors = useThemeColors();
   const fonts = useThemeFonts();
   const textFAQ = "お客さまから寄せられたよくある質問を掲載しています。\nお問い合わせ前にご確認ください。";
-  const inquiryPhone = "03-6820-0995（通話料無料）\n受付時間 9:00～18:00(土日・祝日を除く)";
+  const inquiryPhone = "03-6820-0995\n受付時間 9:00～18:00(土日・祝日を除く)";
   const contactToEmail = () => {
     Linking.openURL("mailto:support_healthcare@pikapaka.co.jp");
   };
