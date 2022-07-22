@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {View, Text, Image, TouchableOpacity, FlatList, Dimensions} from "react-native";
+import {View, Text, Image, TouchableOpacity, FlatList, Dimensions, Platform} from "react-native";
 import {useSelector, useDispatch} from "react-redux";
 import {useThemeColors, useThemeFonts} from "react-native-theme-component";
 import {useNavigation} from "@react-navigation/native";
@@ -23,7 +23,7 @@ export default function OnlineMedicalCare({title = "診療内容", textFormat = 
       arr.push(i);
     }
     setHeightEleArr([...arr]);
-    console.log("arrarr", arr );
+    console.log("arrarr", arr);
   };
 
   useEffect(() => {
@@ -70,7 +70,13 @@ export default function OnlineMedicalCare({title = "診療内容", textFormat = 
           })}
           <View style={{position: "absolute", top: 34, width: Math.floor(screenWidth), zIndex: 0}}>
             {heightEleArr.map((item, index) => (
-              <DashedLine key={`DashedLine-${index}`} style={{marginBottom: 32.5}} dashLength={5} dashGap={5} dashColor={lineColor} />
+              <DashedLine
+                key={`DashedLine-${index}`}
+                style={{marginBottom: Platform.OS === "ios" ? 32 : 32.4}}
+                dashLength={5}
+                dashGap={5}
+                dashColor={lineColor}
+              />
             ))}
           </View>
         </View>
