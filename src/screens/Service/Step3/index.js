@@ -156,7 +156,7 @@ export default function ServiceStep3() {
             data: userDetails,
             key: "illness_during_treatment",
             value: userDetails?.illness_during_treatment,
-            label: "喫煙有無",
+            label: "治療中の病気",
           });
         },
       },
@@ -171,7 +171,7 @@ export default function ServiceStep3() {
             data: userDetails,
             key: "dialysis_treatment",
             value: userDetails?.dialysis_treatment,
-            label: "喫煙有無",
+            label: "透析治療",
           });
         },
       },
@@ -186,7 +186,7 @@ export default function ServiceStep3() {
             data: userDetails,
             key: "blood_tests_and_health",
             value: userDetails?.blood_tests_and_health,
-            label: "喫煙有無",
+            label: "血液検査や健康診断等の異常",
           });
         },
       },
@@ -204,7 +204,7 @@ export default function ServiceStep3() {
             data: user,
             key: "medical_history",
             value: userDetails?.medical_history,
-            label: "喫煙有無",
+            label: "既往歴",
           });
         },
       },
