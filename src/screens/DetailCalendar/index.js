@@ -28,8 +28,8 @@ export default function DetailCalender({route}) {
       navigation.navigate(SCREEN_CONNECT_DOCTOR, {data: dataCalendar});
     } else if (dataCalendar?.status === 2) {
       navigation.navigate(SCREEN_QUESIONAIRE_STEP2, {data: dataCalendar});
-    } else if (dataCalendar?.status === 3) {
-      navigation.navigate(SCREEN_PAYMENT, {id: dataCalendar.id});
+    } else if (dataCalendar?.status === 3 || dataCalendar.status == 5) {
+      // navigation.navigate(SCREEN_PAYMENT, {id: dataCalendar.id});
     }
   };
   const handleEditCalendar = () => {

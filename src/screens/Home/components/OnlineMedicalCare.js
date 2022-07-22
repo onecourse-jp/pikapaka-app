@@ -3,6 +3,7 @@ import {View, Text, Image, TouchableOpacity, FlatList, Dimensions} from "react-n
 import {useSelector, useDispatch} from "react-redux";
 import {useThemeColors, useThemeFonts} from "react-native-theme-component";
 import {useNavigation} from "@react-navigation/native";
+import RenderHtml from "react-native-render-html";
 import DashedLine from "react-native-dashed-line";
 
 const {width} = Dimensions.get("window");
@@ -22,6 +23,7 @@ export default function OnlineMedicalCare({title = "診療内容", textFormat = 
       arr.push(i);
     }
     setHeightEleArr([...arr]);
+    console.log("arrarr", arr );
   };
 
   useEffect(() => {
@@ -45,6 +47,7 @@ export default function OnlineMedicalCare({title = "診療内容", textFormat = 
         <View style={{height: 2, width: 20, marginBottom: 20, backgroundColor: styleColor}}></View>
       </View>
       <View style={{position: "relative"}}>
+        {/* <RenderHtml contentWidth={width - 40} source={{html: textFormat ? textFormat : ""}} /> */}
         <View style={{position: "relative", marginBottom: 20, overflow: "hidden"}}>
           {textFormat.map((item, index) => {
             return (
@@ -65,9 +68,9 @@ export default function OnlineMedicalCare({title = "診療内容", textFormat = 
               </View>
             );
           })}
-          <View style={{position: "absolute", top: 17, width: Math.floor(screenWidth), zIndex: 0}}>
+          <View style={{position: "absolute", top: 34, width: Math.floor(screenWidth), zIndex: 0}}>
             {heightEleArr.map((item, index) => (
-              <DashedLine key={`DashedLine-${index}`} style={{marginVertical: 16}} dashLength={5} dashGap={5} dashColor={lineColor} />
+              <DashedLine key={`DashedLine-${index}`} style={{marginBottom: 32.5}} dashLength={5} dashGap={5} dashColor={lineColor} />
             ))}
           </View>
         </View>

@@ -76,7 +76,9 @@ export default function Home({route}) {
                   "※ピカパカヘルスケアは医療機関ではございません。 ",
                   "※実際の診療・処方は提携医師が行います。",
                 ]}
-                // textFormat={`<p style="text-underline-offset: 10px;text-decoration: underline;text-decoration-style: dashed;text-decoration-color: rgba(219, 207, 95, 0.698);line-height: 34px; font-size:14px;color:#575967;border-color:red;">
+                // textFormat={`<p style="text-underline-offset: 10px;text-decoration: underline;
+                // text-decoration-style: dashed;text-decoration-color: rgba(219, 207, 95, 0.698);line-height: 34px;
+                //  font-size:14px;color:#575967;border-color:red;">
                 // ピカパカヘルスケアは、オンライン診療支援サービスです。オンライン診療を行う医師と患者様をつなぐシステムを提供しています。<br>
                 // ピカパカヘルスケアにより、ご自宅にいながら手軽にスキンケアやダイエットのご相談、またお薬の処方などをオンライン診療で行うことができます。<br>
                 // ※ピカパカヘルスケアは医療機関ではございません。 <br>

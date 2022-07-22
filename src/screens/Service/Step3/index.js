@@ -152,7 +152,12 @@ export default function ServiceStep3() {
         value: userDetails?.illness_during_treatment ?? null,
         label: 4,
         action: () => {
-          navigation.navigate(SCREEN_EDIT_YES_NO_FORM, {data: userDetails, key: "illness_during_treatment", value: userDetails?.illness_during_treatment, label: "喫煙有無"});
+          navigation.navigate(SCREEN_EDIT_YES_NO_FORM, {
+            data: userDetails,
+            key: "illness_during_treatment",
+            value: userDetails?.illness_during_treatment,
+            label: "喫煙有無",
+          });
         },
       },
       {
@@ -162,7 +167,12 @@ export default function ServiceStep3() {
         value: userDetails?.dialysis_treatment ?? null,
         label: 4,
         action: () => {
-          navigation.navigate(SCREEN_EDIT_YES_NO_FORM, {data: userDetails, key: "dialysis_treatment", value: userDetails?.dialysis_treatment, label: "喫煙有無"});
+          navigation.navigate(SCREEN_EDIT_YES_NO_FORM, {
+            data: userDetails,
+            key: "dialysis_treatment",
+            value: userDetails?.dialysis_treatment,
+            label: "喫煙有無",
+          });
         },
       },
       {
@@ -172,7 +182,12 @@ export default function ServiceStep3() {
         value: userDetails?.blood_tests_and_health ?? null,
         label: 4,
         action: () => {
-          navigation.navigate(SCREEN_EDIT_YES_NO_FORM, {data: userDetails, key: "blood_tests_and_health", value: userDetails?.blood_tests_and_health, label: "喫煙有無"});
+          navigation.navigate(SCREEN_EDIT_YES_NO_FORM, {
+            data: userDetails,
+            key: "blood_tests_and_health",
+            value: userDetails?.blood_tests_and_health,
+            label: "喫煙有無",
+          });
         },
       },
       {
@@ -252,6 +267,8 @@ export default function ServiceStep3() {
     };
     if (oldReservationId && dataSubmit.radioStatus) dataReservation.old_reservation_id = oldReservationId;
     if (!oldReservationId && dataSubmit.radioStatus) dataReservation.old_reservation_id = null;
+    if (userDetails?.postal_code) dataReservation.shipping_postal_code = userDetails?.postal_code;
+    if (userDetails?.address) dataReservation.shipping_address = userDetails?.address;
     if (!dataSubmit.radioStatus) dataReservation.old_reservation_id = false;
     dispatch(
       updateCalendar({
