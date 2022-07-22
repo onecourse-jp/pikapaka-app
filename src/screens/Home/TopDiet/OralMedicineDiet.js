@@ -105,7 +105,7 @@ export default function OralMedicineDiet() {
             <TableWrapper style={{flexDirection: "row"}}>
               <TableWrapper style={{flex: 1}}>
                 <Col
-                  data={[global.t("whitening_basic_set")]}
+                  data={[global.t("diet_basic_set")]}
                   style={{flex: 1, backgroundColor: colors.textDiet02}}
                   textStyle={{textAlign: "center", color: colors.textHiragino}}
                 />
