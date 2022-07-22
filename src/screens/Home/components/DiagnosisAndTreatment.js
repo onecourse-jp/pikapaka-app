@@ -49,6 +49,15 @@ export default function DiagnosisAndTreatment() {
       // imageUrl: require("@assets/images/treatment_cate5.png"),
       imageUrl: require("@assets/images/aga_top_disable_treatment.png"),
     },
+    {
+      action: () => {
+        global.showWebView({
+          url: "https://quickpcr.jp/",
+        });
+      },
+      // imageUrl: require("@assets/images/treatment_cate5.png"),
+      imageUrl: require("@assets/images/treatment_cate6.png"),
+    },
   ];
 
   return (
@@ -58,7 +67,12 @@ export default function DiagnosisAndTreatment() {
       <View style={{maxWidth: 256, flexDirection: "row", flexWrap: "wrap", justifyContent: "space-between"}}>
         {DATA.map((item, index) => {
           return (
-            <TouchableOpacity onPress={item.action} style={{marginBottom: 15, width: 120}} key={`item.key-${index}`} disabled={item?.disable}>
+            <TouchableOpacity
+              onPress={item.action}
+              style={{marginBottom: 15, width: 120}}
+              key={`item.key-${index}`}
+              disabled={item?.disable}
+            >
               <Image source={item.imageUrl} />
             </TouchableOpacity>
           );

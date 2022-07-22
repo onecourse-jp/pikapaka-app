@@ -14,7 +14,7 @@ export default function OnlineMedicalCare({title = "診療内容", textFormat = 
   const colors = useThemeColors();
   const screenWidth = width - 80;
   const [heightEleArr, setHeightEleArr] = useState([]);
-  let lenghtArr = 200;
+  let lenghtArr = 555;
   const setDashLine = () => {
     let i = 1;
     let arr = [];
@@ -23,6 +23,7 @@ export default function OnlineMedicalCare({title = "診療内容", textFormat = 
       arr.push(i);
     }
     setHeightEleArr([...arr]);
+    console.log("arrarr", arr );
   };
 
   useEffect(() => {
@@ -67,9 +68,9 @@ export default function OnlineMedicalCare({title = "診療内容", textFormat = 
               </View>
             );
           })}
-          <View style={{position: "absolute", top: 17, width: Math.floor(screenWidth), zIndex: 0}}>
+          <View style={{position: "absolute", top: 34, width: Math.floor(screenWidth), zIndex: 0}}>
             {heightEleArr.map((item, index) => (
-              <DashedLine key={`DashedLine-${index}`} style={{marginVertical: 16}} dashLength={5} dashGap={5} dashColor={lineColor} />
+              <DashedLine key={`DashedLine-${index}`} style={{marginBottom: 32.5}} dashLength={5} dashGap={5} dashColor={lineColor} />
             ))}
           </View>
         </View>

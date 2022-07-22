@@ -185,8 +185,8 @@ export default function ModalWebView({route}) {
                   global.showModalListImage({id: route?.params?.isCallVideo});
                 }}
               >
-                <Image style={{width: 50, height: 50}} source={require("@assets/images/icons/ic_photo_call.png")} />
-                <Text style={{fontSize: 11, lineHeight: 16, color: "white", marginTop: 8}}>受信画像</Text>
+                <Image style={{width: 50, height: 0}} source={require("@assets/images/icons/ic_photo_call.png")} />
+                {/* <Text style={{fontSize: 11, lineHeight: 16, color: "white", marginTop: 8}}>受信画像</Text> */}
               </TouchableOpacity>
             </View>
           </View>

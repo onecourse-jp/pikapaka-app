@@ -305,8 +305,11 @@ export default function Profile({navigation}) {
     navigation.navigate("SERVICE");
     if (item.status == 3 || item.status == 5) {
       setTimeout(() => {
-        navigation.navigate(SCREEN_PAYMENT, {id: item?.id});
+        navigation.navigate(SCREEN_DETAIL_CALENDAR, {id: item?.id});
       }, 200);
+      // setTimeout(() => {
+      //   navigation.navigate(SCREEN_PAYMENT, {id: item?.id});
+      // }, 200);
     } else if (item.status === 4 || item.status === 6) {
       setTimeout(() => {
         navigation.navigate(SCREEN_DETAIL_CALENDAR_AFTER_PAYMENT, {id: item?.id});
