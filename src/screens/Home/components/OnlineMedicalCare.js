@@ -3,6 +3,7 @@ import {View, Text, Image, TouchableOpacity, FlatList, Dimensions} from "react-n
 import {useSelector, useDispatch} from "react-redux";
 import {useThemeColors, useThemeFonts} from "react-native-theme-component";
 import {useNavigation} from "@react-navigation/native";
+import RenderHtml from "react-native-render-html";
 import DashedLine from "react-native-dashed-line";
 
 const {width} = Dimensions.get("window");
@@ -13,7 +14,7 @@ export default function OnlineMedicalCare({title = "診療内容", textFormat = 
   const colors = useThemeColors();
   const screenWidth = width - 80;
   const [heightEleArr, setHeightEleArr] = useState([]);
-  let lenghtArr = 555;
+  let lenghtArr = 200;
   const setDashLine = () => {
     let i = 1;
     let arr = [];
@@ -45,6 +46,7 @@ export default function OnlineMedicalCare({title = "診療内容", textFormat = 
         <View style={{height: 2, width: 20, marginBottom: 20, backgroundColor: styleColor}}></View>
       </View>
       <View style={{position: "relative"}}>
+        {/* <RenderHtml contentWidth={width - 40} source={{html: textFormat ? textFormat : ""}} /> */}
         <View style={{position: "relative", marginBottom: 20, overflow: "hidden"}}>
           {textFormat.map((item, index) => {
             return (
