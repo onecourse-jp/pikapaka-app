@@ -60,7 +60,7 @@ export default function ExternalMedicine() {
       "ヘパリン泡スプレー（100g）",
     ],
     header: ["", "1本"],
-    col_2: ["2,000円", "2,300円", "2,800円", "2,090円", "730円", "2,340円"],
+    col_2: ["2,000円", "2,300円", "2,800円", "1,100円", "730円", "1,8000円"],
   };
   return (
     <View style={{backgroundColor: colors.white, borderRadius: 18, paddingVertical: 40, paddingHorizontal: 20, flexDirection: "column"}}>
